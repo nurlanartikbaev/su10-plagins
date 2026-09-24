@@ -1,9 +1,13 @@
 {
   "name": "su10",
   "description": "Дизайн-система SU10: правила сборки макетов в Figma, каталог компонентов, цвета и токены, подбор иконок, сборка таблиц данных и аудит макета перед сдачей",
-  "version": "4.3.0",
+  "version": "4.3.1",
   "author": {
     "name": "Nurla"
   },
-  "keywords": ["figma", "design-system", "su10"]
+  "keywords": [
+    "figma",
+    "design-system",
+    "su10"
+  ]
 }
