@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.3.1 · 24.09.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
+description: "v4.3.2 · 25.09.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.3.1 · 24.09.2026.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.3.2 · 25.09.2026.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1016,7 +1016,7 @@ table (frame, layoutMode NONE)
 10. Неполная матрица вариантов — знак, что нужен отдельный компонент, а не ещё одно свойство
 11. **Каждой новой переменной — описание.** В поле `description` пишется, где её место и где её брать не надо. Без этого токен выбирают по имени и попадают мимо
 12. Аудит перед сдачей: чужие шрифты, текст без стиля, сырые заливки, чужие переменные — ноль
-13. **После правки обнови этот скилл и подними версию** — запись добавляется в `references/changelog.md`, номер синхронно правится в шапке этого файла и во фронтматтере. Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, поэтому правка заканчивается коммитом и пушем в `main`: до пуша её не видит никто, кроме тебя. Версию в `plugins/su10/.claude-plugin/plugin.json` держи равной версии скилла
+13. **Версию и публикацию берёт на себя хук — руками не надо.** Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, и на хуке `Stop` стоит автопуш: как только правка внесена, patch-версия поднимается сразу в `SKILL.md` и `plugin.json`, делается коммит и пуш в `main`, а у коллег с `autoUpdate` новая версия подхватывается при следующем запуске. Твоя часть — только запись в `references/changelog.md`: что изменилось и почему, этого хук придумать не может
 
 ## Что не трогать
 
@@ -1066,7 +1066,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.3.1 · 24.09.2026**.
+Текущая версия — **v4.3.2 · 25.09.2026**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
