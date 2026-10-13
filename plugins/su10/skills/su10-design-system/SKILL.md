@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.3.3 · 01.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
+description: "v4.3.4 · 13.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.3.3 · 01.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.3.4 · 13.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -44,6 +44,7 @@ description: "v4.3.3 · 01.10.2026 — Сборка макетов, экрано
 6. **В одной строке лейаута — один размер контролов.** Таблица высот ниже.
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
+9. **Заголовок и подзаголовок — всегда компонент, а не текстовый слой.** Заголовок экрана или крупного блока — `Heading`, заголовок секции внутри блока — `Subheading`. Текстовый слой с правильным стилем выглядит так же, но теряет всё остальное: собственные отступы, место под счётчик и действие, `Show Subtitle` и `Show Divider`, поведение при смене моды `Platform`. Через несколько экранов самодельные заголовки расходятся между собой на 2–4 px и по вертикальному ритму — на глаз это ловится, только когда экраны положат рядом. Единственное исключение — паспорта компонентов: там свои `DocHeading` и `DocSubheading`.
 
 ## Основа
 
@@ -1066,7 +1067,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.3.3 · 01.10.2026 · обновил Nurla**.
+Текущая версия — **v4.3.4 · 13.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
