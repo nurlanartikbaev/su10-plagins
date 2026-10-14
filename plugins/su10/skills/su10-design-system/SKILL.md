@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.4.1 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
+description: "v4.4.2 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.4.1 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.4.2 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -439,23 +439,34 @@ Alert — про состояние страницы, Toast — про резу�
 
 **ListItem** `2816:738` — строка списка: переход, действие, выбор или настройка. Мобильная
 замена пункта меню и обычная строка списка на десктопе.
-`State` Rest/**Hover**/Pressed/Disabled · `Signal` Default/**Critical** · `Title`, `Description`
+`State` Rest/**Hover**/Pressed/Disabled · `Signal` Default/**Success**/**Warning**/**Critical** · `Title`, `Description`
 TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Левая и правая
 части — **вложенные инстансы, выведены наружу**: тип и иконку меняют в их свойствах, а не
 подменой.
 
 - **`ListItem · Leading`** `2839:895` — `Type` Icon / Icon Tile / Avatar, `Icon` INSTANCE_SWAP.
-  `Tone` Default/Critical/Disabled задаёт вариант строки — вручную не трогать.
+  `Tone` Default/Critical/Success/Warning/Disabled задаёт вариант строки — вручную не трогать.
   Icon — иконка 18/20 (`height-500`), как в меню; Icon Tile — иконка 24 в плитке 40
   (`Space-8` вокруг `height-650`) для перехода с подписью; Avatar — `Avatar M`.
 - **`ListItem · Trailing`** `2839:940` — `Type` Chevron / Value / Check / Toggle / Badge,
   `Value` TEXT. Check — Linear-галочка на `color/component/controls/active`, как в
-  `SingleSelectItem`; Toggle — `Toggle S`; Badge — `Badge S Neutral`.
+  `SingleSelectItem`; Toggle — `Toggle S`; Badge — `Badge S` **и шеврон после него**: рядом с
+  бейджем всегда стоит шеврон, строка со статусом всегда открывается. Бейдж без шеврона в
+  строке списка не ставят — отдельного варианта для этого нет.
 
 Подложки — свои токены, алиасы на `Button Tertiary`:
 `color/component/list-item/surface-hover` (4 %, только десктоп) и
-`color/component/list-item/surface-pressed` (8 %). У Critical нажатие —
-`surface/red-transparent-static`, наведение — общее `surface-hover`.
+`color/component/list-item/surface-pressed` (8 %). У цветных сигналов нажатие — подложка своего
+цвета (`surface/green-`, `orange-`, `red-transparent-static`), наведение — общее `surface-hover`.
+
+Сигналы красят название и Leading (иконку и плитку):
+- **Success** — подтверждённый результат или положительное действие: «Скачать сертификат»,
+  «Курс завершён»;
+- **Warning** — требует внимания, но не опасно: «Срок сегодня», «Доделать задание»;
+- **Critical** — разрушающее действие, такая строка одна и стоит последней.
+
+Статус задачи («Сегодня», «Просрочено», «Завершено») показывают `Badge` справа, а не сигналом
+строки: сигнал — про действие строки, бейдж — про состояние объекта.
 
 Сборка под задачу — **в одном списке у всех строк один тип Leading**:
 
@@ -463,6 +474,8 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 |---|---|---|---|
 | Переход в раздел | Icon Tile | да | Chevron |
 | Действие | Icon | нет | нет |
+| Положительное или требующее внимания действие | Icon, `Signal=Success` / `Warning` | нет | нет |
+| Объект со статусом (задача, урок) | Icon Tile | да | Badge — всегда с шевроном |
 | Разрушающее действие | Icon, `Signal=Critical` | нет | нет — строка одна и последняя |
 | Выбор из списка | нет | нет | Check у выбранного |
 | Настройка | Icon | нет | Toggle или Value |
@@ -1163,7 +1176,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.4.1 · 14.10.2026 · обновил Nurla**.
+Текущая версия — **v4.4.2 · 14.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

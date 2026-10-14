@@ -252,8 +252,8 @@ const S = {                                   // figma.importStyleByKeyAsync
 | DesktopDrawer | `Show Header#1400:1`, `Show Footer#1400:2`, `Show Secondary Button#1400:3` | **только `Size=M`** — у S и L слот сломан, см. «Баги компонентов» |
 | Overlay | — | `Platform=Desktop` / `Platform=Mobile` |
 | Divider | — | `Orientation=Horizontal` / `Vertical` |
-| ListItem | `Title#2816:0`, `Description#2816:4`, `Show Description#2816:8`, `Show Divider#2816:28`, `Show Leading#2840:0`, `Show Trailing#2840:4`; левая и правая части — вложенные `Leading` / `Trailing`, правятся своими свойствами | `State=Rest, Signal=Default` (State Rest/Hover/Pressed/Disabled, Signal Default/Critical) |
-| ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone задаёт строка) |
+| ListItem | `Title#2816:0`, `Description#2816:4`, `Show Description#2816:8`, `Show Divider#2816:28`, `Show Leading#2840:0`, `Show Trailing#2840:4`; левая и правая части — вложенные `Leading` / `Trailing`, правятся своими свойствами | `State=Rest, Signal=Default` (State Rest/Hover/Pressed/Disabled, Signal Default/Success/Warning/Critical) |
+| ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone Default/Critical/Success/Warning/Disabled задаёт строка) |
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
 
