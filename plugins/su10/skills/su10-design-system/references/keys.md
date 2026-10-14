@@ -74,6 +74,10 @@ Node ID из каталога выше годятся для ссылок и д�
 | ContextMenu | Single | `4cd4a0ae722b773a3072a0a79111dcdacfc2200c` |
 | ContextMenuItem | Set | `9462eb76707a38470c09d83f5d072f3a957ae7d1` |
 | ContextMenuSection | Single | `f4555510fdff690b8480f2058f3c896222338609` |
+| ListItem | Set | `e0c243647c4282071fca3e60a7425efb0e51ead6` |
+| ListItem · Leading | Set | `4e40134f9b341cbb708ef3ef679598e719dd2d28` |
+| ListItem · Trailing | Set | `871b2ef00c1cade62d2bc9357c3deb59e9fd33cf` |
+| ProfileItem | Set | `6b3ca3fb9c4d9dd273389a693a9226129311d9b6` |
 | Header (mobile) | Set | `4376085fe811c84b3b1021509b62be761f933771` |
 | DesktopHeader | Single | `9c8329d80e2fc8d93a4a1098870783b728d65f37` |
 | Status Bar | Single | `a78dfd84c6573f8e7666e854ba76972fcaddd4bf` |
@@ -133,6 +137,13 @@ Node ID из каталога выше годятся для ссылок и д�
 | Time / Stopwatch Play | `2f1c3069b5f188f86a1e9c108c41fab261ba9fe2` |
 | Danger Triangle (иконка Accordion при Signal=Error) | `6146b16fc4139a491ff5ff19308f4efe8d4c860d` |
 | **Bold** / Messages, Conversation, WhatsApp / Plain | `3690bfe6f4559ea1944420222942159c5fdcc961` |
+| Essentional, UI / Info Circle | `2a44b8ec58be9577515ce41fb87d60941664ea68` |
+| Essentional, UI / Bar Chart | `5d874be7ef02004d8bb1de0804ff43cfb455dfd1` |
+| Essentional, UI / Share | `6731d3994ca4dc5617fb6fa7468362f4307ca604` |
+| Text Formatting / Link | `675b8b374ba41635fd38f1b7ba1a0aaaaa7df004` |
+| Arrows Action / Logout | `f8f1d556ed45b573df38d6f9f6e622a02221fbf2` |
+| Map & Location / Global | `046a6eaa84acda2980971492e54d4469647939bd` |
+| **Linear** / Messages, Conversation / Check (галочка `ListItem · Trailing`, Outline-версии нет) | `02248576b50f23ff382bd387ca2b67adb65f5998` |
 
 **Плюс берут именно отсюда** (`6a34385a…`, Outline). Ключ `9608e266…`, который лежит в
 `preferredValues` у `Button` и `Text Button`, — это **Linear**-версия: она красится обводкой
@@ -170,6 +181,8 @@ const V = {                                   // figma.variables.importVariableB
   radius300:"b62402f2b002ea0c612ebd0f804e1900b147c590",  // 12
   radius600:"be2500829c2889116d181cea1a5070ee235c6019",  // 24
   radiusRounded:"0576cfa57576318e03cc9c0e584111ab4db22283",
+  listItemHover:  "956108bd6e25033383598be60e07f38bdb5b995d", // color/component/list-item/surface-hover
+  listItemPressed:"069476cecaacaffec583b08a97ff7d6e040b62af", // color/component/list-item/surface-pressed
 };
 
 const S = {                                   // figma.importStyleByKeyAsync
@@ -239,5 +252,17 @@ const S = {                                   // figma.importStyleByKeyAsync
 | DesktopDrawer | `Show Header#1400:1`, `Show Footer#1400:2`, `Show Secondary Button#1400:3` | **только `Size=M`** — у S и L слот сломан, см. «Баги компонентов» |
 | Overlay | — | `Platform=Desktop` / `Platform=Mobile` |
 | Divider | — | `Orientation=Horizontal` / `Vertical` |
+| ListItem | `Title#2816:0`, `Description#2816:4`, `Show Description#2816:8`, `Show Divider#2816:28`, `Show Leading#2840:0`, `Show Trailing#2840:4`; левая и правая части — вложенные `Leading` / `Trailing`, правятся своими свойствами | `State=Rest, Signal=Default` (State Rest/Hover/Pressed/Disabled, Signal Default/Critical) |
+| ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone задаёт строка) |
+| ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
+| ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
+
+Вложенные части `ListItem` правятся так:
+
+```js
+const row = listItemSet.children.find(c => c.name === 'State=Rest, Signal=Default').createInstance();
+row.setProperties({ 'Title#2816:0': 'Поделиться', 'Show Description#2816:8': false, 'Show Trailing#2840:4': false });
+row.findOne(n => n.name === 'Leading').setProperties({ Type: 'Icon', 'Icon#2839:0': shareIcon.id });
+```
 
 `INSTANCE_SWAP` принимает **id импортированного компонента**, а не его key: `btn.setProperties({ "Left Icon#273:230": bagIcon.id })`.
