@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.4.0 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
+description: "v4.4.1 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.4.0 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.4.1 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -45,6 +45,19 @@ description: "v4.4.0 · 14.10.2026 — Сборка макетов, экрано
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
 9. **Заголовок и подзаголовок — всегда компонент, а не текстовый слой.** Заголовок экрана или крупного блока — `Heading`, заголовок секции внутри блока — `Subheading`. Текстовый слой с правильным стилем выглядит так же, но теряет всё остальное: собственные отступы, место под счётчик и действие, `Show Subtitle` и `Show Divider`, поведение при смене моды `Platform`. Через несколько экранов самодельные заголовки расходятся между собой на 2–4 px и по вертикальному ритму — на глаз это ловится, только когда экраны положат рядом. Единственное исключение — паспорта компонентов: там свои `DocHeading` и `DocSubheading`.
+10. **Разделитель — только между строками списка, у последней строки его нет.** Список из `ListItem` в шторке, в `Island`, в слоте `Accordion`, в `Dialog`, в витрине паспорта: у последней строки `Show Divider = false`. Строку списка определяет следующий сосед: если за ней нет другой `ListItem` (конец контейнера, `Alert`, кнопка, другой блок) — линию выключить. То же для отдельных `Divider` между `ProfileItem` и любыми блоками: `Divider` стоит только **между** двумя элементами, ни первым, ни последним в контейнере. Линия под последней строкой упирается в край карточки или подвал и выглядит как обрезанный список. При сборке строк в цикле выключай линию у последней сразу, а не «потом проверю»:
+   ```js
+   rows.forEach((r, i) => r.setProperties({ 'Show Divider#2816:28': i < rows.length - 1 }));
+   ```
+   Проверка перед сдачей — находит последние строки с линией и выключает её:
+   ```js
+   for (const r of root.findAll(n => n.type === 'INSTANCE' && n.name === 'ListItem')) {
+     const sib = r.parent.children, i = sib.findIndex(c => c.id === r.id);
+     const next = sib.slice(i + 1).find(c => c.visible);
+     if ((!next || next.name !== 'ListItem') && r.componentProperties['Show Divider#2816:28'].value)
+       r.setProperties({ 'Show Divider#2816:28': false });
+   }
+   ```
 
 ## Основа
 
@@ -455,6 +468,9 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 | Настройка | Icon | нет | Toggle или Value |
 | Человек, по которому переходят | Avatar | роль | Chevron |
 
+**У последней строки списка `Show Divider = false`** — железное правило 10. Дефолт у
+`ListItem` — линия включена, поэтому её выключают руками у каждой последней строки.
+
 Высота: строка с Icon — 43 на Mobile, 45 на Desktop; с Icon Tile и подписью — 65. В шторке
 больше шести строк — уже отдельный экран.
 **Граница с соседями:** `ContextMenuItem` — компактное меню 36/40 по правому клику над
@@ -789,6 +805,7 @@ const p = set.addComponentProperty('Left Icon', 'INSTANCE_SWAP', ico.id, {
 | `SegmentedControlRow` | пять табов, у каждого суффикс | лишние — `.visible = false`; суффикс — найти слой `Suffix` и скрыть |
 | `Breadcrumbs` | четыре уровня, последний `Label` | лишний уровень — `findOne(n => n.name === 'Breadcrumbs 4').visible = false`. `remove()` на нём падает |
 | `Island`, `Dialog`, `DesktopDrawer`, `TableCell` | текст-плейсхолдер `swap content` в слоте | удалить, см. «Слоты» |
+| `ListItem` | разделитель под строкой (`Show Divider`) | у последней строки списка — `false`, см. железное правило 10 |
 
 ### Баги компонентов — проверено, обходить
 
@@ -1073,6 +1090,7 @@ table (frame, layoutMode NONE)
 | Primary-кнопка на экране одна | скрипт (`primaryButtons`) |
 | Ни один горизонтальный ряд не вылезает за контейнер (`сумма детей + gap ≤ ширина − поля`); где не влезало — дети на `FILL`, а не торчат за краем | скрипт (`rowOverflow`) |
 | В строке лейаута один размер контролов | глаза |
+| У последней строки каждого списка нет разделителя (`Show Divider = false`), отдельный `Divider` не стоит первым или последним в контейнере | скрипт-проверка из железного правила 10, затем глаза |
 | Контент оверлеев лежит в слоте, а не дорисован внутри панели | глаза |
 | Проверено в обеих модах `Theme` и в нужной моде `Platform` | глаза, переключением мод на корне |
 | Состояния: есть Rest, а также Disabled/Error/Loading там, где они возможны | глаза |
@@ -1145,7 +1163,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.4.0 · 14.10.2026 · обновил Nurla**.
+Текущая версия — **v4.4.1 · 14.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
