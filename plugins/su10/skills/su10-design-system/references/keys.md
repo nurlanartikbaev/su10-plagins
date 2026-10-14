@@ -78,6 +78,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | ListItem · Leading | Set | `4e40134f9b341cbb708ef3ef679598e719dd2d28` |
 | ListItem · Trailing | Set | `871b2ef00c1cade62d2bc9357c3deb59e9fd33cf` |
 | ProfileItem | Set | `6b3ca3fb9c4d9dd273389a693a9226129311d9b6` |
+| ProgressBar | Set | `426c2f75a8b3e2c4e6f4d67df9438bdd2c3b3716` |
 | Header (mobile) | Set | `4376085fe811c84b3b1021509b62be761f933771` |
 | DesktopHeader | Single | `9c8329d80e2fc8d93a4a1098870783b728d65f37` |
 | Status Bar | Single | `a78dfd84c6573f8e7666e854ba76972fcaddd4bf` |
@@ -183,6 +184,11 @@ const V = {                                   // figma.variables.importVariableB
   radiusRounded:"0576cfa57576318e03cc9c0e584111ab4db22283",
   listItemHover:  "956108bd6e25033383598be60e07f38bdb5b995d", // color/component/list-item/surface-hover
   listItemPressed:"069476cecaacaffec583b08a97ff7d6e040b62af", // color/component/list-item/surface-pressed
+  progressTrack:  "40e64439d5cd79ff53687fa6f8e6f00d20f367a6", // color/component/progress-bar/track
+  progressSuccess:"9a986ed33e6e7707a5794446039df940fbe0e221", // fill-success
+  progressInfo:   "5af323bc66f3066fc0e7df452b133611eeba0d40", // fill-info
+  progressWarning:"4998a6cb5fc3ce80a1cc8f34271585b0442293f8", // fill-warning
+  progressError:  "8cb674a521c03e7a54d02bacc09c300953f2474a", // fill-error
 };
 
 const S = {                                   // figma.importStyleByKeyAsync
@@ -256,6 +262,7 @@ const S = {                                   // figma.importStyleByKeyAsync
 | ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone Default/Critical/Success/Warning/Disabled задаёт строка) |
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
+| ProgressBar | — (процент и цвет — варианты) | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
 
 Вложенные части `ListItem` правятся так:
 

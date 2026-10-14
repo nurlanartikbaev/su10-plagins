@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.4.2 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
+description: "v4.5.0 · 14.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components (misaligned rows, cropped checkboxes, shrunk selects, wrong badge colors); consult it before hand-building table cells from frames."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.4.2 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.5.0 · 14.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -404,6 +404,7 @@ Badge или Tag: если элемент кликабельный (выбира
 **Тост всегда сверху экрана**: на мобильном — под статус-баром во всю ширину с полями 12, на десктопе — в правом верхнем углу. Так он не спорит с нижними панелями и шторками. Движение записано в паспорте (раздел Motion): появление 350 мс — сдвиг 24 px вниз + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px вверх + прозрачность, ease-in. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
 Alert — про состояние страницы, Toast — про результат действия.
 **Loading** `269:1773` — спиннер.
+**ProgressBar** `2960:242` — полоса прогресса, своя страница. `Value` 0–100 с шагом 5 · `Signal` Success/Info/Warning/Error. Ставится **на Fill**: заполнение привязано к ширине (constraint Scale), процент сохраняется на любой ширине. Высота `Space-4`, скругление полное, цвета — `color/component/progress-bar/*` (дорожка — алиас `border/primary`, заполнение — `surface/*-static` по сигналу). Success — прогресс обучения, Info — нейтральный процесс, Warning/Error — отставание и проблема, всегда вместе с подписью. Процент пишут текстом над полосой: полоса число не заменяет. Рисовать полосу линиями или прямоугольниками нельзя — только этот компонент.
 
 ### Оверлеи — страница `Overlay`
 
@@ -1143,7 +1144,7 @@ table (frame, layoutMode NONE)
 
 - **Empty state** и **Skeleton** для страницы
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
-- **Progress bar**, **Slider / Carousel**, **File upload**
+- **Slider / Carousel**, **File upload** (Progress bar с 4.5.0 есть — `ProgressBar`)
 - **Time picker** — календарь выбирает только дату
 - **Stat-тайл / карточка метрики** — плитки вида «подпись + крупное значение»
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
@@ -1176,7 +1177,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.4.2 · 14.10.2026 · обновил Nurla**.
+Текущая версия — **v4.5.0 · 14.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
