@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.8.1 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.8.2 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.8.1 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.8.2 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -95,6 +95,22 @@ description: "v4.8.1 · 16.10.2026 — Сборка макетов, экрано
 - поля оверлея — 16
 - поля страницы — 24 на Mobile, 32 на Desktop
 - у `Island` своих полей нет — их приносит содержимое
+
+### Сетка десктопа
+
+Десктопные экраны (шаблоны в `redesign`) размечены сеткой: **12 колонок по 94, поля 24,
+промежуток 24** на ширине 1440. Блок на N колонок шириной `118·N − 24`:
+
+| Колонок | 1 | 2 | 3 | 4 | 6 | 8 | 9 | 11 | 12 |
+|---|---|---|---|---|---|---|---|---|---|
+| Ширина | 94 | 212 | 330 | 448 | 684 | 920 | 1038 | 1274 | 1392 |
+
+- Колонки страницы и боковые панели — **только этими ширинами**, промежуток между ними — 24
+  (`Space-24`), а не «на глаз» 380 или 300. Главный блок можно оставить на `FILL` — он сам
+  встанет на остаток сетки, если соседи на колонках.
+- Внутри блока на сетке ряды делятся так же: шапка 8 + рейтинг 3 в области на 11 колонок.
+- Проверка: левый край каждого блока = `24 + 118·k`, правый = `24 + 118·k + 94`.
+  Сетку на корне шаблона не удалять — по ней сверяются глазами.
 
 ### Радиусы `radius/border-radius-*`
 
@@ -1224,7 +1240,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.8.1 · 16.10.2026 · обновил Nurla**.
+Текущая версия — **v4.8.2 · 16.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
