@@ -26,24 +26,24 @@
 Одна секция — один раздел продукта (`Страница курса`, `Список уроков`, `Курсы`). Внутри —
 дорожки (lanes) сверху вниз, в дорожке — экраны слева направо в порядке сценария.
 
-**Подписи доски — только компонентами `Handoff*`** со страницы **Documentation Assets**,
-паспорт `HandoffPassport` (`3028:216`) там же. Текст руками и чужой `Note` из внешней
-библиотеки на доску не ставят: до 16.10 так и было, все доски переведены на компоненты.
+**Подписи доски собирают из компонентов, которые уже есть в системе** — отдельных
+компонентов под доску не заводят (решение владельца 16.10: `Handoff*` были созданы и удалены).
+Текст руками и чужой `Note` из внешней библиотеки на доску тоже не ставят.
 
-| Элемент | Компонент | Свойства | Позиция |
+| Элемент | Компонент | Как заполнить | Позиция |
 |---|---|---|---|
-| Шапка секции | `HandoffHeader` `3026:216` · key `26e067dc6a599a617194e78a618e60094dc2dac8` | `Title#3026:0`, `Description#3026:1`, `Show Description#3026:2` | x 100, y 40 |
-| Заголовок дорожки | `HandoffLane` `3026:219` · key `a3eca3a1994c95b493f282b428f815fc6d8bdf70` | `Title#3026:3`, `Subtitle#3026:4`, `Show Subtitle#3026:5` | x 100, на 190 выше экранов |
-| Подпись экрана | `HandoffScreenLabel` `3026:222` · key `3b9e0ad27105459d985d47493594cb528279c1ed` | `Title#3026:6`, `When#3026:7`, `Show When#3026:8` | над тёмным экраном пары, y − 66 |
-| Заметка | `HandoffNote` (набор) `3026:229` · key `3915dd9e8b05e84c9cdfb0fd91317e410fce6048` | `Text#3026:9`; `Type` Заметка / Анимация | под тёмным экраном, низ + 32 |
-| Стрелка | коннектор-образец `HandoffArrow · образец` `3028:306` в паспорте | — | см. §5 |
+| Шапка секции | `DocHeading` `1745:95` | `Title#1745:0`; описание — текстовый слой `Description` (нет описания — скрыть его фрейм) | x 100, y 40, ширина 1400 |
+| Заголовок дорожки | `Heading` `Size=L` (набор `1386:23`) | `Title#1386:0` — «<Буква> · <Название>»; `Subtitle#1386:4` + `Show Subtitle#1386:8` | x 100, на 190 выше экранов, ширина 1400 |
+| Подпись экрана | `Heading` `Size=M` | `Title#1386:0` — «<код> · <название>»; `Subtitle#1386:4` — «Когда: …» | низ на 18 px над тёмным экраном пары, ширина 480 (длинное название — шире) |
+| Заметка | `Alert` (набор `550:15590`) `Weight=Primary, Signal=Info`; заметка про анимацию — `Weight=Secondary, Signal=Info` | `Closable#3361:0`, `Show Title#3361:2`, `Show Buttons #3363:8` — `false`; текст — слой `Subtitle` | под тёмным экраном, низ + 32, ширина 320 |
+| Стрелка | клон любого коннектора доски, например `2955:69707` | см. §5 | — |
 
-- `HandoffHeader` и `HandoffLane` — ширина 1400; `HandoffScreenLabel` — 480 (длинное название —
-  шире, чтобы не переносилось и не наезжало на экран); `HandoffNote` — 260, высота по тексту.
+- **У `Alert` описание обрезается на третьей строке** — в заметке снимают ограничение:
+  `subtitle.textTruncation = 'DISABLED'; subtitle.maxLines = null`. Без этого длинная
+  заметка молча кончается многоточием.
 - Несколько заметок под одним экраном — стопкой с шагом 12, следующая начинается под
-  предыдущей: высота заметки зависит от текста, на глаз её не угадать.
-- Тексты на стилях системы (Heading 1/2/3, Body 1, Body 3), цвета `text/primary` /
-  `text/secondary`, заметка — `surface/blue-static` или `purple-static` с `text/white-static`.
+  предыдущей: высота зависит от текста, на глаз её не угадать. Две заметки рядом — шаг по x
+  = ширина + 24, иначе 320-пиксельные наедут друг на друга.
 
 **Сетка.**
 
@@ -56,17 +56,22 @@
 левые 1000 px — под заголовки дорожек. Дорожка начинается с экрана-входа («откуда пришёл»).
 
 ```js
-// подписи доски — инстансами Handoff*; id и свойства — из таблицы выше
-const [HDR, LANE, LBL, NOTE] = await Promise.all(
-  ['3026:216', '3026:219', '3026:222', '3026:229'].map(id => figma.getNodeByIdAsync(id)));
-for (const c of [HDR, LANE, LBL, ...NOTE.children])
-  for (const t of c.findAll(n => n.type === 'TEXT')) await figma.loadFontAsync(t.fontName);
-function put(comp, x, y, props) { const i = comp.createInstance(); sec.appendChild(i);
-  i.x = x; i.y = y; i.setProperties(props); return i; }
-put(LANE, 100, screenY - 190, { 'Title#3026:3': 'А · Прохождение курса', 'Show Subtitle#3026:5': false });
-put(LBL, screenX, screenY - 66, { 'Title#3026:6': 'А2 · В процессе', 'When#3026:7': 'Когда: открыл курс' });
-const note = NOTE.children.find(v => v.name === 'Type=Заметка');
-put(note, screenX, screenY + screenH + 32, { 'Text#3026:9': 'Экран открывается прокрученным к текущей неделе.' });
+// подписи доски — компонентами системы
+const DOC = await figma.getNodeByIdAsync('1745:95');                 // DocHeading
+const HEAD = await figma.getNodeByIdAsync('1386:23');                // Heading
+const ALERT = await figma.getNodeByIdAsync('550:15590');             // Alert
+const hL = HEAD.children.find(v => v.name === 'Size=L'), hM = HEAD.children.find(v => v.name === 'Size=M');
+const note = ALERT.children.find(v => v.name === 'Weight=Primary, Signal=Info');
+for (const c of [DOC, hL, hM, note]) for (const t of c.findAll(n => n.type === 'TEXT')) await figma.loadFontAsync(t.fontName);
+function put(comp, x, y, w, props) { const i = comp.createInstance(); sec.appendChild(i);
+  if (props) i.setProperties(props); i.resize(w, i.height); i.x = x; i.y = y; return i; }
+put(hL, 100, screenY - 190, 1400, { 'Title#1386:0': 'А · Прохождение курса', 'Show Subtitle#1386:8': false });
+const lbl = put(hM, screenX, 0, 480, { 'Title#1386:0': 'А2 · В процессе', 'Subtitle#1386:4': 'Когда: открыл курс' });
+lbl.y = screenY - 18 - lbl.height;
+const n = put(note, screenX, screenY + screenH + 32, 320,
+  { 'Closable#3361:0': false, 'Show Title#3361:2': false, 'Show Buttons #3363:8': false });
+const sub = n.findOne(t => t.type === 'TEXT' && t.name === 'Subtitle');
+sub.characters = 'Экран открывается прокрученным к текущей неделе.'; sub.textTruncation = 'DISABLED'; sub.maxLines = null;
 ```
 
 ## 3. Имена и тексты
@@ -105,7 +110,7 @@ put(note, screenX, screenY + screenH + 32, { 'Text#3026:9': 'Экран откр
 как галерея, а не как поток.
 
 ```js
-const a = (await figma.getNodeByIdAsync('3028:306')).clone(); sec.appendChild(a);  // образец из HandoffPassport
+const a = (await figma.getNodeByIdAsync('2955:69707')).clone(); sec.appendChild(a);  // любой коннектор доски
 a.connectorStart = { endpointNodeId: fromLight.id, magnet: 'RIGHT' };  // из СВЕТЛОГО экрана пары
 a.connectorEnd   = { endpointNodeId: toDark.id,   magnet: 'LEFT'  };  // в ТЁМНЫЙ следующей
 await figma.loadFontAsync(a.text.fontName); a.text.characters = 'нажал «Итог месяца»';
@@ -164,7 +169,7 @@ async function screen(theme, name, x, y) {
 | У каждого экрана есть пара светлой темы | §4 |
 | Каждый переход — стрелка с подписью | §5 |
 | Под каждым экраном «Когда:» и заметка | §2 |
-| Все подписи доски — инстансы `Handoff*`, ни текста руками, ни чужого `Note` | §2 |
+| Подписи доски — `DocHeading`, `Heading`, `Alert`; ни текста руками, ни чужого `Note`, ни своих компонентов под доску | §2 |
 | Самодельные элементы заменены компонентами, где они появились | §6 |
 | Нет разделителя под последней строкой списков | железное правило 10 |
 | Экраны прошли `audit.md`, изменённые кадры сняты скриншотом | `audit.md` |
