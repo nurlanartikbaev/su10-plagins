@@ -26,19 +26,24 @@
 Одна секция — один раздел продукта (`Страница курса`, `Список уроков`, `Курсы`). Внутри —
 дорожки (lanes) сверху вниз, в дорожке — экраны слева направо в порядке сценария.
 
-**Подписи доски не рисуют заново — клонируют из готовой секции** (`Курсы — сценарии для
-разработки`, `2955:67282`). Это подписи доски, а не макет: шрифт Inter без текстового стиля
-здесь штатен, аудит их не касается.
+**Подписи доски — только компонентами `Handoff*`** со страницы **Documentation Assets**,
+паспорт `HandoffPassport` (`3028:216`) там же. Текст руками и чужой `Note` из внешней
+библиотеки на доску не ставят: до 16.10 так и было, все доски переведены на компоненты.
 
-| Элемент | Образец | Позиция |
-|---|---|---|
-| Заголовок секции | `2955:67283` (40 / Semi Bold) | x 100, y 40 |
-| Описание секции | `2955:67284` (16 / Regular, ширина 1400) | x 100, y 100 |
-| Заголовок дорожки | `2955:67285` (32 / Semi Bold) | x 100, на 190 выше экранов |
-| Название экрана | `2955:67454` (20 / Semi Bold) | над экраном, y − 66 |
-| «Когда: …» | `2955:67455` (13 / Regular) | над экраном, y − 36 |
-| Заметка | инстанс `Note` (компонент `2686:68635`), образец `2955:67456` | под экраном, y + высота + 32 |
-| Стрелка | коннектор `2955:69707` | см. §5 |
+| Элемент | Компонент | Свойства | Позиция |
+|---|---|---|---|
+| Шапка секции | `HandoffHeader` `3026:216` · key `26e067dc6a599a617194e78a618e60094dc2dac8` | `Title#3026:0`, `Description#3026:1`, `Show Description#3026:2` | x 100, y 40 |
+| Заголовок дорожки | `HandoffLane` `3026:219` · key `a3eca3a1994c95b493f282b428f815fc6d8bdf70` | `Title#3026:3`, `Subtitle#3026:4`, `Show Subtitle#3026:5` | x 100, на 190 выше экранов |
+| Подпись экрана | `HandoffScreenLabel` `3026:222` · key `3b9e0ad27105459d985d47493594cb528279c1ed` | `Title#3026:6`, `When#3026:7`, `Show When#3026:8` | над тёмным экраном пары, y − 66 |
+| Заметка | `HandoffNote` (набор) `3026:229` · key `3915dd9e8b05e84c9cdfb0fd91317e410fce6048` | `Text#3026:9`; `Type` Заметка / Анимация | под тёмным экраном, низ + 32 |
+| Стрелка | коннектор-образец `HandoffArrow · образец` `3028:306` в паспорте | — | см. §5 |
+
+- `HandoffHeader` и `HandoffLane` — ширина 1400; `HandoffScreenLabel` — 480 (длинное название —
+  шире, чтобы не переносилось и не наезжало на экран); `HandoffNote` — 260, высота по тексту.
+- Несколько заметок под одним экраном — стопкой с шагом 12, следующая начинается под
+  предыдущей: высота заметки зависит от текста, на глаз её не угадать.
+- Тексты на стилях системы (Heading 1/2/3, Body 1, Body 3), цвета `text/primary` /
+  `text/secondary`, заметка — `surface/blue-static` или `purple-static` с `text/white-static`.
 
 **Сетка.**
 
@@ -51,14 +56,17 @@
 левые 1000 px — под заголовки дорожек. Дорожка начинается с экрана-входа («откуда пришёл»).
 
 ```js
-// подпись клоном образца; у Note меняется самый длинный текст
-async function cl(id, x, y, s) {
-  const n = (await figma.getNodeByIdAsync(id)).clone(); sec.appendChild(n); n.x = x; n.y = y;
-  const t = n.type === 'TEXT' ? n
-    : n.findAll(k => k.type === 'TEXT').sort((a, b) => b.characters.length - a.characters.length)[0];
-  for (const f of t.getRangeAllFontNames(0, t.characters.length)) await figma.loadFontAsync(f);
-  t.characters = s; return n;
-}
+// подписи доски — инстансами Handoff*; id и свойства — из таблицы выше
+const [HDR, LANE, LBL, NOTE] = await Promise.all(
+  ['3026:216', '3026:219', '3026:222', '3026:229'].map(id => figma.getNodeByIdAsync(id)));
+for (const c of [HDR, LANE, LBL, ...NOTE.children])
+  for (const t of c.findAll(n => n.type === 'TEXT')) await figma.loadFontAsync(t.fontName);
+function put(comp, x, y, props) { const i = comp.createInstance(); sec.appendChild(i);
+  i.x = x; i.y = y; i.setProperties(props); return i; }
+put(LANE, 100, screenY - 190, { 'Title#3026:3': 'А · Прохождение курса', 'Show Subtitle#3026:5': false });
+put(LBL, screenX, screenY - 66, { 'Title#3026:6': 'А2 · В процессе', 'When#3026:7': 'Когда: открыл курс' });
+const note = NOTE.children.find(v => v.name === 'Type=Заметка');
+put(note, screenX, screenY + screenH + 32, { 'Text#3026:9': 'Экран открывается прокрученным к текущей неделе.' });
 ```
 
 ## 3. Имена и тексты
@@ -97,7 +105,7 @@ async function cl(id, x, y, s) {
 как галерея, а не как поток.
 
 ```js
-const a = (await figma.getNodeByIdAsync('2955:69707')).clone(); sec.appendChild(a);
+const a = (await figma.getNodeByIdAsync('3028:306')).clone(); sec.appendChild(a);  // образец из HandoffPassport
 a.connectorStart = { endpointNodeId: fromLight.id, magnet: 'RIGHT' };  // из СВЕТЛОГО экрана пары
 a.connectorEnd   = { endpointNodeId: toDark.id,   magnet: 'LEFT'  };  // в ТЁМНЫЙ следующей
 await figma.loadFontAsync(a.text.fontName); a.text.characters = 'нажал «Итог месяца»';
@@ -156,6 +164,7 @@ async function screen(theme, name, x, y) {
 | У каждого экрана есть пара светлой темы | §4 |
 | Каждый переход — стрелка с подписью | §5 |
 | Под каждым экраном «Когда:» и заметка | §2 |
+| Все подписи доски — инстансы `Handoff*`, ни текста руками, ни чужого `Note` | §2 |
 | Самодельные элементы заменены компонентами, где они появились | §6 |
 | Нет разделителя под последней строкой списков | железное правило 10 |
 | Экраны прошли `audit.md`, изменённые кадры сняты скриншотом | `audit.md` |

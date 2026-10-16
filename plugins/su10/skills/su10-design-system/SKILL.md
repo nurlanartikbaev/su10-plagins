@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.6.0 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.7.0 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.6.0 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.7.0 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -29,7 +29,9 @@ description: "v4.6.0 · 16.10.2026 — Сборка макетов, экрано
 перед сдачей. Если экраны идут на доску для разработки — ещё `handoff.md` до начала сборки:
 сетку и имена закладывают сразу, а не переставляют потом.
 
-**Шапки паспортов — свои компоненты**: `DocHeading` `1745:95` и `DocSubheading` `1745:100` на странице Documentation Assets. Миграция завершена 22.09 — чужих `Heading` / `Subheading` в файле не осталось нигде, кроме `sandbox`; новые паспорта собираются только на этих двух. Заголовок — текстовое свойство `Title`, описание — обычный текстовый слой: так в нём живут маркированные списки. Образцы цвета — `Swatch` `1746:3339` на странице Colors.
+**Шапки паспортов — свои компоненты**: `DocHeading` `1745:95` и `DocSubheading` `1745:100` на странице Documentation Assets. Миграция завершена 22.09 — чужих `Heading` / `Subheading` в файле не осталось нигде, кроме `sandbox`; новые паспорта собираются только на этих двух. Заголовок — текстовое свойство `Title`, описание — обычный текстовый слой: так в нём живут маркированные списки. Образцы цвета — `Swatch` `1746:3339` на странице Colors. **Подписи досок хэндоффа** — тоже
+здесь, на Documentation Assets: `HandoffHeader`, `HandoffLane`, `HandoffScreenLabel`, `HandoffNote`
+и образец стрелки в `HandoffPassport`; как ими собирать доску — `references/handoff.md`.
 
 **Токены тоже документированы**: `ColorsPassport` на странице Colors — все 62 семантических токена со свотчами и правилами выбора; `SpacingPassport` на странице Spacing — `Space`, радиусы, высоты строки, обводки и `size/*`.
 
@@ -1122,6 +1124,9 @@ table (frame, layoutMode NONE)
 - варианты различаются устройством, итерация — новой дорожкой рядом, старое не удалять без просьбы;
 - тёмная слева, светлая справа = клон + мода `Theme`, а не пересборка;
 - экраны из `redesign` и концептов — только клоном, оригиналы не трогать (правило 8);
+- подписи доски — только компонентами `HandoffHeader`, `HandoffLane`, `HandoffScreenLabel`,
+  `HandoffNote` со страницы Documentation Assets (паспорт `HandoffPassport`); текст руками и
+  чужой `Note` не ставят;
 - `devStatus` через API не ставится — Ready for development отмечает владелец.
 
 ## Если добавляешь компонент в систему
@@ -1191,7 +1196,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.6.0 · 16.10.2026 · обновил Nurla**.
+Текущая версия — **v4.7.0 · 16.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

@@ -95,6 +95,10 @@ Node ID из каталога выше годятся для ссылок и д�
 | Subheading | Single | `6049e6e2a901ffbd07f8ce6c3c4e3d3421e9273c` |
 | Divider | Set | `3a5e90422e2d44de12019cd303ac896c87d1bcc1` |
 | Island | Single | `0353e3904c9e72531687060d18d616228260e1ef` |
+| HandoffHeader (доска сценариев) | Single | `26e067dc6a599a617194e78a618e60094dc2dac8` |
+| HandoffLane | Single | `a3eca3a1994c95b493f282b428f815fc6d8bdf70` |
+| HandoffScreenLabel | Single | `3b9e0ad27105459d985d47493594cb528279c1ed` |
+| HandoffNote | Set | `3915dd9e8b05e84c9cdfb0fd91317e410fce6048` |
 | Accordion | Set | `610c45714a8c02db13e706df1989d3672a3e7e70` |
 | TabBar | Single | `d5966621e6ab36fe14767aafd92919fa01948345` |
 | TabBarItem | Set | `00aca1142f096373da3da161922ac2c08d8cf093` |
@@ -263,6 +267,8 @@ const S = {                                   // figma.importStyleByKeyAsync
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
 | ProgressBar | — (процент и цвет — варианты) | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
+| HandoffHeader · HandoffLane · HandoffScreenLabel | `Title#3026:0` `Description#3026:1` `Show Description#3026:2` · `Title#3026:3` `Subtitle#3026:4` `Show Subtitle#3026:5` · `Title#3026:6` `When#3026:7` `Show When#3026:8` | — (одиночные) |
+| HandoffNote | `Text#3026:9` | `Type=Заметка` / `Type=Анимация` |
 
 Вложенные части `ListItem` правятся так:
 
