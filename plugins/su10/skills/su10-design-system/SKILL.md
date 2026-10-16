@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.8.0 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.8.1 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.8.0 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.8.1 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -61,6 +61,12 @@ description: "v4.8.0 · 16.10.2026 — Сборка макетов, экрано
        r.setProperties({ 'Show Divider#2816:28': false });
    }
    ```
+
+11. **Новый компонент — только когда существующие не закрывают задачу.** Перед тем как
+    создавать компонент (даже по прямой просьбе «собери компоненты для …»), разложи задачу
+    на то, что в системе уже есть, и покажи это владельцу. Заводить новое можно, только если
+    ничего не подошло, и тогда в отчёте сказано, что именно не подошло и почему. Порядок
+    проверки — первый пункт раздела «Если добавляешь компонент в систему».
 
 ## Основа
 
@@ -1130,6 +1136,29 @@ table (frame, layoutMode NONE)
 
 ## Если добавляешь компонент в систему
 
+0. **Сначала докажи, что компонент нужен** (железное правило 11). По шагам:
+   - **Разложи задачу на роли** и подбери каждой готовый компонент. Чаще всего хватает
+     этих связок:
+     - связка «заголовок + подзаголовок» — `Heading` L/M/S, `Subheading`; в документации — `DocHeading`, `DocSubheading`;
+     - строки — `ListItem`, `ProfileItem`;
+     - контейнеры — `Island`, `Accordion`;
+     - сообщения — `Alert`, `Toast`, `Tooltip`;
+     - метки — `Badge`, `Tag`;
+     - действия — `Button`, `Text Button`.
+   - **Не хватает одного состояния или варианта** — это свойство или вариант у
+     существующего компонента, а не новый компонент. Правка чужого компонента идёт по
+     правилу 8: копия рядом, показать владельцу.
+   - **Отличается только содержимое** (тексты, иконка, порядок) — это заполнение
+     существующего компонента, а не новый.
+   - **Ничего не подошло** — сначала владельцу: какие роли, что примеряли, почему не легло.
+     Создавать после ответа.
+
+   Прецеденты:
+   - `Handoff*` (16.10.2026) создали для подписей доски хэндоффа и удалили по решению
+     владельца: подписи собрались из `DocHeading`, `Heading` и `Alert`.
+   - `ProgressBar` (14.10) завели оправданно: он стоял в «Чего в системе нет», и ни один
+     компонент не показывал долю.
+
 1. Цвета — свой слой `color/component/<имя>/*`, алиасы на семантику, **узкие scopes и `hiddenFromPublishing`**
 2. Размеры — токены `size/*` со скоупом `WIDTH_HEIGHT`, разные значения на Mobile и Desktop
 3. Любой произвольный контент — через нативный SLOT, а не через INSTANCE_SWAP-заглушку
@@ -1195,7 +1224,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.8.0 · 16.10.2026 · обновил Nurla**.
+Текущая версия — **v4.8.1 · 16.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
