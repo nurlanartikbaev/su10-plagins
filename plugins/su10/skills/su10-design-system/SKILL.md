@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.8.2 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.8.3 · 16.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.8.2 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.8.3 · 16.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -67,6 +67,18 @@ description: "v4.8.2 · 16.10.2026 — Сборка макетов, экрано
     на то, что в системе уже есть, и покажи это владельцу. Заводить новое можно, только если
     ничего не подошло, и тогда в отчёте сказано, что именно не подошло и почему. Порядок
     проверки — первый пункт раздела «Если добавляешь компонент в систему».
+
+12. **Без тавтологий: один факт — в одном месте экрана.** Перед сдачей пройди по экрану и
+    вычеркни всё, что уже видно рядом:
+    - выбранная неделя подсвечена в навигации — значит, её номер не дублируют ни в
+      подзаголовке шапки страницы, ни в заголовке блока справа;
+    - процент уже написан в строке — шапка блока говорит другое (что осталось, что делать);
+    - заголовок аккордеона «Итог месяца» — подзаголовок не повторяет «итог месяца»;
+    - кнопка дублирует плашку, которая ведёт туда же (рейтинг → аналитика), — оставь
+      что-то одно.
+
+    Каждый повтор отнимает место и заставляет читать одно и то же дважды. Если без
+    подзаголовка блок пустеет — его выключают, а не заполняют пересказом.
 
 ## Основа
 
@@ -1129,6 +1141,7 @@ table (frame, layoutMode NONE)
 | Primary-кнопка на экране одна | скрипт (`primaryButtons`) |
 | Ни один горизонтальный ряд не вылезает за контейнер (`сумма детей + gap ≤ ширина − поля`); где не влезало — дети на `FILL`, а не торчат за краем | скрипт (`rowOverflow`) |
 | В строке лейаута один размер контролов | глаза |
+| Нет тавтологий: факт, видный в навигации, строке или соседнем блоке, не повторяется в заголовках и подзаголовках | глаза, железное правило 12 |
 | У последней строки каждого списка нет разделителя (`Show Divider = false`), отдельный `Divider` не стоит первым или последним в контейнере | скрипт-проверка из железного правила 10, затем глаза |
 | Контент оверлеев лежит в слоте, а не дорисован внутри панели | глаза |
 | Проверено в обеих модах `Theme` и в нужной моде `Platform` | глаза, переключением мод на корне |
@@ -1240,7 +1253,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.8.2 · 16.10.2026 · обновил Nurla**.
+Текущая версия — **v4.8.3 · 16.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
