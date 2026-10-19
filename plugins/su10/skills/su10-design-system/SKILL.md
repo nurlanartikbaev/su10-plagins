@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.8.4 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.9.0 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.8.4 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.9.0 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -837,6 +837,7 @@ const p = set.addComponentProperty('Left Icon', 'INSTANCE_SWAP', ico.id, {
 ### Что нельзя делать с инстансами
 
 - **`appendChild` внутрь инстанса запрещён** (`Cannot move node. New parent is an instance or is inside of an instance`) — кроме нативных слотов. Если надо положить свою графику в шапку компонента (логотип в `Header`), клади её **соседом с абсолютным позиционированием**: `parent.appendChild(node); node.layoutPositioning = 'ABSOLUTE'; node.x = …`.
+- **`rescale()` у инстанса масштабирует и привязанные к нему радиусы.** Картинку курса 236 px уменьшили `rescale` до 56 — привязанный `radius/border-radius-300` стал 2,8 px вместо 12. Размер инстанса меняют `resize()`, радиус привязывают после.
 - **`remove()` ребёнка инстанса запрещён** (`Removing this node is not allowed`). Лишний элемент скрывается через `.visible = false`.
 - Исключение из предыдущего пункта: у элементов, включаемых булевым свойством (`Show Right Icon` и родня), `.visible = false` ставить нельзя — инстанс уходит в сломанное состояние. Для них только `setProperties`. Починка сломанного — `instance.resetOverrides()`.
 - Имена свойств содержат суффикс с id и **различаются у похожих компонентов**: у `Subheading` это `Title#1386:20`, а не `Title#1386:0` от `Heading`. Не угадывай — либо бери из таблицы ниже, либо считай с временного инстанса:
@@ -964,7 +965,34 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 
 **Структура страницы.** `Heading` L сверху, дальше блоки `Island` со своими полями, в каждом `Heading` M или `Subheading`. `Divider` — только там, где отступа не хватает.
 
-**Состояния экрана.** Загрузка — `Loading`, скелетона нет. Пусто — есть только `Dropdown State=Empty` для списка.
+**Состояния экрана.** Загрузка — `Loading`, скелетона нет. Пусто у выпадающего списка — `Dropdown State=Empty`; пустой список на странице — рецепт «Пустой результат» ниже.
+
+**Поиск по списку.** `Text field` `Size=M`:
+- `Show Label` и `Show Description` выключены, префикс — `Type=Icon` с иконкой `Magnifer`;
+- плейсхолдер — «Поиск по <чему>»: «Поиск по задачам». Контекст («этой недели», «курса») не дописывают — он и так виден на экране;
+- после ввода: `Has Value=On`, `State=Focused`, суффикс `Type=Icon` с `Close` — очистка запроса.
+
+Поле и кнопка фильтра стоят **одной строкой над списком**: поле на `FILL`, кнопка — `Button` Only Icon того же размера M. Кнопку фильтра из шапки экрана при этом убирают: точка входа одна.
+
+**Фильтр списка.**
+- **Где открывается.** На телефоне — `MobileBottomSheet` «Фильтры». На десктопе — `Popover` под кнопкой фильтра: ширина по сетке (4 колонки = 448), правый край по краю колонки. Слот `content` у Popover по умолчанию HUG — растягивают на `FILL`.
+- **Группы.** Подпись, `Text Button` «Сбросить» и `Tag`.
+- **Кнопки.** «Сбросить» и «Применить» неактивны (`State=Disabled`), пока ничего не изменено.
+- **Применённые фильтры** — строка `Tag` `Closable=Yes` над списком: крестик снимает фильтр без шторки.
+- **Не повторять навигацию.** В фильтр не кладут то, что уже выбирается на странице: на десктопе неделя выбирается в линии, группы «Неделя» в поповере нет.
+- **Бинарный признак списка** («только обязательные») — первая строка фильтра: `ListItem` с `Trailing` `Type=Toggle`. Не `SegmentedControlRow` «Все / X» над списком: сегмент «Все» повторяет «Все …» в группах фильтра и занимает строку.
+- **Выравнивание.** Отступ группы слева и справа = внутренний отступ `ListItem` (8), иначе подписи групп не встают по тексту строки.
+
+**Пустой результат (поиск, фильтр).** Не `Alert`: он для событий и предупреждений, а не для пустого места. По центру области списка — сборка из трёх частей:
+- иллюстрация — готовое изображение с пустой страницы «Курсы», клоном;
+- `Heading` `Size=S` с заголовком «Ничего не найдено» и подсказкой в подзаголовке. Запрос в подсказке не повторяют — он виден в поле;
+- `Button` Secondary «Очистить поиск».
+
+**Шапка страницы курса (десктоп).**
+- Слева направо: `Button` Only Icon «назад», картинка курса, `Heading` `Size=L`, справа действия Secondary.
+- Картинка курса — `Mascot-img` 56 × 56, `radius/border-radius-300` (12), `clipsContent`.
+- Подзаголовок у `Heading` — только если он несёт новое. Выбранная неделя видна в навигации — её не повторяют.
+- Подстраницы курса («Аналитика», «О курсе») — та же шапка: `Title` — название страницы, `Subtitle` — курс.
 
 **Перенос ассетов из исходного макета.** Когда пересобираешь чужой экран на дске, картинки, логотипы и брендовые иконки не перерисовываются — они забираются из оригинала, иначе макет теряет узнаваемость и время уходит на заглушки:
 
@@ -1218,7 +1246,7 @@ table (frame, layoutMode NONE)
 
 Если экран требует одного из этого, останови сборку и напиши владельцу системы:
 
-- **Empty state** и **Skeleton** для страницы
+- **Skeleton** для страницы. **Empty state** как компонента тоже нет — пустой список собирается по рецепту «Пустой результат» (иллюстрация + `Heading` S + `Button`), не из `Alert`
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
 - **Slider / Carousel**, **File upload** (Progress bar с 4.5.0 есть — `ProgressBar`)
 - **Time picker** — календарь выбирает только дату
@@ -1253,7 +1281,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.8.4 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.9.0 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
