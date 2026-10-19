@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.11.4 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.3 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.11.4 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.3 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -44,6 +44,7 @@ description: "v4.11.4 · 19.10.2026 — Сборка макетов, экран�
 3. **Никаких сырых значений.** Цвет, отступ, радиус, размер — только переменные. Текст — только текстовыми стилями.
 4. **Платформа — мода, а не отдельные макеты.** Коллекция `Platform` (Mobile / Desktop) ставится на корневой фрейм экрана. Тема — коллекция `Theme` (Light / Dark). Один макет, две моды.
 5. **Иконки — только стиль Outline** из пака. Linear красится обводкой и теряет цвет при подмене. Исключение — те иконки, которых в Outline в паке просто нет: `Check` и семейство `Sort`; они остаются Linear, пока их не нарисуют.
+   **Второе исключение — «⋯» в кнопках всегда Bold** (решение владельца 19.10): `Bold / Essentional, UI / Menu Dots`, ключ `c29819c4476ffc9404b1b002ae8977b35d16861e`, в файле дски `3180:97432`. Касается любой кнопки с меню: `HeaderButton`, `Button` `Only Icon=Yes`. Outline-точки тонкие и теряются на подложке.
 6. **В одной строке лейаута — один размер контролов.** Таблица высот ниже.
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
@@ -81,7 +82,7 @@ description: "v4.11.4 · 19.10.2026 — Сборка макетов, экран�
     подзаголовка блок пустеет — его выключают, а не заполняют пересказом.
 
 13. **В макете компоненты стоят в покое: `State=Rest`.** `Pressed`, `Hover`, `Focused` — это мгновение взаимодействия, разработчик сверстает их как постоянный вид. Другое состояние ставят, только если экран показывает именно этот момент: поле в фокусе, пока вводят запрос; строка под курсором в сценарии наведения. `Signal` выбирают по смыслу действия: `Success` — только у действия про успех. Кнопка-иконка без смысла сигнала — `Signal=Info`.
-    Не берут вариант «потому что так выглядит»: Tertiary в покое прозрачная, и это и есть её вид. Нужна видимая плашка — берут `Weight=Secondary`, а не `State=Pressed`. Иконку внутри кнопки не перекрашивают поверх: неверный цвет иконки значит, что выбран неверный вариант. Подменённая иконка (`Icon` / `Left Icon`) сама берёт цвет кнопки — проверено на свежих инстансах.
+    Не берут вариант «потому что так выглядит»: Tertiary в покое прозрачная, и это и есть её вид. Нужна видимая плашка — берут `Weight=Secondary`, а не `State=Pressed`. Иконку внутри кнопки не перекрашивают поверх: неверный цвет иконки значит, что выбран неверный вариант. Подменённая иконка (`Icon` / `Left Icon`) сама берёт цвет кнопки — проверено на свежих инстансах. **Но дефолтную иконку в свойство повторно не передают**: если записать в `Left Icon` ту же иконку, что стоит по умолчанию (`Plus` `1505:5044`), слетает цвет, заданный в мастере, и вектор берёт цвет из пака (19.10 плюс у «Добавить курс» стал бледным). Нужна иконка по умолчанию — ставят только `Show Left Icon=true`. После любой подмены проверяют, что заливка вектора привязана к `icon/*`, а не к переменной пака.
 
 ## Основа
 
@@ -368,7 +369,8 @@ description: "v4.11.4 · 19.10.2026 — Сборка макетов, экран�
 
 **HeaderButton** `3136:103` — кнопка-иконка в шапке мобильного экрана: «назад», фильтр, «⋯», корзина. Кладётся в слоты `left` / `right` у `MobileHeader`.
 - `State` Rest/Hover/Pressed/Disabled, в макете — Rest. `Icon` — INSTANCE_SWAP, только Outline; по умолчанию `Outline / Arrows / Alt Arrow Left`.
-- В покое серая полупрозрачная подложка — токены `color/component/header-button/*`, 42 × 42, радиус 12.
+- **Круглая кнопка-«стекло»** (как владелец собирал в макетах): 42 × 42, радиус `radius/border-radius-rounded`, эффект-стиль `blur-medium` (размытие фона 12), обводка 1 px внутрь.
+- Токены `color/component/header-button/*`: `surface` — белое 32% в светлой и белое 8% в тёмной, `surface-hover` — белое 40% / прежнее, `border` `3179:99689` — чёрное 4% / белое 4%. Размытие не выключают: под кнопкой бывает карта или фото.
 - `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
 
 **Tab** `678:29650` + **TabsRow** `678:29898` — навигация между разделами.
@@ -1046,7 +1048,8 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 **Поиск по списку.** `Text field` `Size=M`:
 - `Show Label` и `Show Description` выключены, префикс — `Type=Icon` с иконкой `Magnifer`;
 - плейсхолдер — «Поиск по <чему>»: «Поиск по задачам». Контекст («этой недели», «курса») не дописывают — он и так виден на экране;
-- после ввода: `Has Value=On`, `State=Focused`, суффикс `Type=Icon` с `Close` — очистка запроса.
+- **после ввода — всегда крестик справа**: `Has Value=On`, `Show Suffix=true`, суффикс `Type=Icon` с `Outline / Essentional, UI / Close`. Нажатие стирает весь запрос. Крестик есть в любом состоянии с введённым текстом, не только в `Focused`; поле, пока вводят, — `State=Focused`.
+- Правило только для поля-**поиска**. У обычного поля формы (имя, телефон, дата) крестика очистки нет — там суффикс по смыслу поля или выключен.
 
 Поле и кнопка фильтра стоят **одной строкой над списком**: поле на `FILL`, кнопка — `Button` `Size=M, Signal=Info, Weight=Secondary, State=Rest, Only Icon=Yes`: светло-синяя плашка, как у соседних Secondary-кнопок (железное правило 13). Кнопку фильтра из шапки экрана при этом убирают: точка входа одна.
 
@@ -1082,6 +1085,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 **«Аналитика» (десктоп):**
 - **Раскладка по сетке.** Слева 3 колонки: плашка места в курсе и под ней месяцы-`Accordion` с неделями и «Итогом месяца». Справа рейтинг (6 колонок) и баллы по видам работ (3).
 - **Плашка места — это и выбор «Весь курс».** Отдельная строка «Весь курс» её повторяла бы.
+- **Плашка места (`rating banner` / `rating row`) везде одинаковая**: поля по бокам `Space-12`, сверху и снизу `Space-8`, шаг `Space-12`, радиус `radius/border-radius-400` (16), подложка `surface/2-layer`, обводка `border/secondary`. Поменял одну — прогони все копии на странице поиском по имени (решение владельца 19.10, обновлено 40 копий).
 - **Выбранный пункт** (плашка, неделя, итог месяца) — подложка `surface/blue-transparent-static` с радиусом 12, как неделя в линии курса.
 - **Не влезает по высоте.** Если два раскрытых месяца не помещаются в колонку, текущий сворачивают.
 - **Состояния:** весь курс, выбранная неделя, итог месяца, загрузка, «рейтинга ещё нет» (справа — рецепт «Пустой результат» без кнопки), курс завершён.
@@ -1318,7 +1322,26 @@ table (frame, layoutMode NONE)
 3. Любой произвольный контент — через нативный SLOT, а не через INSTANCE_SWAP-заглушку
 4. Высота собирается из полей и line-height, а не задаётся числом — сверь с таблицей размеров
 5. Внутри компонента бери готовые компоненты дски, а не собирай заново: заголовок — `Heading`, крестик — `Text Button`, линия — `Divider`
-6. **Свой паспорт** по шаблону дски плюс `description` и `documentationLinks` на него. Ссылка живёт только в `documentationLinks`, в тексте `description` URL быть не должно
+6. **Свой паспорт** по шаблону дски плюс `description` и `documentationLinks` на него. Ссылка живёт только в `documentationLinks`, в тексте `description` URL быть не должно.
+   **Анатомия паспорта** (эталон — `ProgressBarPassport`; шапку не собирают заново, а клонируют оттуда):
+   ```
+   <Имя>Passport            VERTICAL, ширина 860, поля 32, шаг 48, clipsContent off
+   ├─ Header                VERTICAL, шаг 0
+   │  ├─ Dev status         две `DevStatus` `1592:75`: Platform=Mobile и Platform=Web
+   │  ├─ DocHeading         Title = имя компонента, описание — что это и когда брать
+   │  └─ Showcase           главный пример: полосы «Светлая» / «Тёмная тема», дефолтный вариант
+   ├─ Section × N           VERTICAL, шаг 0: DocSubheading (свойство или тема) + Showcase
+   └─ Section «Поведение»   правила, которые чаще всего нарушают, + пример в реальном окружении
+   ```
+   - **Статус разработки обязателен.** `Status`: Не начато / В работе / Нужны правки / Готово. Новый компонент — «Не начато» на обеих платформах; дальше статус меняет владелец. Это компонент в документации, он ставится через API — в отличие от Figma `devStatus` у секций.
+   - **Каждый раздел с витриной.** Паспорт из одних `DocSubheading` — неполный: свойство без примера не проверить глазами. Новое свойство (например, `Platform` у `Course map / Node`) — новый раздел с витриной «подпись + варианты».
+   - Перед сдачей — проверка всех паспортов файла:
+     ```js
+     for (const p of figma.root.children) { if (p.name === 'sandbox') continue; await p.loadAsync();
+       for (const f of p.findAll(n => n.type === 'FRAME' && /Passport$/.test(n.name))) {
+         const h = f.children.find(c => c.name === 'Header');
+         if (!h?.children.some(c => c.name === 'Dev status') || !h.children.some(c => c.name === 'Showcase')) console.log(p.name, f.name); } }
+     ```
 7. **Витрина паспорта — две полосы: `Светлая` и `Тёмная тема`.** Сама `Showcase` полей не держит
    (`padding 0`, `gap 0`, вертикальный автолейаут), фон у неё `surface/1-layer`. Каждая полоса —
    самостоятельная панель: свой фон `surface/1-layer`, поля **12** со всех сторон, шаг **12**,
@@ -1419,7 +1442,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.11.4 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.3 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

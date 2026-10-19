@@ -124,7 +124,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | Essentional, UI / Home | `3aa09976a88e1a6af2e3dfdb1a18af50fb74e83b` |
 | Notifications / Bell | `dfc33364b045e8ffa629fe8cf53c203dde111061` |
 | Files / File Check | `858c96215314710d2417d986791d20a09871c29a` |
-| Essentional, UI / Menu Dots | `ba33be53f493c0938afd94def72af034a7acfa7f` |
+| Essentional, UI / Menu Dots — Outline, **в кнопки не ставить** | `ba33be53f493c0938afd94def72af034a7acfa7f` |
+| **Bold** / Essentional, UI / Menu Dots — «⋯» в любой кнопке | `c29819c4476ffc9404b1b002ae8977b35d16861e` (в дске `3180:97432`) |
 | Essentional, UI / Plus | `6a34385acbf2872301d1eb6f4305b8e72b9c57f4` |
 | Essentional, UI / Sort | `1ef4848b7e78479698f49445b8c4e31f5c925a70` |
 | Like / Star | `371cdbc09df4bf1700ee4d0c1984ba9cb6972423` |
