@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.3 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.4 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.3 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.4 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1090,6 +1090,12 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Не влезает по высоте.** Если два раскрытых месяца не помещаются в колонку, текущий сворачивают.
 - **Состояния:** весь курс, выбранная неделя, итог месяца, загрузка, «рейтинга ещё нет» (справа — рецепт «Пустой результат» без кнопки), курс завершён.
 
+**Страница «Курсы» (десктоп)** — вариант владельца В1, доска «Курсы — сценарии для разработки», К5–К7:
+- Заголовка страницы «Курсы» нет — пункт подсвечен в верхнем меню. Сверху строка: `Heading` M «Активные курсы» и справа `Button` `Weight=Primary` «Добавить курс» с плюсом.
+- Курсы — карточки `Island` на 4 колонки (448), по три в ряд; ряд с `layoutWrap = WRAP`, четвёртый курс уходит на следующий ряд. В карточке: `Mascot-img` 64 (радиус 12) + `Heading` S (название, «2 месяц · 3 неделя»), «Пройдено» с процентом и `ProgressBar`, следующая задача — `ListItem` с `Icon Tile` и шевроном на подложке `surface/3-layer`.
+- Архив — `Heading` M «Архив» и карточки той же ширины: картинка 48, `Heading` S (название, «Завершён · есть сертификат» / «Не завершён»), шеврон.
+- Курсов нет — пустое состояние в карточке, кнопка «Добавить курс» по ширине текста, не на всю карточку.
+
 **Звёзды недель (`Course map / Node`) на десктопе — `Platform=Desktop`.** Это вариант без свечения, искр и радара: на тёмной карте телефона свечение работает, а в колонке в теме приложения выглядит грязно.
 
 **Перенос ассетов из исходного макета.** Когда пересобираешь чужой экран на дске, картинки, логотипы и брендовые иконки не перерисовываются — они забираются из оригинала, иначе макет теряет узнаваемость и время уходит на заглушки:
@@ -1442,7 +1448,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.3 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.4 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
