@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.11.3 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.11.4 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.11.3 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.11.4 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1326,6 +1326,15 @@ table (frame, layoutMode NONE)
    тема». Направление полосы наследуется от исходной витрины: было горизонтально — осталось
    горизонтально. Содержимое тёмной — клон светлой, и правка компонента доезжает в обе копии
    сразу; руками дублируют только самодельные фреймы и подписи
+   **Витрина всегда вертикальная, даже если содержимое идёт в строку.** Полосы стоят одна под
+   другой; горизонтальным остаётся содержимое **внутри** полосы, а не сама витрина. Если сделать
+   горизонтальной витрину, полосы встанут в ряд и вылезут за паспорт — так разъехались 41 витрина,
+   пока не поймали.
+   **Содержимому, которое выходит за полосу вниз, добавляют нижнее поле.** Раскрытый `Dropdown`,
+   тултип, шторка — всё, что в примере висит поверх, HUG-высота полосы не учитывает, и оно
+   вываливается из паспорта. Запас считают по габариту поддерева и дают **обеим** полосам
+   одинаковый, иначе светлая и тёмная разъедутся.
+
 8. **Мод темы закрепляют за обеими полосами, а не только за тёмной.**
    `setExplicitVariableModeForCollection` на сам фрейм: светлой — `Light` `57:2`, тёмной —
    `Dark` `95:0`. Если светлую оставить без мода, она перевернётся вместе с родителем, когда
@@ -1410,7 +1419,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.11.3 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.11.4 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
