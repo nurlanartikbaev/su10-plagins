@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.11.1 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.11.2 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.11.1 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.11.2 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1320,23 +1320,18 @@ table (frame, layoutMode NONE)
 5. Внутри компонента бери готовые компоненты дски, а не собирай заново: заголовок — `Heading`, крестик — `Text Button`, линия — `Divider`
 6. **Свой паспорт** по шаблону дски плюс `description` и `documentationLinks` на него. Ссылка живёт только в `documentationLinks`, в тексте `description` URL быть не должно
 7. **Витрина паспорта — две полосы: `Светлая` и `Тёмная тема`.** Сама `Showcase` полей не держит
-   (`padding 0`, `gap 0`), фон у неё `surface/1-layer`; поля и шаг живут в полосах, у обеих
-   одинаковые. У тёмной мод `Theme = Dark` ставится `setExplicitVariableModeForCollection` на сам
-   фрейм — тогда всё внутри, включая инстансы, пересчитывается само. Содержимое тёмной — клон
-   светлой, и правка компонента доезжает в обе копии сразу; руками дублируют только самодельные
-   фреймы и подписи. Белые компоненты (`surface/2-layer`) на чистом 1-layer сливаются с фоном —
-   под них кладут `surface/3-layer`. В вертикальной витрине полосы идут друг под другом, в
-   горизонтальной — бок о бок, обе на `FILL`
-8. **Три грабли витрины, на которых уже спотыкались:**
-   - **поля у тёмной полосы.** С собственными боковыми полями тёмный пример съезжает относительно
-     светлого, а дети, стоявшие на `FILL`, внутри HUG-панели схлопываются в натуральную ширину.
-     Боковые поля — нулевые, ширина — `FILL`
-   - **содержимое шире своего фрейма.** В 61 витрине из 312 поддерево вылезает за родительский
-     фрейм: на однородном светлом фоне не видно, а из-под тёмной панели торчит хвост на светлом.
-     Поэтому полоса идёт во всю ширину, а не карточкой с полями
-   - **фиксированная высота витрины.** 44 витрины стояли на `primaryAxisSizingMode = 'FIXED'` и
-     просто резали добавленное содержимое — паспорт при этом не рос, и дефект было не видно.
-     Высоту витрины задаёт содержимое, всегда `AUTO`
+   (`padding 0`, `gap 0`, вертикальный автолейаут), фон у неё `surface/1-layer`. Каждая полоса —
+   самостоятельная панель: свой фон `surface/1-layer`, поля **12** со всех сторон, шаг **12**,
+   ширина `FILL`, высота по содержимому, первым ребёнком текстовая подпись «Светлая» / «Тёмная
+   тема». Направление полосы наследуется от исходной витрины: было горизонтально — осталось
+   горизонтально. Содержимое тёмной — клон светлой, и правка компонента доезжает в обе копии
+   сразу; руками дублируют только самодельные фреймы и подписи
+8. **Мод темы закрепляют за обеими полосами, а не только за тёмной.**
+   `setExplicitVariableModeForCollection` на сам фрейм: светлой — `Light` `57:2`, тёмной —
+   `Dark` `95:0`. Если светлую оставить без мода, она перевернётся вместе с родителем, когда
+   паспорт смотрят в тёмной теме, и сравнивать станет не с чем. Мод на фрейме пересчитывает всё
+   внутри, включая инстансы. **В примитивах (`Spacing`, `Colors`, `Typography`) тёмной полосы нет
+   вовсе** — там показывают сами токены, сравнивать темы нечего
 9. **Раскладка страницы: паспорт слева, его компоненты справа.** Колонка компонентов с отступом
    200, верх по верху паспорта, между компонентами 80. Привязка компонента к паспорту — **сначала
    точное совпадение имени**, и только потом «имя компонента начинается с имени паспорта»: иначе
@@ -1415,7 +1410,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.11.1 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.11.2 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
