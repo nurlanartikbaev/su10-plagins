@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.9.1 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.9.2 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.9.1 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.9.2 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -975,7 +975,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - плейсхолдер — «Поиск по <чему>»: «Поиск по задачам». Контекст («этой недели», «курса») не дописывают — он и так виден на экране;
 - после ввода: `Has Value=On`, `State=Focused`, суффикс `Type=Icon` с `Close` — очистка запроса.
 
-Поле и кнопка фильтра стоят **одной строкой над списком**: поле на `FILL`, кнопка — `Button` `Size=M, Signal=Info, Weight=Tertiary, State=Rest, Only Icon=Yes` (железное правило 13). Кнопку фильтра из шапки экрана при этом убирают: точка входа одна.
+Поле и кнопка фильтра стоят **одной строкой над списком**: поле на `FILL`, кнопка — `Button` `Size=M, Signal=Info, Weight=Secondary, State=Rest, Only Icon=Yes`: светло-синяя плашка, как у соседних Secondary-кнопок (железное правило 13). Кнопку фильтра из шапки экрана при этом убирают: точка входа одна.
 
 **Фильтр списка.**
 - **Где открывается.** На телефоне — `MobileBottomSheet` «Фильтры». На десктопе — `Popover` под кнопкой фильтра: ширина по сетке (4 колонки = 448), правый край по краю колонки. Слот `content` у Popover по умолчанию HUG — растягивают на `FILL`.
@@ -992,7 +992,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - `Button` Secondary «Очистить поиск».
 
 **Шапка страницы курса (десктоп).**
-- Слева направо: «назад» — `Button` `Signal=Info, Weight=Tertiary, State=Rest, Only Icon=Yes`, картинка курса, `Heading` `Size=L`, справа действия Secondary.
+- Слева направо: «назад» — `Button` `Size=M, Signal=Info, Weight=Secondary, State=Rest, Only Icon=Yes`, картинка курса, `Heading` `Size=L`, справа действия Secondary.
 - Картинка курса — `Mascot-img` 56 × 56, `radius/border-radius-300` (12), `clipsContent`.
 - Подзаголовок у `Heading` — только если он несёт новое. Выбранная неделя видна в навигации — её не повторяют.
 - Подстраницы курса («Аналитика», «О курсе») — та же шапка: `Title` — название страницы, `Subtitle` — курс.
@@ -1285,7 +1285,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.9.1 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.9.2 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
