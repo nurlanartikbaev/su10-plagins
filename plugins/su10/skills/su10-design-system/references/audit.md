@@ -17,7 +17,7 @@ const ROOT_ID = '0:0';                    // ← корневой фрейм э�
 const root = await figma.getNodeByIdAsync(ROOT_ID);
 if (!root) return { error: 'root не найден' };
 
-const PRIMITIVE = /^(blue|green|red|yellow|purple|grey|black|white|brand)\//;
+const PRIMITIVE = /^(blue|green|red|yellow|purple|teal|grey|black|white)\//;
 const LOOKALIKE = /^(Button|Text Button|Badge|Tag|Avatar|Divider|Island|Accordion|TableCell|TableHeaderCell|CheckBox|Toggle)$/;
 const inInstance = n => n.id.indexOf(';') !== -1;   // узел внутри инстанса — правим не мы
 
