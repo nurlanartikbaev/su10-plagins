@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.9.5 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.10.0 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.9.5 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.10.0 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -306,6 +306,11 @@ description: "v4.9.5 · 19.10.2026 — Сборка макетов, экрано
 **Tags group** `890:26018` — строка тегов со счётчиком «+N».
 
 ### Навигация
+
+**HeaderButton** `3136:103` — кнопка-иконка в шапке мобильного экрана: «назад», фильтр, «⋯», корзина. Кладётся в слоты `left` / `right` у `MobileHeader`.
+- `State` Rest/Hover/Pressed/Disabled, в макете — Rest. `Icon` — INSTANCE_SWAP, только Outline; по умолчанию `Outline / Arrows / Alt Arrow Left`.
+- В покое серая полупрозрачная подложка — токены `color/component/header-button/*`, 42 × 42, радиус 12.
+- `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
 
 **Tab** `678:29650` + **TabsRow** `678:29898` — навигация между разделами.
 
@@ -979,13 +984,14 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 Поле и кнопка фильтра стоят **одной строкой над списком**: поле на `FILL`, кнопка — `Button` `Size=M, Signal=Info, Weight=Secondary, State=Rest, Only Icon=Yes`: светло-синяя плашка, как у соседних Secondary-кнопок (железное правило 13). Кнопку фильтра из шапки экрана при этом убирают: точка входа одна.
 
 **Фильтр списка.**
-- **Где открывается.** На телефоне — `MobileBottomSheet` «Фильтры». На десктопе — `Popover` под кнопкой фильтра: ширина по сетке (4 колонки = 448), правый край по краю колонки. Слот `content` у Popover по умолчанию HUG — растягивают на `FILL`.
+- **Где открывается.** На телефоне — `MobileBottomSheet` «Фильтры». На десктопе — `Popover` на 8 px ниже кнопки фильтра: ширина по сетке (4 колонки = 448), правый край по краю колонки.
+- **Popover фильтра изнутри** (вариант владельца): у `Content` поля `Space-0`, шаг `Space-8`; слот на `FILL` (по умолчанию HUG), шаг `Space-8`. Строка и группы лежат прямо в слоте, без обёртки.
 - **Группы.** Подпись, `Text Button` «Сбросить» и `Tag`.
 - **Кнопки.** «Сбросить» и «Применить» неактивны (`State=Disabled`), пока ничего не изменено.
 - **Применённые фильтры** — строка `Tag` `Closable=Yes` над списком: крестик снимает фильтр без шторки.
 - **Не повторять навигацию.** В фильтр не кладут то, что уже выбирается на странице: на десктопе неделя выбирается в линии, группы «Неделя» в поповере нет.
 - **Бинарный признак списка** («только обязательные») — первая строка фильтра: `ListItem` с `Trailing` `Type=Toggle`. Не `SegmentedControlRow` «Все / X» над списком: сегмент «Все» повторяет «Все …» в группах фильтра и занимает строку.
-- **Выравнивание.** Отступ группы слева и справа = внутренний отступ `ListItem` (8), иначе подписи групп не встают по тексту строки.
+- **Выравнивание.** У строки `ListItem` поля `Content` слева и справа `Space-12`, у групп те же `Space-12` — подписи групп встают по тексту строки. В шторке, где `ListItem` со своими 8, группы тоже 8.
 
 **Пустой результат (поиск, фильтр).** Не `Alert`: он для событий и предупреждений, а не для пустого места. По центру области списка — сборка из трёх частей:
 - иллюстрация — готовое изображение с пустой страницы «Курсы», клоном;
@@ -996,11 +1002,11 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Кнопки «назад» на десктопе нет**: путь показывают хлебные крошки — компонент `Breadcrumbs` над шапкой, первым элементом `Content`. По описанию компонента открытая страница стоит справа (`Active page`), до неё — уровни начиная с раздела. Лишние уровни выключают свойствами `Breadcrumb 2/3/4`, подписи — `Label#570:0` у вложенных `Text Button`.
   - Страница курса: «Курсы › ДЖТ Smart Қараша».
   - Подстраница: «Курсы › ДЖТ Smart Қараша › Аналитика».
-- **Шапка под крошками:** картинка курса, `Heading` `Size=L`, справа действия Secondary.
+- **Шапка под крошками:** картинка курса, `Heading` `Size=L`, справа действия Secondary. `Title` у `Heading` переопределён стилем **Heading 1 / h1-semibold** (решение владельца).
 - **Картинка курса** — `Mascot-img` 56 × 56, `radius/border-radius-300` (12), `clipsContent`.
 - **Подзаголовок** у `Heading` — только если он несёт новое. Курс уже есть в крошках, выбранная неделя — в навигации, поэтому ни то ни другое в подзаголовок не пишут.
-- **Подстраницы курса** («Аналитика», «О курсе») — та же шапка, `Title` — название страницы, подзаголовка нет.
-- На телефоне «назад» остаётся в `MobileHeader`.
+- **Подстраницы курса** («Аналитика», «О курсе») — шапка **без картинки курса**: только `Heading` (h1-semibold) с названием страницы, подзаголовка нет. Курс — в крошках.
+- На телефоне «назад» — `HeaderButton` в слоте `left` у `MobileHeader`.
 
 **Перенос ассетов из исходного макета.** Когда пересобираешь чужой экран на дске, картинки, логотипы и брендовые иконки не перерисовываются — они забираются из оригинала, иначе макет теряет узнаваемость и время уходит на заглушки:
 
@@ -1224,6 +1230,8 @@ table (frame, layoutMode NONE)
      владельца: подписи собрались из `DocHeading`, `Heading` и `Alert`.
    - `ProgressBar` (14.10) завели оправданно: он стоял в «Чего в системе нет», и ни один
      компонент не показывал долю.
+   - `HeaderButton` (19.10) завели по просьбе владельца. Ни один вариант `Button` в покое
+     не даёт нейтральную видимую подложку, а `State=Pressed` вместо вида нарушал правило 13.
 
 1. Цвета — свой слой `color/component/<имя>/*`, алиасы на семантику, **узкие scopes и `hiddenFromPublishing`**
 2. Размеры — токены `size/*` со скоупом `WIDTH_HEIGHT`, разные значения на Mobile и Desktop
@@ -1290,7 +1298,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.9.5 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.10.0 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
