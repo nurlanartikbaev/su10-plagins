@@ -197,9 +197,7 @@ async function screen(theme, name, x, y) {
     a.layoutSizingHorizontal = 'FIXED'; a.layoutSizingHorizontal = 'FILL'; }
   ```
   После любой массовой подмены — скриншот каждого затронутого экрана, а не одного.
-- **`Button` Only Icon `Signal=Success, Weight=Tertiary, State=Pressed`** (кнопка мобильной
-  шапки) красит Outline-иконку в зелёный. В шапке телефона цвет иконки переопределён — в новых
-  экранах так же: заливку вектора иконки копируют с иконки мобильной шапки.
+- **Кнопку-иконку не копируют из мобильной шапки.** Внутри `MobileHeader` кнопки стоят как `Signal=Success, State=Pressed`. Скопированный вариант дал на экранах «нажатые» зелёные кнопки, а перекраска иконки поверх только спрятала ошибку. Кнопка-иконка на экране — `Size=M, Signal=Info, Weight=Tertiary, State=Rest, Only Icon=Yes` (железное правило 13 в `SKILL.md`).
 - **ID локального текстового стиля кончается запятой** (`S:18ec…f0,`). Без запятой
   `getStyleByIdAsync` возвращает `null`.
 - **Состояние и тексты `Course map / Dock`** ставят двумя вызовами `setProperties`: сначала
