@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.9.3 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.9.4 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.9.3 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.9.4 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -81,7 +81,7 @@ description: "v4.9.3 · 19.10.2026 — Сборка макетов, экрано
     подзаголовка блок пустеет — его выключают, а не заполняют пересказом.
 
 13. **В макете компоненты стоят в покое: `State=Rest`.** `Pressed`, `Hover`, `Focused` — это мгновение взаимодействия, разработчик сверстает их как постоянный вид. Другое состояние ставят, только если экран показывает именно этот момент: поле в фокусе, пока вводят запрос; строка под курсором в сценарии наведения. `Signal` выбирают по смыслу действия: `Success` — только у действия про успех. Кнопка-иконка без смысла сигнала — `Signal=Info`.
-    Не берут вариант «потому что так выглядит»: Tertiary в покое прозрачная, и это и есть её вид. Нужна видимая плашка — берут `Weight=Secondary`, а не `State=Pressed`. Иконку внутри кнопки не перекрашивают поверх: неверный цвет иконки значит, что выбран неверный вариант.
+    Не берут вариант «потому что так выглядит»: Tertiary в покое прозрачная, и это и есть её вид. Нужна видимая плашка — берут `Weight=Secondary`, а не `State=Pressed`. Иконку внутри кнопки не перекрашивают поверх: неверный цвет иконки обычно значит, что выбран не тот вариант. Единственное исключение — баг подменённой иконки у `Only Icon` (раздел «Баги компонентов»): тогда вектор привязывают к токену самой кнопки, а не к выбранному на глаз.
 
 ## Основа
 
@@ -870,6 +870,11 @@ const p = set.addComponentProperty('Left Icon', 'INSTANCE_SWAP', ico.id, {
   const hasSlot = d.findAll(n => n.type === 'SLOT').length > 0;
   ```
 - **`TableHeaderCell`: иконку сортировки не подменять.** Состояние колонки задаётся вариантом `Sort`, а слой `Sort Icon` меняется вместе с ним: `Available` — `Linear / Essentional, UI / Sort random`, `Ascending` — `Sort up`, `Descending` — `Sort down`. Семейство `Sort` остаётся `Linear` по решению владельца (штатное исключение из правила «только Outline»). Ставить вместо него шеврон **нельзя** — меняется смысл: шеврон читается как «раскрыть», а не «сортировать». Запись v3.2.0 «состояний asc/desc/неактивно у компонента нет» **устарела**: с 18.09 они есть.
+- **`Button` `Only Icon=Yes`: подменённая иконка не берёт цвет кнопки.** После подмены через `Icon#525:271` (например, на `Filter`) вектор остаётся `icon/primary`, и в тёмной теме на светлой плашке Secondary иконка почти пропадает. `resetOverrides()` не помогает. Обход — привязать вектор к токену самой кнопки (у Info это `icon/info-outline-static`), а не к любому другому:
+  ```js
+  for (const v of btn.findAll(n => n.type === 'VECTOR')) v.fills = [infoOutlineStaticPaint];
+  ```
+  У кнопок с подписью (`Left Icon`) подменённая иконка цвет берёт.
 - **`Badge`: вектор внутри не наследует цвет подписи.** При смене `Signal` текст перекрашивается, а вектор — нет. Если он виден, цвет копируется с лейбла: `vec.fills = badgeLabel.fills`.
 
 ### Моды тем и платформ
@@ -1289,7 +1294,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.9.3 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.9.4 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
