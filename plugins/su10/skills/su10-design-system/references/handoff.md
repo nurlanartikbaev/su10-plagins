@@ -143,6 +143,7 @@ async function screen(theme, name, x, y) {
   for (const k of [...c.children]) k.remove();
   c.layoutMode = 'VERTICAL'; c.itemSpacing = 20;
   c.primaryAxisSizingMode = 'FIXED'; c.counterAxisSizingMode = 'FIXED'; c.resize(1440, 972);
+  c.primaryAxisAlignItems = 'MIN';  // у шаблона CENTER: без этого короткая страница уезжает в середину
   return { f, c };  // дальше: шапка страницы + body (HORIZONTAL, FILL)
 }
 ```
