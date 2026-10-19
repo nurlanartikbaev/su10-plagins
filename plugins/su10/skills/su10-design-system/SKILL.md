@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.10.0 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.11.0 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.10.0 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.11.0 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1008,6 +1008,19 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Подстраницы курса** («Аналитика», «О курсе») — шапка **без картинки курса**: только `Heading` (h1-semibold) с названием страницы, подзаголовка нет. Курс — в крошках.
 - На телефоне «назад» — `HeaderButton` в слоте `left` у `MobileHeader`.
 
+**«О курсе» на десктопе — не страница, а `DesktopDrawer`** `Size=M` (420) справа поверх страницы курса с `Overlay` `Platform=Desktop`:
+- заголовок «О курсе» и крестик, футер выключен, подзаголовок шапки выключен;
+- в слоте (растянуть на `FILL`) — блоки «Учителя» и «Куратор и группа».
+
+**«Аналитика» (десктоп):**
+- **Раскладка по сетке.** Слева 3 колонки: плашка места в курсе и под ней месяцы-`Accordion` с неделями и «Итогом месяца». Справа рейтинг (6 колонок) и баллы по видам работ (3).
+- **Плашка места — это и выбор «Весь курс».** Отдельная строка «Весь курс» её повторяла бы.
+- **Выбранный пункт** (плашка, неделя, итог месяца) — подложка `surface/blue-transparent-static` с радиусом 12, как неделя в линии курса.
+- **Не влезает по высоте.** Если два раскрытых месяца не помещаются в колонку, текущий сворачивают.
+- **Состояния:** весь курс, выбранная неделя, итог месяца, загрузка, «рейтинга ещё нет» (справа — рецепт «Пустой результат» без кнопки), курс завершён.
+
+**Звёзды недель (`Course map / Node`) на десктопе — `Platform=Desktop`.** Это вариант без свечения, искр и радара: на тёмной карте телефона свечение работает, а в колонке в теме приложения выглядит грязно.
+
 **Перенос ассетов из исходного макета.** Когда пересобираешь чужой экран на дске, картинки, логотипы и брендовые иконки не перерисовываются — они забираются из оригинала, иначе макет теряет узнаваемость и время уходит на заглушки:
 
 ```js
@@ -1298,7 +1311,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.10.0 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.11.0 · 19.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
