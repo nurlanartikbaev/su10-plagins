@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.11 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.12 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.11 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.12 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -318,8 +318,20 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 `icon-hover`, `icon-pressed`, `icon-disabled`. До 20.10 у семи вариантов из восьми иконка стояла
 сырым цветом.
 
+**Tertiary — один фон на все сигналы, и это нарочно:** фон прозрачный, у hover и pressed — нейтральная подкраска 4 % / 8 %, а сигнал несёт цвет подписи (`text/info-static`, `positive-static`, `critical-static`). Варианты нарисованы для всех трёх.
+
+**`Text Button` Default светлеет монотонно:** Rest 100 % → Hover 80 % → Pressed 72 %, Disabled 52 % отдельно. До 20.10 hover и pressed совпадали на 72 %.
+
+**В тёмной теме теней нет.** Цвета теней (`effects/shadow/color/*`) в тёмной прозрачны: глубину там даёт подложка — `surface/2-layer` на чёрном фоне читается уверенно, чёрная тень на чёрном не видна, а белое свечение смотрится дёшево. Смещения слоёв в обеих темах одинаковые.
+
 **Одна инверсная подложка — `surface/inverse`** (тёмная в светлой теме, светлая в тёмной) на тост и
 тултип. Раньше их было две — `#222222` у тултипа и `#303030` у тоста.
+
+### Tooltip и Popover — поведение
+
+**Tooltip.** Зазор 4px (`Space-4`) от края элемента до кончика стрелки. Показ по наведению через 500 мс, по фокусу с клавиатуры — сразу, скрытие без задержки, появление 150 мс (прозрачность + сдвиг 4px). Длинный текст растёт по высоте, не обрезается — но три строки уже знак, что нужен `Popover`. **Причину неактивности кнопки в тултип не прячут**: она пишется видимым текстом рядом — на телефоне наведения нет, и иначе её никто не найдёт. Остальные подсказки на тач — по долгому нажатию.
+
+**Popover.** Снизу по левому краю элемента, зазор 8px, не помещается — сверху. Появление 150 мс, как у тултипа. Предельная высота — `size/popover-max-height` 400, дальше прокручивается слот. **На мобильном `Popover` не ставят** — содержимое открывается в `MobileBottomSheet`.
 
 ### Тени
 
@@ -533,6 +545,8 @@ Badge или Tag: если элемент кликабельный (выбира
 **Toast** `1254:11921` — всплывающее уведомление, уходит само. `Signal` Info/Success/Warning/Error (называлось `Type` до 21.09) · `Show Action` добавляет действие справа, кнопка выведена наружу. Глиф слева — `FeedbackIcon` из пака, у него тот же набор сигналов.
 
 **Место тоста зависит от платформы.** Desktop — всегда правый верхний угол: 24 справа и **24 под шапкой** (`size/header-height` 56 + 24 = 80 от края окна) — шапку тост не закрывает. Mobile — во всю ширину минус 12 по бокам, и сверху (под статус-баром), и снизу (над зоной жеста): оба положения равноправны. Снизу тост ближе к большому пальцу, но ложится поверх таб-бара и панели действий — проверь, что он не прячет действие. Движение: тост выезжает от того края, у которого стоит, и уходит обратно к нему же. Появление 350 мс — сдвиг 24 px + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px + прозрачность, ease-in. Desktop и Mobile сверху — появление вниз, уход вверх; Mobile снизу — зеркально. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
+
+**Поведение тоста.** Тост с действием, без которого нельзя продолжить, сам не уходит; undo («Отменить») — исключение, уходит через 10 с: действие уже выполнено. Заголовок до двух строк, описание до трёх, дальше многоточие. Длинную ошибку кладут в `Alert`, логин и пароль — в `Dialog` с кнопкой «Скопировать», не в тост. Не больше трёх сразу; четвёртый вытесняет самый старый без действия. Таймер встаёт на паузу при наведении и при фокусе с клавиатуры и продолжается с остатка. Сверху на мобильном — safe-area + 12.
 
 **`FeedbackIcon`** `2332:17603` (`Signal` Info/Success/Warning/Error, 16×16) — круглая плашка с белым знаком внутри, одна на `Alert` и `Toast`. Сигнал несёт **форма и цвет плашки**, а не краска родителя: внутренние слои прибиты к `icon/white-static`, сама плашка залита градиентом на примитивах (`blue|green|yellow|red / solid / 400 → 600`). Перекрашивать её не нужно и нечем — ставится как есть. Собственное описание компонента не слушай: там написано «цвет берёт от родителя», и это неверно.
 **Тост всегда сверху экрана**: на мобильном — под статус-баром во всю ширину с полями 12, на десктопе — в правом верхнем углу. Так он не спорит с нижними панелями и шторками. Движение записано в паспорте (раздел Motion): появление 350 мс — сдвиг 24 px вниз + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px вверх + прозрачность, ease-in. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
@@ -1489,7 +1503,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.11 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.12 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
