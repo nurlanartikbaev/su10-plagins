@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.10 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.11 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.10 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.11 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1109,7 +1109,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Подстраницы курса** («Аналитика», «О курсе») — шапка **без картинки курса**: только `Heading` (h1-semibold) с названием страницы, подзаголовка нет. Курс — в крошках.
 - На телефоне «назад» — `HeaderButton` в слоте `left` у `MobileHeader`.
 
-**Материалы курса.** На телефоне — третья строка в шторке меню «⋯» («О курсе», «Аналитика», «Материалы», иконка `Outline / Notes / Documents`, описание «3 файла · PDF, DOC, ZIP») и шторка «Материалы» с компонентом `Files` (`Show Header=false`). Доска «Страница курса», Ж1–Ж2. Десктоп — варианты М1–М4 на выбор (шторка, блок под неделями, поповер, подстраница).
+**Материалы курса.** На телефоне — третья строка в шторке меню «⋯» («О курсе», «Аналитика», «Материалы», иконка `Outline / Notes / Documents`, описание «3 файла · PDF, DOC, ZIP») и шторка «Материалы» с компонентом `Files` (`Show Header=false`). Доска «Страница курса», Ж1–Ж2. Десктоп (выбор владельца — М1): кнопка «Материалы» (`Button` Secondary, иконка `Documents`) в шапке страницы курса третьей, после «Аналитики» и «О курсе»; нажатие открывает `DesktopDrawer` «Материалы» справа, как «О курсе», внутри `Files` без шапки. Доска «Страница курса · десктоп», Е8; кнопка стоит на всех экранах Д1–Д7 и Е2.
 
 **«О курсе» на десктопе — не страница, а `DesktopDrawer`** `Size=M` (420) справа поверх страницы курса с `Overlay` `Platform=Desktop`:
 - заголовок «О курсе» и крестик, футер выключен, подзаголовок шапки выключен;
@@ -1489,7 +1489,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.10 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.11 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
