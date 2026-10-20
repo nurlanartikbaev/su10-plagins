@@ -133,13 +133,13 @@ await figma.loadFontAsync(a.text.fontName); a.text.characters = 'нажал «И
 
 ## 7. Десктоп из шаблона с верхней навигацией
 
-Шаблон — десктоп-экраны владельца в `redesign`: тёмный `2254:15859`, светлый `2250:15099`
+Шаблон — десктоп-экраны владельца в `redesign`: тёмный `3258:100612` (К6), светлый `3258:100350` (К7) — с 21.10 это актуальные экраны «Курсов», до этого были `2254:15859` / `2250:15099`
 (1440 × 1024). Внутри: `Header` (верхняя навигация, абсолютно сверху) и `Content`
 (1440 × 972, поля 20 / 24). Мода `Platform = Desktop` уже стоит на корне.
 
 ```js
 async function screen(theme, name, x, y) {
-  const tpl = await figma.getNodeByIdAsync(theme === 'dark' ? '2254:15859' : '2250:15099');
+  const tpl = await figma.getNodeByIdAsync(theme === 'dark' ? '3258:100612' : '3258:100350');
   const f = tpl.clone(); sec.appendChild(f); f.x = x; f.y = y; f.name = name;
   const c = f.children.find(k => k.name === 'Content');
   for (const k of [...c.children]) k.remove();
