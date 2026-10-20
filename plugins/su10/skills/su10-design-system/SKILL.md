@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.8 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.9 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.8 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.9 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1126,6 +1126,13 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - Курсы — карточки `Island` на 4 колонки (448), по три в ряд; ряд с `layoutWrap = WRAP`, четвёртый курс уходит на следующий ряд. В карточке: `Mascot-img` 64 (радиус 12) + `Heading` S (название, «2 месяц · 3 неделя»), «Пройдено» с процентом и `ProgressBar`, следующая задача — `ListItem` с `Icon Tile` и шевроном на подложке `surface/3-layer`.
 - Архив — `Heading` M «Архив» и карточки той же ширины: картинка 48, `Heading` S (название, «Завершён · есть сертификат» / «Не завершён»), шеврон.
 - Курсов нет — пустое состояние в карточке, кнопка «Добавить курс» по ширине текста, не на всю карточку.
+- Архив: у завершённого курса под названием `Text Button` S Link «Сертификат» с иконкой `Download Minimalistic` (без слова «Скачать»), подпись — «Завершён».
+- Состояния страницы (выбор владельца 20.10, доска «Курсы», К8–К11):
+  - загрузка — пустая страница и `Loading` по центру;
+  - ошибка — карточка пустого состояния с «Не удалось загрузить курсы» и `Button` L Secondary «Повторить» (иконка `Refresh`);
+  - все курсы закончились — блок «Активные курсы» остаётся: карточка с маленькой картинкой и «Активных курсов нет», архив ниже;
+  - состояние карточки курса меняет только нижний блок: не начался — «Программа курса» (`Calendar`, шеврон), задачи недели сделаны — `Check Circle` с `Tone=Success` без шеврона, доступ закончился — `Button` Secondary «Продлить доступ».
+- Карточка на телефоне и десктопе отличается намеренно (телефон — пройдено и длительность, десктоп — неделя и следующая задача); это написано в шапке доски.
 
 **Звёзды недель (`Course map / Node`) на десктопе — `Platform=Desktop`.** Это вариант без свечения, искр и радара: на тёмной карте телефона свечение работает, а в колонке в теме приложения выглядит грязно.
 
@@ -1479,7 +1486,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.8 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.9 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
