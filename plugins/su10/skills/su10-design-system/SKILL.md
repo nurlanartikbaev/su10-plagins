@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.14.5 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.14.7 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.14.5 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.14.7 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -669,7 +669,7 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 Ширина 448 (4 колонки), высота по содержимому. Собран из компонентов системы (выбор владельца
 20.10: вариант «Карточка» из трёх, метрики — плашками).
 Свойства, все BOOLEAN кроме текстов: `Show Confluence`, `Show Jira`, `Show Link 1–3` (по
-умолчанию выключены), `Show Links` — весь ряд ссылок · `Show Metric 1–4`, `Metric N` и
+умолчанию включены, как и все ссылки), `Show Links` — весь ряд ссылок · `Show Metric 1–4`, `Metric N` и
 `Metric N Goal` TEXT, `Show Metrics` — весь блок. Наружу выведены `Heading`, оба
 `ProfileItem` и все пять `Text Button` (слои `Confluence`, `Jira`, `Link 1–3`).
 
@@ -1550,7 +1550,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.14.5 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.14.7 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
