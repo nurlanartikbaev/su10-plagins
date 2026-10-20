@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.14.7 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.14.8 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.14.7 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.14.8 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -39,7 +39,7 @@ description: "v4.14.7 · 20.10.2026 — Сборка макетов, экран�
 
 ## Железные правила
 
-1. **Только компоненты из этого файла.** Легаси-библиотеки `JUZ40 UI-Kit` и `Juz40 Landing` устарели — не подключать и не копировать оттуда паттерны (это их настоящие имена, не путать с переименованной системой). Страница `sandbox` — тоже не референс, там живёт старый кит (607 чужих инстансов, чистке не подлежат).
+1. **Сначала компоненты SU10.** Всё, что есть в системе, берётся только из неё. Легаси-библиотеки `JUZ40 UI-Kit` и `Juz40 Landing` (это их настоящие имена, не путать с переименованной системой) **в продуктовых макетах можно использовать при надобности** — готовым блоком из старого макета, когда такого блока в SU10 нет. Есть в SU10 — старый блок не берут. **В самом DS-файле** легаси не подключают и паттерны оттуда не копируют. Страница `sandbox` — не референс, там живёт старый кит (607 чужих инстансов, чистке не подлежат). Чего нет ни в SU10, ни в старом ките — см. «Чего в системе нет».
    **Состояние на 22.09:** вне `sandbox` чужих компонентов в файле не осталось. Единственное исключение — мок-обвес устройства на MobileHeader и MobileTabbar (24 инстанса статус-бара из стороннего iOS-кита): это рамка устройства вокруг примера, трогать не надо.
 2. **Не детачить инстансы.** Нужного состояния нет — значит компонента не хватает, см. раздел «Чего в системе нет».
 3. **Никаких сырых значений.** Цвет, отступ, радиус, размер — только переменные. Текст — только текстовыми стилями.
@@ -1365,7 +1365,7 @@ table (frame, layoutMode NONE)
 | Контент оверлеев лежит в слоте, а не дорисован внутри панели | глаза |
 | Проверено в обеих модах `Theme` и в нужной моде `Platform` | глаза, переключением мод на корне |
 | Состояния: есть Rest, а также Disabled/Error/Loading там, где они возможны | глаза |
-| Пробелы системы помечены, а не сымитированы | глаза, см. «Чего в системе нет» |
+| Недостающее в SU10 — локальный компонент в своём файле, а не разовые фреймы; Nurla предупреждён | глаза, см. «Чего в системе нет» |
 
 ## Регламент команды — отдельный справочник
 
@@ -1511,9 +1511,9 @@ table (frame, layoutMode NONE)
 - **Логотип в моках** (`Logo_JUZ40` в MobileHeader, текст `JUZ40` в примере Action Panel) — это название продукта на макете, а не имя системы; переименование дски его не касается
 - **Осознанные отклонения** от правил, если они описаны в паспорте: разные размеры иконок в `Tab` и `Control > Label`, прозрачный фон `badge/neutral`, порядок «подпись, затем значение» в Action Panel
 
-## Чего в системе нет — не изобретать
+## Чего в системе нет — локальный компонент в своём файле
 
-Если экран требует одного из этого, останови сборку и напиши владельцу системы:
+Сейчас в SU10 нет:
 
 - **Skeleton** для страницы. **Empty state** как компонента тоже нет — пустой список собирается по рецепту «Пустой результат» (иллюстрация + `Heading` S + `Button`), не из `Alert`
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
@@ -1524,33 +1524,31 @@ table (frame, layoutMode NONE)
 - **Avatar group** и статус-точка на аватаре
 - **Брендовые иконки соцсетей, кроме Telegram и WhatsApp** — этих двоих в паке есть в стиле Bold (см. «Иконки»), а Instagram, TikTok, VK, YouTube нет, они переносятся из исходного макета клоном
 
-### Как помечать пробел в макете
+### Что делать, если элемента нет
 
-Остановить сборку целиком из-за одного графика нельзя — вокруг него ещё десяток блоков,
-которые собираются нормально. Поэтому недостающий кусок **помечают заглушкой, а не
-имитируют**: рисовать свой график из прямоугольников или свой стат-тайл из текста нельзя —
-на ревью это неотличимо от настоящего компонента и расползается по другим макетам.
+Сборку не останавливают и заглушку не ставят. Недостающий элемент **сразу генерируют
+вариантом и оформляют компонентом в своём файле**, а владелец потом переносит его в дску.
 
-Заглушка собирается так: фрейм на всю ширину блока, высота примерно как у будущего
-компонента, заливка `surface/3-layer`, **пунктирная** обводка `border/primary`
-(`dashPattern = [6, 4]` — именно пунктир, чтобы не путалась с настоящей карточкой),
-скругление 12, по центру подпись стилем `Caption 1` цветом `text/tertiary` вида
-`⚠ Chart/график — нет компонента в SU10`. Слой называется так же:
-`gap-placeholder: <чего не хватает>` — по этому имени пробелы потом находятся поиском.
+1. **Компонент, а не разовые фреймы** — `figma.createComponent()` или `createComponentFromNode()`.
+   Собирается по правилам системы, как будто он уже в дске: переменные вместо сырых значений,
+   текстовые стили, иконки Outline, внутри — готовые компоненты SU10 (`Heading`, `Badge`,
+   `Text Button` и т. п.), произвольный контент — через SLOT.
+2. **Имя по смыслу**: `StatTile`, `Chart / Line`, `EmptyState`. В `description` — что это и
+   чего не хватило в SU10.
+3. **Компонент живёт в файле, где собирают макет** (личный файл в JUZ40 Workspace); в макете —
+   его инстансы, а не копии.
+4. **Написать Nurla**: появился компонент, ссылка на него. Перенос в SU10 Design System делает
+   владелец; после переноса инстансы переключают на компонент дски.
 
-```js
-const box = figma.createAutoLayout('VERTICAL', { name: 'gap-placeholder: Chart/график' });
-box.primaryAxisAlignItems = 'CENTER'; box.counterAxisAlignItems = 'CENTER';
-box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
-```
-
-Параллельно с пометкой — написать владельцу системы: заглушка фиксирует пробел в макете,
-но не заводит задачу на компонент.
+Нельзя: рисовать недостающее разовыми фреймами без компонента (его не перенести в дску) и
+заводить такой компонент прямо в DS-файле — для DS-файла действует раздел «Если добавляешь
+компонент в систему». Если элемент есть готовым блоком на старом ките, можно взять его
+(железное правило 1).
 
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.14.7 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.14.8 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
