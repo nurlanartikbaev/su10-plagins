@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.5 · 19.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.6 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.5 · 19.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.6 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -326,7 +326,7 @@ description: "v4.12.5 · 19.10.2026 — Сборка макетов, экран�
 **Button** `521:2482` — основная кнопка.
 `Size` L/M/S · `Weight` Primary/Secondary/Tertiary · `Signal` Info/Success/Error · `State` Rest/Hover/Pressed/Disabled/Loading · `Only Icon` No/Yes · `Show Left Icon`, `Show Right Icon`, `Label`.
 На экране **одна** Primary. Secondary — альтернатива рядом с ней, Tertiary — необязательное действие. Signal=Error только для разрушающих действий. `Only Icon=Yes` — когда смысл очевиден из иконки, иначе подпись обязательна.
-`Show Dot` (`Show Dot#3184:0`, BOOLEAN, по умолчанию off) — красная точка 8 px в правом верхнем углу, только у `Only Icon=Yes`: «здесь что-то включено». Главный случай — кнопка фильтра при применённых фильтрах. Точка не счётчик; цвет — токен `color/component/button/indicator` (алиас `surface/red-static`), не перекрашивают.
+`Show Dot` (`Show Dot#3184:0`, BOOLEAN, по умолчанию off) — красная точка 8 px в правом верхнем углу, только у `Only Icon=Yes`. Отступ точки от правого края и от верха: `Size=L` — 12, `M` — 8, `S` — 6 (решение владельца); точка привязана к правому краю, поэтому на десктопе, где кнопка шире, отступ тот же: «здесь что-то включено». Главный случай — кнопка фильтра при применённых фильтрах. Точка не счётчик; цвет — токен `color/component/button/indicator` (алиас `surface/red-static`), не перекрашивают.
 
 **Text Button** `563:777` — действие без фона.
 `Size` M/S · `Variant` Default/Link/Error · `State` Rest/Hover/Pressed/Disabled.
@@ -1450,7 +1450,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.5 · 19.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.6 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
