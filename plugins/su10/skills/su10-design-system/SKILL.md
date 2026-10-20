@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.13.2 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.14.1 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.13.2 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.14.1 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -661,6 +661,26 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
   подпись вроде «Куратор пока не назначен», остальное выключено.
 - **Профиль — для чтения**, своих Hover и Pressed нет. Список людей для перехода или выбора
   — `ListItem` с Leading = Avatar.
+
+### Паспорт задачи — страница `TaskPassport`
+
+**TaskPassport** `3238:97430` (ключ `eb492739a0612250c4f1e13ca773268a259a0808`) — карточка
+задачи рядом с макетами: что за задача, кто её поставил, где почитать, на что должна повлиять.
+Ширина 448 (4 колонки), высота по содержимому. Собран только из компонентов системы (выбор
+владельца 20.10 из трёх вариантов — карточка, шапка доски, список).
+Свойства: `Show Confluence`, `Show Jira` BOOLEAN · слот `Metrics`. Наружу выведены `Heading`,
+оба `ProfileItem` и обе `Text Button`.
+
+- Название и краткое описание — `Heading` M: описание отвечает на «что меняем и зачем».
+- Автор и от кого задача — `ProfileItem` S с бейджем роли «Автор» / «От кого». Даже если это
+  один человек, строки две — роли разные.
+- Ссылки — `Text Button` Link на Confluence и Jira. Нет страницы или задачи — выключают
+  тумблером, пустую ссылку не оставляют.
+- **На что влияем — слот `Metrics`**: по строке `ListItem` на метрику, Leading `Icon Tile` с
+  `Bar Chart`, Trailing выключен. Заголовок — название метрики, описание — направление и цель
+  («Поднять с 3% до 5%»), а не просто имя. Бейджи сюда не ставят: в них не помещается, что
+  именно хотим изменить. У последней строки `Show Divider=false`.
+- На доске хэндоффа — под шапкой секции, до первой дорожки экранов (см. `handoff.md`).
 
 ### Подсказки — страница `Tooltip`
 
@@ -1524,7 +1544,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.13.2 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.14.1 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
