@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.12 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.12.13 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.12 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.12.13 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -151,6 +151,8 @@ description: "v4.12.12 · 20.10.2026 — Сборка макетов, экран
 `GreenGradient`, `RedGradient`, `YellowGradient` и `StoriesGradient` (кольцо непросмотренной
 истории). Для текста и обычных заливок градиенты не берут — только там, где это предусмотрено
 компонентом.
+
+**Направление градиента хранится в `gradientTransform` стиля, и выгрузка его теряет.** Все сигнальные градиенты (`BlueGradient`, `GreenGradient`, `RedGradient`, `OrangeGradient`, `PurpleGradient`, `YellowGradient`, `LightBlueGradient`) и `StoriesGradient` идут **сверху вниз** — матрица `[[0,1,0],[-1,0,1]]`, в CSS это `linear-gradient(180deg, …)`. Исключения — `BackgroundTop` и `BackgroundBot`, у них своё масштабирование. Фронт угол из выгрузки не получает: его надо брать отсюда.
 
 **Три правила, которые закрывают большинство вопросов:**
 
@@ -515,7 +517,7 @@ Vertical — кнопки друг под другом, основная све�
 **TableCell** `1163:10817` (содержимое в слоте `content`) · **TableFooter** `1244:10626` (`Type` Counted/Uncounted).
 В ячейку кладут: текст, `Badge`, `Tag`, `Avatar`, `Text Button`, `CheckBox`.
 
-**Badge** `1078:14902` — статус рядом с данными, его **не нажимают**. `Size` L/M/S · `Signal` Neutral/Info/Success/Warning/Error/Accent · `Label` TEXT · `Show Label` BOOLEAN. `Show Label = false` даёт бейдж-иконку — отдельного `Only Icon` для этого не нужно.
+**Badge** `1078:14902` — статус рядом с данными, его **не нажимают**. `Size` L/M/S · `Signal` Neutral/Info/Success/Warning/Error/Accent · `Label` TEXT · `Show Label` BOOLEAN. `Show Label = false` даёт бейдж-иконку — отдельного `Only Icon` для этого не нужно. **Длинный текст обрезается многоточием** — бейдж в одну строку и не растёт.
 Badge или Tag: если элемент кликабельный (выбирается, снимается крестиком) — это `Tag`; если он только показывает статус записи — `Badge`.
 
 **Avatar** `1224:65` — `Size` XL/L/M/S/XS · `Type` Placeholder/Initials/Picture, картинка в слоте `picture` · `Show Status` — точка «на связи» в правом нижнем углу, размер по аватару (18/14/12/10/8), со своей обводкой цветом подложки. Счётчика и стека внахлёст нет. Кольцо истории вокруг аватара — это отдельный компонент `Stories`, а не свойство аватара.
@@ -667,10 +669,10 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 
 ### Структура
 
-**Heading** `1386:23` — заголовок экрана или крупного блока. `Size` L/M/S, `Title`, `Subtitle`, `Show Subtitle`, `Show Action` + слот `action`.
+**Heading** `1386:23` — заголовок экрана или крупного блока. `Size` L/M/S, `Title`, `Subtitle`, `Show Subtitle`, `Show Action` + слот `action`. **Длинный заголовок переносится на новую строку**, не обрезается.
 L — заголовок экрана, на экране один. M — крупный блок и шапка оверлея. S — небольшой блок внутри карточки.
 
-**Subheading** `1386:24` — заголовок секции внутри блока: `Title`, `Show Counter` (Badge), `Show Action` + слот, `Show Divider`. Отличается от Heading S не размером, а анатомией. Вложенных секций не бывает.
+**Subheading** `1386:24` — заголовок секции внутри блока: `Title`, `Show Counter` (Badge), `Show Action` + слот, `Show Divider`. Отличается от Heading S не размером, а анатомией. Вложенных секций не бывает. **Счётчик форматируется по языку интерфейса**: «1 234», с неразрывным пробелом между разрядами.
 
 **Гоча: счётчик у `Subheading` и `Accordion` называется слоем `Counter`, а не `Badge`.**
 `instance.findOne(n => n.name === 'Badge')` возвращает `null` (или молча не то), хотя это
@@ -1504,7 +1506,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.12 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.12.13 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
