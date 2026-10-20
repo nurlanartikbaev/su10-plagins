@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.12.14 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development."
+description: "v4.13.0 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.12.14 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.13.0 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -23,6 +23,7 @@ description: "v4.12.14 · 20.10.2026 — Сборка макетов, экран
 | `references/audit.md` | скрипт проверки макета и как читать отчёт | перед сдачей макета |
 | `references/handoff.md` | доска сценариев: варианты → выбор → состояния → хэндофф; сетка секции, имена, пары тем, стрелки, десктоп из шаблона, чистка, ловушки | собираешь стейты и сценарии, варианты на выбор, светлую тему или десктоп-версию; готовишь секцию к разработке |
 | `references/icon-repair.md` | починка иконок, обновление библиотеки, массовые правки DS-файла | что-то уже сломано или предстоит тронуть много мастеров |
+| `references/team-workflow.md` | регламент команды: черновики в JUZ40 Workspace, перенос в проект роли → файл раздела → страница фичи, обложка, Ready for development, пуш правил в скилл | начинаешь фичу, переносишь апрувнутый дизайн в чистовой файл, нашёл правило для скилла |
 | `references/changelog.md` | история версий скилла | нужен контекст решения или дописываешь версию |
 
 Порядок по умолчанию: правила и каталог отсюда → ключи из `keys.md` → сборка → `audit.md`
@@ -1340,6 +1341,22 @@ table (frame, layoutMode NONE)
 | Состояния: есть Rest, а также Disabled/Error/Loading там, где они возможны | глаза |
 | Пробелы системы помечены, а не сымитированы | глаза, см. «Чего в системе нет» |
 
+## Регламент команды — отдельный справочник
+
+Обязателен для всех, кто генерирует макеты и работает в Figma. Полностью — в
+**`references/team-workflow.md`**, коротко:
+
+- черновик фичи — только в личном файле дизайнера в проекте **JUZ40 Workspace**;
+- генерация — только этим скиллом; новое правило или ловушка — в скилл на GitHub (доступ даёт
+  Nurla) с записью в `changelog.md`;
+- после апрува — «подготовь к хэндоффу» (`handoff.md`), затем перенос: **проект роли**
+  (Student, Parent, Curator, Admin…) → **файл раздела** `<Раздел> (<Роль>)` → **страница**
+  `<Фича> [<Месяц апрува> <Год>]`, новая страница всегда самой верхней, `cover` внизу;
+- нет файла раздела — создать, настроить обложку и сообщить дизайнерам;
+- Ready for development вручную ставит тот, кто перенёс, только на готовые секции.
+
+Роль, раздел или месяц апрува не ясны — спросить, а не угадывать.
+
 ## Хэндофф в разработку — отдельный справочник
 
 Экраны для разработки живут не по одному, а **доской сценариев**: секция раздела, дорожки
@@ -1507,7 +1524,7 @@ box.strokes = [boundPaint(borderPrimary)]; box.dashPattern = [6, 4];
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.12.14 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.13.0 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
