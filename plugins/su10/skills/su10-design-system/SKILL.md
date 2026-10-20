@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.15.0 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.15.1 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.15.0 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.15.1 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -872,6 +872,8 @@ async function fillSlot(instance, build) {        // см. «Слоты» ниж
 
 `appendChild` ребёнка слота в обычный фрейм падает ошибкой «node does not exist» и откатывает весь скрипт. Нужен блок из чужого слота (пустое состояние из карточки К5) — `clone()` этого узла, копия живёт сама по себе.
 
+**Прозрачность заливки, привязанной к переменной, не доезжает до инстанса.** Если у такой заливки задать `opacity` у самой заливки (paint), в инстансе она станет 1 — свечение на обложке в экземпляре было ярче мастера. Прозрачность ставят на слой (`node.opacity`), заливку оставляют 1.
+
 **Новое булево свойство на сете — проверь мастера.** После `addComponentProperty` слой, привязанный к свойству, в каком-то варианте может остаться видимым (`visible = true`), и инстансы этого варианта покажут его без включения свойства. Так 20.10 красная точка `Show Dot` горела у `Button` L Primary. Проверка: у всех вариантов привязанный слой `visible = false`.
 
 ### После `clone()` ищи по `children`, а не через `findOne`
@@ -1548,7 +1550,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.15.0 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.15.1 · 20.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
