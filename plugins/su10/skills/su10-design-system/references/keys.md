@@ -79,6 +79,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | ListItem · Trailing | Set | `871b2ef00c1cade62d2bc9357c3deb59e9fd33cf` |
 | ProfileItem | Set | `6b3ca3fb9c4d9dd273389a693a9226129311d9b6` |
 | ProgressBar | Set | `426c2f75a8b3e2c4e6f4d67df9438bdd2c3b3716` |
+| NumberInput | Set | `4dced48846d7ae96c9e999170465899349283c1d` |
 | Header (mobile) | Set | `4376085fe811c84b3b1021509b62be761f933771` |
 | DesktopHeader | Single | `9c8329d80e2fc8d93a4a1098870783b728d65f37` |
 | Status Bar | Single | `a78dfd84c6573f8e7666e854ba76972fcaddd4bf` |
@@ -127,6 +128,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | Essentional, UI / Menu Dots — Outline, **в кнопки не ставить** | `ba33be53f493c0938afd94def72af034a7acfa7f` |
 | **Bold** / Essentional, UI / Menu Dots — «⋯» в любой кнопке | `c29819c4476ffc9404b1b002ae8977b35d16861e` (в дске `3180:97432`) |
 | Essentional, UI / Plus | `6a34385acbf2872301d1eb6f4305b8e72b9c57f4` |
+| Essentional, UI / Minus Circle (кнопка − в NumberInput) | `6606426b5538144b05d825954bad7f0146750efb` |
+| Essentional, UI / Add Circle (кнопка + в NumberInput) | `7e18e7c2e6c0e0af4fb9d1d38b7d3bae822c1899` |
 | Essentional, UI / Sort | `1ef4848b7e78479698f49445b8c4e31f5c925a70` |
 | Like / Star | `371cdbc09df4bf1700ee4d0c1984ba9cb6972423` |
 | School / Book | `235a50a50ad28577e95cc66e6cefdebe951ca0a2` |
@@ -265,6 +268,7 @@ const S = {                                   // figma.importStyleByKeyAsync
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
 | ProgressBar | — (процент и цвет — варианты) | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
+| NumberInput | `Label#3421:0`, `Show Label#3421:11`, `Importance#3421:22`, `Value#3421:33`, `Unit#3421:44`, `Show Unit#3421:55`, `Description#3421:66`, `Show Description#3421:77`; вложенные `Minus` / `Plus` — Text Button, `State` меняют в них | `Size=M, State=Rest` (Size M/S, State Rest/Hover/Focused/Disabled/Error) |
 | HeaderButton | `Icon#3136:0` (INSTANCE_SWAP, Outline) | `State=Rest` (Rest/Hover/Pressed/Disabled) |
 
 Вложенные части `ListItem` правятся так:

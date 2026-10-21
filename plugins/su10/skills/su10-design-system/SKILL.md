@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.16.2 · 21.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.17.1 · 21.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.16.2 · 21.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.17.1 · 21.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -348,7 +348,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 | Компонент | L | M | S |
 |---|---|---|---|
 | Button | 52 / 54 | 42 / 44 | 32 |
-| Text field · Text area · SingleSelect · ComboBox · MultiSelect | — | 42 / 44 | 32 |
+| Text field · Text area · SingleSelect · ComboBox · MultiSelect · NumberInput | — | 42 / 44 | 32 |
 | SegmentedControlRow | — | 42 / 44 | 32 |
 | Avatar | XL 64/72 · L 52/54 | 42 / 44 | S 32 · XS 24 |
 | Stories (кольцо) | XL 72/80 · L 60/62 | 50 / 52 | S 40 · XS 32 |
@@ -386,6 +386,14 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 **Text area** `894:26270` — многострочный ввод. Те же свойства плюс `Show Counter` и `Show Copy`.
 
 **Counter** `894:26268` — счётчик символов под Text area.
+
+**NumberInput** `3421:245` (страница `NumberInput`, паспорт `NumberInputPassport` `3423:90`) — числовое поле с кнопками − и + по краям: целевой балл, количество попыток, число участников.
+`Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Label`, `Value`, `Unit`, `Description` TEXT · `Show Label`, `Show Unit`, `Show Description`, `Importance` BOOLEAN.
+- Геометрия и цвета — один в один с Text field и SingleSelect: M 42/44 (поля 12, скругление 12), S 32 (поля 8, скругление 8), обводка внутрь `stroke/border-stroke-regular`, цвета — общий слой `color/component/inputs/*` (своего слоя нет намеренно). В одной строке с полями и селектами — тот же размер.
+- Кнопки — вложенные `Text Button` того же размера (`Default`, только иконка: `Outline / Minus Circle` и `Outline / Add Circle`), выведены наружу как `Minus` / `Plus`. На границе диапазона соответствующую кнопку ставят `State=Disabled` прямо во вложенном инстансе — отдельного варианта «Limit» нет.
+- Значение по центру (Body 2 у M, Body 4 у S), единица сразу за числом тем же стилем, `text/tertiary`; если единица уже в лейбле — `Show Unit=false`.
+- Значение вне диапазона — `State=Error` и причина в `Description`. Нажатие на число — ввод с цифровой клавиатуры (`Focused`).
+- Не для сумм, телефонов, дат и дробей без шага — там Text field с маской или DatePicker. Самодельный «степпер» из двух кнопок и текста в макеты не собирают — только этот компонент.
 
 ### Выбор
 
@@ -1557,7 +1565,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.16.2 · 21.10.2026 · обновил Nurla**.
+Текущая версия — **v4.17.1 · 21.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
