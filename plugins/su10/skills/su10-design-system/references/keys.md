@@ -184,13 +184,13 @@ const V = {                                   // figma.variables.importVariableB
   radius300:"b62402f2b002ea0c612ebd0f804e1900b147c590",  // 12
   radius600:"be2500829c2889116d181cea1a5070ee235c6019",  // 24
   radiusRounded:"0576cfa57576318e03cc9c0e584111ab4db22283",
-  listItemHover:  "956108bd6e25033383598be60e07f38bdb5b995d", // color/component/list-item/surface-hover
-  listItemPressed:"069476cecaacaffec583b08a97ff7d6e040b62af", // color/component/list-item/surface-pressed
-  progressTrack:  "40e64439d5cd79ff53687fa6f8e6f00d20f367a6", // color/component/progress-bar/track
-  progressSuccess:"9a986ed33e6e7707a5794446039df940fbe0e221", // fill-success
-  progressInfo:   "5af323bc66f3066fc0e7df452b133611eeba0d40", // fill-info
-  progressWarning:"4998a6cb5fc3ce80a1cc8f34271585b0442293f8", // fill-warning
-  progressError:  "8cb674a521c03e7a54d02bacc09c300953f2474a", // fill-error
+  listItemHover:  "9228c33a2abfef9c20d2a35740d4ae4a64a63b41", // color/component/list-item/surface-hover
+  listItemPressed:"2226495f5b901418599575d12fe85b94955688ce", // color/component/list-item/surface-pressed
+  progressTrack:  "6a08f9b53f74ff094f3cd76b4723dfb175e9d571", // color/component/progress-bar/track
+  progressSuccess:"512bed6379c4dffde143a3ddfcd020f1ed6f0324", // fill-success
+  progressInfo:   "069020fa37b1e82ddc65c79ab04ff6fffec8c146", // fill-info
+  progressWarning:"ed3cd1c5a1ef7db33ea9a426c57646d1d1c7e2f2", // fill-warning
+  progressError:  "c5206645a31d7015409f68d462e373dca7ec4dea", // fill-error
 };
 
 const S = {                                   // figma.importStyleByKeyAsync

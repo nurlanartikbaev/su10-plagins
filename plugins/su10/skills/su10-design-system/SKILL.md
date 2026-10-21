@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.15.1 · 20.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.16.1 · 21.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.15.1 · 20.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.16.1 · 21.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -410,7 +410,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 **HeaderButton** `3136:103` — кнопка-иконка в шапке мобильного экрана: «назад», фильтр, «⋯», корзина. Кладётся в слоты `left` / `right` у `MobileHeader`.
 - `State` Rest/Hover/Pressed/Disabled, в макете — Rest. `Icon` — INSTANCE_SWAP, только Outline (кроме «⋯» — Bold); по умолчанию `Outline / Arrows / Alt Arrow Left`. `Show Dot` (`Show Dot#3184:271`) — красная точка 8 px, отступ 8 от правого края и от верха, как у `Button` размера M.
 - **Круглая кнопка-«стекло»** (как владелец собирал в макетах): 42 × 42, радиус `radius/border-radius-rounded`, эффект-стиль `blur-medium` (размытие фона 12), обводка 1 px внутрь.
-- Токены `color/component/header-button/*`: `surface` — белое 32% в светлой и белое 8% в тёмной, `surface-hover` — белое 40% / прежнее, `border` `3179:99689` — чёрное 4% / белое 4%. Размытие не выключают: под кнопкой бывает карта или фото.
+- Токены `color/component/header-button/*`: `surface` — белое 32% в светлой и белое 8% в тёмной, `surface-hover` — белое 40% / прежнее, `border` `3323:394` — чёрное 4% / белое 4%. Размытие не выключают: под кнопкой бывает карта или фото.
 - `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
 
 **Tab** `678:29650` + **TabsRow** `678:29898` — навигация между разделами.
@@ -1427,7 +1427,13 @@ table (frame, layoutMode NONE)
    - `HeaderButton` (19.10) завели по просьбе владельца. Ни один вариант `Button` в покое
      не даёт нейтральную видимую подложку, а `State=Pressed` вместо вида нарушал правило 13.
 
-1. Цвета — свой слой `color/component/<имя>/*`, алиасы на семантику, **узкие scopes и `hiddenFromPublishing`**
+1. Цвета — свой слой `color/component/<имя>/*`, алиасы на семантику, **узкие scopes и `hiddenFromPublishing`**.
+   **Группы `color/component/*` в панели переменных идут строго по алфавиту** (решение владельца
+   21.10) — и порядок держат при каждой новой группе. Plugin API порядок переменных менять не
+   умеет: новая группа встаёт в конец. Поэтому после создания токенов нового компонента группы,
+   которые по алфавиту должны стоять после неё, пересоздают в конец — скрипт и проверка в
+   `references/icon-repair.md`, «Порядок групп токенов компонентов». Без этого шага компонент не
+   сдают
 2. Размеры — токены `size/*` со скоупом `WIDTH_HEIGHT`, разные значения на Mobile и Desktop
 3. Любой произвольный контент — через нативный SLOT, а не через INSTANCE_SWAP-заглушку
 4. Высота собирается из полей и line-height, а не задаётся числом — сверь с таблицей размеров
@@ -1550,7 +1556,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.15.1 · 20.10.2026 · обновил Nurla**.
+Текущая версия — **v4.16.1 · 21.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
