@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.17.2 · 21.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.18.1 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.17.2 · 21.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.18.1 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -355,6 +355,9 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 | Badge | 34 / 36 | 28 | 22 |
 | Tag | — | 26 / 28 | 20 |
 | Text Button | — | 18 / 20 | 14 |
+| RadioButton · CheckBox (контрол с полем касания) | — | 32 (сам 20 / 22) | 24 (сам 16) |
+| RadioItem · CheckBoxItem | — | 40, с метаданными 44 | 32, с метаданными 40 |
+| Toggle | — | 40 | 32 |
 
 **Как этим пользоваться.** Поле и кнопка рядом — оба M. Фильтр над таблицей из селекта и переключателя — оба S или оба M. Не смешивать: разнобой высот в строке виден сразу.
 
@@ -406,6 +409,13 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 
 **CheckBox** `592:7427` · **RadioButton** `592:7169` — сами контролы. Акцент **синий** с 22.09 (до этого был зелёный). Цвет живёт не в компонентах, а в трёх переменных `color/component/controls/active`, `-hover`, `-disabled`; на них же сидит `Toggle` и галочка в `SingleSelectItem`, поэтому они синие тоже — **это решение владельца, слой `controls` намеренно не разделён**. Перекрашивать контролы поштучно не надо: меняется токен, и меняются все.
 **CheckBoxItem** `627:24353` · **RadioItem** `592:7480` — контрол с подписью, `Position` Left/Right. В формах брать **Item**-версии.
+`Size` M/S у всех пяти: `RadioButton`, `CheckBox`, `RadioItem`, `CheckBoxItem` и подписи
+**`Label`** `592:7573` (решение владельца 22.10; до этого был один размер — нынешний M). S:
+контрол 24 (круг или квадрат 16, галочка 14, обводки те же), `Label` — `Body 2 medium`, мета
+`Caption 2`, иконка `height-500`; строка-Item собрана из S-частей, радиус 6. **Размер Item
+меняют только свойством `Size` самой строки** — контрол и подпись внутри переключаются вместе,
+по отдельности их не трогают. S — плотные списки, фильтры, ячейки таблицы, шторки с длинным
+выбором; рядом с полями и кнопками M — M. В одной группе выбора один размер.
 
 **Toggle** `592:7455` — мгновенное переключение настройки. `Size` S/M. Где изменение применяется по кнопке — чекбокс.
 
@@ -1567,7 +1577,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.17.2 · 21.10.2026 · обновил Nurla**.
+Текущая версия — **v4.18.1 · 22.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
