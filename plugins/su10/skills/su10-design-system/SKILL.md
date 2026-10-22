@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.18.3 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.18.5 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.18.3 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.18.5 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -349,7 +349,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 |---|---|---|---|
 | Button | 52 / 54 | 42 / 44 | 32 |
 | Text field · Text area · SingleSelect · ComboBox · MultiSelect · NumberInput | — | 42 / 44 | 32 |
-| SegmentedControlRow | — | 42 / 44 | 32 |
+| SegmentedControlRow | — | 42 / 44 | S 32 · XS 24 |
 | Avatar | XL 64/72 · L 52/54 | 42 / 44 | S 32 · XS 24 |
 | Stories (кольцо) | XL 72/80 · L 60/62 | 50 / 52 | S 40 · XS 32 |
 | Badge | 34 / 36 | 28 | 22 |
@@ -498,7 +498,7 @@ const natural = Math.ceil(probe.width); probe.remove();
 Island/Accordion с `layoutSizingHorizontal='FILL'`, без дополнительной обёртки) — тогда она
 сама «прижимается» к тому же краю, что и заголовок и таблица под ней.
 
-**SegmentedControl** `843:13462` + **SegmentedControlRow** `1367:14480` — переключение режима показа одного и того же контента. `Size` M/S задаётся на Row.
+**SegmentedControl** `843:13462` + **SegmentedControlRow** `1367:14480` — переключение режима показа одного и того же контента. `Size` M/S/XS задаётся на Row. XS (с 22.10) — дорожка 24, сегмент 20, подпись та же Body 4, поля сегмента Space-2 / Space-8, радиусы 4 и 6: плотные фильтры и переключение вида в шапке таблицы или карточки, в строке с Toggle XS и RadioItem/CheckBoxItem S.
 Разница с Tab: Tab — разделы, Segmented — режимы.
 
 **Breadcrumbs** `558:20324` — путь до текущей страницы.
@@ -977,6 +977,21 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
 - **Текст на `FILL` схлопывается в ноль, если у него не было собственной ширины.** `createText()` → `textAutoResize = 'HEIGHT'` → `layoutSizingHorizontal = 'FILL'` даёт `width: 0`, и подпись рендерится как «…». Лечится явным `resize(любая_ширина, h)` **перед** `FILL`. Симптом легко принять за обрезку по `textTruncation`.
 
 ### Свойства компонентов — ловушки
+
+- **`clone()` варианта внутри набора теряет привязки к свойствам** (`componentPropertyReferences`
+  у слоёв: `characters`, `visible`, `mainComponent`). Новый размер, собранный клоном, выглядит
+  верно, но текст и тумблеры в инстансе перестают работать (22.10: подписи XS-сегментов все стали
+  «Tab 1», у `Label` S отвалились `Text Label`, `Show Icon`). После клонирования переноси ссылки
+  с исходного варианта, обходя слои параллельно по одинаковым именам:
+  ```js
+  function copyRefs(a, b) {
+    const r = a.componentPropertyReferences;
+    if (r && Object.keys(r).length) b.componentPropertyReferences = { ...r };
+    if ('children' in a && a.type !== 'INSTANCE')
+      a.children.forEach((c, i) => b.children[i]?.name === c.name && copyRefs(c, b.children[i]));
+  }
+  src.children.forEach((c, i) => copyRefs(c, clone.children[i]));
+  ```
 
 **`addComponentProperty` для `INSTANCE_SWAP` принимает `id`, а не `key`.** Документация говорит «key», и это неправда: с ключом прилетает `Property value is incompatible with component property type`. Проверено пробником на четырёх случаях — `set + key` ❌, `set + id` ✅, `comp + key` ❌, `set + TEXT/BOOLEAN` ✅. То же правило, что и у `setProperties`. А вот `preferredValues` наоборот берут **ключи**:
 
@@ -1577,7 +1592,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.18.3 · 22.10.2026 · обновил Nurla**.
+Текущая версия — **v4.18.5 · 22.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
