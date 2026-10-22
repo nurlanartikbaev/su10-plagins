@@ -67,7 +67,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | Tag | Set | `efa1d37528aa90b58eda129049747ce0079f7966` |
 | Tags group | Set | `d532ca06e019b038135be21c4040ad9cde4ffaee` |
 | Tab | Set | `44fffb1668f32b8c363e8bea44b56c93fe453e2c` |
-| TabsRow | Single | `ee0c02619cedda4f73c033137e1cd9fb6e95863c` |
+| TabsRow | Set (`Size` M/S), ключ набора `58d7e4646659f2dd3a6d67581918f9726172dde0` | M `ee0c02619cedda4f73c033137e1cd9fb6e95863c` · S `63f2c5d00e07209723f0cada0a3b347bc2cdd98b` |
 | SegmentedControlRow | Set | `8f2cb2065155bfcac1dcda29ef9edd6cb4cba539` |
 | Breadcrumbs | Single | `306d946ea0171db99eea747b8d1c187bb2359f3d` |
 | MenuItem | Set | `2742b4abae46273b783ebfc54c1f063786a1fd45` |

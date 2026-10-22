@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.18.5 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.18.7 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.18.5 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.18.7 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -355,6 +355,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 | Badge | 34 / 36 | 28 | 22 |
 | Tag | — | 26 / 28 | 20 |
 | Text Button | — | 18 / 20 | 14 |
+| Tab (`TabsRow`) | — | 38 | 30 |
 | RadioButton · CheckBox (контрол с полем касания) | — | 32 (сам 20 / 22) | 24 (сам 16) |
 | RadioItem · CheckBoxItem | — | 40, с метаданными 44 | 32, с метаданными 40 |
 | Toggle | — | 40 | S 32 · XS 24 |
@@ -431,7 +432,12 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 - Токены `color/component/header-button/*`: `surface` — белое 32% в светлой и белое 8% в тёмной, `surface-hover` — белое 40% / прежнее, `border` `3323:394` — чёрное 4% / белое 4%. Размытие не выключают: под кнопкой бывает карта или фото.
 - `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
 
-**Tab** `678:29650` + **TabsRow** `678:29898` — навигация между разделами.
+**Tab** `678:29650` + **TabsRow** (набор `3539:136180`: `Size=M` `678:29898`, `Size=S` `3539:136091`) — навигация между разделами.
+`Size` M/S (с 22.10; прежний единственный размер — M). Размер ставят на `TabsRow`, вкладки ряда
+переключаются вместе. M — вкладка 38 (34 + линия выбора 4), Body 2, поля 8 / 16, шаг 8: основная
+навигация по разделам. S — вкладка 30 (28 + линия 2), Body 4, поля 6 / 12, шаг 4, счётчик ниже:
+вкладки внутри карточки, шторки, панели фильтров. В S внутренний отступ первой вкладки — **12**, а
+не 16: правило «встык» ниже работает так же, только поле содержимого карточки тогда 12.
 
 **TabsRow ставится встык к краю блока — свои 16 px у него уже внутри.** У самого `TabsRow`
 полей нет (`paddingLeft/Right = 0`), но внутри каждого `Tab` лежит фрейм с
@@ -1592,7 +1598,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.18.5 · 22.10.2026 · обновил Nurla**.
+Текущая версия — **v4.18.7 · 22.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
