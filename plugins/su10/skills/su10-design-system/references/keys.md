@@ -59,6 +59,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | SingleSelectItem | Set | `f76e1a130fa0a5251f3435077cd408d15c133bdd` |
 | CheckBox | Set | `b3aa47f023c4750c4145eeceda1125396fea384b` |
 | CheckBoxItem | Set | `d064a94788f2464372463684d0ae83d0293e9d20` |
+| ToggleItem | Set | `430ea5d3b621ad64e7ab6145ca460bb32ce87992` |
 | RadioButton | Set | `94df075f7f80b365e942d2175d26acfd005ceabf` |
 | RadioItem | Set | `93d6822d3e9e13c28b9b3727363bd2a450449fa5` |
 | Toggle | Set | `6170adad7e1bbb53dc17399ddf193664906fa04a` |
@@ -108,6 +109,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | Overlay | Set | `ef6f6b82893931f5fa39e6aaf311c2720cb680f5` |
 | DatePickerStrip | Set | `a5389e41e2020d0976b366d8fb095bb263e448b5` |
 | CheckBoxItem | Set | `d064a94788f2464372463684d0ae83d0293e9d20` |
+| ToggleItem | Set | `430ea5d3b621ad64e7ab6145ca460bb32ce87992` |
 | DateStripCell | Set | `d87a0c6916e2d7af61efd6bb7b17512ac4b4db1f` |
 | DatePickerCalendar | Set | `e9948cc1353733d9b8d640550a7a72da9871a024` |
 | CalendarCell | Set | `797b4be84f5ae822537edf3a525612666c74cdd8` |

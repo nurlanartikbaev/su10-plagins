@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.18.9 · 22.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.19.1 · 27.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.18.9 · 22.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.19.1 · 27.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -305,7 +305,9 @@ description: "v4.18.9 · 22.10.2026 — Сборка макетов, экран�
 
 **Фокус с клавиатуры — одно кольцо на все интерактивные компоненты:** токен `border/focus`,
 толщина 2px, отступ 2px от компонента, радиус = радиус компонента + 2. Рисуется снаружи и в
-раскладке не участвует. Цвет сейчас совпадает с `border/info`, но роль отдельная — чтобы цвет
+раскладке не участвует. У `Text Button` своего скругления нет (0) — кольцо радиусом 2. **Поля ввода —
+исключение**: их фокус — обводка `inputs/border-focused`, кольцо появляется только у поля в `Error`
+(см. «Состояния полей»). Цвет сейчас совпадает с `border/info`, но роль отдельная — чтобы цвет
 фокуса можно было поменять, не задев рамку поля.
 
 **Каждое состояние — на ступень рампы дальше предыдущего.** Primary: 500 → hover 600 → pressed 700.
@@ -384,10 +386,30 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 **Text field** `631:26237` — однострочный ввод.
 `Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Has Value` On/Off · `Show Label`, `Show Description`, `Show Prefix`, `Show Suffix`, `Show Action`, `Show Mask`, `Importance`.
 Лейбл — Body 3, значение — Body 2 (M) или Body 4 (S). `Importance` — звёздочка обязательного поля. Хелп-текст и текст ошибки живут в `Show Description`. Поле ввода даты — это оно же с иконкой календаря в суффиксе.
+Иконки в поле берут ступень высоты строки значения: M — 18 (`height-500`), S — 16 (`height-300`).
+**Автодополнение**: предлагаемое продолжение — серым (`text/tertiary`) сразу после курсора; принять — Tab или → в конце текста, отказаться — Esc или продолжить ввод. Невидимую подсказку не делают.
+
+**Состояния полей — одно правило на все поля** (решение владельца 27.10): Text field, Text area,
+SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
+- **Disabled — всё серое**: обводка `inputs/border-disabled`, подложка `inputs/surface-disabled`,
+  лейбл, значение, плейсхолдер и подсказка — `text/disabled`, иконки — `icon/disabled`, чипы
+  MultiSelect — `Tag` `State=Disabled`. До 27.10 у полей было четыре разных правила (у Text field
+  M и S — даже разные); мастера выровнены.
+- **Focused** — обводка `inputs/border-focused`, отдельного кольца нет: обводка и есть индикатор
+  фокуса, и для мыши, и для клавиатуры.
+- **Error в фокусе** — обводка остаётся красной (`inputs/border-error`), снаружи добавляется общее
+  кольцо фокуса `border/focus` (2 px, отступ 2, радиус поля + 2). Ошибка важнее фокуса, но фокус
+  всё равно виден. Отдельного варианта в Figma нет — это поведение, описано в паспортах.
 
 **Prefix** `631:26374` / **Suffix** `631:26379` — начинка поля, `Type` Icon/Text. Отдельно в макетах не ставятся.
 
 **Text area** `894:26270` — многострочный ввод. Те же свойства плюс `Show Counter` и `Show Copy`.
+Типографика как у Text field M (с 27.10): значение и плейсхолдер Body 2, подсказка Caption 1 — до
+этого были Body 1 и Body 4. Высота: старт 118, растёт с текстом до 240, дальше прокрутка внутри;
+за угол не тянется нигде. После копирования — тост Success «Скопировано». Текст длиннее лимита,
+подставленный программно (660/500), переводит поле в `Error`: счётчик и подсказка
+`text/critical-static`, подсказка — «Сократите текст до 500 символов». С клавиатуры лимит не
+превысить.
 
 **Counter** `894:26268` — счётчик символов под Text area.
 
@@ -405,10 +427,14 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 Все три: `Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Has Value` Off/On. Геометрия совпадает с Text field. У всех шести компонентов страницы заполнены `description` и `documentationLinks`.
 
 **Dropdown** `863:4824` — выпадающий список к селектам. `Type` Single/Multi · `State` Rest/Loading/Error/Empty. Показывать только в Focused родителя.
+Открывается под полем по левому краю; нет места снизу — над полем. **На мобильном — в
+`MobileBottomSheet`**, не под полем (как `Popover`). `Error` — иконка, «Ошибка загрузки» и кнопка
+«Повторить» (`Button` M Secondary Info, включена с 27.10). Длинный список прокручивается, справа
+`Scrollbar` системы — только десктоп, на телефоне системная прокрутка.
 
-**SingleSelectItem** `863:4808` — строка списка, только внутри Dropdown.
+**SingleSelectItem** `863:4808` — строка списка, только внутри Dropdown. Подпись Body 2, как значение в поле (до 27.10 — Body 1); строки `Type=Multi` в Dropdown — тоже Body 2.
 
-**CheckBox** `592:7427` · **RadioButton** `592:7169` — сами контролы. Акцент **синий** с 22.09 (до этого был зелёный). Цвет живёт не в компонентах, а в трёх переменных `color/component/controls/active`, `-hover`, `-disabled`; на них же сидит `Toggle` и галочка в `SingleSelectItem`, поэтому они синие тоже — **это решение владельца, слой `controls` намеренно не разделён**. Перекрашивать контролы поштучно не надо: меняется токен, и меняются все.
+**CheckBox** `592:7427` · **RadioButton** `592:7169` — сами контролы. Галочка — `Linear / Messages, Conversation / Check` из пака, 18 (S — 14), обводка 1.67, `icon/white-static`; минус InGroup — `Bold / Essentional, UI / Minus` 18. Фронт берёт их из SU10 Icon Pack, не рисует. Акцент **синий** с 22.09 (до этого был зелёный). Цвет живёт не в компонентах, а в трёх переменных `color/component/controls/active`, `-hover`, `-disabled`; на них же сидит `Toggle` и галочка в `SingleSelectItem`, поэтому они синие тоже — **это решение владельца, слой `controls` намеренно не разделён**. Перекрашивать контролы поштучно не надо: меняется токен, и меняются все.
 **CheckBoxItem** `627:24353` · **RadioItem** `592:7480` — контрол с подписью, `Position` Left/Right. В формах брать **Item**-версии.
 `Size` M/S у всех пяти: `RadioButton`, `CheckBox`, `RadioItem`, `CheckBoxItem` и подписи
 **`Label`** `592:7573` (решение владельца 22.10; до этого был один размер — нынешний M). S:
@@ -419,10 +445,22 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 выбором; рядом с полями и кнопками M — M. В одной группе выбора один размер.
 
 **Toggle** `592:7455` — мгновенное переключение настройки. `Size` M/S/XS: M 56×40, S 40×32, XS 32×24 (дорожка 28×16, кружок 12; с 22.10). Рядом с RadioItem/CheckBoxItem M — Toggle S, рядом с их S — XS. Где изменение применяется по кнопке — чекбокс.
+`State` Rest/Hover/Disabled — Hover с 27.10: дорожка на ступень темнее (`controls/active-hover`,
+`controls/inactive-hover`), прототип наведения заведён.
+
+**ToggleItem** `3626:153790` (паспорт `ToggleItemComponentPassport` `3626:154109`) — подпись +
+Toggle для форм, рядом с CheckBoxItem и RadioItem; собран по их образцу (27.10). `Size` M (Toggle S,
+строка 44) / S (Toggle XS, строка 40) · `Position` Left/Right, по умолчанию Right — подпись слева ·
+`IsSelected` No/Yes · `State` Rest/Hover/Disabled. **Списки настроек** собирают не из него, а из
+`ListItem` с `Trailing Type=Toggle`.
 
 **Tag** `890:25989` — метка-значение, её нажимают. `Size` M/S · `State` Rest/Hover/**Selected**/Disabled · `Closable` · `Value` TEXT. S — чипы в MultiSelect, M — самостоятельные теги. Текст правится свойством `Value`, а не оверрайдом внутри инстанса.
+У `Selected` обводки нет — так задумано, выбор несёт заливка `tag/surface-selected`. Иконка
+закрытия — иконочная пара цвета подписи: Rest/Hover `icon/primary`, Selected
+`icon/info-outline-static`, Disabled `icon/disabled` (исправлено 27.10). Длинный текст —
+многоточие, полный текст в тултипе, только когда текст правда обрезан.
 
-**Tags group** `890:26018` — строка тегов со счётчиком «+N».
+**Tags group** `890:26018` — строка тегов со счётчиком «+N». «+N» нажимается: скрытые теги раскрываются в той же строке, строка переносится. В MultiSelect «+N» не нажимается — всё выбранное видно в открытом списке.
 
 ### Навигация
 
@@ -572,7 +610,7 @@ Badge или Tag: если элемент кликабельный (выбира
 **Alert** `550:15590` — сообщение в потоке страницы, остаётся до реакции. `Signal` Info/Success/Warning/Error (свойство называлось `Type` до 21.09) · `Weight` Primary/Secondary. Глиф слева — **тот же `FeedbackIcon`, что в `Toast`**: 16×16 в обоих `Weight`, `Signal` переключает знак. До 07.10 стояли четыре отдельные Bold-иконки пака, причём Warning и Error рисовались одной `Danger Triangle` и отличались только цветом.
 **Toast** `1254:11921` — всплывающее уведомление, уходит само. `Signal` Info/Success/Warning/Error (называлось `Type` до 21.09) · `Show Action` добавляет действие справа, кнопка выведена наружу. Глиф слева — `FeedbackIcon` из пака, у него тот же набор сигналов.
 
-**Место тоста зависит от платформы.** Desktop — всегда правый верхний угол: 24 справа и **24 под шапкой** (`size/header-height` 56 + 24 = 80 от края окна) — шапку тост не закрывает. Mobile — во всю ширину минус 12 по бокам, и сверху (под статус-баром), и снизу (над зоной жеста): оба положения равноправны. Снизу тост ближе к большому пальцу, но ложится поверх таб-бара и панели действий — проверь, что он не прячет действие. Движение: тост выезжает от того края, у которого стоит, и уходит обратно к нему же. Появление 350 мс — сдвиг 24 px + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px + прозрачность, ease-in. Desktop и Mobile сверху — появление вниз, уход вверх; Mobile снизу — зеркально. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
+**Место тоста зависит от платформы.** Desktop — всегда правый верхний угол: 24 справа и **24 под шапкой** (`size/header-height` 56 + 24 = 80 от края окна) — шапку тост не закрывает. Mobile — **всегда сверху** (решение владельца 27.10): под статус-баром, во всю ширину минус 12 по бокам. Снизу тост не ставят — там таб-бар, панели действий и шторки. Движение: тост выезжает от того края, у которого стоит, и уходит обратно к нему же. Появление 350 мс — сдвиг 24 px + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px + прозрачность, ease-in. Появление вниз, уход вверх. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
 
 **Поведение тоста.** Тост с действием, без которого нельзя продолжить, сам не уходит; undo («Отменить») — исключение, уходит через 10 с: действие уже выполнено. Заголовок до двух строк, описание до трёх, дальше многоточие. Длинную ошибку кладут в `Alert`, логин и пароль — в `Dialog` с кнопкой «Скопировать», не в тост. Не больше трёх сразу; четвёртый вытесняет самый старый без действия. Таймер встаёт на паузу при наведении и при фокусе с клавиатуры и продолжается с остатка. Сверху на мобильном — safe-area + 12.
 
@@ -1603,7 +1641,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.18.9 · 22.10.2026 · обновил Nurla**.
+Текущая версия — **v4.19.1 · 27.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
