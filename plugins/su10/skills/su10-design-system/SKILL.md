@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.20.12 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.13 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.20.12 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.13 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -431,7 +431,7 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
   кольцо фокуса `border/focus` (2 px, отступ 2, радиус поля + 2). Ошибка важнее фокуса, но фокус
   всё равно виден. Отдельного варианта в Figma нет — это поведение, описано в паспортах.
 
-**Prefix** `631:26374` / **Suffix** `631:26379` — начинка поля, `Type` Icon/Text; у Suffix ещё `Type=Action` (с 29.10; `Disabled` Off/On — выключенная отправка при пустом поле, есть только у Action) — нажимаемая акцентная иконка-действие на `icon/info-outline-static`, по умолчанию **Bold** `Plain` (отправка сообщения, в паке `Bold / Messages, Conversation, Telegram / Plain`, ключ `dfe800f6…`). `Type=Icon` остаётся служебной серой иконкой (`icon/tertiary`) — крестик очистки, копирование. Отдельно в макетах не ставятся.
+**Prefix** `631:26374` / **Suffix** `631:26379` — начинка поля, `Type` Icon/Text; у Suffix ещё `Type=Action` (с 29.10; `Disabled` Off/On — выключенная отправка при пустом поле, есть только у Action) — нажимаемая акцентная иконка-действие на `icon/info-outline-static`, иконка фиксированная — **Bold** `Plain` (отправка сообщения, в паке `Bold / Messages, Conversation, Telegram / Plain`, ключ `dfe800f6…`), свойство `Icon` на неё не действует; примеры — в паспорте Text field, раздел Prefix & Suffix. `Type=Icon` остаётся служебной серой иконкой (`icon/tertiary`) — крестик очистки, копирование. Отдельно в макетах не ставятся.
 
 **Text area** `894:26270` — многострочный ввод. Те же свойства плюс `Show Counter` и `Show Copy`.
 Типографика как у Text field M (с 27.10): значение и плейсхолдер Body 2, подсказка Caption 1 — до
@@ -1074,6 +1074,12 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
 
 ### Свойства компонентов — ловушки
 
+- **`swapComponent` у слоя, привязанного к INSTANCE_SWAP-свойству, меняет значение по умолчанию
+  у всего свойства** — и все варианты набора, где слой привязан к тому же свойству, получают новую
+  иконку. 29.10: в новом `Suffix` `Type=Action` поставили самолётик — и у `Type=Icon` во всех полях
+  файла вместо «Copy» встал самолётик. Если у варианта иконка своя — сначала отвяжи слой
+  (`ic.componentPropertyReferences = {}`), потом меняй; общее умолчание после проверь
+  (`set.componentPropertyDefinitions[key].defaultValue`).
 - **`clone()` варианта внутри набора теряет привязки к свойствам** (`componentPropertyReferences`
   у слоёв: `characters`, `visible`, `mainComponent`). Новый размер, собранный клоном, выглядит
   верно, но текст и тумблеры в инстансе перестают работать (22.10: подписи XS-сегментов все стали
@@ -1693,7 +1699,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.20.12 · 29.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.13 · 29.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
