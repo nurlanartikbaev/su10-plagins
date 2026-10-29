@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.20.5 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.6 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.20.5 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.6 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -388,6 +388,25 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 Внутри строки текста, в шапке поля (`Show Action`), в подвале таблицы. Link — переход на другую страницу, Default — действие на месте. Им же собирается крестик в шапках оверлеев: иконка тёмная, а не акцентная.
 
 **Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel` (была `DesktopActionPanel`: панель используется и на мобильном). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
+
+- **Кнопки пошагового флоу на десктопе — только в `Action Panel`**, не голыми `Button` под
+  контентом: оценочный тест, шаги «1 из 2 → 2 из 2», экран результата, «время вышло». Панель —
+  последний блок колонки, `Elevate=Off` (список длиннее экрана — `Elevate=On`), ширина `FILL`.
+  «Назад» на шаге — `Show Left Button`, основное действие — последняя кнопка в `buttons row`,
+  вторая кнопка справа и тексты выключены, если им нечего сказать без тавтологии (правило 12).
+- **В колонке страницы внешние поля мастера (`Space-40`) перепривязать на `Space-0`** —
+  иначе кнопки уезжают внутрь относительно островов над панелью. Поля 40 — для панели во всю
+  ширину экрана, как в паспорте.
+- **Подпись кнопки задавать до того, как прячешь соседнюю:** скрытая `Show Right Button`
+  кнопка выпадает из `children` инстанса, и индекс основной кнопки сдвигается.
+  ```js
+  const ap = offVariant.createInstance(); body.appendChild(ap); ap.layoutSizingHorizontal = 'FILL';
+  for (const k of ['paddingLeft','paddingRight','paddingTop','paddingBottom']) ap.setBoundVariable(k, space0);
+  const row = ap.children[0].children.find(c => c.name === 'buttons row');
+  row.children.at(-1).setProperties({ 'Label#273:46': 'Сохранить цель' });
+  ap.setProperties({ 'Show Primary Text#1060:2': false, 'Show Secondary Text#1060:3': false,
+    'Show Right Button#1060:4': false, 'Show Left Button#1060:5': true });
+  ```
 `Elevate` On/Off · `Show Left Button`, `Show Right Button`, тексты.
 `Elevate=On`, когда контент уходит под панель; `Off`, когда панель — последний блок страницы.
 
@@ -1669,7 +1688,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.20.5 · 29.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.6 · 29.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
