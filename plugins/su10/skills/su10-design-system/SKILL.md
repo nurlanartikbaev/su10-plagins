@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.20.14 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.15 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.20.14 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.15 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -85,6 +85,21 @@ description: "v4.20.14 · 29.10.2026 — Сборка макетов, экран
 
 13. **В макете компоненты стоят в покое: `State=Rest`.** `Pressed`, `Hover`, `Focused` — это мгновение взаимодействия, разработчик сверстает их как постоянный вид. Другое состояние ставят, только если экран показывает именно этот момент: поле в фокусе, пока вводят запрос; строка под курсором в сценарии наведения. `Signal` выбирают по смыслу действия: `Success` — только у действия про успех. Кнопка-иконка без смысла сигнала — `Signal=Info`.
     Не берут вариант «потому что так выглядит»: Tertiary в покое прозрачная, и это и есть её вид. Нужна видимая плашка — берут `Weight=Secondary`, а не `State=Pressed`. Иконку внутри кнопки не перекрашивают поверх: неверный цвет иконки значит, что выбран неверный вариант. Подменённая иконка (`Icon` / `Left Icon`) сама берёт цвет кнопки — проверено на свежих инстансах. **Но дефолтную иконку в свойство повторно не передают**: если записать в `Left Icon` ту же иконку, что стоит по умолчанию (`Plus` `1505:5044`), слетает цвет, заданный в мастере, и вектор берёт цвет из пака (19.10 плюс у «Добавить курс» стал бледным). Нужна иконка по умолчанию — ставят только `Show Left Icon=true`. После любой подмены проверяют, что заливка вектора привязана к `icon/*`, а не к переменной пака.
+
+14. **Текст никогда не прилипает к обводке — между ними всегда воздух.** Касается любой
+    границы: рамка карточки и баннера, кольцо прогресса, обводка поля, бейдж, контур иконки-плитки.
+    Минимум — `Space-4` по каждой стороне до внутреннего края линии, в круге — до окружности
+    отверстия (углы текстового блока тоже внутри). Внутри компонента воздух заложен мастером —
+    его не ужимают; правило про собственные фреймы макета: кольца, плашки, ячейки, подписи
+    поверх графиков.
+    **Объём текста продумывают до сборки, а не по факту.** Перед тем как задать размер
+    контейнера, прикинь самый длинный реальный вариант: «1:40 из 3:00», а не «78»; «Вычислительная
+    техника · КБТУ», а не «ЕНУ»; четырёхзначное число, перевод на казахский (он длиннее русского
+    на 20–30 %). Не помещается — сначала сокращают формулировку («из 3 ч»), затем берут стиль на
+    ступень меньше (но не мельче 10 px), и только потом меняют геометрию. Масштабировать текст
+    `rescale` вместе с контейнером нельзя — так получается 7,4 px без текстового стиля.
+    Проверка перед сдачей: `(ширина отверстия − ширина текста) / 2 ≥ 4`, а для круга
+    `радиус − hypot(w/2, h/2) ≥ 0`.
 
 ## Основа
 
@@ -1707,7 +1722,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.20.14 · 29.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.15 · 29.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
