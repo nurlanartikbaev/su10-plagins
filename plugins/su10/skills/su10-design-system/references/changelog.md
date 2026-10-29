@@ -22,6 +22,10 @@
 ---
 
 
+## v4.20.2 · 29.10.2026 · обновил Nurla
+
+- **Статус-бар над `MobileHeader v2` — стиль `BackgroundTop`.** Инстанс `Status Bar` во фрейме `Header and Status Bar` заливается стилем-градиентом `BackgroundTop` (`S:465e657a273b007d0b1a3bd250030fa81cfbbdd7,`) через `setFillStyleIdAsync` вместо `surface/2-layer`. Правило всегда, когда на экране `MobileHeader v2`. Применено ко всем 238 мобильным экранам страницы redesign (роадмап, «Курсы»).
+
 ## v4.20.0 · 29.10.2026 · обновил Nurla
 
 - **MobileActionPanel v2** `3718:2054` и **MobileBottomBar v2** `3718:2073` — стеклянный низ экрана
