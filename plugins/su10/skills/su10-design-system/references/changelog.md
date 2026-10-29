@@ -22,6 +22,10 @@
 ---
 
 
+## v4.20.10 · 29.10.2026 · обновил Nurla
+
+- **Выключенная отправка при пустом поле** (каталог: Text field, MobileActionPanel v2). У `Suffix` `631:26379` новое вариантное свойство `Disabled` Off/On; вариант `Type=Action, Disabled=On` — иконка на `icon/disabled`, у остальных типов `Disabled=Off`. В паспорте панели два примера поля: с текстом (отправка акцентная) и пустое с плейсхолдером (отправка выключена). Плейсхолдер поля задаётся `Text Mask`, а не `Text Value`.
+
 ## v4.20.9 · 29.10.2026 · обновил Nurla
 
 - **Самолётик отправки — Bold** (железное правило 5, третье исключение; каталог; `keys.md`). Решение владельца: в `Suffix` `Type=Action` и в примерах `MobileActionPanel v2` иконка `Bold / Messages, Conversation, Telegram / Plain` (`dfe800f6…`), цвет прежний — `icon/info-outline-static`. Ловушка: по имени легко взять `Bold / … WhatsApp / Plain` (`3690bfe6…`) — это логотип WhatsApp, не самолётик; в `keys.md` у обеих строк теперь подписано, что есть что.
