@@ -104,6 +104,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | MobileActionPanel | Set | `c4a63ec6d61ea27edefdfe610f58a78c10551273` |
 | Home Indicator | Single | `69dcf80775ec1d795edb4b6fdb982e2638c0969e` |
 | MobileBottomBar | Single | `43a17b6ea11818d8bfdb4adee3f7dd931ad08fa8` |
+| MobileActionPanel v2 | Single | `3f4e0ddb4ae898cef658b58eed9e045cb629a9f7` |
+| MobileBottomBar v2 | Single | `266fa9f95ab88bdaded26ee4981e942fba992979` |
 | Dialog | Single | `21accf16fc925049bcd05887e739e4602801757f` |
 | DesktopDrawer | Set | `04c8e660b742d18afb14457480230edda35f783d` |
 | Overlay | Set | `ef6f6b82893931f5fa39e6aaf311c2720cb680f5` |

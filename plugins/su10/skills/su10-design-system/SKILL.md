@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.19.1 · 27.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.1 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.19.1 · 27.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.1 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -564,6 +564,22 @@ Vertical — кнопки друг под другом, основная све�
 
 **TabBar** `1713:563` + **TabBarItem** `1713:562` — нижняя навигация мобильного экрана. У панели слот `items`, у таба `State` Rest/Selected, `Label` TEXT и `Icon` INSTANCE_SWAP.
 От трёх до пяти табов, каждый ставится на Fill — тогда они делят ширину поровну. Выбран ровно один. Высота 56: `Space-8` сверху и снизу плюс 40 на таб; зона home indicator добавляется экраном, а не компонентом. `Selected` красит иконку и подпись акцентом (`icon/info-outline-static` и `text/info-static`).
+
+**Редизайн — v2, стеклянный низ экрана.** Три компонента одной формы: ширина 351, поля 12 от
+краёв экрана, скругление 16, подложка `mobile-tabbar-v2/surface`, кромка `mobile-tabbar-v2/border`,
+размытие 12. Висят над контентом, зону home indicator под ними добавляет экран. На экранах со
+старым `TabBar` во всю ширину берут v1 (`MobileActionPanel`, `MobileBottomBar`), v1 и v2 не мешают.
+- **MobileTabbar v2** `2224:669` (паспорт `MobileTabbarV2Passport` `2230:685`) — плавающий таб-бар,
+  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54.
+- **MobileActionPanel v2** `3718:2054` (паспорт `3719:2087`, с 29.10) — стеклянная панель действий,
+  поля 4 (кнопка M 12 + 4 = 16), высота 52. **Слот `content`**: по умолчанию `Button` M Secondary +
+  Primary на Fill; можно одну кнопку Primary или поле ввода — `Text field` M без лейбла и подсказки,
+  на Fill (вопрос в чат-бот, комментарий), кнопка отправки — суффиксом поля. Выше 42 в слот не кладут.
+- **MobileBottomBar v2** `3718:2073` (паспорт `3719:2408`) — панель v2 над таб-баром v2, зазор 8,
+  вместе 114. `Show Action Panel`, `Show TabBar`: обе — экран раздела с действием; только панель —
+  шаг оформления или форма без табов; только таб-бар — обычный экран. Обе части выведены наружу.
+  Выбран владельцем 29.10 из четырёх вариантов (две панели / одна панель / кнопки вместо табов /
+  круглая кнопка рядом с баром). Контент прокручивается под панелями и заканчивается выше них.
 
 **DesktopHeader** `1664:62` — шапка десктопного экрана: логотип слева, слот `actions` справа. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.
 
@@ -1641,7 +1657,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.19.1 · 27.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.1 · 29.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
