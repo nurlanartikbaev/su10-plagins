@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.20.6 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.8 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.20.6 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.8 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -605,7 +605,8 @@ Vertical — кнопки друг под другом, основная све�
 - **MobileActionPanel v2** `3718:2054` (паспорт `3719:2087`, с 29.10) — стеклянная панель действий,
   поля 4 (кнопка M 12 + 4 = 16), высота 52. **Слот `content`**: по умолчанию `Button` M Secondary +
   Primary на Fill; можно одну кнопку Primary или поле ввода — `Text field` M без лейбла и подсказки,
-  на Fill (вопрос в чат-бот, комментарий), кнопка отправки — суффиксом поля. Выше 42 в слот не кладут.
+  на Fill (вопрос в чат-бот, комментарий), справа от него кнопка отправки — `Button` M Primary,
+  `Only Icon=Yes`, иконка `Outline / Messages, Conversation / Plain`, шаг 8. Выше 42 в слот не кладут.
 - **MobileBottomBar v2** `3718:2073` (паспорт `3719:2408`) — панель v2 над таб-баром v2, зазор 8,
   вместе 114. `Show Action Panel`, `Show TabBar`: обе — экран раздела с действием; только панель —
   шаг оформления или форма без табов; только таб-бар — обычный экран. Обе части выведены наружу.
@@ -1688,7 +1689,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.20.6 · 29.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.8 · 29.10.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
