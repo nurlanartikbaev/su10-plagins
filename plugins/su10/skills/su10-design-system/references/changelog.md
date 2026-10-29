@@ -22,6 +22,10 @@
 ---
 
 
+## v4.20.9 · 29.10.2026 · обновил Nurla
+
+- **Самолётик отправки — Bold** (железное правило 5, третье исключение; каталог; `keys.md`). Решение владельца: в `Suffix` `Type=Action` и в примерах `MobileActionPanel v2` иконка `Bold / Messages, Conversation, Telegram / Plain` (`dfe800f6…`), цвет прежний — `icon/info-outline-static`. Ловушка: по имени легко взять `Bold / … WhatsApp / Plain` (`3690bfe6…`) — это логотип WhatsApp, не самолётик; в `keys.md` у обеих строк теперь подписано, что есть что.
+
 ## v4.20.8 · 29.10.2026 · обновил Nurla
 
 - **Кнопка отправки — внутри поля** (каталог: Text field, MobileActionPanel v2). Решение владельца: отдельная кнопка рядом с полем из 4.20.7 отменена. В `Suffix` `631:26379` добавлен вариант `Type=Action` `3737:930` — акцентная иконка-действие (`icon/info-outline-static`), по умолчанию `Outline / Plain`; `Plain` в `preferredValues`. В примерах панели: `Show Suffix=true`, `Suffix Type=Action`. Ловушка: набор `Suffix` был фиксированной ширины — новый вариант лёг поверх `Type=Icon`, набор переведён на HUG.

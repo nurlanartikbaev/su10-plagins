@@ -145,8 +145,9 @@ Node ID из каталога выше годятся для ссылок и д�
 | Messages, Conversation / Pen New Square | `7952ce9e5c12ed51a80f63994fadecf468779f77` |
 | Time / Stopwatch Play | `2f1c3069b5f188f86a1e9c108c41fab261ba9fe2` |
 | Danger Triangle (иконка Accordion при Signal=Error) | `6146b16fc4139a491ff5ff19308f4efe8d4c860d` |
-| Messages, Conversation / Plain — отправка, `Suffix` `Type=Action` | `8f2c72a271a6e6f44fc83602bf9e33908312c306` |
-| **Bold** / Messages, Conversation, WhatsApp / Plain | `3690bfe6f4559ea1944420222942159c5fdcc961` |
+| Messages, Conversation / Plain — Outline, в поле не ставить (там Bold) | `8f2c72a271a6e6f44fc83602bf9e33908312c306` |
+| **Bold** / Messages, Conversation, Telegram / Plain — самолётик отправки, `Suffix` `Type=Action` | `dfe800f6ad5031ec075adc8b94939e0f4fd81741` |
+| **Bold** / Messages, Conversation, WhatsApp / Plain — **это значок WhatsApp**, не самолётик | `3690bfe6f4559ea1944420222942159c5fdcc961` |
 | Essentional, UI / Info Circle | `2a44b8ec58be9577515ce41fb87d60941664ea68` |
 | Essentional, UI / Bar Chart | `5d874be7ef02004d8bb1de0804ff43cfb455dfd1` |
 | Essentional, UI / Share | `6731d3994ca4dc5617fb6fa7468362f4307ca604` |
