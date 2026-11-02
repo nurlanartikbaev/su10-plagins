@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.7 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.8 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.7 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.8 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -33,7 +33,7 @@ description: "v4.21.7 · 02.11.2026 — Сборка макетов, экран�
 **Шапки паспортов — свои компоненты**: `DocHeading` `1745:95` и `DocSubheading` `1745:100` на странице Documentation Assets. Миграция завершена 22.09 — чужих `Heading` / `Subheading` в файле не осталось нигде, кроме `sandbox`; новые паспорта собираются только на этих двух. Заголовок — текстовое свойство `Title`, описание — обычный текстовый слой: так в нём живут маркированные списки. Образцы цвета — `Swatch` `1746:3339` на странице Colors. **Экран для разделов `Usage` — `DocScreenMock` `3067:329`** там же: `Platform` Mobile 375×812 / Desktop 1440×1024, тумблеры `Show Status Bar`, `Show Header`, `Show Home Indicator`. Наполнение скелетонное — плашки `surface/3-layer` в карточках `surface/2-layer`; продуктовый контент в мок не рисуют. Desktop по сетке: поля 24, колонки 920 + 448, промежуток 24. Плавающий элемент внутрь мока не кладут — мок и элемент кладут в общий фрейм без автолейаута и двигают элемент поверх, после чего весь фрейм ужимают `rescale`, чтобы пропорции остались честными. `DocHeading` — ещё и шапка доски
 хэндоффа; из чего собирать остальные подписи доски — `references/handoff.md`.
 
-**Токены тоже документированы**: `ColorsPassport` на странице Colors — все 62 семантических токена со свотчами и правилами выбора; `SpacingPassport` на странице Spacing — `Space`, радиусы, высоты строки, обводки и `size/*`.
+**Токены тоже документированы**: `ColorsPassport` на странице Colors — все 64 семантических токена со свотчами и правилами выбора; `SpacingPassport` на странице Spacing — `Space`, радиусы, высоты строки, обводки и `size/*`.
 
 **У каждого компонента свой паспорт** — фрейм `<Имя>Passport` на его странице, ссылка лежит в `documentationLinks` компонента. Сомневаешься в поведении — открой паспорт, а не выдумывай. **У каждой переменной заполнено описание** — в панели переменных Figma видно, где её место.
 
@@ -180,6 +180,8 @@ description: "v4.21.7 · 02.11.2026 — Сборка макетов, экран�
 истории). Для текста и обычных заливок градиенты не берут — только там, где это предусмотрено
 компонентом.
 
+**`IconGradient` — градиент, который сам меняется по теме** (решение владельца 02.11). Стиль на токенах `icon/accent-gradient-start` и `-end`: в светлой теме совпадает с `BlueGradient` (`blue/solid/400 → 600`), в тёмной с `LightBlueGradient` (`blue/solid/200 → 400`). Переменная не хранит градиент, но стопы к переменным привязать можно, и они слушают моду `Theme`: так делают любой градиент, разный по темам. Токены отдельно в заливку не ставят, берут стиль. Им красят `QuickLink`.
+
 **Направление градиента хранится в `gradientTransform` стиля, и выгрузка его теряет.** Все сигнальные градиенты (`BlueGradient`, `GreenGradient`, `RedGradient`, `OrangeGradient`, `PurpleGradient`, `YellowGradient`, `LightBlueGradient`) и `StoriesGradient` идут **сверху вниз** — матрица `[[0,1,0],[-1,0,1]]`, в CSS это `linear-gradient(180deg, …)`. Исключения — `BackgroundTop` и `BackgroundBot`, у них своё масштабирование. Фронт угол из выгрузки не получает: его надо брать отсюда.
 
 **Три правила, которые закрывают большинство вопросов:**
@@ -238,6 +240,7 @@ description: "v4.21.7 · 02.11.2026 — Сборка макетов, экран�
 | `secondary-black-static` | Второстепенная иконка на светлой плашке |
 | `tertiary-white-static` | Приглушённая белая иконка, в том числе Disabled у Primary-кнопки |
 | `tertuary-black-static` | Disabled у кнопки Tertiary. **В имени опечатка** (tertuary) — исправление сломает привязки, оставлено как есть |
+| `accent-gradient-start`, `accent-gradient-end` | Цвета стиля `IconGradient`, отдельно не ставят: заливка градиентной иконки — сам стиль |
 
 ### Поверхности `surface/*`
 
@@ -642,7 +645,7 @@ Vertical — кнопки друг под другом, основная све�
 **Промо-блоки главной — редизайн (с 02.11).**
 - **Промо-баннер — не компонент** (решение владельца 02.11: баннеры бывают совсем разные). Каждый собирают фреймом на месте: подложка и поля на токенах, скругление `radius/border-radius-400`, внутри готовые `Heading` и `Button`. Набор типов не заводят и в дску не переносят. Сообщение о состоянии страницы — по-прежнему `Alert`.
 - **PromoSlide** `3850:17027` (страница `PromoSlide`, паспорт `3853:786`) — слайд-картинка, `Size` S 219×123 / L 438×246. Картинка — заливка инстанса, режим Fill. Ряд — автолейаут с шагом 4, идёт за край.
-- **QuickLink** `3850:17028` (страница `QuickLink`, паспорт `3853:1141`) — быстрая ссылка в ряду, только телефон: `Icon`, `Label`, `Show Badge`, в ряду на Fill, ряд в `Island`. Иконки Bold с градиентом — решение владельца. Бейдж в углу с текстом 6 px без стиля — перенесён как в макете.
+- **QuickLink** `3850:17028` (страница `QuickLink`, паспорт `3853:1141`) — быстрая ссылка в ряду, только телефон: `Icon`, `Label`, `Show Badge`, в ряду на Fill, ряд в `Island`. Иконки Bold, заливка — стиль `IconGradient`: в светлой теме как `BlueGradient`, в тёмной как `LightBlueGradient`, по темам руками не перекрашивают. Бейдж в углу с текстом 6 px без стиля — перенесён как в макете.
 - **SocialLink** `3850:17098` (страница `SocialLink`, паспорт `3866:293`) — логотип соцсети и название. `Icon` — цветной логотип из пака, `Color / Social / YouTube`, `Telegram`, `Instagram`, `TikTok`; новая сеть — новая иконка в паке. `Type` Logo + Label / Logo · `State` Rest/Hover (Hover только с подписью, десктоп) · `Label`. Logo — шаг 12 в слоте `action` у `Heading`, телефон; Logo + Label — сетка в `Island`, шаг 16, десктоп. Логотипы не перекрашивают.
 
 **DesktopHeader** `1664:62` — шапка десктопного экрана: логотип слева, слот `actions` справа. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.
@@ -1110,6 +1113,7 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
   файла вместо «Copy» встал самолётик. Если у варианта иконка своя — сначала отвяжи слой
   (`ic.componentPropertyReferences = {}`), потом меняй; общее умолчание после проверь
   (`set.componentPropertyDefinitions[key].defaultValue`).
+- **Инстанс с подменённой иконкой не получает новую заливку мастера.** Перекрасил вектор иконки в мастере — инстансы с иконкой по умолчанию обновились, а где иконку уже подменили, остался старый цвет: он записан оверрайдом в момент подмены (02.11: 12 из 22 `QuickLink` остались на `BlueGradient`). После смены заливки пройти по `getInstancesAsync()` и сверить; новые подмены берут цвет уже из нового мастера.
 - **`clone()` варианта внутри набора теряет привязки к свойствам** (`componentPropertyReferences`
   у слоёв: `characters`, `visible`, `mainComponent`). Новый размер, собранный клоном, выглядит
   верно, но текст и тумблеры в инстансе перестают работать (22.10: подписи XS-сегментов все стали
@@ -1758,7 +1762,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.7 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.8 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

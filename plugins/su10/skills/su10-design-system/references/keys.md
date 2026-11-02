@@ -247,6 +247,7 @@ const S = {                                   // figma.importStyleByKeyAsync
 | RedGradient | `2f25bf17609a5e32994f2cc8516a08c855518cac` |
 | YellowGradient | `cc0fd3227f33bcac0d476ebb2500e89849900803` |
 | StoriesGradient | `b899c82f441aa10e91ce76e79e6f67263a7db946` |
+| IconGradient — сам меняется по теме | `010164bc24b7f613bf9044aa1521379f8c868413` |
 
 `StoriesGradient` — три стопа, `#285B6E` → `#4DAFD4` (0.505) → `#EEBA1B`, поворот на 90°
 (`gradientTransform` `[[0,1,0],[-1,0,1]]`). Только кольцо `Stories`, больше нигде.
