@@ -106,6 +106,14 @@ Node ID из каталога выше годятся для ссылок и д�
 | MobileBottomBar | Single | `43a17b6ea11818d8bfdb4adee3f7dd931ad08fa8` |
 | MobileActionPanel v2 | Single | `3f4e0ddb4ae898cef658b58eed9e045cb629a9f7` |
 | MobileBottomBar v2 | Single | `266fa9f95ab88bdaded26ee4981e942fba992979` |
+| DesktopHeader v2 | Single | `7c01798c28f677a5a9a59d4e3bd8784e4cc302c1` |
+| Logo | Set | `6d4806f28bbb6bc44cca510378e892e21cb8471f` |
+| NavLink | Set | `d658f28f9d94d6769c8132e36c3382d0c5fe612c` |
+| PromoBanner | Set | `8b915d71f2dbd3a9bf26ad0ac93cb5f5288c7729` |
+| PromoSlide | Set | `f74a6ce365b466e516d0a056c7894e62ed07acf4` |
+| QuickLink | Single | `703fa01bc8f76492cf940dd3c777d97778dc7fc4` |
+| SocialLink | Set | `920a9cea198064a648b8b16a3fd50bf437f155e1` |
+| StreakPill | Set | `b48dbc188f7d5388c6b4b8ba1162c10d154bc3ed` |
 | Dialog | Single | `21accf16fc925049bcd05887e739e4602801757f` |
 | DesktopDrawer | Set | `04c8e660b742d18afb14457480230edda35f783d` |
 | Overlay | Set | `ef6f6b82893931f5fa39e6aaf311c2720cb680f5` |
