@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.2 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.6 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.2 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.6 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -47,6 +47,7 @@ description: "v4.21.2 · 02.11.2026 — Сборка макетов, экран�
 5. **Иконки — только стиль Outline** из пака. Linear красится обводкой и теряет цвет при подмене. Исключение — те иконки, которых в Outline в паке просто нет: `Check` и семейство `Sort`; они остаются Linear, пока их не нарисуют.
    **Второе исключение — «⋯» в кнопках всегда Bold** (решение владельца 19.10): `Bold / Essentional, UI / Menu Dots`, ключ `c29819c4476ffc9404b1b002ae8977b35d16861e`, в файле дски `3180:97432`. Касается любой кнопки с меню: `HeaderButton`, `Button` `Only Icon=Yes`. Outline-точки тонкие и теряются на подложке.
    **Третье исключение — самолётик отправки в поле всегда Bold** (решение владельца 29.10): `Suffix` `Type=Action`, `Bold / Messages, Conversation, Telegram / Plain`, ключ `dfe800f6ad5031ec075adc8b94939e0f4fd81741`. **`Bold / … WhatsApp / Plain` — не самолётик, а значок WhatsApp**, имя в паке вводит в заблуждение.
+   **Четвёртое исключение — цветные логотипы соцсетей** `Color / Social / *` (решение владельца 02.11): только в `SocialLink`, не перекрашивают.
 6. **В одной строке лейаута — один размер контролов.** Таблица высот ниже.
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
@@ -640,7 +641,7 @@ Vertical — кнопки друг под другом, основная све�
 - **Промо-баннер — не компонент** (решение владельца 02.11: баннеры бывают совсем разные). Каждый собирают фреймом на месте: подложка и поля на токенах, скругление `radius/border-radius-400`, внутри готовые `Heading` и `Button`. Набор типов не заводят и в дску не переносят. Сообщение о состоянии страницы — по-прежнему `Alert`.
 - **PromoSlide** `3850:17027` (страница `PromoSlide`, паспорт `3853:786`) — слайд-картинка, `Size` S 219×123 / L 438×246. Картинка — заливка инстанса, режим Fill. Ряд — автолейаут с шагом 4, идёт за край.
 - **QuickLink** `3850:17028` (страница `QuickLink`, паспорт `3853:1141`) — быстрая ссылка в ряду, только телефон: `Icon`, `Label`, `Show Badge`, в ряду на Fill, ряд в `Island`. Иконки Bold с градиентом — решение владельца. Бейдж в углу с текстом 6 px без стиля — перенесён как в макете.
-- **SocialLink** `3850:17098` (страница `SocialLink`, паспорт `3853:1631`) — логотип соцсети и название. `Network` YouTube/Telegram/Instagram/TikTok · `State` Rest/Hover · `Label`, `Show Label`. Без подписи — шаг 12 в слоте `action` у `Heading`; с подписью — сетка в `Island`, шаг 16. Логотипы не перекрашивают.
+- **SocialLink** `3850:17098` (страница `SocialLink`, паспорт `3866:293`) — логотип соцсети и название. `Icon` — цветной логотип из пака, `Color / Social / YouTube`, `Telegram`, `Instagram`, `TikTok`; новая сеть — новая иконка в паке. `Type` Logo + Label / Logo · `State` Rest/Hover (Hover только с подписью, десктоп) · `Label`. Logo — шаг 12 в слоте `action` у `Heading`, телефон; Logo + Label — сетка в `Island`, шаг 16, десктоп. Логотипы не перекрашивают.
 
 **DesktopHeader** `1664:62` — шапка десктопного экрана: логотип слева, слот `actions` справа. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.
 
@@ -1727,7 +1728,7 @@ table (frame, layoutMode NONE)
 - **Stat-тайл / карточка метрики** — плитки вида «подпись + крупное значение»
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
 - **Avatar group** и статус-точка на аватаре
-- **Брендовые иконки соцсетей, кроме Telegram и WhatsApp** в паке нет. YouTube, Telegram, Instagram и TikTok цветными логотипами есть в `SocialLink`; VK и другие переносятся из исходного макета клоном
+- **Логотипов соцсетей, кроме YouTube, Telegram, Instagram, TikTok и WhatsApp** — первые четыре цветными лежат в паке (`Color / Social`, см. `SocialLink`), WhatsApp и плоский Telegram — в стиле Bold. VK и другие переносятся из исходного макета клоном
 
 ### Что делать, если элемента нет
 
@@ -1753,7 +1754,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.2 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.6 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
