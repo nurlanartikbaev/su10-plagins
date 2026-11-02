@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.6 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.7 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.6 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.7 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -469,10 +469,10 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 
 ### Выбор
 
-**SingleSelect** `863:3980` · **ComboBox** `863:4115` (ввод с фильтрацией) · **MultiSelect** `863:4255` (выбранное чипами `Tag` S).
+**SingleSelect** `863:3980` · **ComboBox** `863:4115` (ввод с фильтрацией; значение только из списка, свободный текст при потере фокуса сбрасывается) · **MultiSelect** `863:4255` (выбранное чипами `Tag` S).
 Все три: `Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Has Value` Off/On. Геометрия совпадает с Text field. У всех шести компонентов страницы заполнены `description` и `documentationLinks`.
 
-**Dropdown** `863:4824` — выпадающий список к селектам. `Type` Single/Multi · `State` Rest/Loading/Error/Empty. Показывать только в Focused родителя.
+**Dropdown** `863:4824` — выпадающий список к селектам. `Type` Single/Multi · `State` Rest/Loading/Error/Empty. Показывать только в Focused родителя. **`Loading` и `Empty` без кнопки, она только у `Error`** (решение владельца 02.11). `Show Button` теперь управляет только кнопкой в `Error`. Строка кнопок Multi (`Show Buttons Row`): включена — выбор применяется по кнопке, выключена — сразу. «Выбрать все» выбирает всё видимое с учётом поиска и во всех группах; выбрана часть — промежуточное состояние чекбокса; своих чекбоксов у групп нет.
 Открывается под полем по левому краю; нет места снизу — над полем. **На мобильном — в
 `MobileBottomSheet`**, не под полем (как `Popover`). `Error` — иконка, «Ошибка загрузки» и кнопка
 «Повторить» (`Button` M Secondary Info, включена с 27.10). Длинный список прокручивается, справа
@@ -506,7 +506,7 @@ Toggle для форм, рядом с CheckBoxItem и RadioItem; собран п
 `icon/info-outline-static`, Disabled `icon/disabled` (исправлено 27.10). Длинный текст —
 многоточие, полный текст в тултипе, только когда текст правда обрезан.
 
-**Tags group** `890:26018` — строка тегов со счётчиком «+N». «+N» нажимается: скрытые теги раскрываются в той же строке, строка переносится. В MultiSelect «+N» не нажимается — всё выбранное видно в открытом списке.
+**Tags group** `890:26018` — строка тегов со счётчиком «+N». «+N» нажимается: скрытые теги раскрываются в той же строке, строка переносится. В MultiSelect поле растёт до двух строк чипов, дальше лишнее сворачивается в «+N»; он не нажимается — всё выбранное видно в открытом списке.
 
 ### Навигация
 
@@ -522,6 +522,8 @@ Toggle для форм, рядом с CheckBoxItem и RadioItem; собран п
 навигация по разделам. S — вкладка 30 (28 + линия 2), Body 4, поля 6 / 12, шаг 4, счётчик ниже:
 вкладки внутри карточки, шторки, панели фильтров. В S внутренний отступ первой вкладки — **12**, а
 не 16: правило «встык» ниже работает так же, только поле содержимого карточки тогда 12.
+
+Линия под рядом — нижняя обводка самого `TabsRow`: `border/secondary`, 1 px.
 
 **TabsRow ставится встык к краю блока — свои 16 px у него уже внутри.** У самого `TabsRow`
 полей нет (`paddingLeft/Right = 0`), но внутри каждого `Tab` лежит фрейм с
@@ -588,16 +590,16 @@ const natural = Math.ceil(probe.width); probe.remove();
 Island/Accordion с `layoutSizingHorizontal='FILL'`, без дополнительной обёртки) — тогда она
 сама «прижимается» к тому же краю, что и заголовок и таблица под ней.
 
-**SegmentedControl** `843:13462` + **SegmentedControlRow** `1367:14480` — переключение режима показа одного и того же контента. `Size` M/S/XS задаётся на Row. XS (с 22.10) — дорожка 24, сегмент 20, подпись та же Body 4, поля сегмента Space-2 / Space-8, радиусы 4 и 6: плотные фильтры и переключение вида в шапке таблицы или карточки, в строке с Toggle XS и RadioItem/CheckBoxItem S.
+**SegmentedControl** `843:13462` + **SegmentedControlRow** `1367:14480` — переключение режима показа одного и того же контента. Счётчик в Rest и Hover — `segmented-control/surface-selected` (Light `#FFFFFF`, Dark `#222222`). `Size` M/S/XS задаётся на Row. XS (с 22.10) — дорожка 24, сегмент 20, подпись та же Body 4, поля сегмента Space-2 / Space-8, радиусы 4 и 6: плотные фильтры и переключение вида в шапке таблицы или карточки, в строке с Toggle XS и RadioItem/CheckBoxItem S.
 Разница с Tab: Tab — разделы, Segmented — режимы.
 
-**Breadcrumbs** `558:20324` — путь до текущей страницы.
+**Breadcrumbs** `558:20324` — путь до текущей страницы. Не помещается в строку — средние уровни сворачиваются в многоточие, на вторую строку не переносится; первый уровень и открытая страница видны всегда. Длинное название отдельной крошки обрезается многоточием, полный текст в тултипе (решение владельца 02.11).
 
 **MenuItem** `1177:11111` — пункт бокового меню. Selected — ровно один. `Show Counter` добавляет счётчик (`Suffix` `Type=Count`, тот же, что в табах; вложенный инстанс выведен наружу). Пункт ставится на **Fill**: на HUG подпись Selected шире обычной на 2 px и пункт дёргается при переключении — это свойство начертания, а не ошибка.
 
 **Stepper** `672:28616` + **Step** `672:28603` — от 2 до 6 шагов.
 
-**Pagination** `894:26885` + **PageButton** `894:26935`. `Total pages` 3 / 8+ / Unknown.
+**Pagination** `894:26885` + **PageButton** `894:26935`. `Total pages` 3 / 8+ / Unknown. До семи страниц показываются все, с восьми — многоточие. Шаг между кнопками `Space-8`. У `PageButton` Active только заливка, обводки нет. Стрелки — `Button` Tertiary `Only Icon=Yes`, но тёмные: `icon/primary`, в Disabled `icon/tertuary-black-static`; это записанное исключение из правил 5 и 13 (решение владельца 02.11).
 
 **Header** `697:31280` + **Status Bar** `697:31403` — шапка мобильного экрана.
 
@@ -661,7 +663,7 @@ Vertical — кнопки друг под другом, основная све�
 **Badge** `1078:14902` — статус рядом с данными, его **не нажимают**. `Size` L/M/S · `Signal` Neutral/Info/Success/Warning/Error/Accent · `Label` TEXT · `Show Label` BOOLEAN. `Show Label = false` даёт бейдж-иконку — отдельного `Only Icon` для этого не нужно. **Длинный текст обрезается многоточием** — бейдж в одну строку и не растёт.
 Badge или Tag: если элемент кликабельный (выбирается, снимается крестиком) — это `Tag`; если он только показывает статус записи — `Badge`.
 
-**Avatar** `1224:65` — `Size` XL/L/M/S/XS · `Type` Placeholder/Initials/Picture, картинка в слоте `picture` · `Show Status` — точка «на связи» в правом нижнем углу, размер по аватару (18/14/12/10/8), со своей обводкой цветом подложки. Счётчика и стека внахлёст нет. Кольцо истории вокруг аватара — это отдельный компонент `Stories`, а не свойство аватара.
+**Avatar** `1224:65` — `Size` XL/L/M/S/XS · `Type` Placeholder/Initials/Picture, картинка в слоте `picture` · `Show Status` — точка «на связи» в правом нижнем углу, размер по аватару (18/14/12/10/8), со своей обводкой цветом подложки: `avatar/status-ring`, толщина по размеру 3/2/2/2/1,5, токена толщины нет. Иконка заглушки — `Bold / Users / User`, ключ `0a9f6bc2b3bd1e7d7f6f5c2ce0711b7a4815eea1`. Счётчика и стека внахлёст нет. Кольцо истории вокруг аватара — это отдельный компонент `Stories`, а не свойство аватара.
 
 **Stories** `1871:115` — история пользователя: аватар в кольце статуса и подпись под ним.
 `Size` XL/L/M/S/XS · `State` New/Viewed · `Label` TEXT · `Show Label` BOOLEAN.
@@ -685,7 +687,7 @@ Badge или Tag: если элемент кликабельный (выбира
 
 ### Обратная связь
 
-**Alert** `550:15590` — сообщение в потоке страницы, остаётся до реакции. `Signal` Info/Success/Warning/Error (свойство называлось `Type` до 21.09) · `Weight` Primary/Secondary. Глиф слева — **тот же `FeedbackIcon`, что в `Toast`**: 16×16 в обоих `Weight`, `Signal` переключает знак. До 07.10 стояли четыре отдельные Bold-иконки пака, причём Warning и Error рисовались одной `Danger Triangle` и отличались только цветом.
+**Alert** `550:15590` — сообщение в потоке страницы, остаётся до реакции. Типографика: `Primary` — заголовок `b1-semibold`, описание `b2-medium`; `Secondary` — `b2-semibold` и `b3-medium`. `Signal` Info/Success/Warning/Error (свойство называлось `Type` до 21.09) · `Weight` Primary/Secondary. Глиф слева — **тот же `FeedbackIcon`, что в `Toast`**: 16×16 в обоих `Weight`, `Signal` переключает знак. До 07.10 стояли четыре отдельные Bold-иконки пака, причём Warning и Error рисовались одной `Danger Triangle` и отличались только цветом.
 **Toast** `1254:11921` — всплывающее уведомление, уходит само. `Signal` Info/Success/Warning/Error (называлось `Type` до 21.09) · `Show Action` добавляет действие справа, кнопка выведена наружу. Глиф слева — `FeedbackIcon` из пака, у него тот же набор сигналов.
 
 **Место тоста зависит от платформы.** Desktop — всегда правый верхний угол: 24 справа и **24 под шапкой** (`size/header-height` 56 + 24 = 80 от края окна) — шапку тост не закрывает. Mobile — **всегда сверху** (решение владельца 27.10): под статус-баром, во всю ширину минус 12 по бокам. Снизу тост не ставят — там таб-бар, панели действий и шторки. Движение: тост выезжает от того края, у которого стоит, и уходит обратно к нему же. Появление 350 мс — сдвиг 24 px + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px + прозрачность, ease-in. Появление вниз, уход вверх. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
@@ -704,9 +706,9 @@ Alert — про состояние страницы, Toast — про резу�
 
 Анатомия у всех трёх одинаковая: шапка (вложенный `Heading` + крестик на `Text Button`) → слот `content` → подвал с кнопками. Общие свойства: `content` (SLOT), `Show Header`, `Show Footer`, `Show Secondary Button`. Заголовок и подзаголовок правятся во вложенном `Heading`.
 
-**DesktopDrawer** `1400:336` — боковая панель. `Size` S/M/L: `size/drawer-width-s` 280/360, `-m` 320/420, `-l` 360/640. Когда человек продолжает работать с тем же списком и нужен контекст рядом. Прокручивается только слот. Шире L не делать — это уже отдельный экран.
+**DesktopDrawer** `1400:336` — боковая панель. `Size` S/M/L: `size/drawer-width-s` 280/360, `-m` 320/420, `-l` 360/640. Когда человек продолжает работать с тем же списком и нужен контекст рядом. Прокручивается только слот. Шире L не делать — это уже отдельный экран. Скруглена сторона контента (`radius/border-radius-400`), сторона у края экрана прямая.
 
-**MobileBottomSheet** `1387:27` — шторка снизу. Скругление только сверху, `Show Handle` — ручка перетаскивания. Действия внизу: верх экрана на телефоне недосягаем. Меню и списки в слоте `content` собираются из строк **`ListItem`** на Fill, люди и группы — из **`ProfileItem`** (см. «Списки»). Нажатие на строку-переход или строку-действие закрывает шторку, переключение `Toggle` в строке — нет.
+**MobileBottomSheet** `1387:27` — шторка снизу. Скругление только сверху, `Show Handle` — ручка перетаскивания. Действия внизу: верх экрана на телефоне недосягаем. Меню и списки в слоте `content` собираются из строк **`ListItem`** на Fill, люди и группы — из **`ProfileItem`** (см. «Списки»). Нажатие на строку-переход или строку-действие закрывает шторку, переключение `Toggle` в строке — нет. Свайп закрывает, если шторку протащили больше чем на 25 % высоты или резко смахнули. `Home Indicator` внутри мастера — рамка устройства: в коде это системный отступ, полоску рисует iOS.
 
 **Dialog** `1387:52` — окно по центру для короткой задачи или подтверждения. Ширина — `size/dialog-width` (343 / 480). У подтверждающего вторая кнопка обязательна, а кнопки — ответ на заголовок: не «Да / Нет», а «Удалить / Отмена».
 
@@ -714,7 +716,7 @@ Alert — про состояние страницы, Toast — про резу�
 
 ### Контекстное меню — страница `ContextMenu`
 
-**ContextMenu** `1793:8` — команды над конкретным объектом: строкой таблицы, карточкой, файлом. Правый клик или кнопка «…» рядом с объектом; закрывается после первого выбора. `content` SLOT, ширина `size/context-menu-width` (240), поверхность и тень как у `Dropdown`.
+**ContextMenu** `1793:8` — команды над конкретным объектом: строкой таблицы, карточкой, файлом. Правый клик или кнопка «…» рядом с объектом; закрывается после первого выбора. От кнопки меню — отступ `Space-4`. `content` SLOT, ширина `size/context-menu-width` (240), поверхность и тень как у `Dropdown`.
 
 **ContextMenuItem** `1792:49` — одна команда. `Signal` Default/**Critical** · `State` Rest/Hover/Disabled · `Label` и `Shortcut` TEXT · `Show Shortcut` · `Left Icon` / `Right Icon` INSTANCE_SWAP с `Show`-булями. Высота фиксированная — `height/height-1000`. Ставится **на Fill**. Правая стрелка — признак подменю и с горячей клавишей вместе не показывается.
 
@@ -724,7 +726,9 @@ Alert — про состояние страницы, Toast — про резу�
 
 **Граница с соседями:** `Dropdown` выбирает значение для поля, `MenuItem` — постоянная навигация в сайдбаре, `Popover` — панель с содержимым и кнопками, `ContextMenu` — разовые команды без состояния выбора. На мобильном вместо меню берут `MobileBottomSheet` **со строками `ListItem`**: в строку 36 px у края экрана пальцем не попасть. Строка списка на экране, в шторке или панели — тоже `ListItem`, а не `ContextMenuItem`.
 
-Одновременно открыт **один** оверлей. Крестик всегда закрывает без сохранения, сохранение живёт в подвале.
+Одновременно открыт **один** оверлей. Крестик закрывает без сохранения, сохранение живёт в подвале.
+
+**Несохранённые изменения — всегда диалог** (решение владельца 02.11). Есть изменения — любой выход (крестик, подложка, свайп, Esc) сначала показывает `Dialog` «Закрыть без сохранения?»: панель заменяется диалогом, поэтому оверлей остаётся один. «Закрыть без сохранения» закрывает, «Продолжить редактирование» возвращает панель с введёнными данными. Изменений нет — закрывается сразу.
 
 ### Списки — страницы `ListItem` и `ProfileItem`
 
@@ -888,7 +892,7 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 
 ### Контейнеры
 
-**Accordion** `1703:19513` — раскрывающийся блок: шапка, по которой кликают, и содержимое в слоте. `Size` L/M/S · `State` Collapsed/Expanded · `Signal` **Primary**/Neutral/Info/Success/Warning/Error/Accent (с 23.09 `Primary` — дефолт) · `Title`, `Subtitle` TEXT · `Show Icon`, `Show Subtitle`, `Show Counter` BOOLEAN · `Icon` INSTANCE_SWAP · `content` SLOT. Обводки у карточки нет — только заливка и скругление. Шапку отделяет тон, и только у `Primary` — рамка `border/secondary`: у него шапка того же цвета, что тело. Иконка сигнала сидит на `icon/*-outline-static` (глиф Outline, роль светлеет в тёмной теме); до 19.10 стояла `solid`-роль и в тёмной теме иконка тонула. У `Accent` своей иконочной роли нет — колокольчик нейтральный, хотя шапка фиолетовая. У `Signal=Neutral` шапка отличается от тела всего на ΔL 1.5 — не видно ни в одной теме, это известный дефект `surface/3-layer`.
+**Accordion** `1703:19513` — раскрывающийся блок: шапка, по которой кликают, и содержимое в слоте. `Size` L/M/S · `State` Collapsed/Expanded · `Signal` **Primary**/Neutral/Info/Success/Warning/Error/Accent (с 23.09 `Primary` — дефолт) · `Title`, `Subtitle` TEXT · `Show Icon`, `Show Subtitle`, `Show Counter` BOOLEAN · `Icon` INSTANCE_SWAP · `content` SLOT. Обводки у карточки нет — только заливка и скругление. Шапку отделяет тон, и только у `Primary` — обводка `border/secondary` 1 px на фрейме `Header` (у самого блока обводки нет): у него шапка того же цвета, что тело. Иконка сигнала сидит на `icon/*-outline-static` (глиф Outline, роль светлеет в тёмной теме); до 19.10 стояла `solid`-роль и в тёмной теме иконка тонула. У `Accent` своей иконочной роли нет — колокольчик нейтральный, хотя шапка фиолетовая. У `Signal=Neutral` шапка отличается от тела всего на ΔL 1.5 — не видно ни в одной теме, это известный дефект `surface/3-layer`.
 Размер меняет поля, скругление и типографику заголовка: L — `Space-16` и Body 1, M (по умолчанию) — `Space-12` и Body 2, S — `Space-8`, скругление 12 и Body 4. Иконка и шеврон берут `height`-токен по строке заголовка. `State` переключает и шеврон, и видимость слота; содержимое при сворачивании не пропадает. Счётчик — обычный `Badge` того же сигнала. Сигнал красит шапку, ведущую иконку и счётчик; **шеврон нейтральный при любом сигнале** — он про «раскрыть», а не про состояние. Иконка — свойство, а не часть сигнала: при Error её меняют на `Danger Triangle`, он первый в предустановленных значениях.
 
 **Как выбрать `Signal` — главный вопрос при сборке аккордеона.** Сигнал отвечает не «какого
@@ -933,10 +937,10 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 
 ### Даты
 
-**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years.
+**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years. Неделя начинается с понедельника. При выборе одной даты подвала нет (`Show Footer=false`), выбор применяется сразу; подвал нужен для периода. Открытый переключатель шапки в Months и Years — `Button` `Weight=Secondary`, `State=Rest`, а не `Pressed` (решение владельца 02.11); у `DatePickerCalendarForward` выделения пока нет.
 **DatePickerCalendarForward** `1314:13740` — только вперёд: бронь, запись, доставка.
-**CalendarCell** `1308:1698` — ячейка календаря.
-**DatePickerStrip** `1357:14442` — мобильный выбор даты. `State` Strip / Calendar в одной карточке.
+**CalendarCell** `1308:1698` — ячейка календаря. `State` Default/Hover/Selected/Disabled и для периода Range Start/In Range/Range End (у `Type` Current month и Today, решение владельца 02.11). Середина — семантика `surface/blue-transparent-static` напрямую: отдельный токен в `date-picker/*` пришлось бы вставлять пересозданием всех групп после него ради порядка по алфавиту.
+**DatePickerStrip** `1357:14442` — мобильный выбор даты. `State` Strip / Calendar в одной карточке: кнопка календаря разворачивает эту же карточку, отдельный `DatePickerCalendar` не открывается. В ленте 14 дней от ближайшего доступного, дальше — через календарь. Прошлые дни в календаре Disabled. Крестик и Escape закрывают без изменения выбора. Мышью ленту листают колесом или перетаскиванием, с клавиатуры стрелками, полосы прокрутки нет.
 Свойства: `Month#1357:0` (TEXT), `Show Calendar Button#1357:1`. Внутри — фрейм `Strip` с
 восемью `DateStripCell`; лишние прячут `.visible = false`, остальным задают
 `Caption#1348:0`, `Day#1348:5` и вариант `State`.
@@ -1727,7 +1731,7 @@ table (frame, layoutMode NONE)
 - **Time picker** — календарь выбирает только дату
 - **Stat-тайл / карточка метрики** — плитки вида «подпись + крупное значение»
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
-- **Avatar group** и статус-точка на аватаре
+- **Avatar group** (статус-точка на аватаре есть — `Show Status`)
 - **Логотипов соцсетей, кроме YouTube, Telegram, Instagram, TikTok и WhatsApp** — первые четыре цветными лежат в паке (`Color / Social`, см. `SocialLink`), WhatsApp и плоский Telegram — в стиле Bold. VK и другие переносятся из исходного макета клоном
 
 ### Что делать, если элемента нет
@@ -1754,7 +1758,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.6 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.7 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
