@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.8 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.9 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.8 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.9 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1177,6 +1177,12 @@ grid.gridRowCount = 1;
 
 Новый компонент дски нельзя вставить в другой файл, пока его не опубликовали в Figma: `importComponentByKeyAsync` отвечает `not found`. Публикует человек, через API это недоступно. Поэтому порядок такой: собрать и проверить в дске → публикация → замена в продуктовых файлах.
 
+Перед заменой проверь, что дошло именно то, что нужно: импортируй каждый ключ, а также новые стили и токены. Публикация может пройти частично: 02.11 в библиотеке уже были `Logo` и `DesktopHeader v2`, но не было `SocialLink` и `IconGradient`, а `QuickLink` был старой версии.
+
+**Содержимое слота не пересчитывается по моде родителя.** Экран в `Platform=Desktop`, а `MenuItem`, вставленный клоном в слот нового инстанса, остаётся по размерам Mobile: 42 вместо 44, шапка 52 вместо 54. Значения токенов при этом уже верные, поэтому ошибку видно только по размерам и на скриншоте. Лечится сбросом размеров у вставленных узлов: `FIXED`, затем обратно `HUG`, и проверка в следующем вызове.
+
+При замене ищи положение узла по id: `parent.children.findIndex(c => c.id === node.id)`. `indexOf` на узле из `findAll` может вернуть −1.
+
 ### Что нельзя делать с инстансами
 
 - **`appendChild` внутрь инстанса запрещён** (`Cannot move node. New parent is an instance or is inside of an instance`) — кроме нативных слотов. Если надо положить свою графику в шапку компонента (логотип в `Header`), клади её **соседом с абсолютным позиционированием**: `parent.appendChild(node); node.layoutPositioning = 'ABSOLUTE'; node.x = …`.
@@ -1762,7 +1768,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.8 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.9 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
