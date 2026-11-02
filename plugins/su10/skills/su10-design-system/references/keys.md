@@ -155,6 +155,10 @@ Node ID из каталога выше годятся для ссылок и д�
 | Messages, Conversation / Plain — Outline, в поле не ставить (там Bold) | `8f2c72a271a6e6f44fc83602bf9e33908312c306` |
 | **Bold** / Messages, Conversation, Telegram / Plain — самолётик отправки, `Suffix` `Type=Action` | `dfe800f6ad5031ec075adc8b94939e0f4fd81741` |
 | **Bold** / Messages, Conversation, WhatsApp / Plain — **это значок WhatsApp**, не самолётик | `3690bfe6f4559ea1944420222942159c5fdcc961` |
+| **Color** / Social / YouTube — цветной логотип | `88d265374dfa87ae3376fba4c4face3ed06d6d82` |
+| **Color** / Social / Telegram — цветной логотип | `f88616c78628dbea6f3f9cb0d224c8b32c0640fb` |
+| **Color** / Social / Instagram — цветной логотип | `130d5546d45ff8c9402b9dc77fafe3ed000436f8` |
+| **Color** / Social / TikTok — цветной логотип | `89ce10c635931fbeb87a329b55f4f15afaf85d1b` |
 | Essentional, UI / Info Circle | `2a44b8ec58be9577515ce41fb87d60941664ea68` |
 | Essentional, UI / Bar Chart | `5d874be7ef02004d8bb1de0804ff43cfb455dfd1` |
 | Essentional, UI / Share | `6731d3994ca4dc5617fb6fa7468362f4307ca604` |
