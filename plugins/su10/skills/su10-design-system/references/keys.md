@@ -109,7 +109,6 @@ Node ID из каталога выше годятся для ссылок и д�
 | DesktopHeader v2 | Single | `7c01798c28f677a5a9a59d4e3bd8784e4cc302c1` |
 | Logo | Set | `6d4806f28bbb6bc44cca510378e892e21cb8471f` |
 | NavLink | Set | `d658f28f9d94d6769c8132e36c3382d0c5fe612c` |
-| PromoBanner | Set | `8b915d71f2dbd3a9bf26ad0ac93cb5f5288c7729` |
 | PromoSlide | Set | `f74a6ce365b466e516d0a056c7894e62ed07acf4` |
 | QuickLink | Single | `703fa01bc8f76492cf940dd3c777d97778dc7fc4` |
 | SocialLink | Set | `920a9cea198064a648b8b16a3fd50bf437f155e1` |

@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.1 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.2 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.1 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.2 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -637,7 +637,7 @@ Vertical — кнопки друг под другом, основная све�
 - **Logo** `3850:17014` (страница `Logo`, паспорт `3853:24`) — логотип на `icon/brand`, `Size` S 72×30 телефон, M 78×32 десктоп. В `DesktopHeader` v1 логотип пока зашит слоем.
 
 **Промо-блоки главной — редизайн (с 02.11).**
-- **PromoBanner** `3852:150` (страница `PromoBanner`, паспорт `3853:2244`) — заголовок, описание и действие на цветной подложке; `Heading` и кнопка выведены наружу, ставится на Fill. `Type` Tint / Gradient / Gradient Image / Diagnostic · `Size` S (поля 12, телефон) / M (поля 16, десктоп). Gradient Image есть только в S, Gradient только в M; картинку меняют заливкой слоя `Image`. Сообщение о состоянии страницы — по-прежнему `Alert`.
+- **Промо-баннер — не компонент** (решение владельца 02.11: баннеры бывают совсем разные). Каждый собирают фреймом на месте: подложка и поля на токенах, скругление `radius/border-radius-400`, внутри готовые `Heading` и `Button`. Набор типов не заводят и в дску не переносят. Сообщение о состоянии страницы — по-прежнему `Alert`.
 - **PromoSlide** `3850:17027` (страница `PromoSlide`, паспорт `3853:786`) — слайд-картинка, `Size` S 219×123 / L 438×246. Картинка — заливка инстанса, режим Fill. Ряд — автолейаут с шагом 4, идёт за край.
 - **QuickLink** `3850:17028` (страница `QuickLink`, паспорт `3853:1141`) — быстрая ссылка в ряду, только телефон: `Icon`, `Label`, `Show Badge`, в ряду на Fill, ряд в `Island`. Иконки Bold с градиентом — решение владельца. Бейдж в углу с текстом 6 px без стиля — перенесён как в макете.
 - **SocialLink** `3850:17098` (страница `SocialLink`, паспорт `3853:1631`) — логотип соцсети и название. `Network` YouTube/Telegram/Instagram/TikTok · `State` Rest/Hover · `Label`, `Show Label`. Без подписи — шаг 12 в слоте `action` у `Heading`; с подписью — сетка в `Island`, шаг 16. Логотипы не перекрашивают.
@@ -1753,7 +1753,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.1 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.2 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
