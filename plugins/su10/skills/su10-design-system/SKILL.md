@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.4 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.5 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.4 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.5 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -471,7 +471,7 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 **SingleSelect** `863:3980` · **ComboBox** `863:4115` (ввод с фильтрацией; значение только из списка, свободный текст при потере фокуса сбрасывается) · **MultiSelect** `863:4255` (выбранное чипами `Tag` S).
 Все три: `Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Has Value` Off/On. Геометрия совпадает с Text field. У всех шести компонентов страницы заполнены `description` и `documentationLinks`.
 
-**Dropdown** `863:4824` — выпадающий список к селектам. `Type` Single/Multi · `State` Rest/Loading/Error/Empty. Показывать только в Focused родителя. **`Loading` и `Empty` без кнопки, она только у `Error`** (решение владельца 02.11; мастер пока не менялся, копия `_Dropdown — копия на проверку` на странице Select). Строка кнопок Multi (`Show Buttons Row`): включена — выбор применяется по кнопке, выключена — сразу. «Выбрать все» выбирает всё видимое с учётом поиска и во всех группах; выбрана часть — промежуточное состояние чекбокса; своих чекбоксов у групп нет.
+**Dropdown** `863:4824` — выпадающий список к селектам. `Type` Single/Multi · `State` Rest/Loading/Error/Empty. Показывать только в Focused родителя. **`Loading` и `Empty` без кнопки, она только у `Error`** (решение владельца 02.11). `Show Button` теперь управляет только кнопкой в `Error`. Строка кнопок Multi (`Show Buttons Row`): включена — выбор применяется по кнопке, выключена — сразу. «Выбрать все» выбирает всё видимое с учётом поиска и во всех группах; выбрана часть — промежуточное состояние чекбокса; своих чекбоксов у групп нет.
 Открывается под полем по левому краю; нет места снизу — над полем. **На мобильном — в
 `MobileBottomSheet`**, не под полем (как `Popover`). `Error` — иконка, «Ошибка загрузки» и кнопка
 «Повторить» (`Button` M Secondary Info, включена с 27.10). Длинный список прокручивается, справа
@@ -936,9 +936,9 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 
 ### Даты
 
-**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years. Неделя начинается с понедельника. При выборе одной даты подвала нет (`Show Footer=false`), выбор применяется сразу; подвал нужен для периода. **На проверке 02.11** (копии на странице DatePicker, мастера не менялись): активный переключатель шапки — `Button` `Weight=Secondary`, `State=Rest`, а не `Pressed`; период — `CalendarCell` `State` Range Start / In Range / Range End, середина `surface/blue-transparent-static`.
+**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years. Неделя начинается с понедельника. При выборе одной даты подвала нет (`Show Footer=false`), выбор применяется сразу; подвал нужен для периода. Открытый переключатель шапки в Months и Years — `Button` `Weight=Secondary`, `State=Rest`, а не `Pressed` (решение владельца 02.11); у `DatePickerCalendarForward` выделения пока нет.
 **DatePickerCalendarForward** `1314:13740` — только вперёд: бронь, запись, доставка.
-**CalendarCell** `1308:1698` — ячейка календаря.
+**CalendarCell** `1308:1698` — ячейка календаря. `State` Default/Hover/Selected/Disabled и для периода Range Start/In Range/Range End (у `Type` Current month и Today, решение владельца 02.11). Середина — семантика `surface/blue-transparent-static` напрямую: отдельный токен в `date-picker/*` пришлось бы вставлять пересозданием всех групп после него ради порядка по алфавиту.
 **DatePickerStrip** `1357:14442` — мобильный выбор даты. `State` Strip / Calendar в одной карточке: кнопка календаря разворачивает эту же карточку, отдельный `DatePickerCalendar` не открывается. В ленте 14 дней от ближайшего доступного, дальше — через календарь. Прошлые дни в календаре Disabled. Крестик и Escape закрывают без изменения выбора. Мышью ленту листают колесом или перетаскиванием, с клавиатуры стрелками, полосы прокрутки нет.
 Свойства: `Month#1357:0` (TEXT), `Show Calendar Button#1357:1`. Внутри — фрейм `Strip` с
 восемью `DateStripCell`; лишние прячут `.visible = false`, остальным задают
@@ -1757,7 +1757,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.4 · 02.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.5 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
