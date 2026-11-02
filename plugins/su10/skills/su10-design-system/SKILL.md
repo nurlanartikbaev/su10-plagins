@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.20.15 · 29.10.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.20.16 · 02.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.20.15 · 29.10.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.20.16 · 02.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1137,6 +1137,18 @@ const p = set.addComponentProperty('Left Icon', 'INSTANCE_SWAP', ico.id, {
 
 **Узел внутри другого инстанса опознаётся по `;` в id.** `i.id.indexOf(';') !== -1` — дёшево и надёжно. Подъём по `parent` для этой проверки не нужен и может бросить `get_parent: The node with id "I916:…;863:…" does not exist`, если промежуточный узел уже невалиден. Такие узлы нельзя ни переставить, ни удалить — правится мастер, и все проекции подхватываются сами: на Select 12 легаси-`Divider` закрылись **одной** заменой в мастере `Dropdown`.
 
+### Грид-лейаут: новые узлы уходят в новую строку
+
+`appendChild` в грид (`layoutMode = 'GRID'`) не занимает ячейку удаляемого соседа: при замене детей по одному грид вырастает на строку, а порядок перемешивается (02.11: `Island` быстрых ссылок стал 124 вместо 68). Порядок детей в слоях у грида не равен порядку на экране, поэтому колонку снимают с исходного узла до удаления (`gridColumnAnchorIndex`). После замены — вывести детей на свободную строку и вернуть:
+```js
+grid.gridRowCount = 3;
+ordered.forEach((k, i) => k.setGridChildPosition(2, i));
+ordered.forEach((k, i) => k.setGridChildPosition(0, i));
+grid.gridRowCount = 1;
+```
+
+**Слот в своём компоненте — `component.createSlot()`.** У `figma` такого метода нет, он на узле компонента. Свойство заводится само (`actions#143:1`), дальше слот настраивают как фрейм и переносят куда нужно.
+
 ### Что нельзя делать с инстансами
 
 - **`appendChild` внутрь инстанса запрещён** (`Cannot move node. New parent is an instance or is inside of an instance`) — кроме нативных слотов. Если надо положить свою графику в шапку компонента (логотип в `Header`), клади её **соседом с абсолютным позиционированием**: `parent.appendChild(node); node.layoutPositioning = 'ABSOLUTE'; node.x = …`.
@@ -1722,7 +1734,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.20.15 · 29.10.2026 · обновил Nurla**.
+Текущая версия — **v4.20.16 · 02.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
