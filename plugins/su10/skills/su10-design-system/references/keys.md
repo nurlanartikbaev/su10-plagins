@@ -72,6 +72,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | SegmentedControlRow | Set | `8f2cb2065155bfcac1dcda29ef9edd6cb4cba539` |
 | Breadcrumbs | Single | `306d946ea0171db99eea747b8d1c187bb2359f3d` |
 | MenuItem | Set | `2742b4abae46273b783ebfc54c1f063786a1fd45` |
+| Coachmark | Set | `3f08715173df5554f566648d7a8324196ad48a8f` |
 | ContextMenu | Single | `4cd4a0ae722b773a3072a0a79111dcdacfc2200c` |
 | ContextMenuItem | Set | `9462eb76707a38470c09d83f5d072f3a957ae7d1` |
 | ContextMenuSection | Single | `f4555510fdff690b8480f2058f3c896222338609` |
