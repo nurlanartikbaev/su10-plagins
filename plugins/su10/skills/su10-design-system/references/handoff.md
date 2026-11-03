@@ -54,7 +54,7 @@
 | Заголовок дорожки | `Heading` `Size=L` (набор `1386:23`) | `Title#1386:0` — «<Буква> · <Название>»; `Subtitle#1386:4` + `Show Subtitle#1386:8` | x 100, на 190 выше экранов, ширина 1400 |
 | Подпись экрана | `Heading` `Size=M` | `Title#1386:0` — «<код> · <название>»; `Subtitle#1386:4` — «Когда: …» | низ на 18 px над тёмным экраном пары, ширина 480 (длинное название — шире) |
 | Заметка | `Alert` (набор `550:15590`) `Weight=Primary, Signal=Info`; заметка про анимацию — `Weight=Secondary, Signal=Info` | `Closable#3361:0`, `Show Title#3361:2`, `Show Buttons #3363:8` — `false`; текст — слой `Subtitle` | под тёмным экраном, низ + 32, ширина 320 |
-| Стрелка | клон любого коннектора доски, например `2955:69707` | см. §5 | — |
+| Стрелка | клон коннектора из того же файла | см. §5 | — |
 
 - **У `Alert` описание обрезается на третьей строке** — в заметке снимают ограничение:
   `subtitle.textTruncation = 'DISABLED'; subtitle.maxLines = null`. Без этого длинная
@@ -129,11 +129,20 @@ sub.characters = 'Экран открывается прокрученным к 
 как галерея, а не как поток.
 
 ```js
-const a = (await figma.getNodeByIdAsync('2955:69707')).clone(); sec.appendChild(a);  // любой коннектор доски
+// образец ищут в файле: id из другого файла и старые id здесь не работают
+let src = null;
+for (const p of figma.root.children) { await p.loadAsync();
+  src = p.findAllWithCriteria({ types: ['CONNECTOR'] })[0]; if (src) break; }
+const a = src.clone(); sec.appendChild(a);
 a.connectorStart = { endpointNodeId: fromLight.id, magnet: 'RIGHT' };  // из СВЕТЛОГО экрана пары
 a.connectorEnd   = { endpointNodeId: toDark.id,   magnet: 'LEFT'  };  // в ТЁМНЫЙ следующей
 await figma.loadFontAsync(a.text.fontName); a.text.characters = 'нажал «Итог месяца»';
 ```
+
+**Новую стрелку скриптом не создать:** `figma.createConnector` в дизайн-файле недоступен,
+работает только клон существующей. В файле нет ни одной стрелки — доску сначала переносят в
+чистовой файл, где они есть, и ставят стрелки там, после вставки (`team-workflow.md`, §5.4).
+Ни там, ни там нет — одну стрелку рисует человек, остальные клонируются с неё.
 
 Тип `STRAIGHT`, толщина 4, стрелка только на конце. Переход во второй ряд (экран результатов
 под списком) — вертикальная стрелка `BOTTOM` → `TOP` между светлыми экранами.
