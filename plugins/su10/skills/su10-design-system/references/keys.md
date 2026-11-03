@@ -138,6 +138,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | Files / File Check | `858c96215314710d2417d986791d20a09871c29a` |
 | Essentional, UI / Menu Dots — Outline, **в кнопки не ставить** | `ba33be53f493c0938afd94def72af034a7acfa7f` |
 | **Bold** / Essentional, UI / Menu Dots — «⋯» в любой кнопке | `c29819c4476ffc9404b1b002ae8977b35d16861e` (в дске `3180:97432`) |
+| **Bold** / Essentional, UI / AI — кнопка чата, оба вектора на `icon/white-static` | `b298700cdbdbbc000aff65c4e4a26b20a287bc71` |
 | Essentional, UI / Plus | `6a34385acbf2872301d1eb6f4305b8e72b9c57f4` |
 | Essentional, UI / Minus (кнопка − в NumberInput; в имени пака двойной пробел после «Outline») | `2870324b13ac69af8b80e76b3ae3f1248505f526` |
 | Essentional, UI / Sort | `1ef4848b7e78479698f49445b8c4e31f5c925a70` |
