@@ -2,12 +2,25 @@
 # Синхронизация скилла SU10 в обе стороны. Стоит на хуке Stop.
 #  1. подтягивает правки коллабораторов (rebase)
 #  2. если есть свои правки — поднимает patch-версию, пишет кто обновил, коммитит и пушит
+# Работает только на main: на другой ветке и при отсоединённом HEAD ничего не трогает.
 REPO="$HOME/Documents/su10-plugins"
 SKILL="$REPO/plugins/su10/skills/su10-design-system/SKILL.md"
 PJSON="$REPO/plugins/su10/.claude-plugin/plugin.json"
 
 [ -d "$REPO/.git" ] || exit 0
 cd "$REPO" || exit 0
+
+# ---------- только main ----------
+BRANCH=$(git symbolic-ref --short -q HEAD)
+if [ "$BRANCH" != "main" ]; then
+  if [ -n "$(git status --porcelain)" ]; then
+    # кавычка допустима в имени ветки и сломала бы JSON
+    WHERE=${BRANCH//\"/}
+    [ -n "$WHERE" ] || WHERE="отсоединённый HEAD"
+    echo "{\"systemMessage\":\"SU10: не main ($WHERE) — автокоммита и пуша нет. Правки попадут в main только после слияния\"}"
+  fi
+  exit 0
+fi
 
 WHO=$(git config user.name)
 [ -n "$WHO" ] || WHO=$(id -un)

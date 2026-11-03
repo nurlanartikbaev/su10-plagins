@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.21.13 · 03.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.21.14 · 03.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.21.13 · 03.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.21.14 · 03.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1742,7 +1742,7 @@ table (frame, layoutMode NONE)
    осталось вовсе. Признак, что правишь не ту копию: `git log` в каталоге показывает один-
    единственный коммит (у боевого история полная). Перед записью — убедиться в пути; после
    записи — проверить `git status` в `~/Documents/su10-plugins`, там должны появиться изменения
-17. **Версию и синхронизацию берёт на себя хук — руками не надо** (он поднимает только патч; новый компонент — это минорная версия, её поднимают руками в трёх местах до коммита, тогда хуку делать нечего). Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, который правят несколько человек. На хуке `Stop` стоит `tools/su10-autopush.sh`: он подтягивает правки остальных, поднимает patch-версию в `SKILL.md` и `plugin.json`, проставляет в шапке, кто обновил, коммитит и пушит. У всех с `autoUpdate` новая версия подхватывается при следующем запуске. Твоя часть — только запись в `references/changelog.md`: что изменилось и почему, этого хук придумать не может
+17. **Версию и синхронизацию берёт на себя хук — руками не надо** (он поднимает только патч; новый компонент — это минорная версия, её поднимают руками в трёх местах до коммита, тогда хуку делать нечего). Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, который правят несколько человек. На хуке `Stop` стоит `tools/su10-autopush.sh`: он подтягивает правки остальных, поднимает patch-версию в `SKILL.md` и `plugin.json`, проставляет в шапке, кто обновил, коммитит и пушит. У всех с `autoUpdate` новая версия подхватывается при следующем запуске. Твоя часть — только запись в `references/changelog.md`: что изменилось и почему, этого хук придумать не может. **Хук работает только на `main`**: на другой ветке он ничего не коммитит, не подтягивает и не пушит. Правку на ветке коммитят сами и перед слиянием поднимают patch-версию руками: в `plugin.json`, описании и шапке `SKILL.md` и в разделе «Версии». Иначе `autoUpdate` её не подхватит
 
 ## Что не трогать
 
@@ -1790,7 +1790,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.21.13 · 03.11.2026 · обновил Nurla**.
+Текущая версия — **v4.21.14 · 03.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
