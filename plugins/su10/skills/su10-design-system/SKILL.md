@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.22.3 · 03.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.22.4 · 03.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.22.3 · 03.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.22.4 · 03.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -863,11 +863,11 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 
 **Popover** `1389:2` — панель у элемента по клику: фильтр, быстрые настройки, карточка сущности. Слот `content`, `Show Header`, `Show Footer`, `Show Secondary Button`, ширина `size/popover-width`. Не затемняет экран. Одновременно открыт один.
 
-**Coachmark** `3902:404` (страница `Coachmark`, паспорт `CoachmarkPassport` `3904:146`, с 03.11) — подсказка онбординга у конкретного элемента: заголовок, описание, шаг и кнопки. Лежит поверх затемнения с вырезом. `Position` Top/Bottom/Left/Right — с какой стороны от цели стоит, хвостик смотрит на цель; Left и Right только на десктопе · `Align` Start/Center/End · `Media` SLOT + `Show Media` · `Step` TEXT + `Show Step` · `Show Back`, `Show Skip`. Наружу выведены `Heading`, `Back`, `Skip`, `Next`.
+**Coachmark** `3902:404` (страница `Coachmark`, паспорт `CoachmarkPassport` `3904:146`, с 03.11) — подсказка онбординга у конкретного элемента: заголовок, описание, шаг и кнопки. Лежит поверх затемнения с вырезом. `Position` Top/Bottom/Left/Right — с какой стороны от цели стоит, хвостик смотрит на цель; Left и Right только на десктопе · `Align` Start/Center/End · `Media` SLOT + `Show Media` · `Step` TEXT + `Show Step` · `Show Secondary`. Наружу выведены `Heading`, `Secondary action`, `Next`.
 - Ширина — `size/coachmark-width` (327 / 330). Цвет — семантика `surface/2-layer` напрямую: отдельная группа `color/component/coachmark` потребовала бы пересоздать 30 групп токенов ради алфавита.
 - **Хвостик над произвольной целью:** переместить его в инстансе нельзя, но поле можно. У слоя `Tail row` отвязать и задать `paddingLeft` (у Left/Right — `paddingTop`) так, чтобы центр хвостика совпал с центром цели: `tr.setBoundVariable('paddingLeft', null); tr.paddingLeft = 113`. Правое поле ряда при этом обнуляют так же: иначе длинное смещение растягивает компонент шире токена.
-- **Текст задают свойствами**, а не через `characters` у вложенного текста: `Heading` — `Title#1386:0`, `Subtitle#1386:4`, `Next` — `Label#273:46`, `Skip` — `Label#570:0`.
-- **Кнопки:** `Next` всегда; `Back` со второго шага; `Skip` закрывает весь тур, на последнем шаге его нет, `Next` там — «Понятно». **Короткий вид:** у `Heading` выключен `Show Subtitle`, в подсказке выключены `Show Step` и `Show Skip`.
+- **Текст задают свойствами**, а не через `characters` у вложенного текста: `Heading` — `Title#1386:0`, `Subtitle#1386:4`, `Next` — `Label#273:46`, `Secondary action` — тоже `Label#273:46`.
+- **Кнопки:** `Next` — Primary, есть всегда, на последнем шаге называется «Понятно». Вторая кнопка одна, `Button` S `Weight=Tertiary, Signal=Info`: на первом шаге «Пропустить» закрывает весь тур, со второго шага на её месте «Назад» возвращает на шаг (решение владельца 03.11). **Короткий вид:** у `Heading` выключен `Show Subtitle`, в подсказке выключены `Show Step` и `Show Secondary`.
 - **Вырез и кольцо рисуют в макете:** их размер зависит от цели. Заливка из `Overlay`, вырез через `figma.subtract` больше цели на 4 с каждой стороны, радиус — радиус цели + 4, кольцо `border/info` толщиной 2. Клик по вырезу открывает цель и завершает тур, клик по затемнению ничего не делает.
 
 ### Структура
@@ -1800,7 +1800,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.22.3 · 03.11.2026 · обновил Nurla**.
+Текущая версия — **v4.22.4 · 03.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
