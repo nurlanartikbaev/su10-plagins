@@ -1,6 +1,6 @@
 ---
 name: su10-design-system
-description: "v4.22.4 · 03.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.23.0 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
@@ -1403,13 +1403,20 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - Архив — `Heading` M «Архив» и карточки той же ширины: картинка 48, `Heading` S (название, «Завершён · есть сертификат» / «Не завершён»), шеврон.
 - Курсов нет — пустое состояние в карточке, кнопка «Добавить курс» по ширине текста, не на всю карточку.
 - Архив: у завершённого курса под названием `Text Button` S Link «Сертификат» с иконкой `Download Minimalistic` (без слова «Скачать»), подпись — «Завершён».
-- **Порядок блоков (решение владельца 03.11):** активные курсы → архив → подарочные курсы в самом конце. На телефоне архив и подарочные — свёрнутые `Accordion` со счётчиком, на десктопе — блоки с компактными карточками. Бейджа «Подарок» внутри блока нет: блок уже так называется.
-- **Состояния карточки по `courseState`** (файл «Redesign (Student)», секция «Карточка курса — все состояния»): `ACTIVE`, `PROLONG_PENDING` (счётчик, жёлтый `Alert` с датой, «Продлить»), `PROLONG_EXPIRED` (приглушённая картинка, бейдж с замком, «Написать менеджеру»: ученик сам оплатить не может, «Продлить» здесь не ставить), `FINISHED` (итог в процентах, «Сертификат», «Пересмотреть уроки»), `FREE`, промежуточное «Распределяем в группу».
+- **Порядок блоков (решение владельца 03.11):** активные курсы → архив → подарочные курсы в самом конце. На телефоне архив и подарочные — свёрнутые `Accordion` со счётчиком, на десктопе — блоки с компактными карточками. Слова «Подарок» на карточке нет: вместо него значок подарка.
+- **Состояния карточки по `courseState`** (правки владельца 04.11, файл «Redesign (Student)», секция «Карточка курса — все состояния (v2)»). Карточка показывает статус бейджем рядом с названием, объяснение живёт отдельно:
+  - **Телефон — компактная карточка, объяснение в `MobileBottomSheet`.** Нажал на карточку — открылась шторка с `Alert` и действиями. Большой `Alert` в карточку телефона не ставить.
+  - `PROLONG_PENDING`: бейдж «3 дня» / «Осталось 3 дня». Телефон — шторка с «Продолжить» и «Продлить». Десктоп — жёлтый `Alert` с датой и «Продлить» в карточке.
+  - `PROLONG_EXPIRED`: приглушённая картинка, бейдж с замком «Доступ закрыт». Действие только «Написать менеджеру»: ученик сам оплатить не может, «Продлить» здесь не ставить. Телефон — через шторку.
+  - `FINISHED`: компактная карточка архива, а не отдельная с кнопками. Нажатие открывает уроки. Есть сертификат — «Завершён» и «Сертификат»; нет — «Не завершён».
+  - `FREE` и скрытый курс: значок в бейдже рядом с названием, без текста (`Gift` и `Eye Closed`). На десктопе подсказка в `Tooltip` при наведении: «Подарочный курс», «Скрыт от учеников». На телефоне наведения нет: нажатие на значок показывает `Toast` с тем же текстом на 4 секунды.
+  - «Распределяем в группу»: только бейдж, подзаголовок скрыт: они говорили одно и то же.
+  - Исключён из группы: обычная карточка с бейджем «Исключён». Десктоп — красный `Alert` в карточке, телефон — в шторке, действие «Написать менеджеру». Спецификация backend убирает такой курс из списка, поэтому нужна правка на backend.
 - Состояния страницы (выбор владельца 20.10, доска «Курсы», К8–К11):
   - загрузка — пустая страница и `Loading` по центру;
   - ошибка — карточка пустого состояния с «Не удалось загрузить курсы» и `Button` L Secondary «Повторить» (иконка `Refresh`);
   - все курсы закончились — блок «Активные курсы» остаётся: карточка с маленькой картинкой и «Активных курсов нет», архив ниже;
-  - состояние карточки курса меняет только нижний блок: не начался — «Программа курса» (`Calendar`, шеврон), задачи недели сделаны — `Check Circle` с `Tone=Success` без шеврона, доступ закончился — `Button` Secondary «Продлить доступ».
+  - состояние карточки курса меняет только нижний блок: не начался — «Программа курса» (`Calendar`, шеврон), задачи недели сделаны — `Check Circle` с `Tone=Success` без шеврона, доступ закончился — `Button` Secondary «Написать менеджеру» (см. `PROLONG_EXPIRED`).
 - Телефон — в прежнем стиле (аккордеоны, строки курса), владелец оставил его как был. Состояния К12–К15: загрузка — `Loading` по центру; ошибка — раскладка пустого состояния К1 с «Повторить» Secondary; все курсы закончились — «Активные курсы» без счётчика с картинкой и «Активных курсов нет», архив раскрыт; состояния карточки — дата старта вместо «Пройдено» без полосы, «Доступ закончился» и `Button` S Secondary «Продлить» вместо шеврона. «Задачи недели выполнены» мобильную карточку не меняют — следующей задачи в ней нет.
 - Карточка на телефоне и десктопе отличается намеренно (телефон — пройдено и длительность, десктоп — неделя и следующая задача); это написано в шапке доски.
 
@@ -1800,7 +1807,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.22.4 · 03.11.2026 · обновил Nurla**.
+Текущая версия — **v4.23.0 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
