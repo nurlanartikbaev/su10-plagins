@@ -30,6 +30,8 @@
 (`cornerRadius` на его контур не действует). Блики и нижняя грань обрезаны маской
 `silhouette-mask` в группе `limbs`. Размер меняют только `rescale` (Scale, K).
 
+**Имена слоёв** (кебаб-кейс, без шаблонных `Group N`, без повторов среди соседей): `character` → `body`, `limbs` (`silhouette-mask`, `bottom`, `highlights`), `face`, `rim`, `mouth-open` или `mouth`, `cheeks`, `eyes` (`eye-left`, `eye-right`, внутри `-shape` и `-highlight`). Стороны — как видит зритель. Детали называют по смыслу: `sweat`, `magnifier-lens`, `thought-bubble`, `target-outer`, `confetti-1`.
+
 ## 2. Какой маскот на какой экран
 
 Черновики лежат в файле Redesign (Student) `KhMjdqizE1KUp3RsScJKne`, страница Roadmap, секция
@@ -86,7 +88,7 @@ const arm=(f,side,deg,st=1.15)=>{const S=side==='R'?[182.7,126.3]:[57.3,126.3];c
  const ax=[tip[0]-S[0],tip[1]-S[1]],L=Math.hypot(...ax),th=(side==='R'?-deg:deg)*Math.PI/180;
  const w=(x,y)=>{const t=((x-S[0])*ax[0]+(y-S[1])*ax[1])/(L*L),u=Math.max(0,Math.min(1,t)),k=u*u*(3-2*u);
   const a=th*k,c=Math.cos(a),s=Math.sin(a),g=1+(st-1)*k,dx=(x-S[0])*g,dy=(y-S[1])*g;return[S[0]+dx*c-dy*s,S[1]+dx*s+dy*c];};
- for(const v of f.findAll(n=>n.type==='VECTOR'&&['body-start','silhouette-mask','bottom','highlight'].includes(n.name))){
+ for(const v of f.findAll(n=>n.type==='VECTOR'&&(['body','silhouette-mask','bottom'].includes(n.name)||/^highlight-(left|right)$/.test(n.name)))){
   const ox=v.x,oy=v.y,cr=v.cornerRadius;
   const paths=v.vectorPaths.map(p=>{const t=p.data.trim().split(/\s+/),o=[];let i=0;while(i<t.length){if(/[A-Za-z]/.test(t[i]))o.push(t[i++]);else{const q=w(+t[i]+ox,+t[i+1]+oy);o.push(q[0],q[1]);i+=2;}}return{windingRule:p.windingRule,data:o.join(' ')};});
   v.vectorPaths=paths;const bx=paths.map(p=>bbox(p.data));v.x=Math.min(...bx.map(b=>b[0]));v.y=Math.min(...bx.map(b=>b[1]));if(typeof cr==='number')v.cornerRadius=cr;}
@@ -111,12 +113,12 @@ const bbox=d=>{const t=d.trim().split(/\s+/);let i=0,cx=0,cy=0,X=[],Y=[];const a
 
 Токены маскота скрыты из публикации, в продуктовом файле их не импортировать. Заливку копируют
 с готового слоя: `JSON.parse(JSON.stringify(layer.fills))` — привязка к переменной сохраняется.
-Голубой берут из обводки `face-start` варианта `AI`.
+Голубой берут из обводки `face` варианта `AI`.
 
 ### Геометрия лица (кадр 240)
 
-Звезда: лицо `51,84`, 137 × 105. Глаза `Group 88` `74.5,114` и `Group 89` `143,114`, 22,5 × 36.
-Рот `Group 91` `107,144`, 25,5 × 23; в `Happy` рот — `Group 213`. Брови рисуют вектором,
+Звезда: лицо `51,84`, 137 × 105. Глаза `eye-left` `74.5,114` и `eye-right` `143,114`, 22,5 × 36.
+Рот `mouth-open` `107,144`, 25,5 × 23. Брови рисуют вектором,
 толщина 4,3, рот 3,4. Рот жёлтого, половина от центра, вторая зеркально:
 `M 0 0 C 2.01 0 6.73 0 9.53 0 C 13.03 0 13.03 6.26 12.55 9.46 C 12.07 12.67 10.92 15.48 9.53 17.6 C 6.51 22.21 3.35 22.97 0 22.97`.
 
