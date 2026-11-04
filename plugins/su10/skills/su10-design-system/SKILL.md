@@ -1,6 +1,6 @@
 ---
 name: su10-design-system
-description: "v4.24.0 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.24.1 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
@@ -1365,6 +1365,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Красная точка на кнопке фильтра** — `Show Dot=true`, пока применён хотя бы один фильтр. Пока фильтр только выбирают в шторке или поповере и ещё не применили — точки нет. Сняли все фильтры — точка гаснет. Точку не рисуют поверх кнопки руками: она живёт внутри компонента.
 - **Список уроков: сегменты над поиском** (решение владельца 04.11). `SegmentedControlRow` «Все уроки» и «Рейтинговые» стоит первым, под ним поиск и фильтр. Это не фильтр: в шторке его нет, тега и красной точки он не даёт. Выбор недели — в фильтре, недель можно выбрать несколько.
 - **Подзаголовок курса при нескольких неделях.** Одна неделя — «2 месяц 1 неделя». Недели подряд в одном месяце — «2 месяц 1–2 неделя». Недели не подряд или из разных месяцев — количество: «3 недели». На каждую неделю свой тег над списком и свой блок с заголовком недели.
+- **Активные фильтры на телефоне — одной строкой со скроллом вбок**, до правого края экрана (`overflowDirection = HORIZONTAL`, `clipsContent`). В несколько строк теги не переносят.
 - **Не повторять навигацию.** В фильтр не кладут то, что уже выбирается на странице: на десктопе неделя выбирается в линии, группы «Неделя» в поповере нет.
 - **Бинарный признак списка** («только обязательные») — первая строка фильтра: `ListItem` с `Trailing` `Type=Toggle`. Не `SegmentedControlRow` «Все / X» над списком: сегмент «Все» повторяет «Все …» в группах фильтра и занимает строку.
 - **Выравнивание.** У строки `ListItem` поля `Content` слева и справа `Space-12`, у групп те же `Space-12` — подписи групп встают по тексту строки. В шторке, где `ListItem` со своими 8, группы тоже 8.
@@ -1811,7 +1812,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.24.0 · 04.11.2026 · обновил Nurla**.
+Текущая версия — **v4.24.1 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
