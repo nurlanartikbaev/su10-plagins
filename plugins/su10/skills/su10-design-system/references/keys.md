@@ -96,6 +96,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | Stories | Set | `75cf811442a7f00b0973a7f6f5a59bf18ab99274` |
 | Heading | Set | `b749746cc11c139c5f14d9a57d9c45c52cd1445d` |
 | Mascot | Set | `e780e07a784c25641ca8ee22df020a0b5fd8712d` |
+| ChatButton | Set | `68274f7c451712b5ff48aff30f6ccf86901bc8fd` |
 | Subheading | Single | `6049e6e2a901ffbd07f8ce6c3c4e3d3421e9273c` |
 | Divider | Set | `3a5e90422e2d44de12019cd303ac896c87d1bcc1` |
 | Island | Single | `0353e3904c9e72531687060d18d616228260e1ef` |

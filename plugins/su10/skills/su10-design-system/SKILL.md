@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.26.1 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.27.1 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.26.1 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.27.1 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -49,7 +49,7 @@ description: "v4.26.1 · 04.11.2026 — Сборка макетов, экран�
    **Второе исключение — «⋯» в кнопках всегда Bold** (решение владельца 19.10): `Bold / Essentional, UI / Menu Dots`, ключ `c29819c4476ffc9404b1b002ae8977b35d16861e`, в файле дски `3180:97432`. Касается любой кнопки с меню: `HeaderButton`, `Button` `Only Icon=Yes`. Outline-точки тонкие и теряются на подложке.
    **Третье исключение — самолётик отправки в поле всегда Bold** (решение владельца 29.10): `Suffix` `Type=Action`, `Bold / Messages, Conversation, Telegram / Plain`, ключ `dfe800f6ad5031ec075adc8b94939e0f4fd81741`. **`Bold / … WhatsApp / Plain` — не самолётик, а значок WhatsApp**, имя в паке вводит в заблуждение.
    **Четвёртое исключение — цветные логотипы соцсетей** `Color / Social / *` (решение владельца 02.11): только в `SocialLink`, не перекрашивают.
-   **Пятое исключение — иконка AI в кнопке чата всегда Bold** (решение владельца 03.11): `Button` `Only Icon=Yes` на десктопе, `Bold / Essentional, UI / AI`, ключ `b298700cdbdbbc000aff65c4e4a26b20a287bc71`. Описание иконки в паке («в макетах не использовать») этого случая не отменяет. Иконка из двух векторов, и в Primary-кнопке оба должны быть белыми: после подмены проверь, что заливка каждого привязана к `icon/white-static`, а обводки нет. У Outline-версии второй вектор сидел на `icon/primary`, и в светлой теме искорка становилась тёмной. Кнопка чата стоит на всех десктопных экранах, фиксированно: 54 × 54, отступ 24 справа и снизу, в первом экране 1024 (решение владельца 03.11). На экране с оверлеем она лежит под ним: под `Overlay`, шторкой и меню.
+   **Пятое исключение снято** (решение владельца 04.11): вместо `Button` с иконкой AI в кнопке чата стоит компонент `ChatButton` с маскотом, 96 × 96, отступ 24 справа и снизу, в первом экране 1024, на всех десктопных экранах. На экране с оверлеем лежит под ним: под `Overlay`, шторкой и меню. Подробности — `references/mascot.md`.
 6. **В одной строке лейаута — один размер контролов.** Таблица высот ниже.
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
@@ -1831,7 +1831,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.26.1 · 04.11.2026 · обновил Nurla**.
+Текущая версия — **v4.27.1 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
