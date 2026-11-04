@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.24.3 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.24.4 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.24.3 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.24.4 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -429,7 +429,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 `Size` M/S · `Variant` Default/Link/Error · `State` Rest/Hover/Pressed/Disabled.
 Внутри строки текста, в шапке поля (`Show Action`), в подвале таблицы. Link — переход на другую страницу, Default — действие на месте. Им же собирается крестик в шапках оверлеев: иконка тёмная, а не акцентная.
 
-**Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel` (была `DesktopActionPanel`: панель используется и на мобильном). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
+**Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel`. **Только десктоп; на телефоне — `MobileActionPanel`, на экранах редизайна — `MobileActionPanel v2`** (решение владельца 04.11). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
 
 - **Кнопки пошагового флоу на десктопе — только в `Action Panel`**, не голыми `Button` под
   контентом: оценочный тест, шаги «1 из 2 → 2 из 2», экран результата, «время вышло». Панель —
@@ -1319,6 +1319,8 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 если рядом с заголовком есть шеврон, который явно управляет видимостью блока ниже — сначала
 ищи `Accordion`, а не собирай `Subheading + Text Button` по аналогии с шапкой оверлея.
 
+**Таблица на телефоне — по задаче** (решение владельца 04.11). Значения сравнивают по столбцам — таблица с прокруткой вбок, без `Scrollbar`. Запись читают целиком — карточки: строка становится `Island` с `ListItem`, главное значение в заголовке, остальное в описании, статус — `Badge`. Примеры — раздел «Телефон» в паспорте Table.
+
 **Таблица.** Вся таблица кладётся в `Island` с нулевыми полями. `TableHeaderCell` в строку заголовка, `TableFooter` снизу. Фильтры над таблицей — селекты и `SegmentedControlRow` размера S в одну строку.
 Сборка бывает двух видов: **строками** — `TableRow` со слотом, если у строки есть состояния (выбор чекбоксом, наведение); **колонками** — вертикальные стопки `TableCell`, если состояний нет и важнее один раз задать ширину колонки. Смешивать в одной таблице нельзя. Подробности — в разделе «Таблицы данных» ниже.
 
@@ -1650,7 +1652,7 @@ table (frame, layoutMode NONE)
 
 ## Если добавляешь компонент в систему
 
-00. **Поведение на телефоне другое — покажи это в паспорте.** Открывается не так, как на десктопе, заменяется другим компонентом или теряет наведение — раздел «Телефон»: экран `DocScreenMock` Mobile, поверх `Overlay` и `MobileBottomSheet`, в обеих темах. Только текста мало (решение владельца 04.11). Сейчас раздел есть у SingleSelect, ComboBox, MultiSelect, DatePicker, ContextMenu, DesktopDrawer, Popover, Tooltip, Breadcrumbs.
+00. **Поведение на телефоне другое — покажи это в паспорте.** Открывается не так, как на десктопе, заменяется другим компонентом или теряет наведение — раздел «Телефон»: экран `DocScreenMock` Mobile, поверх `Overlay` и `MobileBottomSheet`, в обеих темах. Только текста мало (решение владельца 04.11). Сейчас раздел есть у SingleSelect, ComboBox, MultiSelect, DatePicker, ContextMenu, DesktopDrawer, Popover, Tooltip, Breadcrumbs, Table, Action Panel.
 
 0. **Сначала докажи, что компонент нужен** (железное правило 11). По шагам:
    - **Разложи задачу на роли** и подбери каждой готовый компонент. Чаще всего хватает
@@ -1814,7 +1816,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.24.3 · 04.11.2026 · обновил Nurla**.
+Текущая версия — **v4.24.4 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
