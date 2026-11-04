@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.25.1 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.25.2 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.25.1 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.25.2 · 04.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1433,12 +1433,14 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - Как перевернуть составной блок: позиции детей зеркалят (`y = H − y − h`), векторы-линии отражают матрицей `[[1,0,x],[0,−1,y+h]]`. Иллюстрации и глифы не отражают — двигают целиком, иначе «?» и сертификат встанут вверх ногами.
 
 **Месяц открывается целиком: будущие недели открытого месяца не закрывают замком** (решение владельца 04.11). Состояния недели:
-- `Open` — неделя открытого месяца, до которой студент ещё не дошёл: голубая звезда с треугольником, без подзаголовка (`Show subtitle` выключен). Её можно выбрать, кольцо как у пройденных; тряски и тоста нет.
+- `Open` — неделя открытого месяца, до которой студент ещё не дошёл: голубая звезда с треугольником. Её можно выбрать, кольцо как у пройденных; тряски и тоста нет.
+- Процент у `Open`: ничего не сделано — без подзаголовка (`Show subtitle` выключен); сделана хотя бы одна задача — «12% пройдено», в плашке «Неделя 4 · пройдена на 12%». Звезда остаётся голубой, пока неделя не закончится; цвет по порогам появляется после этого.
+- Легенда в `Path start`: «Скоро откроется» заменена на `Open` «Открыто». Фиолетовая звезда осталась в конце дороги со своей подписью.
 - `Locked` — только недели месяца, который ещё не открыт (`Month` `Progress=None`). Тост: «3 месяц пока закрыт» / «Откроется после 2 месяца».
 - В `Month` `Progress=W1`–`W3` будущие недели уже `Open`. Линия до них остаётся пунктиром.
 - Выбрали `Open` — `Course map / Dock` `State=Выбрана · впереди`: серая подпись, `Button` Tertiary «Открыть уроки», кнопка открывает список уроков этой недели.
 - На десктопе то же: `Course map / Node` `State=Open`, `Platform=Desktop`.
-- Экраны в чистовом файле: выбор будущей недели — В5, нажатие на закрытую — В1, доска «Страница курса».
+- Экраны в чистовом файле: выбор будущей недели — В5, начатой — В6, нажатие на закрытую — В1, доска «Страница курса»; десктоп — Д9, доска «Страница курса · десктоп».
 - Как поставить новый вариант на экране: пока обновление библиотеки не принято, `setProperties` падает с «Unable to find a variant». Берут набор через `importComponentSetByKeyAsync` и делают `swapComponent`, затем заново ставят `Title` и `Show subtitle`.
 - После замены строки проверяют вложенную звезду `week node`: в строках с переопределением она остаётся `Locked`, её меняют отдельным `swapComponent`.
 
@@ -1826,7 +1828,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.25.1 · 04.11.2026 · обновил Nurla**.
+Текущая версия — **v4.25.2 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
