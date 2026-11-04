@@ -1,6 +1,6 @@
 ---
 name: su10-design-system
-description: "v4.23.2 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.23.3 · 04.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
@@ -1411,7 +1411,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
   - `PROLONG_EXPIRED`: приглушённая картинка. Действие только «Написать менеджеру»: ученик сам оплатить не может, «Продлить» здесь не ставить. Телефон — бейдж с замком «Доступ закрыт» и шторка. Десктоп — без бейджа и подзаголовка; причина и кнопка в красном `Alert`.
   - `FINISHED`: компактная карточка архива, а не отдельная с кнопками. Нажатие открывает уроки. Есть сертификат — «Завершён» и «Сертификат»; нет — «Не завершён».
   - `FREE` и скрытый курс: значок в бейдже без текста справа, на телефоне перед шевроном (`Gift` и `Eye Closed`). Стиль Bold: решение владельца, исключение из правила Outline. На десктопе подсказка в `Tooltip` при наведении: «Подарочный курс», «Скрыт от учеников». На телефоне наведения нет: нажатие на значок показывает `Toast` с тем же текстом на 4 секунды.
-  - «Распределяем в группу»: только бейдж, подзаголовок скрыт: они говорили одно и то же.
+  - «Распределяем в группу»: только бейдж S под названием, на месте подзаголовка, на телефоне и десктопе. Подзаголовок скрыт: они говорили одно и то же.
   - Исключён из группы: обычная карточка с бейджем «Исключён». Десктоп — красный `Alert` в карточке, телефон — в шторке, действие «Написать менеджеру». Спецификация backend убирает такой курс из списка, поэтому нужна правка на backend.
 - Состояния страницы (выбор владельца 20.10, доска «Курсы», К8–К11):
   - загрузка — пустая страница и `Loading` по центру;
@@ -1808,7 +1808,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.23.2 · 04.11.2026 · обновил Nurla**.
+Текущая версия — **v4.23.3 · 04.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
