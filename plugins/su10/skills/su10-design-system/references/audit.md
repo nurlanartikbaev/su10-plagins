@@ -149,6 +149,23 @@ for (const c of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRigh
 растяжка полосы по вертикали в горизонтальной витрине — это `FILL` (колонки равной высоты), а в
 вертикальной — `HUG`.
 
+## 2б. Ряд иконок
+
+Запускают на каждом ряду иконок перед сдачей. В ответе должно быть: один размер, один центр, один шаг.
+
+```js
+function checkRow(nodes) {
+  const b = nodes.map(n => n.absoluteBoundingBox);
+  return {
+    sizes: [...new Set(b.map(x => x.width + 'x' + x.height))],
+    centers: [...new Set(b.map(x => +(x.y + x.height / 2).toFixed(1)))],
+    gaps: [...new Set(b.slice(1).map((x, i) => +(x.x - b[i].x - b[i].width).toFixed(1)))],
+  };
+}
+```
+
+Рисунок внутри иконки тоже проверяют: общий центр всех `VECTOR` должен совпасть с центром кнопки. Размер рисунка у разных глифов разный, это нормально.
+
 ## 3. Чего скрипт не видит
 
 Главная слепая зона — скрытые слои.
