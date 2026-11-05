@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.27.6 · 05.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.27.7 · 05.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.27.6 · 05.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.27.7 · 05.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -21,7 +21,7 @@ description: "v4.27.6 · 05.11.2026 — Сборка макетов, экран�
 | `references/data-tables.md` | устройство таблицы, спецификация колонок, сборка по шагам, ловушки | собираешь или чинишь таблицу |
 | `references/table-scripts.md` | готовые скрипты: оркестратор, добор строк, синхронизация высот, подвал | там же, когда дошло до кода |
 | `references/audit.md` | скрипт проверки макета и как читать отчёт | перед сдачей макета |
-| `references/handoff.md` | доска сценариев: варианты → выбор → состояния → хэндофф; сетка секции, имена, пары тем, стрелки, десктоп из шаблона, чистка, ловушки | собираешь стейты и сценарии, варианты на выбор, светлую тему или десктоп-версию; готовишь секцию к разработке |
+| `references/handoff.md` | доска сценариев: варианты → выбор → состояния → хэндофф; сетка секции, имена, пары тем, две секции (русская и казахская), стрелки, десктоп из шаблона, чистка, ловушки | собираешь стейты и сценарии, варианты на выбор, светлую тему или десктоп-версию; готовишь секцию к разработке |
 | `references/icon-repair.md` | починка иконок, обновление библиотеки, массовые правки DS-файла | что-то уже сломано или предстоит тронуть много мастеров |
 | `references/team-workflow.md` | регламент команды: черновики в JUZ40 Workspace, перенос в проект роли → файл раздела → страница фичи, обложка, Ready for development, пуш правил в скилл | начинаешь фичу, переносишь апрувнутый дизайн в чистовой файл, нашёл правило для скилла |
 | `references/mascot.md` | маскот: варианты и ключи, какой на какой экран, правила и скрипты генерации, анимации успеха и чата | нужен маскот на экран, новый вариант или поза, пустое состояние, ошибка, успех, анимация, AI-маскот |
@@ -1831,7 +1831,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.27.6 · 05.11.2026 · обновил Nurla**.
+Текущая версия — **v4.27.7 · 05.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
