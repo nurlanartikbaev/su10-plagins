@@ -22,6 +22,10 @@
 ---
 
 
+## v4.27.13 · 05.11.2026 · обновил Nurla
+
+- Имена маскотов: JuzStar (`Type=Brand`) и JuzAI (`Type=AI`). Паспорт и описание `Mascot`, паспорта `MobileTabbar` в дизайн-системе обновлены.
+
 ## v4.27.12 · 05.11.2026 · обновил Nurla
 
 - Новые варианты: `Mascot` `Type=AI, Emotion=Wink` и `ChatButton` `State=Wink`, анимация в `mascot.md` §6.2а. Решение владельца. Нужна публикация.
