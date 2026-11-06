@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.27.28 · 06.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.27.29 · 06.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.27.28 · 06.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.27.29 · 06.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -744,7 +744,7 @@ Badge или Tag: если элемент кликабельный (выбира
 **Анимация в прототипе внутри компонента** (решение владельца 06.11): микроанимации собирают в самом компоненте интерактивными вариантами и Smart Animate, промежуточный кадр — служебный вариант, в макет его не ставят. То, что прототип не умеет (пауза по наведению, частицы), описывают в паспорте и в артефакте.
 
 **Все анимации для разработки — один артефакт [Анимации SU10](https://claude.ai/artifact/AEn8dEDJkugA1iMFoqSyQQ)** (решение владельца 06.11). Сейчас в нём: обзор и общие правила, JuzAI на десктопе, маскот на телефоне, успех, избранное и тост. Отдельных артефактов с анимациями не публикуют — в любой задаче и в любом чате анимацию кладут сюда.
-- **Только согласованные.** Идеи, варианты на выбор и черновики показывают отдельным временным артефактом. В хаб анимация попадает после «да» владельца. Решение, которого ещё нет в макете Figma, помечают `Новое`.
+- **Только согласованные.** Идеи, варианты на выбор и черновики показывают отдельным временным артефактом. В хаб анимация попадает после «да» владельца. Решение, которого ещё нет в макете Figma, помечают `Новое`. Пометки `Новое` на 06.11 владелец согласовал: поведение маскота в мобильном чате, хлопушки успеха на десктопе, пауза полосы тоста при наведении. Пометку снимают, когда решение появится в макете.
 - **Как добавить.** Прочитай артефакт (`Artifact` `read` по ссылке, затем `read` с `paths` — все опубликованные страницы). Новая страница — отдельный файл со своим `<!doctype html>`, `<meta charset="utf-8">` и строкой навигации `.topnav` как на соседних. Добавь ссылку на неё в навигацию **каждой** страницы и плитку на обзоре, кривые и длительности — в таблицы обзора. Опубликуй в тот же `url`, передав страницы через `files`.
 - **Правка существующей** — тоже через `read` и публикацию в тот же `url`, ссылка не меняется.
 - В паспорт компонента — раздел «Анимация» со ссылкой на страницу хаба.
@@ -1864,7 +1864,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.27.28 · 06.11.2026 · обновил Nurla**.
+Текущая версия — **v4.27.29 · 06.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
