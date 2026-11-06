@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.27.29 · 06.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.27.30 · 06.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.27.29 · 06.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.27.30 · 06.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -476,6 +476,8 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 `Elevate` On/Off · `Show Left Button`, `Show Right Button`, тексты.
 `Elevate=On`, когда контент уходит под панель; `Off`, когда панель — последний блок страницы.
 
+**ButtonsGroup** `1991:376` (страница `ActionPanel`) — пара кнопок «основное действие + отмена», `Type` Horizontal/Vertical. Основная кнопка по умолчанию `Signal=Info`; другой сигнал ставят в инстансе по смыслу (решение владельца 06.11, до этого в мастере стоял Success).
+
 ### Ввод
 
 **Text field** `631:26237` — однострочный ввод.
@@ -511,7 +513,7 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 **NumberInput** `3421:245` (страница `NumberInput`, паспорт `NumberInputPassport` `3423:90`) — числовое поле с кнопками − и + по краям: целевой балл, количество попыток, число участников.
 `Size` M/S · `State` Rest/Hover/Focused/Disabled/Error · `Limit` None/Min/Max · `Label`, `Value`, `Unit`, `Description` TEXT · `Show Label`, `Show Unit`, `Show Description`, `Importance` BOOLEAN.
 - Высота — токены `size/input-m` (42/44) и `size/input-s` (32) на фрейме `Input`: внутри стоят кнопки фиксированной высоты, поэтому высоту нельзя собрать из полей и строки, как у Text field. Скругление, обводка и цвета — как у Text field и SingleSelect (общий слой `color/component/inputs/*`, своего слоя нет намеренно). В одной строке с полями и селектами — тот же размер.
-- Кнопки — иконочные `Button` `Size=S, Weight=Secondary, Only Icon=Yes` (`Outline / Minus`, `Outline / Plus`) со своими Hover/Pressed/Disabled — нажатие видно (решение владельца: «голые иконки» в поле отвергнуты). В M стоят внутри с отступом `Space-6`, в S — вплотную к краям поля.
+- Кнопки — иконочные `Button` `Size=S, Weight=Tertiary, Only Icon=Yes` (`Outline / Minus`, `Outline / Plus`), без подложки, со своими Hover/Pressed/Disabled (решение владельца 06.11; прежнее решение про Secondary отменено, мастер всегда был на Tertiary). В M стоят внутри с отступом `Space-6`, в S — вплотную к краям поля.
 - Граница диапазона — **только свойство `Limit`** (Min выключает −, Max — +). Вложенные кнопки вручную в Disabled не переводят: у `Outline / Plus` цвет кнопки на иконку не переносится, он задан в мастере вариантов и застрянет при смене состояния вложенной кнопки.
 - Значение по центру (Body 2 у M, Body 4 у S), единица сразу за числом тем же стилем, `text/tertiary`; если единица уже в лейбле — `Show Unit=false`. Вне диапазона — `State=Error` и причина в `Description`.
 - Не для сумм, телефонов, дат и дробей без шага — там Text field с маской или DatePicker. Самодельный «степпер» из двух кнопок и текста в макеты не собирают — только этот компонент.
@@ -564,6 +566,8 @@ Toggle для форм, рядом с CheckBoxItem и RadioItem; собран п
 - **Круглая кнопка-«стекло»** (как владелец собирал в макетах): 42 × 42, радиус `radius/border-radius-rounded`, эффект-стиль `blur-medium` (размытие фона 12), обводка 1 px внутрь.
 - Токены `color/component/header-button/*`: `surface` — белое 32% в светлой и белое 8% в тёмной, `surface-hover` — белое 40% / прежнее, `border` `3323:394` — чёрное 4% / белое 4%. Размытие не выключают: под кнопкой бывает карта или фото.
 - `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
+- Открывает другой экран (корзина, профиль) — в коде это ссылка; действие на месте (фильтр, меню, назад) — кнопка. Вид одинаковый (решение владельца 06.11).
+- Тем же стеклом залита плашка заголовка в `MobileHeader v2`: `header-button/surface` и `header-button/border` (до 06.11 стояли токены `action-panel`).
 
 **Tab** `678:29650` + **TabsRow** (набор `3539:136180`: `Size=M` `678:29898`, `Size=S` `3539:136091`) — навигация между разделами.
 `Size` M/S (с 22.10; прежний единственный размер — M). Размер ставят на `TabsRow`, вкладки ряда
@@ -642,11 +646,11 @@ Island/Accordion с `layoutSizingHorizontal='FILL'`, без дополнител
 **SegmentedControl** `843:13462` + **SegmentedControlRow** `1367:14480` — переключение режима показа одного и того же контента. Счётчик в Rest и Hover — `segmented-control/surface-selected` (Light `#FFFFFF`, Dark `#222222`). `Size` M/S/XS задаётся на Row. XS (с 22.10) — дорожка 24, сегмент 20, подпись та же Body 4, поля сегмента Space-2 / Space-8, радиусы 4 и 6: плотные фильтры и переключение вида в шапке таблицы или карточки, в строке с Toggle XS и RadioItem/CheckBoxItem S.
 Разница с Tab: Tab — разделы, Segmented — режимы.
 
-**Breadcrumbs** `558:20324` — путь до текущей страницы. Не помещается в строку — средние уровни сворачиваются в многоточие, на вторую строку не переносится; первый уровень и открытая страница видны всегда. Длинное название отдельной крошки обрезается многоточием, полный текст в тултипе (решение владельца 02.11).
+**Breadcrumbs** `558:20324` — путь до текущей страницы. Не помещается в строку — средние уровни сворачиваются в многоточие, на вторую строку не переносится; первый уровень и открытая страница видны всегда. Длинное название отдельной крошки обрезается многоточием, полный текст в тултипе (решение владельца 02.11). Порядок: сначала средние уровни, открытая страница обрезается последней — когда остались первый уровень и она (06.11).
 
 **MenuItem** `1177:11111` — пункт бокового меню. Selected — ровно один. `Show Counter` добавляет счётчик (`Suffix` `Type=Count`, тот же, что в табах; вложенный инстанс выведен наружу). Пункт ставится на **Fill**: на HUG подпись Selected шире обычной на 2 px и пункт дёргается при переключении — это свойство начертания, а не ошибка.
 
-**Stepper** `672:28616` + **Step** `672:28603` — от 2 до 6 шагов.
+**Stepper** `672:28616` + **Step** `672:28603` — от 2 до 6 шагов. Кружок шага — ширина и высота на `height-600`: 20 на Mobile, 22 на Desktop, всегда круг (до 06.11 ширина была зашита числом).
 
 **Pagination** `894:26885` + **PageButton** `894:26935`. `Total pages` 3 / 8+ / Unknown. До семи страниц показываются все, с восьми — многоточие. Шаг между кнопками `Space-8`. У `PageButton` Active только заливка, обводки нет. Стрелки — `Button` Tertiary `Only Icon=Yes`, но тёмные: `icon/primary`, в Disabled `icon/tertuary-black-static`; это записанное исключение из правил 5 и 13 (решение владельца 02.11).
 
@@ -657,7 +661,7 @@ Island/Accordion с `layoutSizingHorizontal='FILL'`, без дополнител
 **MobileActionPanel** `1721:20159` — панель действий внизу мобильного экрана. `Type` Vertical/Horizontal · `content` SLOT над кнопками · `Show Content`, `Show Secondary Button` BOOLEAN.
 Vertical — кнопки друг под другом, основная сверху; Horizontal — в строку, основная справа. В слот над кнопками кладут сумму, чекбокс согласия, короткую подпись. Кнопки выведены наружу. **Не путать с `Action Panel`** `1060:1884` — та десктопная, с описанием слева и кнопками справа.
 
-**Home Indicator** `1720:646` — безопасная зона жеста внизу экрана iPhone: полоска 134×5 на подложке 34. Ставится последним блоком, выключать нельзя, высоту задаёт система.
+**Home Indicator** `1720:646` — безопасная зона жеста внизу экрана iPhone: полоска 134×5 на подложке 34. Ставится последним блоком, выключать нельзя, высоту задаёт система. Полоска контрастна подложке: чёрная в светлой теме, белая в тёмной (`home-indicator/bar`); в нативном iOS её рисует система.
 
 **MobileBottomBar** `1721:20160` — готовый низ мобильного экрана: `MobileActionPanel` + `TabBar` + `Home Indicator`. `Show Action Panel`, `Show TabBar` BOOLEAN; зона жеста не выключается. Обе панели выведены наружу, поэтому кнопки, слот и состав табов правятся прямо в свойствах.
 
@@ -669,7 +673,7 @@ Vertical — кнопки друг под другом, основная све�
 размытие 12. Висят над контентом, зону home indicator под ними добавляет экран. На экранах со
 старым `TabBar` во всю ширину берут v1 (`MobileActionPanel`, `MobileBottomBar`), v1 и v2 не мешают.
 - **MobileTabbar v2** `2224:669` (паспорт `MobileTabbarV2Passport` `2230:685`) — плавающий таб-бар,
-  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54.
+  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54. У выбранного таба иконка Bold, у остальных Outline: Главная — `Home Smile Angle` `15cd62d1876937be4d62544808dd66992991f60e`, Курсы — `School / Book` `3a69ec036c1ad699c0cf54b0f63d387e185518d8`, JuzAI — `AI` `b298700cdbdbbc000aff65c4e4a26b20a287bc71`, Задачи — `Time / Calendar` `da4b72fefa99fbe0812466d7d297eb8723c7e8b8`.
 - **MobileActionPanel v2** `3718:2054` (паспорт `3719:2087`, с 29.10) — стеклянная панель действий,
   поля 4 (кнопка M 12 + 4 = 16), высота 52. **Слот `content`**: по умолчанию `Button` M Secondary +
   Primary на Fill; можно одну кнопку Primary или поле ввода — `Text field` M без лейбла и подсказки,
@@ -683,10 +687,10 @@ Vertical — кнопки друг под другом, основная све�
   поэтому в слот панели прямо в инстансе кладут и поле ввода (примеры в паспорте: с текстом и пустое).
   Выбран владельцем 29.10 из четырёх вариантов (две панели / одна панель / кнопки вместо табов /
   круглая кнопка рядом с баром). Контент прокручивается под панелями и заканчивается выше них.
-- **StreakPill** `2235:377` (страница `MobileHeader`, паспорт `2238:365`) — плашка серии: звезда и счётчик, подворачивается под аватар, аватар сверху, шаг −16. `State` Active/Zero · `Value` TEXT · `Placement` (с 02.11): Right — справа от аватара, высота 34, мобильная шапка с `Avatar` M; Left — слева от аватара, высота 28, десктопная шапка с `Avatar` S.
+- **StreakPill** `2235:377` (страница `MobileHeader`, паспорт `2238:365`) — плашка серии: звезда и счётчик, подворачивается под аватар, аватар сверху, шаг −16. `State` Active/Zero · `Value` TEXT · `Placement` (с 02.11): Right — справа от аватара, высота 34, мобильная шапка с `Avatar` M; Left — слева от аватара, высота 28, десктопная шапка с `Avatar` S. Плашка ведёт в раздел серии. Zero — серии нет, «0»; Active — число дней подряд; третьего состояния нет (решение владельца 06.11).
 - **DesktopHeader v2** `3852:399` (паспорт `3853:3031`, с 02.11) — стеклянная шапка десктопа, токены `mobile-tabbar-v2/*`, скругление снизу, ширина 1392, стоит в x 24, y 0 над контентом. `Logo` M; слот `navigation` со строкой `NavLink`, шаг 24; слот `actions`: иконки на `MenuItem` `Type=Closed`, затем `StreakPill` `Placement=Left` + `Avatar` S. На экранах со старой шапкой во всю ширину остаётся `DesktopHeader`.
 - **NavLink** `3850:17024` (страница `NavLink`, паспорт `3853:443`) — пункт верхней навигации десктопа без подложки и линии. `State` Rest/Hover/Selected, `Label`. Выбран один. Боковое меню — `MenuItem`, разделы внутри страницы — `Tab`.
-- **Logo** `3850:17014` (страница `Logo`, паспорт `3853:24`) — логотип на `icon/brand`, `Size` S 72×30 телефон, M 78×32 десктоп. В `DesktopHeader` v1 логотип пока зашит слоем.
+- **Logo** `3850:17014` (страница `Logo`, паспорт `3853:24`) — логотип на `icon/brand`, `Size` S 72×30 телефон, M 78×32 десктоп. В `DesktopHeader` v1 логотип пока зашит слоем. Логотип не ссылка, на главную не ведёт (решение владельца 06.11).
 
 **Промо-блоки главной — редизайн (с 02.11).**
 - **Промо-баннер — не компонент** (решение владельца 02.11: баннеры бывают совсем разные). Каждый собирают фреймом на месте: подложка и поля на токенах, скругление `radius/border-radius-400`, внутри готовые `Heading` и `Button`. Набор типов не заводят и в дску не переносят. Сообщение о состоянии страницы — по-прежнему `Alert`.
@@ -706,7 +710,7 @@ Vertical — кнопки друг под другом, основная све�
 **TableRow** `1683:270` — строка таблицы. `State` Rest / Hover / Selected · `Devider` on / off · `cells` SLOT.
 Даёт строке подложку и состояния, которых у ячеек нет: `Rest` — без заливки, `Hover` — `surface/3-layer`, `Selected` — тот же синий, что у шапки. Разделитель рисует строка, поэтому ячейкам внутри ставят `Devider = off`, а последней строке — `Devider = off` у самой строки.
 
-**TableCell** `1163:10817` (содержимое в слоте `content`) · **TableFooter** `1244:10626` (`Type` Counted/Uncounted).
+**TableCell** `1163:10817` (содержимое в слоте `content`) · **TableFooter** `1244:10626` (`Type` Counted/Uncounted). Подпись «Показывать по:» видимая, в коде связана с Select через `aria-labelledby`.
 В ячейку кладут: текст, `Badge`, `Tag`, `Avatar`, `Text Button`, `CheckBox`.
 
 **Badge** `1078:14902` — статус рядом с данными, его **не нажимают**. `Size` L/M/S · `Signal` Neutral/Info/Success/Warning/Error/Accent · `Label` TEXT · `Show Label` BOOLEAN. `Show Label = false` даёт бейдж-иконку — отдельного `Only Icon` для этого не нужно. **Длинный текст обрезается многоточием** — бейдж в одну строку и не растёт.
@@ -787,7 +791,7 @@ Alert — про состояние страницы, Toast — про резу�
 
 Одновременно открыт **один** оверлей. Крестик закрывает без сохранения, сохранение живёт в подвале.
 
-**Несохранённые изменения — всегда диалог** (решение владельца 02.11). Есть изменения — любой выход (крестик, подложка, свайп, Esc) сначала показывает `Dialog` «Закрыть без сохранения?»: панель заменяется диалогом, поэтому оверлей остаётся один. «Закрыть без сохранения» закрывает, «Продолжить редактирование» возвращает панель с введёнными данными. Изменений нет — закрывается сразу.
+**Несохранённые изменения — всегда диалог** (решение владельца 02.11). Есть изменения — любой выход (крестик, подложка, свайп, Esc) сначала показывает `Dialog` «Закрыть без сохранения?»: панель заменяется диалогом, поэтому оверлей остаётся один. Кнопки — «Закрыть» (Primary, `Signal=Error`) и «Продолжить» (Secondary): «Продолжить» возвращает панель с введёнными данными. Длинные подписи в диалог 480 не помещаются (решение владельца 06.11). Изменений нет — закрывается сразу.
 
 ### Списки — страницы `ListItem` и `ProfileItem`
 
@@ -811,6 +815,8 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
   `SingleSelectItem`; Toggle — `Toggle S`; Badge — `Badge S` **и шеврон после него**: рядом с
   бейджем всегда стоит шеврон, строка со статусом всегда открывается. Бейдж без шеврона в
   строке списка не ставят — отдельного варианта для этого нет.
+
+Строка с `Trailing` `Type=Toggle` сама не нажимается: переключается только `Toggle` (решение владельца 06.11).
 
 Подложки — свои токены, алиасы на `Button Tertiary`:
 `color/component/list-item/surface-hover` (4 %, только десктоп) и
@@ -897,7 +903,7 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 
 **Popover** `1389:2` — панель у элемента по клику: фильтр, быстрые настройки, карточка сущности. Слот `content`, `Show Header`, `Show Footer`, `Show Secondary Button`, ширина `size/popover-width`. Не затемняет экран. Одновременно открыт один.
 
-**Coachmark** `3902:404` (страница `Coachmark`, паспорт `CoachmarkPassport` `3904:146`, с 03.11) — подсказка онбординга у конкретного элемента: заголовок, описание, шаг и кнопки. Лежит поверх затемнения с вырезом. `Position` Top/Bottom/Left/Right — с какой стороны от цели стоит, хвостик смотрит на цель; Left и Right только на десктопе · `Align` Start/Center/End · `Media` SLOT + `Show Media` · `Step` TEXT + `Show Step` · `Show Secondary`. Наружу выведены `Heading`, `Secondary action`, `Next`.
+**Coachmark** `3902:404` (страница `Coachmark`, паспорт `CoachmarkPassport` `3904:146`, с 03.11) — подсказка онбординга у конкретного элемента: заголовок, описание, шаг и кнопки. Лежит поверх затемнения с вырезом. `Position` Top/Bottom/Left/Right — с какой стороны от цели стоит, хвостик смотрит на цель; Left и Right только на десктопе · `Align` Start/Center/End · `Media` SLOT + `Show Media` · `Step` TEXT + `Show Step` · `Show Secondary`. Наружу выведены `Heading`, `Secondary action`, `Next`. По-казахски «Дальше» — «Келесі», «Пропустить» — «Өткізіп жіберу», «Понятно» — «Түсінікті», шаг — «1 / 4».
 - Ширина — `size/coachmark-width` (327 / 330). Цвет — семантика `surface/2-layer` напрямую: отдельная группа `color/component/coachmark` потребовала бы пересоздать 30 групп токенов ради алфавита.
 - **Хвостик над произвольной целью:** переместить его в инстансе нельзя, но поле можно. У слоя `Tail row` отвязать и задать `paddingLeft` (у Left/Right — `paddingTop`) так, чтобы центр хвостика совпал с центром цели: `tr.setBoundVariable('paddingLeft', null); tr.paddingLeft = 113`. Правое поле ряда при этом обнуляют так же: иначе длинное смещение растягивает компонент шире токена.
 - **Текст задают свойствами**, а не через `characters` у вложенного текста: `Heading` — `Title#1386:0`, `Subtitle#1386:4`, `Next` — `Label#273:46`, `Secondary action` — тоже `Label#273:46`.
@@ -1003,7 +1009,7 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 
 ### Даты
 
-**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years. Неделя начинается с понедельника. При выборе одной даты подвала нет (`Show Footer=false`), выбор применяется сразу; подвал нужен для периода. Открытый переключатель шапки в Months и Years — `Button` `Weight=Secondary`, `State=Rest`, а не `Pressed` (решение владельца 02.11); у `DatePickerCalendarForward` выделения пока нет.
+**DatePickerCalendar** `1310:1918` — `State` Days/Months/Years. Неделя начинается с понедельника. При выборе одной даты подвала нет (`Show Footer=false`), выбор применяется сразу; подвал нужен для периода. Открытый переключатель шапки в Months и Years — `Button` `Weight=Secondary`, `State=Rest`, а не `Pressed` (решение владельца 02.11); у `DatePickerCalendarForward` выделения пока нет. Период: можно ввести с клавиатуры в поле; конец раньше начала — даты меняются местами; третье нажатие начинает новый период (06.11).
 **DatePickerCalendarForward** `1314:13740` — только вперёд: бронь, запись, доставка.
 **CalendarCell** `1308:1698` — ячейка календаря. `State` Default/Hover/Selected/Disabled и для периода Range Start/In Range/Range End (у `Type` Current month и Today, решение владельца 02.11). Середина — семантика `surface/blue-transparent-static` напрямую: отдельный токен в `date-picker/*` пришлось бы вставлять пересозданием всех групп после него ради порядка по алфавиту.
 **DatePickerStrip** `1357:14442` — мобильный выбор даты. `State` Strip / Calendar в одной карточке: кнопка календаря разворачивает эту же карточку, отдельный `DatePickerCalendar` не открывается. В ленте 14 дней от ближайшего доступного, дальше — через календарь. Прошлые дни в календаре Disabled. Крестик и Escape закрывают без изменения выбора. Мышью ленту листают колесом или перетаскиванием, с клавиатуры стрелками, полосы прокрутки нет.
@@ -1424,7 +1430,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - **Подстраницы курса** («Аналитика», «О курсе») — шапка **без картинки курса**: только `Heading` (h1-semibold) с названием страницы, подзаголовка нет. Курс — в крошках.
 - На телефоне «назад» — `HeaderButton` в слоте `left` у `MobileHeader`.
 
-**Материалы курса.** На телефоне — третья строка в шторке меню «⋯» («О курсе», «Аналитика», «Материалы», иконка `Outline / Notes / Documents`, описание «3 файла · PDF, DOC, ZIP») и шторка «Материалы» с компонентом `Files` (`Show Header=false`). Доска «Страница курса», Ж1–Ж2. Десктоп (выбор владельца — М1): пункт «Материалы» в меню «⋯» шапки курса открывает `DesktopDrawer` «Материалы» справа, как «О курсе», внутри `Files` без шапки. Доска «Страница курса · десктоп», Е8.
+**Материалы курса.** На телефоне — третья строка в шторке меню «⋯» («О курсе», «Аналитика», «Материалы», иконка `Outline / Notes / Documents`, описание «3 файла · PDF, DOC, ZIP») и шторка «Материалы» с компонентом `Files` (`Show Header=false`). Доска «Страница курса», Ж1–Ж2. Десктоп (выбор владельца — М1): пункт «Материалы» в меню «⋯» шапки курса открывает `DesktopDrawer` «Материалы» справа, как «О курсе», внутри `Files` без шапки. Доска «Страница курса · десктоп», Е8. «Показать все» раскрывает остальные файлы на месте, фокус на пятый файл; `FileItem` в Hover и Pressed — токены `list-item/surface-hover` и `surface-pressed`.
 
 **«О курсе» на десктопе — не страница, а `DesktopDrawer`** `Size=M` (420) справа поверх страницы курса с `Overlay` `Platform=Desktop`:
 - заголовок «О курсе» и крестик, футер выключен, подзаголовок шапки выключен;
@@ -1864,7 +1870,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.27.29 · 06.11.2026 · обновил Nurla**.
+Текущая версия — **v4.27.30 · 06.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
