@@ -22,6 +22,13 @@
 ---
 
 
+## v4.28.0 · 07.11.2026 · обновил Nurla
+
+- **Новые компоненты** (по разбору аудита файла Redesign (Student)): `ListItem v2` и `ListItem · Trailing v2` — `Trailing` `Type=Action` («⋯» Button S Tertiary) и `Show Swipe Action` для удаления свайпом на телефоне; `Spotlight` — затемнение с вырезом и кольцом для тура онбординга, `Radius` 8/12/16/20/Circle. У обоих паспорта.
+- **Новые свойства:** `Text Button` `State=Selected` (синие подпись и иконка, только Default; токены `text-button/default/text-selected`, `icon-selected`); `Heading` `Align` Left/Center; `Island` `Show Border`; `MobileHeader v2` `Show Title` (кнопки у краёв остаются).
+- **Решения владельца:** история JuzAI на десктопе — `Popover`, не `Dropdown`; «Избранное» поверх фото — `Favorite` в стеклянной подложке как у `HeaderButton`; отступы и скругления внутри слотов и Island свободные — не нарушение; в русской секции весь контент на русском, в казахской — на казахском; экраны карты курса — пара тем, блоки меняют тему, небо всегда тёмное.
+- **Исправлено:** иконки таб-бара в `MobileTabbar v2` — в скилле были записаны неверные (`Home Smile Angle`, `School / Book`); верные — `Home Angle` и `Notebook Minimalistic`, Outline в покое и Bold у выбранного; примеры на странице MobileTabbar в дске поправлены.
+
 ## v4.27.30 · 06.11.2026 · обновил Nurla
 
 - **Ответы фронту, часть 4** (доска «Вопросы фронта · часть 4» в дске). Мастера: `Step` — ширина кружка на `height-600`; `ButtonsGroup` — основная кнопка `Signal=Info`; `MobileHeader v2` — плашка на `header-button/surface` и `border`. У `FileItem` подложки Hover и Pressed уже были на токенах `list-item`, фронт смотрел старую выгрузку.

@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.27.30 · 06.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.28.1 · 09.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.27.30 · 06.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.28.1 · 09.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -53,7 +53,7 @@ description: "v4.27.30 · 06.11.2026 — Сборка макетов, экран
    **Сердце избранного в выбранном состоянии — Bold** (решение владельца 06.11): только в `Favorite` `Selected=Yes`, `Bold / Like / Heart`, ключ `96cd0acd6ad354905c6e1bda925688361b38a943`. В `Selected=No` — `Outline / Like / Heart`, ключ `0c908a37212b0634c48286ca9f8a016e4d058598`.
    **Выбранный таб чата** (решение владельца 05.11): `TabBarItem` «JuzAI» с `State=Selected` берёт `Bold / Essentional, UI / AI`, ключ `b298700cdbdbbc000aff65c4e4a26b20a287bc71`. Подмена окрашивает не все векторы: заливку обоих привязывают к `color/component/tabbar/icon-selected`, обводку убирают. Проверяют снимком в обеих темах. Таб-бар на телефоне один на весь продукт: Главная, Курсы, JuzAI, Задачи; по-казахски Басты бет, Курстар, JuzAI, Тапсырмалар.
    **Название чата везде — JuzAI** (решение владельца 05.11), на обоих языках. Не пишут: чат-бот, AI-чат, AI көмекші. Поле ввода: «Спросите JuzAI», по-казахски «Сұрағыңызды жазыңыз».
-   **Кнопки чата** (решение владельца 05.11): история и карандаш есть всегда. Карандаш создаёт новый чат. В новом чате он `State=Disabled`, пока первый вопрос не отправлен, набран он или выбран из готовых. Готовые вопросы при вводе не исчезают, они уходят с отправкой первого вопроса. На десктопе обе кнопки стоят в шапке `DesktopDrawer`, в слоте `action` у `Heading`, это `Text Button` как у крестика, шаг `Space-16`. История на десктопе открывается в `Dropdown` `Type=Single` под кнопкой, диалог остаётся виден. Выбранного состояния у `Text Button` в системе нет: `Variant=Link` как «открыто» не ставят (так было сделано 05.11 — ошибка, см. правило 17). Нужна подсветка открытой кнопки — это предложение к компоненту. На телефоне — шторка.
+   **Кнопки чата** (решение владельца 05.11): история и карандаш есть всегда. Карандаш создаёт новый чат. В новом чате он `State=Disabled`, пока первый вопрос не отправлен, набран он или выбран из готовых. Готовые вопросы при вводе не исчезают, они уходят с отправкой первого вопроса. На десктопе обе кнопки стоят в шапке `DesktopDrawer`, в слоте `action` у `Heading`, это `Text Button` как у крестика, шаг `Space-16`. История на десктопе открывается в `Popover` под кнопкой (решение владельца 06.11, вместо `Dropdown` — тот для полей), диалог остаётся виден. Пока история открыта, кнопка стоит в `State=Selected` (с 06.11): синие подпись и иконка. `Variant=Link` как «открыто» не ставят. Строки истории — `ListItem v2` с `Trailing` `Type=Action` («⋯»). На телефоне — шторка, удаление свайпом (`ListItem v2`, `Show Swipe Action`).
 6. **В одной строке лейаута — один размер контролов.** Таблица высот ниже.
 7. **Один компонент — один паспорт.** Сводных док на несколько компонентов не делаем.
 8. **Чужую работу дублируй перед правкой.** Меняешь существующий компонент или паспорт не по прямой просьбе владельца — делай копию рядом и показывай её, оригинал не трогай.
@@ -450,7 +450,8 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 `Show Dot` (`Show Dot#3184:0`, BOOLEAN, по умолчанию off) — красная точка 8 px в правом верхнем углу, только у `Only Icon=Yes`. Отступ точки от правого края и от верха: `Size=L` — 12, `M` — 8, `S` — 6 (решение владельца); точка привязана к правому краю, поэтому на десктопе, где кнопка шире, отступ тот же: «здесь что-то включено». Главный случай — кнопка фильтра при применённых фильтрах. Точка не счётчик; цвет — токен `color/component/button/indicator` (алиас `surface/red-static`), не перекрашивают.
 
 **Text Button** `563:777` — действие без фона.
-`Size` M/S · `Variant` Default/Link/Error · `State` Rest/Hover/Pressed/Disabled.
+`Size` M/S · `Variant` Default/Link/Error · `State` Rest/Hover/Pressed/Disabled/**Selected**.
+`State=Selected` (с 06.11, только `Variant=Default`) — кнопка открыла меню или панель, и они сейчас открыты: подпись и иконка синие (`text-button/default/text-selected` → `text/info-static`, `icon-selected` → `icon/info-outline-static`). Закрыли — снова Rest. Link как «открыто» не ставят.
 Внутри строки текста, в шапке поля (`Show Action`), в подвале таблицы. Link — переход на другую страницу, Default — действие на месте. Им же собирается крестик в шапках оверлеев: иконка тёмная, а не акцентная.
 
 **Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel`. **Только десктоп; на телефоне — `MobileActionPanel`, на экранах редизайна — `MobileActionPanel v2`** (решение владельца 04.11). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
@@ -568,6 +569,7 @@ Toggle для форм, рядом с CheckBoxItem и RadioItem; собран п
 - `Button` в шапку не ставят: у Tertiary в Rest подложки нет, у Secondary она синяя. Раньше кнопки шапки собирали из `Button` `Signal=Success, State=Pressed` — это и было «нажатое» состояние вместо вида.
 - Открывает другой экран (корзина, профиль) — в коде это ссылка; действие на месте (фильтр, меню, назад) — кнопка. Вид одинаковый (решение владельца 06.11).
 - Тем же стеклом залита плашка заголовка в `MobileHeader v2`: `header-button/surface` и `header-button/border` (до 06.11 стояли токены `action-panel`).
+- **`MobileHeader v2` · `Show Title`** (с 06.11) — выключает заголовок по центру; кнопки слотов `left` и `right` остаются у краёв (центр на FILL). Прозрачностью 0 заголовок не прячут.
 
 **Tab** `678:29650` + **TabsRow** (набор `3539:136180`: `Size=M` `678:29898`, `Size=S` `3539:136091`) — навигация между разделами.
 `Size` M/S (с 22.10; прежний единственный размер — M). Размер ставят на `TabsRow`, вкладки ряда
@@ -673,7 +675,7 @@ Vertical — кнопки друг под другом, основная све�
 размытие 12. Висят над контентом, зону home indicator под ними добавляет экран. На экранах со
 старым `TabBar` во всю ширину берут v1 (`MobileActionPanel`, `MobileBottomBar`), v1 и v2 не мешают.
 - **MobileTabbar v2** `2224:669` (паспорт `MobileTabbarV2Passport` `2230:685`) — плавающий таб-бар,
-  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54. У выбранного таба иконка Bold, у остальных Outline: Главная — `Home Smile Angle` `15cd62d1876937be4d62544808dd66992991f60e`, Курсы — `School / Book` `3a69ec036c1ad699c0cf54b0f63d387e185518d8`, JuzAI — `AI` `b298700cdbdbbc000aff65c4e4a26b20a287bc71`, Задачи — `Time / Calendar` `da4b72fefa99fbe0812466d7d297eb8723c7e8b8`.
+  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54. У выбранного таба иконка Bold, у остальных Outline (исправлено 06.11, до этого здесь были записаны неверные иконки; верные стоят в макетах): Главная — `Home Angle` Outline `756852467f0c8a295d650cd3b6390ac638771fb5` / Bold `f5db4ce234e96ef1450f01101bd3be435e34120c`; Курсы — `School / Notebook Minimalistic` Outline `eb9c3c8d8c0914dcbac9a5a1d5f1fafc905d459e` / Bold `5fbb3b2ce54e9b0cd8c72b9aa5fa5e658e7d72ab`; JuzAI — `AI` Outline `b83a16cee0dec41953acaa9c3ed632a0dfc6ff59` / Bold `b298700cdbdbbc000aff65c4e4a26b20a287bc71`; Задачи — `Time / Calendar` Outline `6644bc081da698626d7a4d8497328d0424e13923` / Bold `da4b72fefa99fbe0812466d7d297eb8723c7e8b8`.
 - **MobileActionPanel v2** `3718:2054` (паспорт `3719:2087`, с 29.10) — стеклянная панель действий,
   поля 4 (кнопка M 12 + 4 = 16), высота 52. **Слот `content`**: по умолчанию `Button` M Secondary +
   Primary на Fill; можно одну кнопку Primary или поле ввода — `Text field` M без лейбла и подсказки,
@@ -743,7 +745,7 @@ Badge или Tag: если элемент кликабельный (выбира
 **Alert** `550:15590` — сообщение в потоке страницы, остаётся до реакции. Типографика: `Primary` — заголовок `b1-semibold`, описание `b2-medium`; `Secondary` — `b2-semibold` и `b3-medium`. `Signal` Info/Success/Warning/Error (свойство называлось `Type` до 21.09) · `Weight` Primary/Secondary. Глиф слева — **тот же `FeedbackIcon`, что в `Toast`**: 16×16 в обоих `Weight`, `Signal` переключает знак. До 07.10 стояли четыре отдельные Bold-иконки пака, причём Warning и Error рисовались одной `Danger Triangle` и отличались только цветом.
 **Toast** `1254:11921` — всплывающее уведомление, уходит само. `Signal` Info/Success/Warning/Error (называлось `Type` до 21.09) · `Show Action` добавляет действие справа, кнопка выведена наружу. Глиф слева — `FeedbackIcon` из пака, у него тот же набор сигналов. `Show Timer` (06.11) — полоса времени 3 px по нижнему краю, цвет сигнала (`surface/blue-static`, `green-static`, `yellow`, `red-static`). Включают, когда действие в тосте отменяет только что сделанное: «Отменить». Полоса убывает линейно за время показа, 10 с для «Отменить», наведение и фокус ставят на паузу. Свойство `Timer` Start / End: в прототипе Start сам переходит в End, Smart Animate 10 с linear; `End` служебный, в макет не ставят.
 
-**Favorite** `4113:49`, ключ `035566520f0c016cd30e42c5d617156ef7108407`, страница `Favorite`, паспорт `FavoritePassport` (06.11) — кнопка «В избранное», сердце без подписи, из `Text Button` `Size=M`. `Selected=No` — контур, `Variant=Default`; `Yes` — Bold, `Variant=Error`. Ставят на карточку статьи, в шапку статьи и в ленту главной вместо самодельного `Text Button` с сердцем. Анимация No → Yes: пульс ×1,3 → ×0,95 → ×1 за 300 мс и шесть точек на 18 px за 420 мс; Yes → No без анимации. Варианты 44 × 44. Анимация собрана внутри компонента для прототипа: служебный кадр `Selected=Pop` (сердце ×1,3, точки на 14 px), клик No → Pop Smart Animate 120 мс → сразу Yes 300 мс `cubic-bezier(.34,1.56,.64,1)`. `Pop` в макет не ставят.
+**Favorite** `4113:49`, ключ `035566520f0c016cd30e42c5d617156ef7108407`, страница `Favorite`, паспорт `FavoritePassport` (06.11) — кнопка «В избранное», сердце без подписи, из `Text Button` `Size=M`. `Selected=No` — контур, `Variant=Default`; `Yes` — Bold, `Variant=Error`. Ставят на карточку статьи, в шапку статьи и в ленту главной вместо самодельного `Text Button` с сердцем. **Поверх фото** (обложка карточки, шапка статьи на телефоне) — `Favorite` в фрейме-подложке как у `HeaderButton`: 44 × 44, скругление `rounded`, заливка `header-button/surface`, обводка `header-button/border` 1 px внутрь, эффект `blur-medium` (решение владельца 06.11; отдельного компонента нет). На обычном фоне — `Favorite` без подложки. Анимация No → Yes: пульс ×1,3 → ×0,95 → ×1 за 300 мс и шесть точек на 18 px за 420 мс; Yes → No без анимации. Варианты 44 × 44. Анимация собрана внутри компонента для прототипа: служебный кадр `Selected=Pop` (сердце ×1,3, точки на 14 px), клик No → Pop Smart Animate 120 мс → сразу Yes 300 мс `cubic-bezier(.34,1.56,.64,1)`. `Pop` в макет не ставят.
 
 **Анимация в прототипе внутри компонента** (решение владельца 06.11): микроанимации собирают в самом компоненте интерактивными вариантами и Smart Animate, промежуточный кадр — служебный вариант, в макет его не ставят. То, что прототип не умеет (пауза по наведению, частицы), описывают в паспорте и в артефакте.
 
@@ -817,6 +819,10 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
   строке списка не ставят — отдельного варианта для этого нет.
 
 Строка с `Trailing` `Type=Toggle` сама не нажимается: переключается только `Toggle` (решение владельца 06.11).
+
+**ListItem v2** (страница `ListItem`, паспорт `ListItemV2Passport`, с 06.11) — та же строка плюс два дополнения; `ListItem` v1 не трогали:
+- `Trailing` — **`ListItem · Trailing v2`**: все типы v1 и `Type=Action` — кнопка-иконка «⋯» (`Button` S, Tertiary, Info, Only Icon, Bold `Menu Dots`), открывает меню действий строки (`ContextMenu` на десктопе, шторка на телефоне). Строка остаётся нажимаемой. Кнопку рядом со строкой (`ListItem` + `Button`) больше не собирают.
+- `Show Swipe Action` — только телефон: справа красная зона `surface/red-static` шириной `Space-80` с `Trash Bin Minimalistic` 20 на `icon/white-static`. Протянули дальше 50 % — строка удаляется, тост «Отменить». В макете показывает открытый свайп. Свой красный фрейм под строкой не рисуют.
 
 Подложки — свои токены, алиасы на `Button Tertiary`:
 `color/component/list-item/surface-hover` (4 %, только десктоп) и
@@ -908,11 +914,11 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 - **Хвостик над произвольной целью:** переместить его в инстансе нельзя, но поле можно. У слоя `Tail row` отвязать и задать `paddingLeft` (у Left/Right — `paddingTop`) так, чтобы центр хвостика совпал с центром цели: `tr.setBoundVariable('paddingLeft', null); tr.paddingLeft = 113`. Правое поле ряда при этом обнуляют так же: иначе длинное смещение растягивает компонент шире токена.
 - **Текст задают свойствами**, а не через `characters` у вложенного текста: `Heading` — `Title#1386:0`, `Subtitle#1386:4`, `Next` — `Label#273:46`, `Secondary action` — тоже `Label#273:46`.
 - **Кнопки:** `Next` — Primary, есть всегда, на последнем шаге называется «Понятно». Вторая кнопка одна, `Button` S `Weight=Tertiary, Signal=Info`: на первом шаге «Пропустить» закрывает весь тур, со второго шага на её месте «Назад» возвращает на шаг (решение владельца 03.11). **Короткий вид:** у `Heading` выключен `Show Subtitle`, в подсказке выключены `Show Step` и `Show Secondary`.
-- **Вырез и кольцо рисуют в макете:** их размер зависит от цели. Заливка из `Overlay`, вырез через `figma.subtract` больше цели на 4 с каждой стороны, радиус — радиус цели + 4, кольцо `border/info` толщиной 2. Клик по вырезу открывает цель и завершает тур, клик по затемнению ничего не делает.
+- **Вырез и кольцо — компонент `Spotlight`** (страница `Spotlight`, паспорт `SpotlightPassport`, с 06.11): `Radius` 8/12/16/20/Circle. Инстанс ставят поверх цели: размер = цель + 4 с каждой стороны, `Radius` = радиус цели + 4. Затемнение `overlay/scrim` уходит за край на 4000 px — экран обрезает его. Кольцо `border/info` 2 px. Клик по вырезу открывает цель и завершает тур, клик по затемнению ничего не делает. Самодельные вырезы через `figma.subtract` больше не рисуют.
 
 ### Структура
 
-**Heading** `1386:23` — заголовок экрана или крупного блока. `Size` L/M/S, `Title`, `Subtitle`, `Show Subtitle`, `Show Action` + слот `action`. **Длинный заголовок переносится на новую строку**, не обрезается.
+**Heading** `1386:23` — заголовок экрана или крупного блока. `Size` L/M/S · `Align` Left/Center (с 06.11: Center — пустые состояния и карточки, где текст по центру; вручную `textAlignHorizontal` не перебивают), `Title`, `Subtitle`, `Show Subtitle`, `Show Action` + слот `action`. **Длинный заголовок переносится на новую строку**, не обрезается.
 L — заголовок экрана, на экране один. M — крупный блок и шапка оверлея. S — небольшой блок внутри карточки.
 
 **Subheading** `1386:24` — заголовок секции внутри блока: `Title`, `Show Counter` (Badge), `Show Action` + слот, `Show Divider`. Отличается от Heading S не размером, а анатомией. Вложенных секций не бывает. **Счётчик форматируется по языку интерфейса**: «1 234», с неразрывным пробелом между разрядами.
@@ -996,7 +1002,7 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 теряется при повторном сворачивании — пропадает только сам узел-слот из дерева чтения, а не
 уже вложенный в него контент.
 
-**Island** `1185:9951` — поверхность `surface/2-layer` со скруглением и слотом `content`. **Своих отступов не задаёт** — поля приносит содержимое: обычный блок — Space-16, таблица во всю ширину — ноль.
+**Island** `1185:9951` — поверхность `surface/2-layer` со скруглением и слотом `content`. `Show Border` (с 06.11) — обводка `border/secondary` 1 px внутрь, радиус как у Island; вручную заливку, обводку и радиус инстанса не перебивают. **Отступы, шаги и скругления внутри слота `content` — свободные** (решение владельца 06.11): это не переопределение и в аудите не нарушение. То же для содержимого любых слотов. **Своих отступов не задаёт** — поля приносит содержимое: обычный блок — Space-16, таблица во всю ширину — ноль.
 Это контейнер **обеих платформ**, а не только мобильный: на десктопе он и есть белая карточка-подложка. Собирать её руками из фрейма, фона, радиуса и обводки не нужно — берётся `Island`, а поля приносит содержимое. Под таблицу он ставится с нулевыми полями, чтобы строки шли от края до края.
 
 **`Island` или `Accordion Signal=Primary`** — выглядят одинаково (одна и та же плоская белая
@@ -1870,7 +1876,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.27.30 · 06.11.2026 · обновил Nurla**.
+Текущая версия — **v4.28.1 · 09.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
