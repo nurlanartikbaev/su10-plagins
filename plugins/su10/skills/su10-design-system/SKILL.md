@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.28.5 · 10.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.29.1 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.28.5 · 10.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.29.1 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1019,6 +1019,18 @@ sub.primaryAxisSizingMode = 'AUTO';   // хугнуть по реальному 
 **Island** `1185:9951` — поверхность `surface/2-layer` со скруглением и слотом `content`. `Show Border` (с 06.11) — обводка `border/secondary` 1 px внутрь, радиус как у Island; вручную заливку, обводку и радиус инстанса не перебивают. **Отступы, шаги и скругления внутри слота `content` — свободные** (решение владельца 06.11): это не переопределение и в аудите не нарушение. То же для содержимого любых слотов. **Своих отступов не задаёт** — поля приносит содержимое: обычный блок — Space-16, таблица во всю ширину — ноль.
 Это контейнер **обеих платформ**, а не только мобильный: на десктопе он и есть белая карточка-подложка. Собирать её руками из фрейма, фона, радиуса и обводки не нужно — берётся `Island`, а поля приносит содержимое. Под таблицу он ставится с нулевыми полями, чтобы строки шли от края до края.
 
+**ActionCard** `4259:86` (страница `ActionCard`, паспорт `ActionCardPassport` `4261:38`, с 11.11) — карточка, которую нажимают: оболочка с состояниями и слотом `content`. Решение владельца 11.11: вместо отдельной плитки метрики одна универсальная оболочка, а содержимое кладут в слот.
+- `Size` M (поля `Space-16`, радиус 12) / S (поля `Space-12`, радиус 8) · `State` Rest / Hover (только десктоп) / Pressed / Focused / Selected / Disabled · `content` SLOT.
+- В макете ставят Rest или Selected, остальное это моменты взаимодействия (правило 13). Focused: общее кольцо `border/focus`, 2 px, отступ 2, радиус +4, снаружи.
+- **В слот кладут только пассивное**: `StatContent`, `Heading`, картинку, `Avatar`, `Badge`. Кнопки и ссылки не кладут: карточка сама кнопка, вложенная кнопка ломает доступность.
+- **Ряд карточек работает как вкладки**: выбрана всегда одна, повторное нажатие ничего не меняет. В ряду карточки на Fill по ширине и высоте, тогда они одной высоты. В коде ряд это `role=tablist`, карточка `role=tab` с `aria-selected`; одиночная карточка `role=button`.
+- При `State=Disabled` содержимое тоже ставят в Disabled: оболочка не перекрашивает слот.
+- Цвета: слой `color/component/action-card/*`: `surface`, `surface-hover`, `surface-pressed`, `surface-selected`, `border-selected`, `surface-disabled`.
+- На телефоне Hover нет, ряд шире экрана прокручивается вбок, берут `Size=S`.
+- Граница с соседями: `Island` не нажимается, `ListItem` это строка списка, `Tag` это метка-значение.
+
+**StatContent** `4259:11` — содержимое `ActionCard` для метрики: подпись (`Body 3`), значение (`Heading 2 semibold`), пояснение (`Body 4`). `State` Default / Disabled · `Label`, `Value`, `Hint` TEXT · `Show Hint`. Без подложки и полей, в слоте на Fill. Своего паспорта нет, разобран в паспорте `ActionCard`. Первый случай — аналитика профориентолога: пять плиток над таблицей учеников, у каждой кроме первой доля от всех учеников.
+
 **`Island` или `Accordion Signal=Primary`** — выглядят одинаково (одна и та же плоская белая
 карточка на фоне страницы), различаются только поведением: у `Island` нет ни заголовка, ни
 сворачивания — это просто поверхность; `Accordion` с `Signal=Primary` — та же поверхность,
@@ -1868,7 +1880,6 @@ table (frame, layoutMode NONE)
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
 - **Slider / Carousel**, **File upload** (Progress bar с 4.5.0 есть — `ProgressBar`)
 - **Time picker** — календарь выбирает только дату
-- **Stat-тайл / карточка метрики** — плитки вида «подпись + крупное значение»
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
 - **Avatar group** (статус-точка на аватаре есть — `Show Status`)
 - **Логотипов соцсетей, кроме YouTube, Telegram, Instagram, TikTok и WhatsApp** — первые четыре цветными лежат в паке (`Color / Social`, см. `SocialLink`), WhatsApp и плоский Telegram — в стиле Bold. VK и другие переносятся из исходного макета клоном
@@ -1897,7 +1908,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.28.5 · 10.11.2026 · обновил Nurla**.
+Текущая версия — **v4.29.1 · 11.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

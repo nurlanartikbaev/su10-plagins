@@ -100,6 +100,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | Subheading | Single | `6049e6e2a901ffbd07f8ce6c3c4e3d3421e9273c` |
 | Divider | Set | `3a5e90422e2d44de12019cd303ac896c87d1bcc1` |
 | Island | Single | `0353e3904c9e72531687060d18d616228260e1ef` |
+| ActionCard | Set (`Size` M/S, `State` Rest/Hover/Pressed/Focused/Selected/Disabled), слот `content#4259:24` | `af35568ac5b2e8219e413cd94d9bec1a4feef661` |
+| StatContent | Set (`State` Default/Disabled), `Label#4259:0`, `Value#4259:3`, `Hint#4259:6`, `Show Hint#4259:9` | `edfcb56fe31d7d2c59ae8bc385f077f4aeb2c6a2` |
 | HeaderButton | Set | `f0bb9240a2cfd9712196c9166bd626d1e4dfee7f` |
 | Accordion | Set | `610c45714a8c02db13e706df1989d3672a3e7e70` |
 | TabBar | Single | `d5966621e6ab36fe14767aafd92919fa01948345` |
