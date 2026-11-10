@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.28.4 · 09.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.28.5 · 10.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.28.4 · 09.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.28.5 · 10.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -119,12 +119,25 @@ description: "v4.28.4 · 09.11.2026 — Сборка макетов, экран�
     - **К пользователю — только на «вы»** (решение владельца 03.11): «Пройдите», «ваш», «вы здесь», а не «Пройди», «твой», «ты здесь». По-казахски так же — на «сіз»: «картаңызды», а не «картаңды». Текст с прода на «ты» при переносе в макет переписывают. Перед сдачей ищут по всем текстам файла: ты, тебя, тебе, твой, глаголы на -ешь и -ишь, повелительное без -те.
     - Не удаляют: числа и лимиты, условие, причину ошибки, следующий шаг, предлоги и союзы, без
       которых фраза становится телеграммой.
+    - **Без длинного тире «—»** (решение владельца 10.11): в текстах экранов и в заметках доски.
+      С ним строка читается как написанная ИИ. Части фразы связывают союзом («если», «чтобы»,
+      «и») или делят на два предложения. Тире в диапазонах («9:00–10:00») остаётся. Подписи
+      доски из регламента (`<Раздел> — сценарии для разработки`) не трогают.
+    - **Русский текст проверяют отдельно** (решение владельца 10.11): сокращённая русская фраза
+      быстро теряет смысл. Пишут, как человек сказал бы собеседнику, и читают строку вслух.
+      Условие через «если», а не через тире. В каждом предложении глагол и объект: «Если не
+      придете без причины», а не «Пропустите без причины» (что пропустите?). С казахского не
+      переводят дословно: сначала смысл, потом русская фраза. Вопрос с ответом часто проще
+      условия: «Не сможете прийти? Отмените запись».
 
     | Было | Стало |
     |---|---|
     | Для того чтобы продолжить, необходимо заполнить все обязательные поля | Заполните обязательные поля |
     | В данный момент у вас отсутствуют уведомления | Уведомлений нет |
     | Ошибка загрузки *(пересокращено: нет причины и шага)* | Файл больше 10 МБ. Выберите файл меньше |
+    | Пропустите без причины — записаться снова нельзя *(тире, нет объекта)* | Если не придете без причины, записаться снова не получится |
+    | Не сможете подключиться — отмените запись минимум за 24 часа *(тире)* | Не сможете прийти? Отмените запись за 24 часа до начала |
+    | Консультация успешно забронирована *(«успешно» лишнее)* | Вы записались на консультацию |
 
     Проверка перед сдачей: прочитай каждую строку и вычеркни всё, без чего пользователь поймёт,
     что произошло и что делать дальше.
@@ -1884,7 +1897,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.28.4 · 09.11.2026 · обновил Nurla**.
+Текущая версия — **v4.28.5 · 10.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
