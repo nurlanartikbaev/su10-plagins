@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.30.1 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.2 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.30.1 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.2 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -31,7 +31,7 @@ description: "v4.30.1 · 11.11.2026 — Сборка макетов, экран�
 перед сдачей. Если экраны идут на доску для разработки — ещё `handoff.md` до начала сборки:
 сетку и имена закладывают сразу, а не переставляют потом.
 
-**Шапки паспортов — свои компоненты**: `DocHeading` `1745:95` и `DocSubheading` `1745:100` на странице Documentation Assets. Миграция завершена 22.09 — чужих `Heading` / `Subheading` в файле не осталось нигде, кроме `sandbox`; новые паспорта собираются только на этих двух. Заголовок — текстовое свойство `Title`, описание — обычный текстовый слой: так в нём живут маркированные списки. Образцы цвета — `Swatch` `1746:3339` на странице Colors. **Экран для разделов `Usage` — `DocScreenMock` `3067:329`** там же: `Platform` Mobile 375×812 / Desktop 1440×1024, тумблеры `Show Status Bar`, `Show Header`, `Show Home Indicator`. Наполнение скелетонное — плашки `surface/3-layer` в карточках `surface/2-layer`; продуктовый контент в мок не рисуют. Desktop по сетке: поля 24, колонки 920 + 448, промежуток 24. Плавающий элемент внутрь мока не кладут — мок и элемент кладут в общий фрейм без автолейаута и двигают элемент поверх, после чего весь фрейм ужимают `rescale`, чтобы пропорции остались честными. `DocHeading` — ещё и шапка доски
+**Шапки паспортов — свои компоненты**: `DocHeading` `1745:95` и `DocSubheading` `1745:100` на странице Documentation Assets. Миграция завершена 22.09 — чужих `Heading` / `Subheading` в файле не осталось нигде, кроме `sandbox`; новые паспорта собираются только на этих двух. Заголовок — текстовое свойство `Title`, описание — обычный текстовый слой: так в нём живут маркированные списки. Образцы цвета — `Swatch` `1746:3339` на странице Colors. **Экран для разделов `Usage` — `DocScreenMock` `3067:329`** там же: `Platform` Mobile 375×812 / Desktop 1440×1024, тумблеры `Show Status Bar`, `Show Header`, `Show Home Indicator`. В Mobile шапка с 11.11 — `MobileHeader v2`: в слотах `HeaderButton` «назад» и «⋯», статус-бар залит стилем `BackgroundTop`. Наполнение скелетонное — плашки `surface/3-layer` в карточках `surface/2-layer`; продуктовый контент в мок не рисуют. Desktop по сетке: поля 24, колонки 920 + 448, промежуток 24. Плавающий элемент внутрь мока не кладут — мок и элемент кладут в общий фрейм без автолейаута и двигают элемент поверх, после чего весь фрейм ужимают `rescale`, чтобы пропорции остались честными. `DocHeading` — ещё и шапка доски
 хэндоффа; из чего собирать остальные подписи доски — `references/handoff.md`.
 
 **Токены тоже документированы**: `ColorsPassport` на странице Colors — все 64 семантических токена со свотчами и правилами выбора; `SpacingPassport` на странице Spacing — `Space`, радиусы, высоты строки, обводки и `size/*`.
@@ -1895,8 +1895,10 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 5. Паспорт вырос: блоки ниже на странице сдвигают на ту же высоту.
 6. Запись в таблицу выше, в каталог, в `keys.md` и в `changelog.md`. Публикует библиотеку человек.
 
-**Известный хвост:** мобильный `DocScreenMock` держит внутри `Header [Deprecated]` (тумблер
-`Show Header`), поэтому моки в паспортах показывают старую шапку.
+**Перед пометкой проверь, кто держит компонент внутри.** Мастер, в который вложен устаревший
+компонент, переводят на замену: `DocScreenMock` `Platform=Mobile` держал `Header` v1 и 11.11
+переведён на `MobileHeader v2`. Вложенный инстанс меняют `swapComponent`: id слоя и привязка
+`visible` к свойству остаются.
 
 ## Что не трогать
 
@@ -1943,7 +1945,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.30.1 · 11.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.2 · 11.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
