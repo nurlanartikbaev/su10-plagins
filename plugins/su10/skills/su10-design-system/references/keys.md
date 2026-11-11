@@ -290,7 +290,7 @@ const S = {                                   // figma.importStyleByKeyAsync
 | ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone Default/Critical/Success/Warning/Disabled задаёт строка) |
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
-| ProgressBar | — (процент и цвет — варианты) | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
+| ProgressBar | `Show Marker#4283:0` (BOOLEAN, по умолчанию `false` — метка порога на 85%); процент и цвет — варианты | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
 | NumberInput | `Label#3421:0`, `Show Label#3421:11`, `Importance#3421:22`, `Value#3421:33`, `Unit#3421:44`, `Show Unit#3421:55`, `Description#3421:66`, `Show Description#3421:77`; вложенные `Minus` / `Plus` — Button S Only Icon; границу задают вариантом `Limit`, не вложенными кнопками | `Size=M, State=Rest, Limit=None` (Size M/S, State Rest/Hover/Focused/Disabled/Error, Limit None/Min/Max) |
 | HeaderButton | `Icon#3136:0` (INSTANCE_SWAP, Outline) | `State=Rest` (Rest/Hover/Pressed/Disabled) |
 

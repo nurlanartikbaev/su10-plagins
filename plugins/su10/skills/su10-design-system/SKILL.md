@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.30.2 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.3 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.30.2 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.3 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -778,7 +778,7 @@ Badge или Tag: если элемент кликабельный (выбира
 **Тост всегда сверху экрана**: на мобильном — под статус-баром во всю ширину с полями 12, на десктопе — в правом верхнем углу. Так он не спорит с нижними панелями и шторками. Движение записано в паспорте (раздел Motion): появление 350 мс — сдвиг 24 px вниз + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px вверх + прозрачность, ease-in. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
 Alert — про состояние страницы, Toast — про результат действия.
 **Loading** `269:1773` — спиннер.
-**ProgressBar** `2960:242` — полоса прогресса, своя страница. `Value` 0–100 с шагом 5 · `Signal` Success/Info/Warning/Error. Ставится **на Fill**: заполнение привязано к ширине (constraint Scale), процент сохраняется на любой ширине. Высота `Space-4`, скругление полное, цвета — `color/component/progress-bar/*` (дорожка — алиас `border/primary`, заполнение — `surface/*-static` по сигналу). Success — прогресс обучения, Info — нейтральный процесс, Warning/Error — отставание и проблема, всегда вместе с подписью. Процент пишут текстом над полосой: полоса число не заменяет. Рисовать полосу линиями или прямоугольниками нельзя — только этот компонент.
+**ProgressBar** `2960:242` — полоса прогресса, своя страница. `Value` 0–100 с шагом 5 · `Signal` Success/Info/Warning/Error. Ставится **на Fill**: заполнение привязано к ширине (constraint Scale), процент сохраняется на любой ширине. Высота `Space-4`, скругление полное, цвета — `color/component/progress-bar/*` (дорожка — алиас `border/primary`, заполнение — `surface/*-static` по сигналу). Success — прогресс обучения, Info — нейтральный процесс, Warning/Error — отставание и проблема, всегда вместе с подписью. Процент пишут текстом над полосой: полоса число не заменяет. **Метка порога — `Show Marker`** (BOOLEAN, по умолчанию выкл., с 11.11): штрих на 85% ширины при любой длине полосы, ширина `Space-2`, выше и ниже полосы на `Space-4`, цвет `color/component/progress-bar/marker` (алиас `icon/primary`). Включают, когда действие открывается после порога: форма решения после просмотра видео. Порог один — 85%, другого положения у метки нет; нужен другой порог — это предложение к компоненту, а не свой штрих поверх. Порог пишут текстом над полосой: слева «Просмотрено 35%», справа «Нужно 85%», подпись заканчивается у метки. Шаг от подписей до полосы с меткой — `Space-8`. Рисовать полосу и метку линиями или прямоугольниками нельзя — только этот компонент.
 
 ### Оверлеи — страница `Overlay`
 
@@ -1217,6 +1217,7 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
   файла вместо «Copy» встал самолётик. Если у варианта иконка своя — сначала отвяжи слой
   (`ic.componentPropertyReferences = {}`), потом меняй; общее умолчание после проверь
   (`set.componentPropertyDefinitions[key].defaultValue`).
+- **`getInstancesAsync()` для компонента, стоящего в слоте, возвращает каждый инстанс дважды.** Настоящий узел имеет id с префиксом `I…` и лежит внутри `SLOT` инстанса-контейнера (`Island`). Второй — узел без детей, его цепочка родителей не доходит до страницы. Правят и удаляют только узлы с префиксом `I`: `insts.filter(i => i.id.startsWith('I'))`. 11.11: замена полосы в 8 слотах `Island` упала на чтении текста из пустого узла.
 - **Инстанс с подменённой иконкой не получает новую заливку мастера.** Перекрасил вектор иконки в мастере — инстансы с иконкой по умолчанию обновились, а где иконку уже подменили, остался старый цвет: он записан оверрайдом в момент подмены (02.11: 12 из 22 `QuickLink` остались на `BlueGradient`). После смены заливки пройти по `getInstancesAsync()` и сверить; новые подмены берут цвет уже из нового мастера.
 - **`clone()` варианта внутри набора теряет привязки к свойствам** (`componentPropertyReferences`
   у слоёв: `characters`, `visible`, `mainComponent`). Новый размер, собранный клоном, выглядит
@@ -1945,7 +1946,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.30.2 · 11.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.3 · 11.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
