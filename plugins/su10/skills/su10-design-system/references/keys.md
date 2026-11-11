@@ -282,7 +282,8 @@ const S = {                                   // figma.importStyleByKeyAsync
 | Text area | `Text Label#3450:11`, `Text Mask#3450:9`, `Text Description#3450:15`, `Show Counter#3474:0`, `Importance#3450:5` | `State=Rest, Has Value=No` |
 | Header [Deprecated] (mobile) | `Show Left Icon#697:17`, `Show Right Icon#697:18`, `Right Icon#697:16`; текст `Title` — обычный слой, правится напрямую | `OnScroll=No` |
 | DesktopHeader [Deprecated] | контент в слоте `actions#1664:0` | — (одиночный) |
-| Dialog | `Show Footer#1387:11`, `Show Secondary Button#1387:12` | — (одиночный) |
+| Dialog | `Show Footer#1387:11`, `Show Secondary Button#1387:12`, `Show Content#4334:0` (пустую середину выключать) | — (одиночный) |
+| MobileBottomSheet | `Show Footer#1387:6`, `Show Secondary Button#1387:7`, `Show Handle#1387:8`, `Show Close#2379:0`, `Show Content#4334:1` (пустую середину выключать) | — (одиночный) |
 | DesktopDrawer | `Show Header#1400:1`, `Show Footer#1400:2`, `Show Secondary Button#1400:3` | **только `Size=M`** — у S и L слот сломан, см. «Баги компонентов» |
 | Overlay | — | `Platform=Desktop` / `Platform=Mobile` |
 | Divider | — | `Orientation=Horizontal` / `Vertical` |

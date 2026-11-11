@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.30.4 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.5 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.30.4 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.5 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -786,6 +786,8 @@ Alert — про состояние страницы, Toast — про резу�
 
 Анатомия у всех трёх одинаковая: шапка (вложенный `Heading` + крестик на `Text Button`) → слот `content` → подвал с кнопками. Общие свойства: `content` (SLOT), `Show Header`, `Show Footer`, `Show Secondary Button`. Заголовок и подзаголовок правятся во вложенном `Heading`.
 
+**Пустую середину выключают: `Show Content=false`** (решение владельца 11.11). Есть у `Dialog` (`Show Content#4334:0`) и `MobileBottomSheet` (`Show Content#4334:1`), по умолчанию включено. Если в слот `content` класть нечего (подтверждение из заголовка, подзаголовка и кнопок), область контента скрывают свойством. Пустой слот оставляет между шапкой и кнопками около 50 px пустоты: так сдавать нельзя. Слой `Content` руками в инстансе не скрывают: только свойством.
+
 **DesktopDrawer** `1400:336` — боковая панель. `Size` S/M/L: `size/drawer-width-s` 280/360, `-m` 320/420, `-l` 360/640. Когда человек продолжает работать с тем же списком и нужен контекст рядом. Прокручивается только слот. Шире L не делать — это уже отдельный экран. Скруглена сторона контента (`radius/border-radius-400`), сторона у края экрана прямая.
 
 **MobileBottomSheet** `1387:27` — шторка снизу. Скругление только сверху, `Show Handle` — ручка перетаскивания. Действия внизу: верх экрана на телефоне недосягаем. Меню и списки в слоте `content` собираются из строк **`ListItem`** на Fill, люди и группы — из **`ProfileItem`** (см. «Списки»). Нажатие на строку-переход или строку-действие закрывает шторку, переключение `Toggle` в строке — нет. Свайп закрывает, если шторку протащили больше чем на 25 % высоты или резко смахнули. `Home Indicator` внутри мастера — рамка устройства: в коде это системный отступ, полоску рисует iOS.
@@ -808,7 +810,7 @@ Alert — про состояние страницы, Toast — про резу�
 
 Одновременно открыт **один** оверлей. Крестик закрывает без сохранения, сохранение живёт в подвале.
 
-**Несохранённые изменения — всегда диалог** (решение владельца 02.11). Есть изменения — любой выход (крестик, подложка, свайп, Esc) сначала показывает `Dialog` «Закрыть без сохранения?»: панель заменяется диалогом, поэтому оверлей остаётся один. Кнопки — «Закрыть» (Primary, `Signal=Error`) и «Продолжить» (Secondary): «Продолжить» возвращает панель с введёнными данными. Длинные подписи в диалог 480 не помещаются (решение владельца 06.11). Изменений нет — закрывается сразу. В этом диалоге крестика нет (`Show Close=false`, решение владельца 11.11): крестик и «Закрыть» делали противоположное. Esc и клик по подложке — как «Продолжить».
+**Несохранённые изменения — всегда диалог** (решение владельца 02.11). Есть изменения — любой выход (крестик, подложка, свайп, Esc) сначала показывает `Dialog` «Закрыть без сохранения?»: панель заменяется диалогом, поэтому оверлей остаётся один. Кнопки — «Закрыть» (Primary, `Signal=Error`) и «Продолжить» (Secondary): «Продолжить» возвращает панель с введёнными данными. Длинные подписи в диалог 480 не помещаются (решение владельца 06.11). Изменений нет — закрывается сразу. В этом диалоге крестика нет (`Show Close=false`, решение владельца 11.11): крестик и «Закрыть» делали противоположное. Контента в нём тоже нет: `Show Content=false`, иначе в середине остаётся пустое место. Esc и клик по подложке — как «Продолжить».
 
 ### Списки — страницы `ListItem` и `ProfileItem`
 
@@ -1115,6 +1117,12 @@ async function fillSlot(instance, build) {        // см. «Слоты» ниж
 1. **Удалить плейсхолдер.** В слоте лежит текст `swap content` — если его не убрать, он останется поверх твоего контента.
 2. **Поставить самому слоту `layoutSizingHorizontal = 'FILL'`.** Слот по умолчанию хугается. Если этого не сделать, вложенный `FILL` не к чему прижиматься: колонка схлопывается в ширину 1px, текст переносится по буквам и ячейка вырастает до сотен пикселей. Симптом — «строка таблицы высотой 670px» или «кнопка уехала на 800px вниз».
 3. **Только потом** класть контент и ставить ему `FILL`.
+
+**Пустой слот не оставляют** (решение владельца 11.11). Удалил плейсхолдер и ничего не положил: в макете остаётся пустая область с отступами слота. Порядок такой:
+- у компонента есть свойство, которое скрывает область слота (`Dialog` и `MobileBottomSheet`: `Show Content`) — выключить его;
+- свойства нет — не оставлять пустоту и не скрывать слой руками, а сразу предложить владельцу доработку компонента (правило 17): какое булево свойство добавить и на какой слой.
+
+Проверка перед сдачей: у каждого оверлея либо в слоте есть контент, либо область контента выключена свойством.
 
 **`clone()` и `combineAsVariants` превращают `SLOT` во фрейм.** При копировании компонента со слотом — например, когда из варианта делают второй вариант — слой-слот у копии приезжает обычным `FRAME` с тем же именем. Внешне и на рендере разницы нет, но слот перестаёт быть слотом: контент в него не положить. После любого `clone()` компонента со слотом сверь `children.find(c => c.type === 'SLOT')`; если там `FRAME` — удали его, клонируй слой-слот с оригинала и перевяжи `componentPropertyReferences = { slotContentId: <propId> }`.
 То же самое делает `combineAsVariants`, **если у слоя-слота на момент сборки нет привязки к SLOT-свойству**. Отсюда порядок: сначала свойство и `slotContentId`, только потом объединение в набор. Слот, уже привязанный к свойству, сборку переживает — проверено дважды: на `Accordion` (свойство добавлено после — слоты упали) и на `MobileActionPanel` (свойство добавлено до — слоты целы).
@@ -1955,7 +1963,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.30.4 · 11.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.5 · 11.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
