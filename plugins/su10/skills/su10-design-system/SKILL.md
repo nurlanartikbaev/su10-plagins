@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.29.6 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.1 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.29.6 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.1 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -467,7 +467,7 @@ Secondary в светлой теме: 50 → hover 100 → pressed 200. До 20.
 `State=Selected` (с 06.11, только `Variant=Default`) — кнопка открыла меню или панель, и они сейчас открыты: подпись и иконка синие (`text-button/default/text-selected` → `text/info-static`, `icon-selected` → `icon/info-outline-static`). Закрыли — снова Rest. Link как «открыто» не ставят.
 Внутри строки текста, в шапке поля (`Show Action`), в подвале таблицы. Link — переход на другую страницу, Default — действие на месте. Им же собирается крестик в шапках оверлеев: иконка тёмная, а не акцентная.
 
-**Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel`. **Только десктоп; на телефоне — `MobileActionPanel`, на экранах редизайна — `MobileActionPanel v2`** (решение владельца 04.11). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
+**Action Panel** `1060:1884` — панель ключевых действий внизу экрана или шага. Страница `ActionPanel`. **Только десктоп; на телефоне — `MobileActionPanel v2`** (решение владельца 04.11; v1 устарел 11.11). Кнопки скрываются тремя тумблерами: `Show Left Button`, `Show Right Button`, `Show Main Button`. Обводка 2 (`stroke/border-stroke-bold`) — так задумано, не выравнивать под обычную линию.
 
 - **Кнопки пошагового флоу на десктопе — только в `Action Panel`**, не голыми `Button` под
   контентом: оценочный тест, шаги «1 из 2 → 2 из 2», экран результата, «время вышло». Панель —
@@ -669,24 +669,26 @@ Island/Accordion с `layoutSizingHorizontal='FILL'`, без дополнител
 
 **Pagination** `894:26885` + **PageButton** `894:26935`. `Total pages` 3 / 8+ / Unknown. До семи страниц показываются все, с восьми — многоточие. Шаг между кнопками `Space-8`. У `PageButton` Active только заливка, обводки нет. Стрелки — `Button` Tertiary `Only Icon=Yes`, но тёмные: `icon/primary`, в Disabled `icon/tertuary-black-static`; это записанное исключение из правил 5 и 13 (решение владельца 02.11).
 
-**Header** `697:31280` + **Status Bar** `697:31403` — шапка мобильного экрана.
+**Status Bar** `697:31403` — статус-бар устройства над шапкой, действующий.
+
+**Header [Deprecated]** `697:31280` — старая шапка мобильного экрана. **Устарел 11.11, в новых макетах не ставят.** Замена: `MobileHeader v2`.
 
 **Статус-бар над `MobileHeader v2`** `2227:28991` (редизайн) — **всегда залит стилем-градиентом `BackgroundTop`** (`S:465e657a273b007d0b1a3bd250030fa81cfbbdd7,`), а не сплошным цветом: экран плавно «уходит» под системную строку. Стиль ставят на инстанс `Status Bar` во фрейме `Header and Status Bar` — `await statusBar.setFillStyleIdAsync(BACKGROUND_TOP)`, именно стиль, а не скопированные стопы, чтобы правка стиля доезжала до всех экранов. Решение владельца 29.10; до этого стоял `surface/2-layer`. Касается любого нового экрана и клона старого — проверяй сразу после сборки.
 
-**MobileActionPanel** `1721:20159` — панель действий внизу мобильного экрана. `Type` Vertical/Horizontal · `content` SLOT над кнопками · `Show Content`, `Show Secondary Button` BOOLEAN.
+**MobileActionPanel [Deprecated]** `1721:20159` — старая панель действий внизу мобильного экрана. **Устарел 11.11, в новых макетах не ставят.** Замена: `MobileActionPanel v2`. `Type` Vertical/Horizontal · `content` SLOT над кнопками · `Show Content`, `Show Secondary Button` BOOLEAN.
 Vertical — кнопки друг под другом, основная сверху; Horizontal — в строку, основная справа. В слот над кнопками кладут сумму, чекбокс согласия, короткую подпись. Кнопки выведены наружу. **Не путать с `Action Panel`** `1060:1884` — та десктопная, с описанием слева и кнопками справа.
 
 **Home Indicator** `1720:646` — безопасная зона жеста внизу экрана iPhone: полоска 134×5 на подложке 34. Ставится последним блоком, выключать нельзя, высоту задаёт система. Полоска контрастна подложке: чёрная в светлой теме, белая в тёмной (`home-indicator/bar`); в нативном iOS её рисует система.
 
-**MobileBottomBar** `1721:20160` — готовый низ мобильного экрана: `MobileActionPanel` + `TabBar` + `Home Indicator`. `Show Action Panel`, `Show TabBar` BOOLEAN; зона жеста не выключается. Обе панели выведены наружу, поэтому кнопки, слот и состав табов правятся прямо в свойствах.
+**MobileBottomBar [Deprecated]** `1721:20160` — старый низ мобильного экрана: `MobileActionPanel` + `TabBar` + `Home Indicator`. **Устарел 11.11, в новых макетах не ставят.** Замена: `MobileBottomBar v2`. `Show Action Panel`, `Show TabBar` BOOLEAN; зона жеста не выключается. Обе панели выведены наружу, поэтому кнопки, слот и состав табов правятся прямо в свойствах.
 
-**TabBar** `1713:563` + **TabBarItem** `1713:562` — нижняя навигация мобильного экрана. У панели слот `items`, у таба `State` Rest/Selected, `Label` TEXT и `Icon` INSTANCE_SWAP.
+**TabBar [Deprecated]** `1713:563` — старая нижняя навигация во всю ширину. **Устарел 11.11, в новых макетах не ставят.** Замена: `MobileTabbar v2`. **TabBarItem** `1713:562` действует: его кладут в слот `MobileTabbar v2`. У панели слот `items`, у таба `State` Rest/Selected, `Label` TEXT и `Icon` INSTANCE_SWAP.
 От трёх до пяти табов, каждый ставится на Fill — тогда они делят ширину поровну. Выбран ровно один. Высота 56: `Space-8` сверху и снизу плюс 40 на таб; зона home indicator добавляется экраном, а не компонентом. `Selected` красит иконку и подпись акцентом (`icon/info-outline-static` и `text/info-static`).
 
 **Редизайн — v2, стеклянный низ экрана.** Три компонента одной формы: ширина 351, поля 12 от
 краёв экрана, скругление 16, подложка `mobile-tabbar-v2/surface`, кромка `mobile-tabbar-v2/border`,
-размытие 12. Висят над контентом, зону home indicator под ними добавляет экран. На экранах со
-старым `TabBar` во всю ширину берут v1 (`MobileActionPanel`, `MobileBottomBar`), v1 и v2 не мешают.
+размытие 12. Висят над контентом, зону home indicator под ними добавляет экран. v1 (`TabBar`,
+`MobileActionPanel`, `MobileBottomBar`) устарели 11.11: в новых макетах только v2.
 - **MobileTabbar v2** `2224:669` (паспорт `MobileTabbarV2Passport` `2230:685`) — плавающий таб-бар,
   слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54. У выбранного таба иконка Bold, у остальных Outline (исправлено 06.11, до этого здесь были записаны неверные иконки; верные стоят в макетах): Главная — `Home Angle` Outline `756852467f0c8a295d650cd3b6390ac638771fb5` / Bold `f5db4ce234e96ef1450f01101bd3be435e34120c`; Курсы — `School / Notebook Minimalistic` Outline `eb9c3c8d8c0914dcbac9a5a1d5f1fafc905d459e` / Bold `5fbb3b2ce54e9b0cd8c72b9aa5fa5e658e7d72ab`; JuzAI — `AI` Outline `b83a16cee0dec41953acaa9c3ed632a0dfc6ff59` / Bold `b298700cdbdbbc000aff65c4e4a26b20a287bc71`; Задачи — `Time / Calendar` Outline `6644bc081da698626d7a4d8497328d0424e13923` / Bold `da4b72fefa99fbe0812466d7d297eb8723c7e8b8`.
 - **MobileActionPanel v2** `3718:2054` (паспорт `3719:2087`, с 29.10) — стеклянная панель действий,
@@ -703,7 +705,7 @@ Vertical — кнопки друг под другом, основная све�
   Выбран владельцем 29.10 из четырёх вариантов (две панели / одна панель / кнопки вместо табов /
   круглая кнопка рядом с баром). Контент прокручивается под панелями и заканчивается выше них.
 - **StreakPill** `2235:377` (страница `MobileHeader`, паспорт `2238:365`) — плашка серии: звезда и счётчик, подворачивается под аватар, аватар сверху, шаг −16. `State` Active/Zero · `Value` TEXT · `Placement` (с 02.11): Right — справа от аватара, высота 34, мобильная шапка с `Avatar` M; Left — слева от аватара, высота 28, десктопная шапка с `Avatar` S. Плашка ведёт в раздел серии. Zero — серии нет, «0»; Active — число дней подряд; третьего состояния нет (решение владельца 06.11).
-- **DesktopHeader v2** `3852:399` (паспорт `3853:3031`, с 02.11) — стеклянная шапка десктопа, токены `mobile-tabbar-v2/*`, скругление снизу, ширина 1392, стоит в x 24, y 0 над контентом. `Logo` M; слот `navigation` со строкой `NavLink`, шаг 24; слот `actions`: иконки на `MenuItem` `Type=Closed`, затем `StreakPill` `Placement=Left` + `Avatar` S. На экранах со старой шапкой во всю ширину остаётся `DesktopHeader`.
+- **DesktopHeader v2** `3852:399` (паспорт `3853:3031`, с 02.11) — стеклянная шапка десктопа, токены `mobile-tabbar-v2/*`, скругление снизу, ширина 1392, стоит в x 24, y 0 над контентом. `Logo` M; слот `navigation` со строкой `NavLink`, шаг 24; слот `actions`: иконки на `MenuItem` `Type=Closed`, затем `StreakPill` `Placement=Left` + `Avatar` S. `DesktopHeader` v1 устарел 11.11.
 - **NavLink** `3850:17024` (страница `NavLink`, паспорт `3853:443`) — пункт верхней навигации десктопа без подложки и линии. `State` Rest/Hover/Selected, `Label`. Выбран один. Боковое меню — `MenuItem`, разделы внутри страницы — `Tab`.
 - **Logo** `3850:17014` (страница `Logo`, паспорт `3853:24`) — логотип на `icon/brand`, `Size` S 72×30 телефон, M 78×32 десктоп. В `DesktopHeader` v1 логотип пока зашит слоем. Логотип не ссылка, на главную не ведёт (решение владельца 06.11).
 
@@ -713,7 +715,7 @@ Vertical — кнопки друг под другом, основная све�
 - **QuickLink** `3850:17028` (страница `QuickLink`, паспорт `3853:1141`) — быстрая ссылка в ряду, только телефон: `Icon`, `Label`, `Show Badge`, в ряду на Fill, ряд в `Island`. Иконки Bold, заливка — стиль `IconGradient`: в светлой теме как `BlueGradient`, в тёмной как `LightBlueGradient`, по темам руками не перекрашивают. У иконок из двух векторов стиль сам ложится только на первый: второму ставят `IconGradient` в инстансе (решение владельца 02.11, иконка целиком одного цвета). Бейдж в углу с текстом 6 px без стиля, немного заезжает на иконку (x 42): так задумано, решение владельца 04.11.
 - **SocialLink** `3850:17098` (страница `SocialLink`, паспорт `3866:293`) — логотип соцсети и название. `Icon` — цветной логотип из пака, `Color / Social / YouTube`, `Telegram`, `Instagram`, `TikTok`; новая сеть — новая иконка в паке. `Type` Logo + Label / Logo · `State` Rest/Hover (Hover только с подписью, десктоп) · `Label`. Logo — шаг 12 в слоте `action` у `Heading`, телефон; Logo + Label — сетка в `Island`, шаг 16, десктоп. Логотипы не перекрашивают.
 
-**DesktopHeader** `1664:62` — шапка десктопного экрана: логотип слева, слот `actions` справа. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.
+**DesktopHeader [Deprecated]** `1664:62` — старая шапка десктопного экрана: логотип слева, слот `actions` справа. **Устарел 11.11, в новых макетах не ставят.** Замена: `DesktopHeader v2`. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.
 
 ### Данные
 
@@ -1168,7 +1170,7 @@ for (const t of tabs) t.layoutSizingHorizontal = 'FILL';   // делят шир�
 
 | Что | Ширина |
 |---|---|
-| Ряд равнозначных контролов (`SegmentedControlRow`, `TabBar`, колонки фильтров) | контейнер `FILL`, **дети тоже `FILL`** — делят поровну |
+| Ряд равнозначных контролов (`SegmentedControlRow`, `MobileTabbar v2`, колонки фильтров) | контейнер `FILL`, **дети тоже `FILL`** — делят поровну |
 | Поле ввода, селект, таблица, карточка в колонке | `FILL` |
 | Кнопка, `Badge`, `Tag`, иконка, подпись | `HUG` — их ширину диктует содержимое |
 | Ряд чипов/тегов переменной длины | контейнер `FILL`, дети `HUG`; не влезает — это прокрутка, а не обрезка |
@@ -1406,9 +1408,9 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 - окно `Dialog` — тот же приём, но `primaryAxisAlignItems = 'CENTER'` и `counterAxisAlignItems = 'CENTER'`.
 Проверка перед сдачей: у каждой шторки `высота экрана − (y + height) = 0`, у окна отступы сверху и снизу равны.
 
-**Мобильный экран.** `Status Bar` + `Header` сверху (с `MobileHeader v2` статус-бар залит стилем `BackgroundTop`, см. каталог), контент в `Island`-блоках, низ — `MobileBottomBar` (панель действий, навигация и зона жеста в одном блоке, лишнее выключается). Мода `Platform = Mobile`.
+**Мобильный экран.** `Status Bar` + `MobileHeader v2` сверху (статус-бар залит стилем `BackgroundTop`, см. каталог), контент в `Island`-блоках, низ — `MobileBottomBar v2` (панель действий и таб-бар, лишнее выключается) и `Home Indicator` последним блоком. Мода `Platform = Mobile`.
 
-**Десктоп.** Сверху `DesktopHeader` на Fill, сайдбар из `MenuItem`, контент в `Island`, действия — `Action Panel` с `Elevate=On`, если список длиннее экрана. Мода `Platform = Desktop`.
+**Десктоп.** Сверху `DesktopHeader v2` (ширина 1392, x 24, над контентом), сайдбар из `MenuItem`, контент в `Island`, действия — `Action Panel` с `Elevate=On`, если список длиннее экрана. Мода `Platform = Desktop`.
 
 **Десктопный экран со списком или таблицей.** Самая частая раскладка, собирается так:
 
@@ -1864,6 +1866,38 @@ table (frame, layoutMode NONE)
    записи — проверить `git status` в `~/Documents/su10-plugins`, там должны появиться изменения
 17. **Версию и синхронизацию берёт на себя хук — руками не надо** (он поднимает только патч; новый компонент — это минорная версия, её поднимают руками в трёх местах до коммита, тогда хуку делать нечего). Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, который правят несколько человек. На хуке `Stop` стоит `tools/su10-autopush.sh`: он подтягивает правки остальных, поднимает patch-версию в `SKILL.md` и `plugin.json`, проставляет в шапке, кто обновил, коммитит и пушит. У всех с `autoUpdate` новая версия подхватывается при следующем запуске. Твоя часть — только запись в `references/changelog.md`: что изменилось и почему, этого хук придумать не может. **Хук работает только на `main`**: на другой ветке он ничего не коммитит, не подтягивает и не пушит. Правку на ветке коммитят сами и перед слиянием поднимают patch-версию руками: в `plugin.json`, описании и шапке `SKILL.md` и в разделе «Версии». Иначе `autoUpdate` её не подхватит
 
+## Устаревшие компоненты — `[Deprecated]`
+
+Компонент с `[Deprecated]` в имени в новые макеты не ставят: берут замену из его описания.
+В старых макетах он остаётся, пока экран не пересобирают. Ключ у компонента прежний.
+
+| Устарел | Замена | С какого числа |
+|---|---|---|
+| `Header [Deprecated]` `697:31280` | `MobileHeader v2` | 11.11.2026 |
+| `DesktopHeader [Deprecated]` `1664:62` | `DesktopHeader v2` | 11.11.2026 |
+| `TabBar [Deprecated]` `1713:563` | `MobileTabbar v2` | 11.11.2026 |
+| `MobileActionPanel [Deprecated]` `1721:20159` | `MobileActionPanel v2` | 11.11.2026 |
+| `MobileBottomBar [Deprecated]` `1721:20160` | `MobileBottomBar v2` | 11.11.2026 |
+
+**Как решают, что компонент устарел** (решение владельца 11.11). Мерило — файл Redesign (Student),
+fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизайн. Компонент устарел, если его нет ни на
+одной странице файла и на его месте везде стоит замена. Считают все инстансы, вместе с вложенными
+и лежащими в слотах. Компонент, которого в редизайне просто нет (календари, `Pagination`,
+`ComboBox`, шапка таблицы), не устарел: ученику он не понадобился. `ListItem` v1 не устарел: в
+редизайне он стоит около 2500 раз, `ListItem v2` только в JuzAI.
+
+**Как помечают.** Компонент не удаляют и не прячут из публикации, иначе старые макеты потеряют связь.
+1. Имя набора или компонента: `<Имя> [Deprecated]`.
+2. В начало `description`: «DEPRECATED с <дата>. В новых макетах не использовать. Замена: <компонент>.»
+3. Первым блоком паспорта `Alert` `Signal=Warning`, `Weight=Primary`, слой `Deprecated note`, без
+   крестика и кнопок: «Компонент устарел» / «В новых макетах берите <замена>.»
+4. `Title` у `DocHeading` паспорта: новое имя.
+5. Паспорт вырос: блоки ниже на странице сдвигают на ту же высоту.
+6. Запись в таблицу выше, в каталог, в `keys.md` и в `changelog.md`. Публикует библиотеку человек.
+
+**Известный хвост:** мобильный `DocScreenMock` держит внутри `Header [Deprecated]` (тумблер
+`Show Header`), поэтому моки в паспортах показывают старую шапку.
+
 ## Что не трогать
 
 - **`MultiSelect`** — нетокеновые значения в нём внесены владельцем намеренно, не «чинить»
@@ -1909,7 +1943,7 @@ table (frame, layoutMode NONE)
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.29.6 · 11.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.1 · 11.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

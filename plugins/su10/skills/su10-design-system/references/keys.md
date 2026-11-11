@@ -82,8 +82,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | ProfileItem | Set | `6b3ca3fb9c4d9dd273389a693a9226129311d9b6` |
 | ProgressBar | Set | `426c2f75a8b3e2c4e6f4d67df9438bdd2c3b3716` |
 | NumberInput | Set | `4dced48846d7ae96c9e999170465899349283c1d` |
-| Header (mobile) | Set | `4376085fe811c84b3b1021509b62be761f933771` |
-| DesktopHeader | Single | `9c8329d80e2fc8d93a4a1098870783b728d65f37` |
+| Header [Deprecated] (mobile, замена `MobileHeader v2`) | Set | `4376085fe811c84b3b1021509b62be761f933771` |
+| DesktopHeader [Deprecated] (замена `DesktopHeader v2`) | Single | `9c8329d80e2fc8d93a4a1098870783b728d65f37` |
 | Status Bar | Single | `a78dfd84c6573f8e7666e854ba76972fcaddd4bf` |
 | TableCell | Set | `e59035655bbe3b304ecfb1f1fc8f08898bbfb7b4` |
 | TableRow | Set | `4976e4b7fde73cfecda30a7a41e5413fe35d4c22` |
@@ -104,11 +104,11 @@ Node ID из каталога выше годятся для ссылок и д�
 | StatContent | Set (`State` Default/Disabled), `Label#4259:0`, `Value#4259:3`, `Hint#4259:6`, `Show Hint#4259:9` | `edfcb56fe31d7d2c59ae8bc385f077f4aeb2c6a2` |
 | HeaderButton | Set | `f0bb9240a2cfd9712196c9166bd626d1e4dfee7f` |
 | Accordion | Set | `610c45714a8c02db13e706df1989d3672a3e7e70` |
-| TabBar | Single | `d5966621e6ab36fe14767aafd92919fa01948345` |
+| TabBar [Deprecated] (замена `MobileTabbar v2`) | Single | `d5966621e6ab36fe14767aafd92919fa01948345` |
 | TabBarItem | Set | `00aca1142f096373da3da161922ac2c08d8cf093` |
-| MobileActionPanel | Set | `c4a63ec6d61ea27edefdfe610f58a78c10551273` |
+| MobileActionPanel [Deprecated] (замена `MobileActionPanel v2`) | Set | `c4a63ec6d61ea27edefdfe610f58a78c10551273` |
 | Home Indicator | Single | `69dcf80775ec1d795edb4b6fdb982e2638c0969e` |
-| MobileBottomBar | Single | `43a17b6ea11818d8bfdb4adee3f7dd931ad08fa8` |
+| MobileBottomBar [Deprecated] (замена `MobileBottomBar v2`) | Single | `43a17b6ea11818d8bfdb4adee3f7dd931ad08fa8` |
 | MobileActionPanel v2 | Single | `3f4e0ddb4ae898cef658b58eed9e045cb629a9f7` |
 | MobileBottomBar v2 | Single | `266fa9f95ab88bdaded26ee4981e942fba992979` |
 | DesktopHeader v2 | Single | `7c01798c28f677a5a9a59d4e3bd8784e4cc302c1` |
@@ -280,8 +280,8 @@ const S = {                                   // figma.importStyleByKeyAsync
 | Text field | `Show Label#3342:22`, `Show Description#3342:16`, `Show Prefix#3342:17`, `Text Mask#3411:64`; у Prefix — `Icon#3342:1` | `Size=M, State=Rest, Has Value=Off` |
 | SingleSelect | `Text Label#3570:1`, `Show Label#3570:8`, `Show Description#3570:2`, `Text Value#3570:10` | `Size=M, State=Rest, Has Value=On` |
 | Text area | `Text Label#3450:11`, `Text Mask#3450:9`, `Text Description#3450:15`, `Show Counter#3474:0`, `Importance#3450:5` | `State=Rest, Has Value=No` |
-| Header (mobile) | `Show Left Icon#697:17`, `Show Right Icon#697:18`, `Right Icon#697:16`; текст `Title` — обычный слой, правится напрямую | `OnScroll=No` |
-| DesktopHeader | контент в слоте `actions#1664:0` | — (одиночный) |
+| Header [Deprecated] (mobile) | `Show Left Icon#697:17`, `Show Right Icon#697:18`, `Right Icon#697:16`; текст `Title` — обычный слой, правится напрямую | `OnScroll=No` |
+| DesktopHeader [Deprecated] | контент в слоте `actions#1664:0` | — (одиночный) |
 | Dialog | `Show Footer#1387:11`, `Show Secondary Button#1387:12` | — (одиночный) |
 | DesktopDrawer | `Show Header#1400:1`, `Show Footer#1400:2`, `Show Secondary Button#1400:3` | **только `Size=M`** — у S и L слот сломан, см. «Баги компонентов» |
 | Overlay | — | `Platform=Desktop` / `Platform=Mobile` |
