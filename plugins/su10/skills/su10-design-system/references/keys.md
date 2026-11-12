@@ -137,6 +137,7 @@ Node ID из каталога выше годятся для ссылок и д�
 | Search / Magnifer | `e082f95cf4b48ce4b693b631669af58579e3b43d` |
 | Essentional, UI / Close | `ba1c0831265027d12b55961b22ffb78a9ae304ce` |
 | Time / Calendar | `6644bc081da698626d7a4d8497328d0424e13923` |
+| Time / Calendar Minimalistic (таб «Задачи»; Bold у выбранного — `a36d5eeac2c51f9118836c011159159811074a5f`) | `4f7ae1a665df1bc3381c9dad7c242ae2880b2808` |
 | Shopping, Ecommerce / Bag | `eee56456667b6e510c7d3739a5d532e42ea15db5` |
 | Essentional, UI / Home | `3aa09976a88e1a6af2e3dfdb1a18af50fb74e83b` |
 | Notifications / Bell | `dfc33364b045e8ffa629fe8cf53c203dde111061` |
