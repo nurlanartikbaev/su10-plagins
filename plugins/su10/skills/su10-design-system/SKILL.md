@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.30.5 · 11.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.6 · 12.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.30.5 · 11.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.6 · 12.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -704,6 +704,10 @@ Vertical — кнопки друг под другом, основная све�
   поэтому в слот панели прямо в инстансе кладут и поле ввода (примеры в паспорте: с текстом и пустое).
   Выбран владельцем 29.10 из четырёх вариантов (две панели / одна панель / кнопки вместо табов /
   круглая кнопка рядом с баром). Контент прокручивается под панелями и заканчивается выше них.
+  **Смена выбранного таба** (мастер исправлен 12.11): у вложенного `TabBarItem` одним вызовом меняют `State` и `Icon`
+  (у выбранного Bold, у прежнего Outline). У «Главной» и «Курсов» цвет иконки идёт за `State`. У «JuzAI» и «Задач»
+  иконка в мастере нарисована обводкой с ручной привязкой: после смены `State` цвет привязывают вручную к
+  `color/component/tabbar/icon-selected` или `icon-rest` и проверяют снимком.
 - **StreakPill** `2235:377` (страница `MobileHeader`, паспорт `2238:365`) — плашка серии: звезда и счётчик, подворачивается под аватар, аватар сверху, шаг −16. `State` Active/Zero · `Value` TEXT · `Placement` (с 02.11): Right — справа от аватара, высота 34, мобильная шапка с `Avatar` M; Left — слева от аватара, высота 28, десктопная шапка с `Avatar` S. Плашка ведёт в раздел серии. Zero — серии нет, «0»; Active — число дней подряд; третьего состояния нет (решение владельца 06.11).
 - **DesktopHeader v2** `3852:399` (паспорт `3853:3031`, с 02.11) — стеклянная шапка десктопа, токены `mobile-tabbar-v2/*`, скругление снизу, ширина 1392, стоит в x 24, y 0 над контентом. `Logo` M; слот `navigation` со строкой `NavLink`, шаг 24; слот `actions`: иконки на `MenuItem` `Type=Closed`, затем `StreakPill` `Placement=Left` + `Avatar` S. `DesktopHeader` v1 устарел 11.11.
 - **NavLink** `3850:17024` (страница `NavLink`, паспорт `3853:443`) — пункт верхней навигации десктопа без подложки и линии. `State` Rest/Hover/Selected, `Label`. Выбран один. Боковое меню — `MenuItem`, разделы внутри страницы — `Tab`.
@@ -1225,6 +1229,7 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
   файла вместо «Copy» встал самолётик. Если у варианта иконка своя — сначала отвяжи слой
   (`ic.componentPropertyReferences = {}`), потом меняй; общее умолчание после проверь
   (`set.componentPropertyDefinitions[key].defaultValue`).
+- **Ручная заливка вектора иконки в составном мастере перекрывает цвет состояния вложенного компонента.** 12.11: в `MobileBottomBar v2` у иконок табов стояла заливка, заданная вручную; после смены `State` у таба подпись перекрашивалась, а иконка оставалась прежней. Свежий `TabBarItem` ведёт себя верно: цвет варианта переходит на подменённую иконку по имени слоя. Лечение в мастере: у вложенной иконки `resetOverrides()`, затем переключить `State` туда и обратно — заливка возвращается от варианта. Отрисовку мастера и его инстансов сверяют до и после: `exportAsync({format:'SVG_STRING'})`, строки должны совпасть. Иконку, перерисованную обводкой, так не лечат: сброс меняет её вид.
 - **`getInstancesAsync()` для компонента, стоящего в слоте, возвращает каждый инстанс дважды.** Настоящий узел имеет id с префиксом `I…` и лежит внутри `SLOT` инстанса-контейнера (`Island`). Второй — узел без детей, его цепочка родителей не доходит до страницы. Правят и удаляют только узлы с префиксом `I`: `insts.filter(i => i.id.startsWith('I'))`. 11.11: замена полосы в 8 слотах `Island` упала на чтении текста из пустого узла.
 - **Инстанс с подменённой иконкой не получает новую заливку мастера.** Перекрасил вектор иконки в мастере — инстансы с иконкой по умолчанию обновились, а где иконку уже подменили, остался старый цвет: он записан оверрайдом в момент подмены (02.11: 12 из 22 `QuickLink` остались на `BlueGradient`). После смены заливки пройти по `getInstancesAsync()` и сверить; новые подмены берут цвет уже из нового мастера.
 - **`clone()` варианта внутри набора теряет привязки к свойствам** (`componentPropertyReferences`
@@ -1963,7 +1968,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.30.5 · 11.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.6 · 12.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
