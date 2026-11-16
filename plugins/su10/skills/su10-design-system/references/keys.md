@@ -127,6 +127,9 @@ Node ID из каталога выше годятся для ссылок и д�
 | DateStripCell | Set | `d87a0c6916e2d7af61efd6bb7b17512ac4b4db1f` |
 | DatePickerCalendar | Set | `e9948cc1353733d9b8d640550a7a72da9871a024` |
 | CalendarCell | Set | `797b4be84f5ae822537edf3a525612666c74cdd8` |
+| Student path / Point (Operators, `Student Path [Student]`) | Set (`Type` Current/Grant/Ambition/Start, `Size`) | `54ed87378a3b97fa88b0fdff497ae9eaa4a7f745` |
+| Student path / Bar (Operators) | Set (`Case`, `Width` 327/652) | `04c434297951b33c97cc84b4d333379f0e0d821c` |
+| Student path / Banner (Operators) | Set (`Case`, `Platform` Mobile/Desktop) | `a795179e0f9641ac6983dd687b8d64bdbde6eb38` |
 | Skeleton | Set (`Type` Heading/Body/Caption/Block S/Block M/Block L/Circle) | `44db53d9b91e43f73e1c6ceef65f2238fa819ab1` |
 | Slider | Set (`Size`, `State`, `Value` 0–100 шаг 10); `Show Label#4410:22`, `Label#4410:89`, `Show Value#4410:156`, `Value Text#4410:223`, `Show Scale#4410:290`, `Min#4410:357`, `Max#4410:424`, `Show Ticks#4410:491`, `Show Description#4410:558`, `Description#4410:625` | `51beef06a6968cf76df93c5d6240a454238bc641` |
 | RangeSlider | Set (`Size`, `State`, `Value` пресеты от–до); `Show Label#4412:0`, `Label#4412:91`, `Show Value#4412:182`, `Value Text#4412:273`, `Show Scale#4412:364`, `Min#4412:455`, `Max#4412:546`, `Show Ticks#4412:637`, `Show Description#4412:728`, `Description#4412:819` | `d70ec3b0848e693cbf0a1ef9ec74be3cc485159e` |
