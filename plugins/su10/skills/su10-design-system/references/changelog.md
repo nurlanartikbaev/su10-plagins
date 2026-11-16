@@ -21,6 +21,18 @@
 
 ---
 
+## v4.32.7 · 16.11.2026 · обновил Nurla
+
+Правки мастеров по редизайну страницы урока. Новых компонентов нет. Запись в файле SU10: страница `Changelog`, v4.
+
+- **`ListItem` и `ListItem v2`: `State=Selected`**, все четыре `Signal`. Выбранная строка в списке навигации. Новый токен `color/component/list-item/surface-selected`, алиас `surface/brand-transparent-static`.
+- **`ListItem · Trailing` и `Trailing v2`: `Show Chevron`**. У `Type=Value` и `Type=Badge` шеврон можно выключить, если строка никуда не ведёт. Правило «бейдж без шеврона не ставят» заменено.
+- **Проверка ответа**: `State=Error` и `State=Success` у `RadioButton` и `RadioItem`, `State=Success` у `CheckBox` и `CheckBoxItem`. Новый токен `color/component/controls/success`.
+- **`FileItem`: `Show Remove`**, кнопка «Удалить файл». `Files` и `FileItem` впервые описаны в `SKILL.md`.
+- Паспорта дополнены разделами. В `keys.md` новые токены и ключи свойств.
+- **Не сделано.** Таб JuzAI: иконка в `MobileTabbar v2` ссылается на старый компонент пака (ключ `b83a16cee0dec41953acaa9c3ed632a0dfc6ff59`), текущая `Outline / Essentional, UI / AI` в паке нарисована обводкой. Нужна перерисовка заливкой в паке и публикация. `Rating` не заводили: в системе есть `RatingScale`. `VideoPlayer`, `FileDropzone`, `AudioRecorder` и блок результата: страница `Lesson [Student]` после выбора вариантов владельцем. В паке нет иконок Play, Pause, Full Screen, Volume, Microphone.
+- Библиотека SU10 не опубликована: в продуктовых файлах новых состояний нет до публикации.
+
 ## v4.32.5 · 16.11.2026 · обновил Nurla
 
 - **Замок всегда Bold** (решение владельца 16.11): `Bold / Security / Lock`, ключ `074b8a96e2ace641ea042685beb5e278e35c565d`. Новое исключение в правиле 5 `SKILL.md`, строка в `keys.md`. Замок на карте курса не трогают. Описания `Bold / Security / Lock` и `Outline / Security / Lock` в паке обновлены 16.11; пак нужно опубликовать. Остальные иконки семейства (`Lock Unlocked`, `Lock Password`, `Lock Keyhole`) не менялись.

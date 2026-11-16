@@ -230,6 +230,7 @@ const V = {                                   // figma.variables.importVariableB
   radiusRounded:"0576cfa57576318e03cc9c0e584111ab4db22283",
   listItemHover:  "9228c33a2abfef9c20d2a35740d4ae4a64a63b41", // color/component/list-item/surface-hover
   listItemPressed:"2226495f5b901418599575d12fe85b94955688ce", // color/component/list-item/surface-pressed
+  listItemSelected:"511c762ea2c4638f0a6c410d724b266d6421230d", // color/component/list-item/surface-selected (с 16.11)
   progressTrack:  "6a08f9b53f74ff094f3cd76b4723dfb175e9d571", // color/component/progress-bar/track
   progressSuccess:"512bed6379c4dffde143a3ddfcd020f1ed6f0324", // fill-success
   progressInfo:   "069020fa37b1e82ddc65c79ab04ff6fffec8c146", // fill-info
@@ -238,6 +239,7 @@ const V = {                                   // figma.variables.importVariableB
   progressLabel:  "719e5f07df615187c200bff38b98711bda4f38c3", // color/component/progress-bar/label
   progressValue:  "3f0e6d59ddc3e5dfd37005886ec70bfe0c68e88a", // color/component/progress-bar/value
   controlsError:  "817c824467c72522f5f07ade0162c8ed6effccf7", // color/component/controls/error
+  controlsSuccess:"4cf1639d5651e21228d8f01477b55989776bbe9e", // color/component/controls/success (с 16.11)
   skeletonSurface:"5cd06f22c1ebce6008263eb547328101158d8b3e", // color/component/skeleton/surface
   skeletonHighlight:"5b1859affe683163bc947a0e8918a81d14f6b08b", // color/component/skeleton/highlight
 };
@@ -311,7 +313,9 @@ const S = {                                   // figma.importStyleByKeyAsync
 | DesktopDrawer | `Show Header#1400:1`, `Show Footer#1400:2`, `Show Secondary Button#1400:3` | **только `Size=M`** — у S и L слот сломан, см. «Баги компонентов» |
 | Overlay | — | `Platform=Desktop` / `Platform=Mobile` |
 | Divider | — | `Orientation=Horizontal` / `Vertical` |
-| ListItem | `Title#2816:0`, `Description#2816:4`, `Show Description#2816:8`, `Show Divider#2816:28`, `Show Leading#2840:0`, `Show Trailing#2840:4`; левая и правая части — вложенные `Leading` / `Trailing`, правятся своими свойствами | `State=Rest, Signal=Default` (State Rest/Hover/Pressed/Disabled, Signal Default/Success/Warning/Critical) |
+| ListItem | `Title#2816:0`, `Description#2816:4`, `Show Description#2816:8`, `Show Divider#2816:28`, `Show Leading#2840:0`, `Show Trailing#2840:4`; левая и правая части — вложенные `Leading` / `Trailing`, правятся своими свойствами | `State=Rest, Signal=Default` (State Rest/Hover/Pressed/Disabled/Selected, Signal Default/Success/Warning/Critical). У вложенного `Trailing`: `Show Chevron#4448:83`, у `Trailing v2`: `Show Chevron#4448:94` |
+| FileItem `427b2c24fef8f5e950127de1a97270a789084148` | `Title#2986:5`, `Meta#2986:6`, `Show Meta#2986:7`, `Show Divider#2986:9`, `Show Remove#4450:0` | `State=Rest` (State Rest/Hover/Pressed) |
+| RadioItem, CheckBoxItem | свойств с `#` нет; подпись правят во вложенном `Label` | `State` Rest/Hover/Disabled/Error/Success (с 16.11: Error и Success у RadioItem, Success у CheckBoxItem) |
 | ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone Default/Critical/Success/Warning/Disabled задаёт строка) |
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |

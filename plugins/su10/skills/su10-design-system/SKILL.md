@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.32.6 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.32.7 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.32.6 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.32.7 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -567,6 +567,7 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 **CheckBox** `592:7427` · **RadioButton** `592:7169` — сами контролы. Галочка — `Linear / Messages, Conversation / Check` из пака, 18 (S — 14), обводка 1.67, `icon/white-static`; минус InGroup — `Bold / Essentional, UI / Minus` 18. Фронт берёт их из SU10 Icon Pack, не рисует. Акцент **teal** с 13.11 (с 22.09 был синий, до этого зелёный): `controls/active` — teal/600, в тёмной teal/400. Цвет живёт не в компонентах, а в трёх переменных `color/component/controls/active`, `-hover`, `-disabled`; на них же сидит `Toggle` и галочка в `SingleSelectItem`, поэтому они тоже teal — **это решение владельца, слой `controls` намеренно не разделён**. Перекрашивать контролы поштучно не надо: меняется токен, и меняются все.
 **CheckBoxItem** `627:24353` · **RadioItem** `592:7480` — контрол с подписью, `Position` Left/Right. В формах брать **Item**-версии.
 **`State=Error` у `CheckBox` и `CheckBoxItem`** (с 16.11): группа не прошла проверку, например не выбран ни один вариант. У пустого красная рамка, у выбранного и `InGroup` красная заливка, токен `color/component/controls/error` (тот же красный, что `inputs/border-error`). Ставят всем строкам группы, текст ошибки пишут один раз под группой: `Caption 1`, `text/critical-static`, с отступом `Space-6` по краю квадрата. Alert вместо этого не ставят. Пример — «Ошибка группы» в паспорте `CheckBoxItem`.
+**Проверка ответа: `State=Success` и `State=Error`** (с 16.11) — у `RadioButton`, `RadioItem`, `CheckBox`, `CheckBoxItem`. Показывают итог после кнопки «Проверить ответ» в тесте, квизе и интерактивном видео. Выбран и `Success` — ответ верный. Выбран и `Error` — ответ неверный. Не выбран и `Success` — верный вариант, который не выбрали. Токены `color/component/controls/success` (green/500, в тёмной green/400) и `controls/error`. После проверки контрол не нажимается. Если верный ответ показывать нельзя (JUZ40, интерактивное видео: после ошибки видно только «Неверно»), ставят только `Error` у выбранного. Свои зелёные и красные рамки вокруг строки не рисуют, `Badge` «Верно» рядом с каждой строкой не ставят.
 `Size` M/S у всех пяти: `RadioButton`, `CheckBox`, `RadioItem`, `CheckBoxItem` и подписи
 **`Label`** `592:7573` (решение владельца 22.10; до этого был один размер — нынешний M). S:
 контрол 24 (круг или квадрат 16, галочка 14, обводки те же), `Label` — `Body 2 medium`, мета
@@ -853,7 +854,7 @@ Alert — про состояние страницы, Toast — про резу�
 
 **ListItem** `2816:738` — строка списка: переход, действие, выбор или настройка. Мобильная
 замена пункта меню и обычная строка списка на десктопе.
-`State` Rest/**Hover**/Pressed/Disabled · `Signal` Default/**Success**/**Warning**/**Critical** · `Title`, `Description`
+`State` Rest/**Hover**/Pressed/Disabled/**Selected** · `Signal` Default/**Success**/**Warning**/**Critical** · `Title`, `Description`
 TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Левая и правая
 части — **вложенные инстансы, выведены наружу**: тип и иконку меняют в их свойствах, а не
 подменой.
@@ -864,9 +865,16 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
   (`Space-8` вокруг `height-650`) для перехода с подписью; Avatar — `Avatar M`.
 - **`ListItem · Trailing`** `2839:940` — `Type` Chevron / Value / Check / Toggle / Badge,
   `Value` TEXT. Check — Linear-галочка на `color/component/controls/active`, как в
-  `SingleSelectItem`; Toggle — `Toggle S`; Badge — `Badge S` **и шеврон после него**: рядом с
-  бейджем всегда стоит шеврон, строка со статусом всегда открывается. Бейдж без шеврона в
-  строке списка не ставят — отдельного варианта для этого нет.
+  `SingleSelectItem`; Toggle — `Toggle S`; Badge — `Badge S` **и шеврон после него**.
+  **`Show Chevron`** (с 16.11, по умолчанию включён) — у `Type=Value` и `Type=Badge` выключает
+  шеврон. Выключают, только если строка никуда не ведёт: значение или статус без перехода.
+  Строка, которая открывается, шеврон сохраняет. То же свойство есть у `Trailing v2`.
+
+**`State=Selected`** (с 16.11, у `ListItem` и `ListItem v2`, все четыре `Signal`) — выбранная строка
+в списке навигации: неделя, урок, раздел. Подложка `color/component/list-item/surface-selected`
+(алиас `surface/brand-transparent-static`). Выбрана одна строка в списке. Это исключение из
+правила 13: `Selected` показывает, где пользователь находится, а не момент нажатия. В списке с
+отметками выбора (настройка, фильтр) ставят `Trailing` `Type=Check`, а не `Selected`.
 
 Строка с `Trailing` `Type=Toggle` сама не нажимается: переключается только `Toggle` (решение владельца 06.11).
 
@@ -879,6 +887,13 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 `color/component/list-item/surface-hover` (4 %, только десктоп) и
 `color/component/list-item/surface-pressed` (8 %). У цветных сигналов нажатие — подложка своего
 цвета (`surface/green-`, `orange-`, `red-transparent-static`), наведение — общее `surface-hover`.
+Выбранная строка — `color/component/list-item/surface-selected` (с 16.11).
+
+**Files** `2986:121` · **FileItem** `2986:106` (страница `Files`, паспорт `FilesPassport`) — список
+файлов и строка файла: `Title`, `Meta`, `Show Meta`, `Show Divider`, `State` Rest/Hover/Pressed.
+**`Show Remove`** (с 16.11, по умолчанию выключен) — кнопка «Удалить файл» справа: `Button` S,
+Tertiary, Only Icon, `Outline / Essentional, UI / Trash Bin Minimalistic`. Включают в форме, пока
+файл можно убрать; после отправки выключают. Свою кнопку поверх строки не кладут.
 
 Сигналы красят название и Leading (иконку и плитку):
 - **Success** — подтверждённый результат или положительное действие: «Скачать сертификат»,
@@ -2015,7 +2030,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.32.6 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.32.7 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
