@@ -201,6 +201,16 @@ const V = {                                   // figma.variables.importVariableB
   space12:"af6afc444726060b8e0d56d6352ee7a5cee6fff0",
   space16:"93137cac0248bd6ba123f0791aaf889946026fee",
   space24:"f5600f3d4788846368d68c6cbab90215391d5be1",
+  space0: "a40746a9eb4f57955a7ea3e146a5e1ec37a6aef2",
+  space1: "eae3d21c35701894d346f794185c2e73a5406a82",
+  space2: "bcbb27de082aed2e2328ff26a39cfc7f98582eb9",
+  space6: "7aff214f73d64fc97ffeff4777f5ab870ada0e55",
+  space20:"9eec6ed1ed0c26648dbac436e3da32dbd20bf627",
+  space32:"ff06891842baa8aa35b804951ba1ec4936a535c2",
+  space40:"cf1369a02ed76ccf9860d15805c603c66093bd71",
+  space48:"9c956e6c870b5ed1df276126060e7c9352ed0e91",
+  space64:"d68ad73b7f4c1dc6781d57172c13f09df6c29f79",
+  space80:"08b503ced9a7c2d8b615f8d3103bc119bb639dc2",
   storiesRingXl:"5b56e333e7ac021cc96cff9b92a367e2a153002f", // 72 Mobile / 80 Desktop
   storiesRingL: "66eeb96158ba957d29b386c5931271ba2ceaa8b6", // 60 / 62
   storiesRingM: "441e463679e37b5f0ad83a4f112bcbd6b79730af", // 50 / 52

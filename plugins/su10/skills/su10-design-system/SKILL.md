@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.30.10 · 13.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.30.11 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.30.10 · 13.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.30.11 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1229,6 +1229,16 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
 
 - `FILL` ставится **после** `appendChild`, иначе `Error: FILL can only be set on children of auto-layout frames`.
 - `figma.createAutoLayout` создаёт фрейм с **белой заливкой**. Внутри тёмной темы это выглядит как белый прямоугольник, а светлый текст на нём становится невидимым. Каждому служебному фрейму сразу `fills = []`.
+- **Нет ключа токена отступа — поле молча становится 0** (13.11, пустые состояния «Тематического теста» на телефоне остались без нижнего отступа). `setBoundVariable('paddingBottom', undefined)` не падает: он отвязывает поле, и отступ пропадает. Помощник отступов при отсутствии токена должен падать, а не тихо продолжать:
+  ```js
+  function sp(f, prop, v) {
+    if (!v) { f[prop] = 0; return; }
+    const vr = V['space' + v];
+    if (!vr) throw new Error('Нет токена Space-' + v + ': добавь ключ из keys.md');
+    f.setBoundVariable(prop, vr);
+  }
+  ```
+  Ключи всех ступеней `Space-*` — в `references/keys.md`. Перед сдачей замерь воздух под последним элементом каждой карточки: низ последнего текста или кнопки плюс нижнее поле не ниже края блока (`absoluteBoundingBox`). Текст, упёртый в низ `Island`, — ошибка (решение владельца 13.11).
 - `counterAxisAlignItems` принимает `MIN | MAX | CENTER | BASELINE`. `END` — ошибка валидации.
 - **Текст на `FILL` схлопывается в ноль, если у него не было собственной ширины.** `createText()` → `textAutoResize = 'HEIGHT'` → `layoutSizingHorizontal = 'FILL'` даёт `width: 0`, и подпись рендерится как «…». Лечится явным `resize(любая_ширина, h)` **перед** `FILL`. Симптом легко принять за обрезку по `textTruncation`.
 
@@ -1979,7 +1989,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.30.10 · 13.11.2026 · обновил Nurla**.
+Текущая версия — **v4.30.11 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
