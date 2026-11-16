@@ -127,6 +127,10 @@ Node ID из каталога выше годятся для ссылок и д�
 | DateStripCell | Set | `d87a0c6916e2d7af61efd6bb7b17512ac4b4db1f` |
 | DatePickerCalendar | Set | `e9948cc1353733d9b8d640550a7a72da9871a024` |
 | CalendarCell | Set | `797b4be84f5ae822537edf3a525612666c74cdd8` |
+| Skeleton | Set (`Type` Heading/Body/Caption/Block S/Block M/Block L/Circle) | `44db53d9b91e43f73e1c6ceef65f2238fa819ab1` |
+| Slider | Set (`Size`, `State`, `Value` 0–100 шаг 10); `Show Label#4410:22`, `Label#4410:89`, `Show Value#4410:156`, `Value Text#4410:223`, `Show Scale#4410:290`, `Min#4410:357`, `Max#4410:424`, `Show Ticks#4410:491`, `Show Description#4410:558`, `Description#4410:625` | `51beef06a6968cf76df93c5d6240a454238bc641` |
+| RangeSlider | Set (`Size`, `State`, `Value` пресеты от–до); `Show Label#4412:0`, `Label#4412:91`, `Show Value#4412:182`, `Value Text#4412:273`, `Show Scale#4412:364`, `Min#4412:455`, `Max#4412:546`, `Show Ticks#4412:637`, `Show Description#4412:728`, `Description#4412:819` | `d70ec3b0848e693cbf0a1ef9ec74be3cc485159e` |
+| SliderThumb | Set (`Size`, `State`); `Show Tooltip#4410:0`, `Tooltip#4410:11` | `f0bba06b287290c9a12ea12796ebda8d2bdbde65` |
 
 Иконки из **SU10 Icon Pack** (все стиля Outline):
 
@@ -227,6 +231,11 @@ const V = {                                   // figma.variables.importVariableB
   progressInfo:   "069020fa37b1e82ddc65c79ab04ff6fffec8c146", // fill-info
   progressWarning:"ed3cd1c5a1ef7db33ea9a426c57646d1d1c7e2f2", // fill-warning
   progressError:  "c5206645a31d7015409f68d462e373dca7ec4dea", // fill-error
+  progressLabel:  "719e5f07df615187c200bff38b98711bda4f38c3", // color/component/progress-bar/label
+  progressValue:  "3f0e6d59ddc3e5dfd37005886ec70bfe0c68e88a", // color/component/progress-bar/value
+  controlsError:  "817c824467c72522f5f07ade0162c8ed6effccf7", // color/component/controls/error
+  skeletonSurface:"5cd06f22c1ebce6008263eb547328101158d8b3e", // color/component/skeleton/surface
+  skeletonHighlight:"5b1859affe683163bc947a0e8918a81d14f6b08b", // color/component/skeleton/highlight
 };
 
 const S = {                                   // figma.importStyleByKeyAsync
@@ -302,7 +311,7 @@ const S = {                                   // figma.importStyleByKeyAsync
 | ListItem · Leading | `Icon#2839:0` | `Type=Icon Tile, Tone=Default` (Type Icon/Icon Tile/Avatar; Tone Default/Critical/Success/Warning/Disabled задаёт строка) |
 | ListItem · Trailing | `Value#2839:10`; у Badge и Toggle — вложенные инстансы `Badge` / `Toggle` | `Type=Chevron, Tone=Default` (Type Chevron/Value/Check/Toggle/Badge) |
 | ProfileItem | `Title#2845:0`, `Subtitle#2845:4`, `Show Subtitle#2845:8`, `Meta#2845:12`, `Show Meta#2845:16`, `Body Text#2845:20`, `Show Badge#2845:24`, `Show Link#2845:28`, `Show Trailing#2854:0`; вложенные `Avatar`, `Badge`, `Trailing` | `Size=M, Body=Collapsed` (Size M/S, Body Collapsed/Expanded/None) |
-| ProgressBar | `Show Marker#4283:0` (BOOLEAN, по умолчанию `false` — метка порога на 85%); процент и цвет — варианты | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
+| ProgressBar | `Show Marker#4283:0` (BOOLEAN, по умолчанию `false` — метка порога на 85%); `Show Labels#4405:0`, `Label#4405:85`, `Show Value Label#4405:170`, `Value Label#4405:255` — подписи над полосой; процент и цвет — варианты | `Signal=Success, Value=75` (Signal Success/Info/Warning/Error, Value 0–100 шаг 5) |
 | NumberInput | `Label#3421:0`, `Show Label#3421:11`, `Importance#3421:22`, `Value#3421:33`, `Unit#3421:44`, `Show Unit#3421:55`, `Description#3421:66`, `Show Description#3421:77`; вложенные `Minus` / `Plus` — Button S Only Icon; границу задают вариантом `Limit`, не вложенными кнопками | `Size=M, State=Rest, Limit=None` (Size M/S, State Rest/Hover/Focused/Disabled/Error, Limit None/Min/Max) |
 | HeaderButton | `Icon#3136:0` (INSTANCE_SWAP, Outline) | `State=Rest` (Rest/Hover/Pressed/Disabled) |
 

@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.31.1 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.32.1 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.31.1 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.32.1 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -565,6 +565,7 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 
 **CheckBox** `592:7427` · **RadioButton** `592:7169` — сами контролы. Галочка — `Linear / Messages, Conversation / Check` из пака, 18 (S — 14), обводка 1.67, `icon/white-static`; минус InGroup — `Bold / Essentional, UI / Minus` 18. Фронт берёт их из SU10 Icon Pack, не рисует. Акцент **teal** с 13.11 (с 22.09 был синий, до этого зелёный): `controls/active` — teal/600, в тёмной teal/400. Цвет живёт не в компонентах, а в трёх переменных `color/component/controls/active`, `-hover`, `-disabled`; на них же сидит `Toggle` и галочка в `SingleSelectItem`, поэтому они тоже teal — **это решение владельца, слой `controls` намеренно не разделён**. Перекрашивать контролы поштучно не надо: меняется токен, и меняются все.
 **CheckBoxItem** `627:24353` · **RadioItem** `592:7480` — контрол с подписью, `Position` Left/Right. В формах брать **Item**-версии.
+**`State=Error` у `CheckBox` и `CheckBoxItem`** (с 16.11): группа не прошла проверку, например не выбран ни один вариант. У пустого красная рамка, у выбранного и `InGroup` красная заливка, токен `color/component/controls/error` (тот же красный, что `inputs/border-error`). Ставят всем строкам группы, текст ошибки пишут один раз под группой: `Caption 1`, `text/critical-static`, с отступом `Space-6` по краю квадрата. Alert вместо этого не ставят. Пример — «Ошибка группы» в паспорте `CheckBoxItem`.
 `Size` M/S у всех пяти: `RadioButton`, `CheckBox`, `RadioItem`, `CheckBoxItem` и подписи
 **`Label`** `592:7573` (решение владельца 22.10; до этого был один размер — нынешний M). S:
 контрол 24 (круг или квадрат 16, галочка 14, обводки те же), `Label` — `Body 2 medium`, мета
@@ -572,6 +573,10 @@ SingleSelect, ComboBox, MultiSelect, NumberInput и поле даты.
 меняют только свойством `Size` самой строки** — контрол и подпись внутри переключаются вместе,
 по отдельности их не трогают. S — плотные списки, фильтры, ячейки таблицы, шторки с длинным
 выбором; рядом с полями и кнопками M — M. В одной группе выбора один размер.
+
+**Slider** (страница `Slider`, паспорт `SliderPassport`, с 16.11) — выбор числа из диапазона перетаскиванием: число вопросов, целевой балл, громкость и скорость видео. `Size` M (область 32, бегунок 20/22) / S (24, бегунок 16) · `State` Rest/Disabled/Error · `Value` 0–100 с шагом 10 — положение бегунка; точное число пишут в `Value Text`. Свойства: `Show Label` + `Label`, `Show Value` + `Value Text` над дорожкой, `Show Scale` + `Min` / `Max` под ней, `Show Ticks` — точки шагов, `Show Description` + `Description` — подсказка или причина ошибки. Бегунок `Thumb` выведен наружу: Hover, Pressed, Focused и подсказку со значением (`Show Tooltip`) ставят на нём, а не вариантом ползунка. Подсказку над бегунком включают только у ползунка без строки подписи. Дорожка утоплена на радиус бегунка, он не выходит за края. Цвета — общие `controls/*`, ползунок teal, как `Toggle`. Точное число — `NumberInput` рядом, значение общее. Ставится на Fill.
+**RangeSlider** (паспорт `RangeSliderPassport`) — диапазон «от–до», два бегунка: цена в фильтре, время занятий. `Value` — пресеты от–до с шагом 20, остальное как у `Slider`; `Thumb Start` и `Thumb End` выведены наружу. Бегунки не обгоняют друг друга.
+**SliderThumb** — бегунок обоих ползунков, отдельно не ставят: `State` Rest/Hover/Pressed/Focused/Disabled, `Show Tooltip` + `Tooltip`.
 
 **Toggle** `592:7455` — мгновенное переключение настройки. `Size` M/S/XS: M 56×40, S 40×32, XS 32×24 (дорожка 28×16, кружок 12; с 22.10). Рядом с RadioItem/CheckBoxItem M — Toggle S, рядом с их S — XS. Где изменение применяется по кнопке — чекбокс.
 `State` Rest/Hover/Disabled — Hover с 27.10: дорожка на ступень темнее (`controls/active-hover`,
@@ -803,7 +808,9 @@ Badge или Tag: если элемент кликабельный (выбира
 **Тост всегда сверху экрана**: на мобильном — под статус-баром во всю ширину с полями 12, на десктопе — в правом верхнем углу. Так он не спорит с нижними панелями и шторками. Движение записано в паспорте (раздел Motion): появление 350 мс — сдвиг 24 px вниз + прозрачность, ease-out; показ 4 с без крестика и 10 с с крестиком; уход 300 мс — сдвиг 12 px вверх + прозрачность, ease-in. Повторный вызов не создаёт второй тост, а перезапускает таймер. В макете тост кладут **последним** ребёнком экрана, иначе закреплённая шапка рисуется поверх него.
 Alert — про состояние страницы, Toast — про результат действия.
 **Loading** `269:1773` — спиннер.
+**Skeleton** (страница `Skeleton`, паспорт `SkeletonPassport`, с 16.11) — плашка загрузки блока с данными. `Type`: Heading / Body / Caption — строка текста (высота 24, 16, 12/14 по `height`-токенам, скругление полное); Block S / M / L — картинка, график, кнопка (скругление 8 / 12 / 16); Circle — аватар. Ширину и высоту блока задают в инстансе, высоту строк не меняют. Цвет `color/component/skeleton/surface` (алиас `surface/elevated`), блик мерцания `skeleton/highlight`. Раскладки карточки, строки списка, таблицы и баннера — в паспорте; мерцание — предложение «Новое», в хабе анимаций его пока нет.
 **ProgressBar** `2960:242` — полоса прогресса, своя страница. `Value` 0–100 с шагом 5 · `Signal` Success/Info/Warning/Error. Ставится **на Fill**: заполнение привязано к ширине (constraint Scale), процент сохраняется на любой ширине. Высота `Space-4`, скругление полное, цвета — `color/component/progress-bar/*` (дорожка — алиас `border/primary`, заполнение — `surface/*-static` по сигналу). Success — прогресс обучения, Info — нейтральный процесс, Warning/Error — отставание и проблема, всегда вместе с подписью. Процент пишут текстом над полосой: полоса число не заменяет. **Метка порога — `Show Marker`** (BOOLEAN, по умолчанию выкл., с 11.11): штрих на 85% ширины при любой длине полосы, ширина `Space-2`, выше и ниже полосы на `Space-4`, цвет `color/component/progress-bar/marker` (алиас `icon/primary`). Включают, когда действие открывается после порога: форма решения после просмотра видео. Порог один — 85%, другого положения у метки нет; нужен другой порог — это предложение к компоненту, а не свой штрих поверх. Порог пишут текстом над полосой: слева «Просмотрено 35%», справа «Нужно 85%», подпись заканчивается у метки. Шаг от подписей до полосы с меткой — `Space-8`. Рисовать полосу и метку линиями или прямоугольниками нельзя — только этот компонент.
+**Подписи над полосой — свойства, а не текст рядом** (с 16.11): `Show Labels` (по умолчанию выкл.) включает строку, `Label` — что считаем («Пройдено», «Верных ответов»), `Show Value Label` + `Value Label` — значение или порог справа («84%», «Нужно 85%»). Шаг до полосы `Space-8`, цвета `progress-bar/label` и `progress-bar/value`. Полоса лежит во фрейме `Track`. Свой текстовый ряд над `ProgressBar` больше не собирают.
 
 ### Оверлеи — страница `Overlay`
 
@@ -1475,7 +1482,7 @@ Button, M ≈ 18–20px) выглядит прижатой/маленькой р
 
 **Структура страницы.** `Heading` L сверху, дальше блоки `Island` со своими полями, в каждом `Heading` M или `Subheading`. `Divider` — только там, где отступа не хватает.
 
-**Состояния экрана.** Загрузка блока с данными (баннер, карточка, виджет на странице) — **всегда скелетон** (решение владельца 12.11): плашки стоят на месте заголовка, чисел и графики, высота блока как у загруженного, блок не нажимается. Спиннер `Loading` в такой блок не ставят. Компонента Skeleton в SU10 нет: плашки собирают фреймами с заливкой `color/semantic/surface/elevated` и скруглением `radius/border-radius-rounded`, в заметке на макете пишут «Нужно в SU10: Skeleton». Загрузка целой страницы, кнопки и выпадающего списка — по-прежнему `Loading`. Пусто у выпадающего списка — `Dropdown State=Empty`; пустой список на странице — рецепт «Пустой результат» ниже.
+**Состояния экрана.** Загрузка блока с данными (баннер, карточка, виджет на странице) — **всегда скелетон** (решение владельца 12.11): плашки стоят на месте заголовка, чисел и графики, высота блока как у загруженного, блок не нажимается. Спиннер `Loading` в такой блок не ставят. Плашки — компонент `Skeleton` (с 16.11): строки `Heading`/`Body`/`Caption`, блоки `Block S/M/L`, `Circle`; раскладку берут из паспорта. Фреймами плашки больше не рисуют. Загрузка целой страницы, кнопки и выпадающего списка — по-прежнему `Loading`. Пусто у выпадающего списка — `Dropdown State=Empty`; пустой список на странице — рецепт «Пустой результат» ниже.
 
 **Поиск по списку.** `Text field` `Size=M`:
 - `Show Label` и `Show Description` выключены, префикс — `Type=Icon` с иконкой `Magnifer`;
@@ -1967,9 +1974,9 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 
 Сейчас в SU10 нет:
 
-- **Skeleton** как компонента. Загрузку блока с данными всё равно показывают скелетоном из плашек, см. «Состояния экрана». **Empty state** как компонента тоже нет — пустой список собирается по рецепту «Пустой результат» (иллюстрация + `Heading` S + `Button`), не из `Alert`
+- **Empty state** как компонента нет — пустой список собирается по рецепту «Пустой результат» (иллюстрация + `Heading` S + `Button`), не из `Alert`
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
-- **Slider / Carousel**, **File upload** (Progress bar с 4.5.0 есть — `ProgressBar`)
+- **Carousel**, **File upload** (`ProgressBar` есть с 4.5.0, `Slider`, `RangeSlider` и `Skeleton` — с 16.11)
 - **Time picker** — календарь выбирает только дату
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
 - **Avatar group** (статус-точка на аватаре есть — `Show Status`)
@@ -1988,7 +1995,8 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
    чего не хватило в SU10.
 3. **Компонент живёт в файле, где собирают макет** (личный файл в JUZ40 Workspace); в макете —
    его инстансы, а не копии.
-4. **Написать Nurla**: появился компонент, ссылка на него. Перенос в SU10 Design System делает
+4. **Компонент одной задачи — в раздел `Operators components` дски** (решение владельца 16.11). Если компонент нужен только одной фиче и в других местах его не будет (точка и полоса пути ученика, звезда карты курса), его не кладут в `Base Blocks`: для него заводят страницу `<Задача> [<Роль>]` под разделителем `↳ Operators components`, как `Course Map [Student]`. На странице одна секция `<Задача> — компоненты, анимации и документация`: компоненты, служебные наборы анимаций, паспорта. Общий элемент (скелетон, полоса, ползунок) — в `Base Blocks` по алфавиту.
+5. **Написать Nurla**: появился компонент, ссылка на него. Перенос в SU10 Design System делает
    владелец; после переноса инстансы переключают на компонент дски.
 
 Нельзя: рисовать недостающее разовыми фреймами без компонента (его не перенести в дску) и
@@ -1999,7 +2007,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.31.1 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.32.1 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

@@ -21,6 +21,16 @@
 
 ---
 
+## v4.32.0 · 16.11.2026 · обновил Nurla
+
+- **Новые компоненты дски: `Skeleton`, `Slider`, `RangeSlider`, `SliderThumb`** (решение владельца 16.11, из хэндоффа «Тематический тест»). Страницы `Skeleton` и `Slider` в `Base Blocks` по алфавиту, паспорта `SkeletonPassport`, `SliderPassport`, `RangeSliderPassport`, статус «Не начато». Ползунок сделан на будущее: число вопросов, целевой балл, цена, время, скорость видео; бегунок выведен наружу, чтобы показывать Hover, Pressed, Focused и подсказку без новых вариантов.
+- **`ProgressBar`: подписи над полосой стали свойствами** `Show Labels`, `Label`, `Show Value Label`, `Value Label`. Полоса перенесена во фрейм `Track`; без подписей вид прежний. Ряд текста над полосой руками больше не собирают.
+- **`CheckBox` и `CheckBoxItem`: `State=Error`** на токене `controls/error`. Текст ошибки группы — под группой, `Caption 1`, `text/critical-static`.
+- Новые токены: `progress-bar/label`, `progress-bar/value`, `controls/error`, `skeleton/surface`, `skeleton/highlight`. Группа `skeleton` встала в конец; порядок групп `color/component/*` и до этого был нарушен (`mascot`, `action-card`), пересоздание — отдельный прогон.
+- **Правило: компонент одной задачи — страница `<Задача> [<Роль>]` в `Operators components`**, как `Course Map [Student]` (решение владельца 16.11).
+- `TopicCard` в SU10 не переносится (решение владельца 16.11): карточку темы собирают из `Island`, `Badge`, текста, `ProgressBar` с подписями и кнопок.
+- На странице `Changelog` дски запись v2.
+
 ## v4.31.0 · 16.11.2026 · обновил Nurla
 
 - **Фирменный акцент — teal, сигнал «информация» — синий** (решение владельца 13.11). В дске заведены пять токенов: `text/brand`, `icon/brand-outline`, `border/brand`, `surface/brand-static`, `surface/brand-transparent-static`. На teal переведены 37 токенов: кнопки Info, ссылки, контролы, фокус, выбранные состояния, табы, таб-бар, меню, календарь, таблица, теги, `ActionCard`, `Stepper`, `IconGradient`, тёмная подкраска `surface/3-layer`. Логотип остаётся `icon/brand`, teal/800 `#00647F`.
