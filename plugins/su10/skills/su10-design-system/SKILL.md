@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.33.2 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.33.3 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.33.2 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.33.3 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -2022,6 +2022,9 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 - **JUZ40: статус пройденного урока — «Сделано»** везде: в уроке и в списке недели. «Завершено» не пишут. По-казахски сверять со строками приложения.
 - **JUZ40: метку штрафа показывают**: `Badge` Neutral «После срока −10 %» в мете урока.
 - **JUZ40: подпись урока в списке недели — тег типа и главный факт** (решение владельца 16.11): «Теоретический урок · 28 мин», «Практический урок · 40 мин». Если название урока уже совпадает с тегом («Домашнее задание», «Сдача урока»), в подписи остаётся только факт: тег не повторяют.
+- **JUZ40: ҚАЗТЕСТ показывает только сумму баллов** (решение владельца 16.11): «96 из 160». Уровень A1–C1 не показывают.
+- **JUZ40: уведомления и профиль — в шапке «Главной»** (решение владельца 16.11): колокольчик и аватар. Таб-бар остаётся из четырёх табов, пятый таб не добавляют.
+- **JUZ40: пороги баннера результата теста разные**: фронт 50 и 76 %, мобилка 50 и 70 %. Не унифицируют, на доске стоят два макета с подписями (см. `references/handoff.md`, «Фронт и мобилка отличаются»).
 - **JUZ40: неоплаченные недели видны** (решение владельца 16.11): недели месяца стоят закрытыми (`Course map / Node` `State=Locked`), в строке месяца справа `Button` S Secondary «Продлить доступ».
 
 ## Чего в системе нет — локальный компонент в своём файле
@@ -2061,7 +2064,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.33.2 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.33.3 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
