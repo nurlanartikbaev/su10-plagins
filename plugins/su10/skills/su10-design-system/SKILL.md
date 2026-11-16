@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.33.8 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.33.9 · 17.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.33.8 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.33.9 · 17.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -2028,6 +2028,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 - **JUZ40: квиз-игра** (секция 16): оболочка как у теста. Ответ: `RadioItem` `State=Success` / `State=Error` и `Alert` «Правильно» или «Неверно. Вопрос вернётся в следующем раунде.» Экран попытки: балл в `Heading`, раунды и результат списками `ListItem`, фильтр результата из `Tag`. На десктопе раунды и результат видны сразу, на телефоне это вкладки `TabsRow`.
 - **JUZ40: мини-тест лекции**: вкладки `TabsRow` «Комментарии» и «Мини-тест» под материалами; материалы до мини-теста заменяет `Alert`.
 - **JUZ40: парная работа, Live, доступ** (секция 17): партнёр — `ListItem` с `Leading` `Type=Avatar` и кнопка «Написать в WhatsApp»; ссылка на запись — `Text field` с описанием; Live — строки `ListItem` и кнопка «Перейти», неактивная раньше чем за 30 минут; обязательный курс и оплата — `Alert` с действием.
+- **JUZ40: прокторинг** (секция 18): настройка разная, поэтому стоят два набора экранов: «Фронт: шаг N из 3» на десктопе и «Мобилка: шаг N из 5» на телефоне. Шаг — оболочка теста без таймера: заголовок, текст, содержимое шага, «Назад» и основная кнопка. Превью камеры — `VideoPlayer` `State=Playing` как заглушка. QR-кода в SU10 нет: стоит фрейм-заглушка. Состояния во время теста — `Dialog` на десктопе и `MobileBottomSheet` на телефоне.
 - **JUZ40: негативный исход в блоке результата** (с 16.11): `Mascot` `Emotion=Sad`, заголовок «Не расстраивайтесь», `ProgressBar` `Signal=Error`. Статус теста и экзамена остаётся «Сделано»: порога нет. «Провалено» (`Badge` Error) есть только у сдачи урока: там есть проходной балл. Тексты с прода: > 70 % «Поздравляем», > 50 % «Вы на верном пути», иначе «Не расстраивайтесь».
 - **JUZ40: редизайн страницы урока только для кабинета студента** (решение владельца 16.11). Кабинет родителя не трогают, хотя он использует те же экраны.
 - **JUZ40: файлы решения — лимит и форматы веба** (решение владельца 16.11): «PDF, DOC, XLS, JPG, PNG или HEIC. До 20 МБ» на десктопе и телефоне.
@@ -2072,7 +2073,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.33.8 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.33.9 · 17.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
