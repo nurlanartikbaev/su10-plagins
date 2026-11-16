@@ -21,6 +21,13 @@
 
 ---
 
+## v4.31.0 · 16.11.2026 · обновил Nurla
+
+- **Фирменный акцент — teal, сигнал «информация» — синий** (решение владельца 13.11). В дске заведены пять токенов: `text/brand`, `icon/brand-outline`, `border/brand`, `surface/brand-static`, `surface/brand-transparent-static`. На teal переведены 37 токенов: кнопки Info, ссылки, контролы, фокус, выбранные состояния, табы, таб-бар, меню, календарь, таблица, теги, `ActionCard`, `Stepper`, `IconGradient`, тёмная подкраска `surface/3-layer`. Логотип остаётся `icon/brand`, teal/800 `#00647F`.
+- 12 мастеров перепривязаны с `info`-токенов на brand: Button (подпись и иконки), Tag, Suffix `Type=Action`, NavLink, RatingOption, SocialLink, CalendarCell, PromoSlide, Spotlight, Cover, Course map / Week row и Dock. Синими остались Alert, Toast, Badge, Accordion и ProgressBar с сигналом Info, а также FeedbackIcon.
+- В `SKILL.md` обновлены таблицы `text`, `icon`, `surface` и `border`, раздел «Фокус и состояния кнопок» и описания компонентов, где акцент был синим. Добавлено правило вести страницу `Changelog` в файле дски и сохранять точку версии перед правкой токенов.
+- **Ловушка: поиск привязок через `node.boundVariables` не видит заливку вектора внутри вложенного инстанса.** 13.11 так пропустили иконки в `Button`, `Tag` и `Suffix`. Искать надо на уровне заливки: `paint.boundVariables.color`.
+
 ## v4.30.11 · 16.11.2026 · обновил Nurla
 
 - **Ловушка: нет ключа токена отступа, и поле молча становится 0.** `setBoundVariable(prop, undefined)` не падает, а отвязывает поле. Так 13.11 в мобильных пустых состояниях «Тематического теста» пропал нижний отступ: текст упёрся в низ `Island`, владелец заметил.
