@@ -130,6 +130,8 @@ Node ID из каталога выше годятся для ссылок и д�
 | Student path / Point (Operators, `Student Path [Student]`) | Set (`Type` Current/Grant/Ambition/Start, `Size`) | `54ed87378a3b97fa88b0fdff497ae9eaa4a7f745` |
 | Student path / Bar (Operators) | Set (`Case`, `Width` 327/652) | `04c434297951b33c97cc84b4d333379f0e0d821c` |
 | Student path / Banner (Operators) | Set (`Case`, `Platform` Mobile/Desktop) | `a795179e0f9641ac6983dd687b8d64bdbde6eb38` |
+| Lesson / Video player (Operators, `Lesson [Student]`) | Set (`State` Poster/Playing/Error; `Show Duration#4458:0`, `Error Title#4458:4`, `Error Description#4458:8`) | `3e56f1dd1ddab3fc39060f7b9168b62cbe2f9d9c` |
+| Lesson / File dropzone (Operators) | Set (`Type` Zone/Button, `State` Rest/Drag over/Error; `Title#4458:12`, `Drop Title#4458:18`, `Hint#4458:24`, `Show Hint#4458:30`, `Error Text#4458:36`) | `ae52307177236ad961121dbada2c82539227f152` |
 | Skeleton | Set (`Type` Heading/Body/Caption/Block S/Block M/Block L/Circle) | `44db53d9b91e43f73e1c6ceef65f2238fa819ab1` |
 | Slider | Set (`Size`, `State`, `Value` 0–100 шаг 10); `Show Label#4410:22`, `Label#4410:89`, `Show Value#4410:156`, `Value Text#4410:223`, `Show Scale#4410:290`, `Min#4410:357`, `Max#4410:424`, `Show Ticks#4410:491`, `Show Description#4410:558`, `Description#4410:625` | `51beef06a6968cf76df93c5d6240a454238bc641` |
 | RangeSlider | Set (`Size`, `State`, `Value` пресеты от–до); `Show Label#4412:0`, `Label#4412:91`, `Show Value#4412:182`, `Value Text#4412:273`, `Show Scale#4412:364`, `Min#4412:455`, `Max#4412:546`, `Show Ticks#4412:637`, `Show Description#4412:728`, `Description#4412:819` | `d70ec3b0848e693cbf0a1ef9ec74be3cc485159e` |
@@ -146,6 +148,9 @@ Node ID из каталога выше годятся для ссылок и д�
 | Time / Calendar | `6644bc081da698626d7a4d8497328d0424e13923` |
 | Time / Calendar Minimalistic (таб «Задачи»; Bold у выбранного — `a36d5eeac2c51f9118836c011159159811074a5f`) | `4f7ae1a665df1bc3381c9dad7c242ae2880b2808` |
 | Security / Lock — в макетах всегда **Bold** (решение владельца 16.11) | Bold `074b8a96e2ace641ea042685beb5e278e35c565d` · Outline `59e3abd822bda0abd5b281e0eec59cef8fa08979` (не ставить) |
+| Video, Audio, Sound / Play (с 16.11, после публикации пака) | Outline `b1c161692e2d9c01af6d2a67e06498723b3952f8` · Bold `4547314edf9f3d10476c072295db3ebbe9a36a3b` |
+| Video, Audio, Sound / Pause | Outline `675201f605e89104043eb8f6c6083c1540facc33` · Bold `267085618954b0f3e97513438c0e0fc372f195a0` |
+| Video, Audio, Sound / Microphone | Outline `79f54810fb3da0f8b4826101cda8caaf1573a5b7` · Bold `6f2b7d376eb7339f0ba35c60fa45a465c7edd17b` |
 | Shopping, Ecommerce / Bag | `eee56456667b6e510c7d3739a5d532e42ea15db5` |
 | Essentional, UI / Home | `3aa09976a88e1a6af2e3dfdb1a18af50fb74e83b` |
 | Notifications / Bell | `dfc33364b045e8ffa629fe8cf53c203dde111061` |

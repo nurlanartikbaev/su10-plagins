@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.32.8 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.33.1 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.32.8 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.33.1 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -1993,13 +1993,42 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 - **Логотип в моках** (`Logo_JUZ40` в MobileHeader, текст `JUZ40` в примере Action Panel) — это название продукта на макете, а не имя системы; переименование дски его не касается
 - **Осознанные отклонения** от правил, если они описаны в паспорте: разные размеры иконок в `Tab` и `Control > Label`, прозрачный фон `badge/neutral`, порядок «подпись, затем значение» в Action Panel
 
+## Страница урока: компоненты и рецепты (`Lesson [Student]`, с 4.33.0)
+
+Страница `Lesson [Student]` под `↳ Operators components`. Секция `Lesson — компоненты, анимации и документация`.
+
+**`Lesson / Video player`** (паспорт `LessonVideoPlayerPassport`) — плеер видео в уроке. Тёмный в обеих темах: на вариантах стоит мода `Theme=Dark`.
+- `State` Poster / Playing / Error. Poster: кадр, кнопка воспроизведения, длительность. Playing: идёт видео, управление у встроенного плеера (Kinescope), своих элементов поверх нет. Error: «Видео не загрузилось», «Проверьте сеть и повторите.», кнопка «Повторить».
+- `Show Duration`, `Error Title`, `Error Description`. Длительность меняют во вложенном `Badge`, подпись кнопки — во вложенном `Button`.
+- Кадр ставят картинкой на слой `Poster`. Ширина FILL, высота 16:9 от ширины.
+- Кнопка воспроизведения: 48 на телефоне, 72 на десктопе, от моды `Platform` (`size/video-player-play`, `size/video-player-play-icon`).
+- **Прогресс просмотра в плеер не встроен** (решение владельца 16.11): под плеером ставят `ProgressBar` с `Show Marker` и подписями. Свою полосу поверх кадра не рисуют.
+- Токены `color/component/video-player/*`: `surface`, `scrim`, `play-surface`, `play-icon`, `title`, `description`.
+- Значок Play пока нарисован в компоненте. В паке он есть с 16.11 (`Video, Audio, Sound / Play`): после публикации пака заменить на инстанс.
+
+**`Lesson / File dropzone`** (паспорт `LessonFileDropzonePassport`) — загрузка файла в форме.
+- `Type` Zone / Button. Zone — десктоп: пунктирная зона, текст «Перетащите файл сюда или», кнопка «Выберите файл», подсказка. Button — телефон: только кнопка и подсказка, зоны нет.
+- `State` Rest / Drag over / Error. Drag over есть только у Zone: текст «Отпустите файл», кнопки нет. Error: причина и следующий шаг под зоной.
+- `Title`, `Drop Title`, `Hint`, `Show Hint`, `Error Text`. В `Hint` — форматы и лимит. В `Error Text` — причина и что сделать: «Файл больше 20 МБ. Выберите файл меньше.»
+- Выбранный файл показывает `FileItem` с `Show Remove` под компонентом.
+- Disabled-вида нет: если загрузка недоступна, компонент не показывают (правило «Недоступное содержимое не показывают»).
+- Токены `color/component/file-dropzone/*`: `border`, `border-active`, `border-error`, `surface-active`, `title`, `title-active`, `hint`, `error`.
+
+**Рецепты без своего компонента** (решения владельца 16.11):
+- **Запись голоса** собирают из готовых: `Button` Secondary «Начать запись» → во время записи `Button` `Signal=Error` «Остановить · 02:14» и `ProgressBar` → готовая запись строкой `FileItem` с `Show Remove` и `Button` Tertiary «Записать заново». Своего `AudioRecorder` нет. Иконки: `Video, Audio, Sound / Microphone`, `Call / Record Square`.
+- **Блок результата** (тест, экзамен, пройденный урок): `Mascot` → `Heading` по центру (балл или итог) → ряд `Badge` с главными фактами (уровень, балл по шкале, верные ответы, время) → `ProgressBar` без подписей → пояснение текстом, если нужно → строки `ListItem` с подробностями. Факт из бейджа в строках не повторяют. На десктопе `ProgressBar` шириной 400.
+- **Закрытый следующий шаг в ленте** (интерактивное видео): строка `ListItem` `State=Disabled` с Bold-замком, название шага и условие. `Alert` здесь не ставят.
+- **`ChatButton` на десктопе перекрывает контент** (решение владельца 16.11): поле справа под кнопку не добавляют, ширину колонок не меняют.
+- **JUZ40: статус пройденного урока — «Сделано»** везде: в уроке и в списке недели. «Завершено» не пишут. По-казахски сверять со строками приложения.
+- **JUZ40: метку штрафа показывают**: `Badge` Neutral «После срока −10 %» в мете урока.
+
 ## Чего в системе нет — локальный компонент в своём файле
 
 Сейчас в SU10 нет:
 
 - **Empty state** как компонента нет — пустой список собирается по рецепту «Пустой результат» (иллюстрация + `Heading` S + `Button`), не из `Alert`
 - **Chart / график** — ни линейного, ни столбчатого, ни осей
-- **Carousel**, **File upload** (`ProgressBar` есть с 4.5.0, `Slider`, `RangeSlider` и `Skeleton` — с 16.11)
+- **Carousel** (`ProgressBar` есть с 4.5.0, `Slider`, `RangeSlider` и `Skeleton` — с 16.11; загрузка файла — `Lesson / File dropzone` с 4.33.0)
 - **Time picker** — календарь выбирает только дату
 - **Comment / элемент ленты** — реакций, ответов и вложений нет. Сама карточка «автор + роль + дата + текст» теперь собирается из `ProfileItem` `Size=S`: роль — `Badge`, дата — `Meta`, текст — `Body`
 - **Avatar group** (статус-точка на аватаре есть — `Show Status`)
@@ -2030,7 +2059,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.32.8 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.33.1 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
