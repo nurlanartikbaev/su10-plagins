@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.32.1 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.32.2 · 16.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.32.1 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.32.2 · 16.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -36,7 +36,7 @@ description: "v4.32.1 · 16.11.2026 — Сборка макетов, экран�
 
 **Токены тоже документированы**: `ColorsPassport` на странице Colors — все 64 семантических токена со свотчами и правилами выбора; `SpacingPassport` на странице Spacing — `Space`, радиусы, высоты строки, обводки и `size/*`. С 13.11 добавлены пять brand-токенов, в паспорт `ColorsPassport` они ещё не внесены: их список — в разделе «Цвет» ниже и на странице `Changelog`.
 
-**Изменения самой дски записывают на странице `Changelog`** (первая страница файла, с 13.11, решение владельца). Перед правкой токенов или мастеров владелец сохраняет точку в истории версий Figma (⌥⌘S): скриптом её не сохранить, `saveVersionHistoryAsync` в MCP не поддержан. Запись в `Changelog` — новая версия сверху: номер, дата, что изменено, таблица «было → стало» по каждому токену в обеих темах, затронутые мастера, имя версии в истории для отката. Собирают из `DocSubheading` и текстовых блоков `Body 3`. Этот журнал — про файл дски; история версий скилла — `references/changelog.md`.
+**Изменения самой дски записывают на странице `Changelog`** (первая страница файла, с 13.11, решение владельца). Перед правкой токенов или мастеров владелец сохраняет точку в истории версий Figma (⌥⌘S): скриптом её не сохранить, `saveVersionHistoryAsync` в MCP не поддержан. Запись в `Changelog` — новая версия сверху: номер, дата, что изменено, таблица «было → стало» по каждому токену в обеих темах, затронутые мастера, имя версии в истории для отката. Собирают из `DocSubheading` и текстовых блоков `Body 3`. Версии стоят по номеру, новая сверху, между версиями `Divider` Horizontal на всю ширину (решение владельца 16.11): без линии непонятно, где кончается одна запись и начинается другая. Этот журнал — про файл дски; история версий скилла — `references/changelog.md`.
 
 **У каждого компонента свой паспорт** — фрейм `<Имя>Passport` на его странице, ссылка лежит в `documentationLinks` компонента. Сомневаешься в поведении — открой паспорт, а не выдумывай. **У каждой переменной заполнено описание** — в панели переменных Figma видно, где её место.
 
@@ -1995,7 +1995,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
    чего не хватило в SU10.
 3. **Компонент живёт в файле, где собирают макет** (личный файл в JUZ40 Workspace); в макете —
    его инстансы, а не копии.
-4. **Компонент одной задачи — в раздел `Operators components` дски** (решение владельца 16.11). Если компонент нужен только одной фиче и в других местах его не будет (точка и полоса пути ученика, звезда карты курса), его не кладут в `Base Blocks`: для него заводят страницу `<Задача> [<Роль>]` под разделителем `↳ Operators components`, как `Course Map [Student]`. На странице одна секция `<Задача> — компоненты, анимации и документация`: компоненты, служебные наборы анимаций, паспорта. Общий элемент (скелетон, полоса, ползунок) — в `Base Blocks` по алфавиту.
+4. **Компонент одной задачи — в раздел `Operators components` дски** (решение владельца 16.11). Если компонент нужен только одной фиче и в других местах его не будет (точка и полоса пути ученика, звезда карты курса), его не кладут в `Base Blocks`: для него заводят страницу `<Задача> [<Роль>]` под разделителем `↳ Operators components`, как `Course Map [Student]`. На странице одна секция `<Задача> — компоненты, анимации и документация`: компоненты, служебные наборы анимаций, паспорта. Общий элемент (скелетон, полоса, ползунок) — в `Base Blocks` по алфавиту. **Имена компонентов, свойств, значений вариантов, слоёв и страницы — на английском**, как `Course map / Node` и `Student path / Point` (решение владельца 16.11). По-русски остаются описания, паспорта и тексты внутри макета. Компонент из продуктового файла переименовывают до вставки в дску: инстансы на экранах сохраняют связь и сами получают новое имя.
 5. **Написать Nurla**: появился компонент, ссылка на него. Перенос в SU10 Design System делает
    владелец; после переноса инстансы переключают на компонент дски.
 
@@ -2007,7 +2007,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.32.1 · 16.11.2026 · обновил Nurla**.
+Текущая версия — **v4.32.2 · 16.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
