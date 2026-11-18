@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.37.1 · 18.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking how well a mockup matches code or whether developers can build it; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot and the team workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам."
+description: "v4.37.2 · 18.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking how well a mockup matches code or whether developers can build it; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot and the team workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.37.1 · 18.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.37.2 · 18.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -145,7 +145,7 @@ description: "v4.37.1 · 18.11.2026 — Макеты, экраны и табли
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.37.1 · 18.11.2026 · обновил Nurla**.
+Текущая версия — **v4.37.2 · 18.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
