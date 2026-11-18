@@ -32,9 +32,9 @@ description: "v4.37.0 · 18.11.2026 — Макеты, экраны и табли
 |---|---|
 | Вопрос про токен или цвет | `color.md`, нужная таблица |
 | Экран или форма | рецепт из `recipes/INDEX.md`, компоненты из `components/INDEX.md`, строки `keys.md`, `keys-tokens.md`, `prologue.md` |
-| График или дашборд | `recipes/dashboard.md`, правила локального компонента в `new-component.md` |
+| График или дашборд | `recipes/dashboard.md`, `local-component.md` |
 | Отступы, сетка, стили текста | `foundations.md` |
-| Таблица | `recipes/tables.md`, `data-tables.md`, `table-scripts.md`, `prologue.md` |
+| Таблица | `recipes/tables.md`, `table-scripts.md`, `prologue.md`. Нестандартная таблица: `data-tables.md` |
 | Тексты интерфейса | `rules/rule-15.md` |
 | Иконка | `icons.md` |
 | Маскот | `mascot.md` |
@@ -118,7 +118,7 @@ description: "v4.37.0 · 18.11.2026 — Макеты, экраны и табли
 | Ситуация | Что делать |
 |---|---|
 | У существующего компонента нет нужного состояния или свойства | правило 17, запись в `component-proposals.md` |
-| Элемента нет в системе совсем | локальный компонент в своём файле: `new-component.md`, раздел «Локальный компонент» |
+| Элемента нет в системе совсем | локальный компонент в своём файле: `local-component.md` |
 
 ## Устаревшие компоненты — `[Deprecated]`
 

@@ -48,9 +48,14 @@ function slotOf(inst, name = 'content') {         // ближайший слот
   return frame;                                   // после clone() слот может стать фреймом
 }
 function refill(node) {                          // после вставки в слот Figma держит старую ширину FILL
-  if (!('layoutSizingHorizontal' in node) || node.layoutSizingHorizontal !== 'FILL') return;
-  node.layoutSizingHorizontal = 'FIXED';
-  node.layoutSizingHorizontal = 'FILL';
+  if (node.type === 'INSTANCE' && node.layoutSizingHorizontal === 'FILL') {
+    const w = node.width, h = node.height, vertical = node.layoutSizingVertical;
+    node.layoutSizingHorizontal = 'FIXED';
+    node.resize(w - 8, h);                        // ширина должна измениться, иначе пересчёта нет
+    node.layoutSizingHorizontal = 'FILL';
+    node.layoutSizingVertical = vertical;
+  }
+  if (node.type !== 'INSTANCE' && 'children' in node) node.children.forEach(refill);
 }
 async function fillSlot(inst, build, name = 'content') {
   const slot = slotOf(inst, name);

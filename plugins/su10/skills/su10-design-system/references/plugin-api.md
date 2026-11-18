@@ -124,6 +124,8 @@ for (const t of tabs) t.layoutSizingHorizontal = 'FILL';   // делят шир�
 | `RadioItem` | строка `MetaData` (`Show MetaData` во вложенном `Label`) | `setProps(item.findOne(n => n.name === 'Label'), { 'Show MetaData': false })`, высота строки M станет 40 вместо 44 |
 | `Text Button` | левая и правая иконки (`Show Left Icon`, `Show Right Icon`) | `setProps(button, { 'Show Left Icon': false, 'Show Right Icon': false })`, нужную иконку оставляют |
 
+Скрыть лишние табы `SegmentedControlRow` и уровни `Breadcrumbs` можно: своих свойств для этого у компонентов нет. Это исключение из запрета на скрытие слоёв в правиле 17, поэтому `code-parity.md` покажет такие экземпляры как `adapt`.
+
 ### Баги компонентов — проверено, обходить
 
 - **`FeedbackIcon` красится примитивами.** Плашка залита градиентом `blue|green|yellow|red / solid / 400 → 600`, а описание компонента утверждает, что «цвет берёт от родителя». Ни то ни другое не чинится в потребителе: ставить как есть и не перекрашивать. Через `Alert` и `Toast` зависимость от примитивов попадает в макеты — как у `Avatar`; в аудите всплывает как `primitiveFill` внутри инстанса и ложным срабатыванием не является.

@@ -53,8 +53,8 @@ for (const s of screens) {
         const f = o.overriddenFields.filter(x => RISKY.test(x));
         if (!f.length || o.id === n.id) continue;
         const t = await figma.getNodeByIdAsync(o.id);
-        if (!t || t.type === 'SLOT') continue;          // содержимое слота свободно
-        if (SHAPE.has(t.type)) { iconColor++; continue; }
+        if (t && t.type === 'SLOT') continue;          // содержимое слота свободно
+        if (t && SHAPE.has(t.type)) { iconColor++; continue; }
         risky++; c.risky++;
       }
     }
