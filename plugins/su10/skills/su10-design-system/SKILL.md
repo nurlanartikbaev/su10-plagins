@@ -1,6 +1,6 @@
 ---
 name: su10-design-system
-description: "v4.35.0 · 18.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking how well a mockup matches code or whether developers can build it; when preparing developer handoff boards; when choosing a component, color, size, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot on empty, error and success screens, and for the team workflow: drafts, moving approved features, page naming, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам."
+description: "v4.35.0 · 18.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking how well a mockup matches code or whether developers can build it; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, color, size, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot on empty, error and success screens, and for the team workflow: drafts, moving approved features, page naming, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
@@ -20,9 +20,9 @@ description: "v4.35.0 · 18.11.2026 — Макеты, экраны и табли
 | 1. Спека | Разобрать требования, собрать вопросы, составить карту экранов | `spec-to-layout.md` |
 | 2. Сборка | Выбрать компоненты, взять ключи, собрать экран | `recipes.md`, `components/*`, `keys.md`, `plugin-api.md` |
 | 3. Проверка макета | Прогнать аудит, посмотреть снимок в обеих темах | `audit.md` |
-| 4. Проверка состояний | Заполнить матрицу, прогнать скрипт, добрать пропуски | `states-audit.md` |
+| 4. Проверка состояний | Заполнить матрицу, прогнать скрипт, записать пропуски | `states-audit.md` |
 | 5. Сверка с кодом | Определить, что фронт соберёт как есть, а что нужно обсудить | `code-parity.md` |
-| 6. Хэндофф | Собрать доску сценариев и почистить секцию | `handoff.md`, `team-workflow.md` |
+| 6. Хэндофф | Запустить критиков, собрать доску из апрувнутых экранов и секцию ревью | `handoff.md`, §0, `team-workflow.md` |
 
 Шаги начинают с того, о чём просят. Если экраны идут на доску для разработки, открой `handoff.md` до сборки: сетку и имена закладывают сразу.
 
@@ -155,6 +155,7 @@ description: "v4.35.0 · 18.11.2026 — Макеты, экраны и табли
     - Инструкция — повелительное наклонение, одно действие в предложении, до 20 слов.
       Описание — до 25 слов. Это верхний предел, а не цель.
     - Активный залог, простые общеупотребимые слова, без канцелярита и цепочек из существительных.
+    - **Без точки в конце строки** (решение владельца 18.11): после последнего предложения точку не ставят, между предложениями точка остаётся: «Файл больше 10 МБ. Выберите файл меньше». Вопросительный знак остаётся. Перед сдачей ищут по всем текстам строки, которые кончаются точкой.
     - **К пользователю — только на «вы»** (решение владельца 03.11): «Пройдите», «ваш», «вы здесь», а не «Пройди», «твой», «ты здесь». По-казахски так же — на «сіз»: «картаңызды», а не «картаңды». Текст с прода на «ты» при переносе в макет переписывают. Перед сдачей ищут по всем текстам файла: ты, тебя, тебе, твой, глаголы на -ешь и -ишь, повелительное без -те.
     - Не удаляют: числа и лимиты, условие, причину ошибки, следующий шаг, предлоги и союзы, без
       которых фраза становится телеграммой.
@@ -337,7 +338,7 @@ description: "v4.35.0 · 18.11.2026 — Макеты, экраны и табли
 | У последней строки каждого списка нет разделителя (`Show Divider = false`), отдельный `Divider` не стоит первым или последним в контейнере | скрипт-проверка из железного правила 10, затем глаза |
 | Контент оверлеев лежит в слоте, а не дорисован внутри панели | глаза |
 | Проверено в обеих модах `Theme` и в нужной моде `Platform` | глаза, переключением мод на корне |
-| Состояния: матрица заполнена, пропуски добраны или вынесены вопросом | `references/states-audit.md`: матрица, скрипт, снимки |
+| Состояния: матрица заполнена, пропуски собраны по просьбе или записаны в ревью | `references/states-audit.md`: матрица, скрипт, снимки |
 | Недостающее в SU10 — локальный компонент в своём файле, а не разовые фреймы; Nurla предупреждён | глаза, см. «Чего в системе нет» |
 
 ## Регламент команды — отдельный справочник
@@ -363,6 +364,7 @@ description: "v4.35.0 · 18.11.2026 — Макеты, экраны и табли
 экраном. Как её собирать — от вариантов на выбор до чистки перед Ready for development —
 в **`references/handoff.md`**. Главное, что держать в голове без него:
 
+- запрос на хэндофф начинают с критиков и `audit.md`, на доску берут только апрувнутые экраны, а что улучшить, чего не хватает (пустые состояния, ошибки и другие) и какие вопросы задать, собирают в отдельной секции ревью (`handoff.md`, §0);
 - варианты различаются устройством, итерация — новой дорожкой рядом, старое не удалять без просьбы;
 - тёмная слева, светлая справа = клон + мода `Theme`, а не пересборка;
 - экраны из `redesign` и концептов — только клоном, оригиналы не трогать (правило 8);

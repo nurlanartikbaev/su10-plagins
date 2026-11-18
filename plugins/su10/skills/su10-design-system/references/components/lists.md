@@ -31,6 +31,7 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 (алиас `surface/brand-transparent-static`). Выбрана одна строка в списке. Это исключение из
 правила 13: `Selected` показывает, где пользователь находится, а не момент нажатия. В списке с
 отметками выбора (настройка, фильтр) ставят `Trailing` `Type=Check`, а не `Selected`.
+**Ловушка (18.11):** до публикации SU10 у `State=Selected` не работает `Show Trailing`: галочку скрывают на слое и помечают как временное решение.
 
 Строка с `Trailing` `Type=Toggle` сама не нажимается: переключается только `Toggle` (решение владельца 06.11).
 
