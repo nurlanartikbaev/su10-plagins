@@ -171,17 +171,21 @@ Node ID из каталога годятся для ссылок и для чт�
 | Course map / Week row | Set | `a36bef2368af8f887305639616fd3f3543dbd00c` |
 | Course map / To current | Set | `3605ee1f924e41c7850b2b87093a522e3120b9f2` |
 
-Иконки из **SU10 Icon Pack** (все стиля Outline):
+Иконки из **SU10 Icon Pack**. Стиль Outline, если в строке не указан другой:
 
 | Иконка | Key |
 |---|---|
 | Arrows / Alt Arrow Right | `e1d0904e023d3763a86ece1c583dc517fef25ed1` |
 | Arrows / Alt Arrow Down | `3b2998c60416f9f0e42c660894b592dc65be09d2` |
+| Arrows / Refresh | `c7818a67192c042c7958e4e82b9225cddc3ee52f` |
 | Search / Magnifer | `e082f95cf4b48ce4b693b631669af58579e3b43d` |
 | Essentional, UI / Close | `ba1c0831265027d12b55961b22ffb78a9ae304ce` |
 | Time / Calendar | `6644bc081da698626d7a4d8497328d0424e13923` |
 | Time / Calendar Minimalistic (таб «Задачи»; Bold у выбранного — `a36d5eeac2c51f9118836c011159159811074a5f`) | `4f7ae1a665df1bc3381c9dad7c242ae2880b2808` |
 | Security / Lock — в макетах всегда **Bold** (решение владельца 16.11) | Bold `074b8a96e2ace641ea042685beb5e278e35c565d` · Outline `59e3abd822bda0abd5b281e0eec59cef8fa08979` (не ставить) |
+| Security / Eye | `c511492a4691432e6dace3c7d0659dc7059f2366` |
+| Security / Eye Closed | `fb515555c0d04ae2a5e10dde3d4b8a960f26f825` |
+| Security / Eye Scan | `b771d449a8d8f19a4549f4b0be1c416108dd4b44` |
 | Video, Audio, Sound / Play (с 16.11, после публикации пака) | Outline `b1c161692e2d9c01af6d2a67e06498723b3952f8` · Bold `4547314edf9f3d10476c072295db3ebbe9a36a3b` |
 | Video, Audio, Sound / Pause | Outline `675201f605e89104043eb8f6c6083c1540facc33` · Bold `267085618954b0f3e97513438c0e0fc372f195a0` |
 | Video, Audio, Sound / Microphone | Outline `79f54810fb3da0f8b4826101cda8caaf1573a5b7` · Bold `6f2b7d376eb7339f0ba35c60fa45a465c7edd17b` |

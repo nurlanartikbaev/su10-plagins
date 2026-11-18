@@ -119,6 +119,10 @@ for (const t of tabs) t.layoutSizingHorizontal = 'FILL';   // делят шир�
 | `Breadcrumbs` | четыре уровня, последний `Label` | лишний уровень — `findOne(n => n.name === 'Breadcrumbs 4').visible = false`. `remove()` на нём падает |
 | `Island`, `Dialog`, `DesktopDrawer`, `TableCell` | текст-плейсхолдер `swap content` в слоте | удалить, см. «Слоты» |
 | `ListItem` | разделитель под строкой (`Show Divider`) | у последней строки списка — `false`, см. железное правило 10 |
+| `Text field` | подсказка `Help text` (`Show Description`) | подсказки нет — `setProps(field, { 'Show Description': false })` |
+| `Heading` | подзаголовок (`Show Subtitle`) | подзаголовка нет — `setProps(heading, { 'Show Subtitle': false })` |
+| `RadioItem` | строка `MetaData` (`Show MetaData` во вложенном `Label`) | `setProps(item.findOne(n => n.name === 'Label'), { 'Show MetaData': false })`, высота строки M станет 40 вместо 44 |
+| `Text Button` | левая и правая иконки (`Show Left Icon`, `Show Right Icon`) | `setProps(button, { 'Show Left Icon': false, 'Show Right Icon': false })`, нужную иконку оставляют |
 
 ### Баги компонентов — проверено, обходить
 

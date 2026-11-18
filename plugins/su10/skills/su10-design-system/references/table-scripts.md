@@ -3,14 +3,14 @@
 Справочник скилла `su10-design-system`. Пошаговое описание и ловушки — в `data-tables.md`,
 правила самой системы — в основном файле скилла.
 
-Перед запуском вставь пролог из `plugin-api.md`. В `V` нужны `textPrimary` и `space0`, в `S` нужны `b2med` и `b2semi`. Компоненты берутся из библиотеки по ключам. Сборка §0 и помощники §3, §4, §5, §7 проверены запуском 18.11.2026.
+Перед запуском вставь пролог из `prologue.md`. В `V` нужны `textPrimary` и `space0`, в `S` нужны `b2med` и `b2semi`. Компоненты берутся из библиотеки по ключам. Сборка §0, колонка `progress`, параметр `lastPage` и помощники §3, §4, §5, §7 проверены запуском 18.11.2026.
 
 ## 0. Оркестратор: собрать таблицу целиком по спецификации колонок
 
 `buildTableFromSpec` строит таблицу колонками с нуля: шапка, ячейки, синхронизация высот, чекбоксы, подвал. Шаблон в файле не нужен. Вставь рядом функции из §3, §4, §5 и §7.
 
 ```js
-async function buildTableFromSpec({ parent, x = 0, y = 0, columns, rows, footerText }) {
+async function buildTableFromSpec({ parent, x = 0, y = 0, columns, rows, footerText, footerOptions }) {
   const [cellSet, headSet, headSlot, cbSet, badgeSet, selectSet, btnSet, linkSet] = await Promise.all([
     figma.importComponentSetByKeyAsync('e59035655bbe3b304ecfb1f1fc8f08898bbfb7b4'),  // TableCell
     figma.importComponentSetByKeyAsync('642683f5cd3479714348fdb6ab3f7bf63c6b353b'),  // TableHeaderCell
@@ -21,7 +21,11 @@ async function buildTableFromSpec({ parent, x = 0, y = 0, columns, rows, footerT
     figma.importComponentSetByKeyAsync('65fba8e790d609b921a8cdd5a32b18da71661209'),  // Button
     figma.importComponentSetByKeyAsync('24198687d25f6c3f1a49eaeb710e12ac4120978c'),  // Text Button
   ]);
+  const progressSet = columns.some(c => c.type === 'progress')
+    ? await figma.importComponentSetByKeyAsync('426c2f75a8b3e2c4e6f4d67df9438bdd2c3b3716')  // ProgressBar
+    : null;
   const lib = {
+    progress: progressSet,
     checkbox: pick(cbSet, { Size: 'S', State: 'Rest', IsSelected: 'Unselected' }),
     badge: pick(badgeSet, { Size: 'S', Signal: 'Neutral' }),
     select: pick(selectSet, { Size: 'S', State: 'Rest', 'Has Value': 'On' }),
@@ -79,7 +83,7 @@ async function buildTableFromSpec({ parent, x = 0, y = 0, columns, rows, footerT
 
   let bottom = headH + tablerow.height, footer = null;
   if (footerText) {
-    footer = await attachFooter(table, footerText);            // скрипт §7
+    footer = await attachFooter(table, footerText, footerOptions);   // скрипт §7
     footer.resize(xCursor, footer.height); footer.x = 0; footer.y = bottom;
     bottom += footer.height;
   }
@@ -104,7 +108,17 @@ async function fillCellContent(cell, col, value, lib) {
       const badge = lib.badge.createInstance();
       slot.appendChild(badge);
       const v = typeof value === 'object' ? value : { label: value, signal: col.accent ? 'Accent' : 'Neutral' };
-      await setBadge(badge, { label: v.label, signal: v.signal, showChevron: col.accent ? false : v.showChevron });
+      await setBadge(badge, { label: v.label, signal: v.signal });
+    }
+    if (col.type === 'progress') {
+      const v = value !== null && typeof value === 'object' ? value : { value };
+      const pct = Number(v.value);
+      if (!Number.isFinite(pct) || pct < 0 || pct > 100) throw new Error('progress: нужно число от 0 до 100, пришло ' + v.value);
+      const step = String(Math.round(pct / 5) * 5);             // варианты Value идут с шагом 5
+      const bar = pick(lib.progress, { Signal: v.signal || col.signal || 'Info', Value: step }).createInstance();
+      slot.appendChild(bar);
+      bar.layoutSizingHorizontal = 'FILL';
+      setProps(bar, { 'Show Labels': true, Label: v.label ?? col.label ?? '', 'Show Value Label': true, 'Value Label': pct + '%' });
     }
     if (col.type === 'select') {
       const sel = lib.select.createInstance();
@@ -223,13 +237,12 @@ async function fixCheckboxColumnAlignment(columnId) {
 }
 ```
 
-## 5. Badge: подпись, сигнал, видимость шеврона и цвет иконки за один раз
+## 5. Badge: подпись, сигнал и цвет иконки за один раз
 
 ```js
-async function setBadge(badge, { label, signal, showChevron }) {
+async function setBadge(badge, { label, signal }) {
   if (signal) badge.setProperties({ Signal: signal });
-  setProps(badge, { Label: label });
-  if (showChevron !== undefined) setProps(badge, { 'Show Right Icon': showChevron });
+  setProps(badge, { Label: label, 'Show Right Icon': false });        // Badge не нажимают, шеврон ему не нужен
   const text = badge.findOne(n => n.type === 'TEXT');
   const vec = badge.findOne(n => n.type === 'VECTOR' && n.visible);   // вектор не наследует цвет подписи
   if (vec && text) vec.fills = text.fills;
@@ -248,14 +261,30 @@ overrides like typed-in text.
 ## 7. Приложить подвал с пагинацией
 
 ```js
-async function attachFooter(parent, infoText, { totalPages = '8+', position = 'First' } = {}) {
+async function attachFooter(parent, infoText, { totalPages = '8+', position = 'First', lastPage } = {}) {
   const footerSet = await figma.importComponentSetByKeyAsync('5ce4da26a0d46756b2df2a1a9cc76f70122173ec');
   const footer = pick(footerSet, { Type: 'Counted' }).createInstance();
   parent.appendChild(footer);
   setProps(footer, { 'Text Info': infoText, 'Show Info': true, 'Show Pagination': true });
   const pagination = footer.findOne(n => n.name === 'Pagination');
-  if (pagination) pagination.setProperties({ 'Total pages': totalPages, Position: position });
+  if (pagination) {
+    pagination.setProperties({ 'Total pages': totalPages, Position: position });
+    pagination.layoutSizingHorizontal = 'HUG';                  // иначе у Middle и Last стрелка вылезает на 26 px
+  }
+  if (lastPage !== undefined) await setLastPage(pagination, lastPage);
   footer.name = 'footer';
   return footer;
+}
+
+// Вариант 8+ показывает последней страницей 9. Номер живёт в текстовом слое PageButton, свойства у него нет
+async function setLastPage(pagination, lastPage) {
+  if (pagination.componentProperties['Total pages'].value !== '8+') throw new Error('lastPage работает только с Total pages = 8+');
+  if (!Number.isInteger(lastPage) || lastPage < 8) throw new Error('lastPage: нужно целое число от 8, пришло ' + lastPage);
+  const labels = pagination.findAll(n => n.type === 'TEXT' && n.name === 'Label');
+  const tail = labels.slice(labels.map(l => l.characters).lastIndexOf('...') + 1);   // номера после многоточия
+  for (let i = 0; i < tail.length; i++) {                       // у Position=Last их пять, номера идут подряд
+    await figma.loadFontAsync(tail[i].fontName);
+    tail[i].characters = String(lastPage - (tail.length - 1 - i));
+  }
 }
 ```

@@ -24,6 +24,7 @@ const LIST_ROW = /^ListItem( v2)?$/;
 const ABBR = /(^|[\s(])(сек|мин|ч|г|др|руб|тг|стр|д|п)\.$/i;
 const YOU = /(^|[^а-яёәіңғүұқөһ])(ты|тебя|тебе|тобой|твой|твоя|твоё|твое|твои|твою|твоего|твоей|твоему|твоим|твоих|твоими|сені|саған|сенің|сенімен)(?![а-яёәіңғүұқөһ])/i;
 const YOU_VERB = /[а-яё]{2,}(ешь|ёшь|ишь)(?![а-яё])/i;
+const PLACEHOLDER = /^(swap content|MetaData|Help text)$/i;   // текст-заглушка мастера целиком
 function lint(s) {
   const t = s.trim(), why = [];
   if (t.endsWith('.') && !t.endsWith('..') && !/^\d+\.$/.test(t) && !ABBR.test(t)) why.push('точка');
@@ -94,7 +95,7 @@ async function walk(n, inTarget) {
   if (n.type === 'TEXT' && typeof n.characters === 'string') {
     const why = lint(n.characters);
     if (why.length) add('textLint', n, `${why.join(', ')} · ${n.characters.trim().slice(0, 40)}`);
-    if (/swap content/i.test(n.characters)) add('placeholderLeft', n);
+    if (PLACEHOLDER.test(n.characters.trim())) add('placeholderLeft', n, n.characters.trim());
   }
 
   // иконка с двумя слоями цвета: и заливка, и обводка непустые

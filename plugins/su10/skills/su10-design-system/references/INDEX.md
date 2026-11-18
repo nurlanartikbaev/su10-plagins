@@ -16,7 +16,7 @@
 | «Списки» | `components/list-item.md`, `components/profile-item.md`, `components/list-common.md` |
 | «Действия» | `components/button.md`, `components/text-button.md` |
 | «Рецепты сборки» | `recipes/INDEX.md` |
-| «Пустой результат», «Состояния экрана», «Недоступное содержимое» | `recipes/screen-states.md` |
+| «Пустой результат», «Пустой экран без поиска», «Состояния экрана», «Недоступное содержимое» | `recipes/screen-states.md` |
 | «Иконки — подбор и подмена», «Исключения из Outline» | `icons.md` |
 | «Таблицы данных», «Ловушки» таблиц | `data-tables.md` |
 | «Если добавляешь компонент в систему», «Локальный компонент», паспорта | `new-component.md` |

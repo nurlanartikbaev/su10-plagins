@@ -16,11 +16,11 @@
   кнопка выпадает из `children` инстанса, и индекс основной кнопки сдвигается.
   ```js
   const ap = offVariant.createInstance(); body.appendChild(ap); ap.layoutSizingHorizontal = 'FILL';
-  for (const k of ['paddingLeft','paddingRight','paddingTop','paddingBottom']) ap.setBoundVariable(k, space0);
+  for (const k of ['paddingLeft','paddingRight','paddingTop','paddingBottom']) ap.setBoundVariable(k, T.space0);
   const row = ap.children[0].children.find(c => c.name === 'buttons row');
-  row.children.at(-1).setProperties({ 'Label#273:46': 'Сохранить цель' });
-  ap.setProperties({ 'Show Primary Text#1060:2': false, 'Show Secondary Text#1060:3': false,
-    'Show Right Button#1060:4': false, 'Show Left Button#1060:5': true });
+  setProps(row.children.at(-1), { Label: 'Сохранить цель' });
+  setProps(ap, { 'Show Primary Text': false, 'Show Secondary Text': false,
+    'Show Right Button': false, 'Show Left Button': true });
   ```
 `Elevate` On/Off · `Show Left Button`, `Show Right Button`, тексты.
 `Elevate=On`, когда контент уходит под панель; `Off`, когда панель — последний блок страницы.
