@@ -1,0 +1,9 @@
+# MobileTabbar v2, TabBarItem, TabBar [Deprecated]
+
+Справочник скилла `su10-design-system`.
+
+**TabBar [Deprecated]** `1713:563` — старая нижняя навигация во всю ширину. **Устарел 11.11, в новых макетах не ставят.** Замена: `MobileTabbar v2`. **TabBarItem** `1713:562` действует: его кладут в слот `MobileTabbar v2`. У панели слот `items`, у таба `State` Rest/Selected, `Label` TEXT и `Icon` INSTANCE_SWAP.
+От трёх до пяти табов, каждый ставится на Fill — тогда они делят ширину поровну. Выбран ровно один. Высота 56: `Space-8` сверху и снизу плюс 40 на таб; зона home indicator добавляется экраном, а не компонентом. `Selected` красит иконку и подпись фирменным акцентом (`tabbar/icon-selected` → `icon/brand-outline`, `tabbar/label-selected` → `text/brand`, с 13.11).
+
+- **MobileTabbar v2** `2224:669` (паспорт `MobileTabbarV2Passport` `2230:685`) — плавающий таб-бар,
+  слот `items` с `TabBarItem` на Fill, от трёх до пяти, высота 54. У выбранного таба иконка Bold, у остальных Outline (исправлено 06.11, до этого здесь были записаны неверные иконки; верные стоят в макетах): Главная — `Home Angle` Outline `756852467f0c8a295d650cd3b6390ac638771fb5` / Bold `f5db4ce234e96ef1450f01101bd3be435e34120c`; Курсы — `School / Notebook Minimalistic` Outline `eb9c3c8d8c0914dcbac9a5a1d5f1fafc905d459e` / Bold `5fbb3b2ce54e9b0cd8c72b9aa5fa5e658e7d72ab`; JuzAI — `AI` Outline `b83a16cee0dec41953acaa9c3ed632a0dfc6ff59` / Bold `b298700cdbdbbc000aff65c4e4a26b20a287bc71`; Задачи — `Time / Calendar Minimalistic` (решение владельца 12.11, до этого `Time / Calendar`) Outline `4f7ae1a665df1bc3381c9dad7c242ae2880b2808` / Bold `a36d5eeac2c51f9118836c011159159811074a5f`. Описания этих четырёх Bold-иконок в паке исправлены 11.11 и 12.11: Bold разрешён только у выбранного таба. `Time / Calendar` в таб-бар не ставят ни в одном стиле. В самом паке `Outline / Essentional, UI / AI` — ключ `ec4fd7d7bf29058810af51358a2aa74a5bf62674`.

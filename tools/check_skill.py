@@ -20,7 +20,7 @@ SKILL_DIR = ROOT / 'plugins/su10/skills/su10-design-system'
 PLUGIN = ROOT / 'plugins/su10/.claude-plugin/plugin.json'
 REGISTRY = ROOT / 'tools/owner-decisions.json'
 JSC = '/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc'
-NO_KEY = {'FeedbackIcon'}   # стоит только внутри Alert и Toast, отдельно не импортируют
+NO_KEY = {'FeedbackIcon', 'Промо-баннер'}   # внутренняя часть Alert и Toast; баннер собирают фреймом
 STALE = ['Fast path', 'каталога выше', 'таблицей в основном файле', 'таблицу ключей в основном файле']
 errors = []
 
@@ -55,7 +55,7 @@ for doc in docs:
         errors.append(f'{name}: следы конфликта слияния')
     if doc.name == 'changelog.md':
         continue
-    for ref in set(re.findall(r'`(?:references/)?(?:components/)?([a-z0-9-]+\.md)`', text)):
+    for ref in set(re.findall(r'`(?:references/)?(?:components/|recipes/)?([A-Za-z0-9-]+\.md)`', text)):
         if ref not in known:
             errors.append(f'{name}: ссылка на несуществующий файл {ref}')
     for phrase in STALE:
@@ -64,11 +64,12 @@ for doc in docs:
 
 # У каждого компонента из карты в SKILL.md есть ключ
 keys = (SKILL_DIR / 'references/keys.md').read_text(encoding='utf-8')
-section = skill[skill.index('**Компоненты**'):skill.index('**Остальные справочники**')]
-for row in re.findall(r'^\| `[a-z]+\.md` \| (.+) \|$', section, re.M):
-    for component in (c.strip() for c in row.split(',')):
-        if component not in NO_KEY and not re.search(r'^\| ' + re.escape(component) + r'(?: \([^|]*)? \|[^\n]*`[0-9a-f]{40}`', keys, re.M):
-            errors.append(f'keys.md: нет ключа компонента {component}')
+index = (SKILL_DIR / 'references/components/INDEX.md').read_text(encoding='utf-8').split('## Общие правила')[0]
+for component, target in re.findall(r'^\| ([^|]+?) \| `([a-z0-9-]+\.md)` \|$', index, re.M):
+    if not (SKILL_DIR / 'references/components' / target).exists():
+        errors.append(f'components/INDEX.md: нет файла {target}')
+    if component not in NO_KEY and not re.search(r'^\| ' + re.escape(component) + r'(?: \([^|]*)? \|[^\n]*`[0-9a-f]{40}`', keys, re.M):
+        errors.append(f'keys.md: нет ключа компонента {component}')
 
 # Код скриптов разбирается без ошибок. Блок с пометкой ХРУПКО показывает два варианта и не запускается
 if os.path.exists(JSC):

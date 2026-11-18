@@ -1,0 +1,7 @@
+# Slider, RangeSlider, SliderThumb
+
+Справочник скилла `su10-design-system`.
+
+**Slider** (страница `Slider`, паспорт `SliderPassport`, с 16.11) — выбор числа из диапазона перетаскиванием: число вопросов, целевой балл, громкость и скорость видео. `Size` M (область 32, бегунок 20/22) / S (24, бегунок 16) · `State` Rest/Disabled/Error · `Value` 0–100 с шагом 10 — положение бегунка; точное число пишут в `Value Text`. Свойства: `Show Label` + `Label`, `Show Value` + `Value Text` над дорожкой, `Show Scale` + `Min` / `Max` под ней, `Show Ticks` — точки шагов, `Show Description` + `Description` — подсказка или причина ошибки. Бегунок `Thumb` выведен наружу: Hover, Pressed, Focused и подсказку со значением (`Show Tooltip`) ставят на нём, а не вариантом ползунка. Подсказку над бегунком включают только у ползунка без строки подписи. Дорожка утоплена на радиус бегунка, он не выходит за края. Цвета — общие `controls/*`, ползунок teal, как `Toggle`. Точное число — `NumberInput` рядом, значение общее. Ставится на Fill.
+**RangeSlider** (паспорт `RangeSliderPassport`) — диапазон «от–до», два бегунка: цена в фильтре, время занятий. `Value` — пресеты от–до с шагом 20, остальное как у `Slider`; `Thumb Start` и `Thumb End` выведены наружу. Бегунки не обгоняют друг друга.
+**SliderThumb** — бегунок обоих ползунков, отдельно не ставят: `State` Rest/Hover/Pressed/Focused/Disabled, `Show Tooltip` + `Tooltip`.

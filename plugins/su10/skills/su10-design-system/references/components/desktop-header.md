@@ -1,0 +1,7 @@
+# DesktopHeader v2, DesktopHeader [Deprecated]
+
+Справочник скилла `su10-design-system`.
+
+- **DesktopHeader v2** `3852:399` (паспорт `3853:3031`, с 02.11) — стеклянная шапка десктопа, токены `mobile-tabbar-v2/*`, скругление снизу, ширина 1392, стоит в x 24, y 0 над контентом. `Logo` M; слот `navigation` со строкой `NavLink`, шаг 24; слот `actions`: иконки на `MenuItem` `Type=Closed`, затем `StreakPill` `Placement=Left` + `Avatar` S. `DesktopHeader` v1 устарел 11.11.
+
+**DesktopHeader [Deprecated]** `1664:62` — старая шапка десктопного экрана: логотип слева, слот `actions` справа. **Устарел 11.11, в новых макетах не ставят.** Замена: `DesktopHeader v2`. Ширина ставится на Fill, высота фиксированная — 56 (`size/header-height` на `height`). Содержимое слота должно укладываться в 40 по высоте: иконка на `Text Button` (18) и `Avatar Size = S` (32) проходят. В предустановленных значениях слота — только `Text Button` и `Avatar`. **Иконка в шапке собирается на `Text Button`**, `Size = M`, `Variant = Default`, с выключенными `Show Label` и `Show Right Icon`: остаётся одна иконка 18 на `icon/primary` — тёмная. `Button` в шапке не используется вообще: `Weight = Tertiary` красит иконку акцентом, а нужна тёмная. Аватар — тоже слой в слоте, ставится последним. Шаг между слоями слота — **`Space-32`**: у иконки на `Text Button` нет собственных полей, и на меньшем шаге иконки сливаются в группу. Нижняя граница есть, тени нет.

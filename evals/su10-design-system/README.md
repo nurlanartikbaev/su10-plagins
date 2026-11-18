@@ -21,12 +21,12 @@
 
 ### 1. Снимите базовую версию
 
-Базовая версия: предыдущая версия скилла. Сейчас это 4.35.2, коммит `1d2ac14`. Рабочую папку держите вне репозитория.
+Базовая версия: предыдущая версия скилла. Сейчас это 4.36.0, коммит `bc33fe2`. Рабочую папку держите вне репозитория.
 
 ```bash
 WORKSPACE="$HOME/su10-design-system-workspace"
 mkdir -p "$WORKSPACE/skill-snapshot"
-git archive 1d2ac14 plugins/su10/skills/su10-design-system | tar -x -C "$WORKSPACE/skill-snapshot"
+git archive bc33fe2 plugins/su10/skills/su10-design-system | tar -x -C "$WORKSPACE/skill-snapshot"
 ```
 
 После выпуска новой версии замените коммит на коммит предыдущей версии.
