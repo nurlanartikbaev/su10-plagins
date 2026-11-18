@@ -6,7 +6,7 @@
 
 | Раздел | Файл |
 |---|---|
-| Железные правила, правило с номером | `rules.md` |
+| Железные правила, правило с номером | rules/rule-NN.md |
 | «Основа», «Типографика», «Сетка десктопа», «Радиусы», высоты строки | `foundations.md`, `recipes/screen-layout.md` |
 | «Чек-лист перед сдачей макета» | `checklist.md` |
 | «Слоты», «Порядок операций в автолейауте», «Не помещается — переводи на FILL», «Баги компонентов», «Моды тем и платформ» | `plugin-api.md` |
@@ -33,9 +33,9 @@
 | `components/INDEX.md` | компонент и его файл |
 | `recipes/INDEX.md` | рецепты по типам экранов |
 | `keys.md`, `keys-tokens.md` | ключи компонентов, свойств, токенов и стилей |
-| `plugin-api.md`, `plugin-api-traps.md` | пролог скриптов и ошибки |
+| `prologue.md`, `plugin-api.md`, `plugin-api-traps.md` | пролог скриптов, факты и ошибки |
 | `data-tables.md`, `table-scripts.md` | таблицы и скрипты |
-| `audit.md`, `checklist.md`, `states-audit.md`, `accessibility.md` | проверка макета |
+| `audit-script.md`, `audit.md`, `checklist.md`, `states-audit.md`, `accessibility.md` | проверка макета |
 | `spec-to-layout.md`, `code-parity.md` | спека и сверка с кодом |
 | `handoff.md`, `handoff-board.md`, `handoff-traps.md`, `team-workflow.md` | передача в разработку |
 | `component-proposals.md`, `adoption.md` | очередь предложений и замер внедрения |

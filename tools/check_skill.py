@@ -55,7 +55,7 @@ for doc in docs:
         errors.append(f'{name}: следы конфликта слияния')
     if doc.name == 'changelog.md':
         continue
-    for ref in set(re.findall(r'`(?:references/)?(?:components/|recipes/)?([A-Za-z0-9-]+\.md)`', text)):
+    for ref in set(re.findall(r'`(?:references/)?(?:components/|recipes/|rules/)?([A-Za-z0-9-]+\.md)`', text)):
         if ref not in known:
             errors.append(f'{name}: ссылка на несуществующий файл {ref}')
     for phrase in STALE:
