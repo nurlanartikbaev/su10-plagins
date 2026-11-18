@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.33.12 · 17.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
+description: "v4.34.1 · 18.11.2026 — Сборка макетов, экранов и таблиц данных в Figma на дизайн-системе SU10 (бывшая JUZ40): каталог компонентов, цвета, токены, размеры, правила консистентности, подбор иконок, пошаговая сборка таблиц и готовые скрипты. Use when building any screen, flow, form, modal, drawer, tooltip or mobile layout in the SU10 Design System Figma file or in a product file that consumes it; when choosing which component, color, size or token to use; when adding a new component to the system; or when reviewing a mockup for consistency. Also use for data tables — building a table screen (student lists, call logs, any row/column grid), adding rows or a status/badge column, adding pagination or a footer, or fixing a table built from these components; consult it before hand-building table cells from frames. Also for developer handoff boards: states and flows, variants to pick from, dark/light pairs, desktop versions, cleanup before Ready for development; every handoff request starts with a critic review, builds approved screens only and adds a separate review section with improvements, missing states and open questions. Also for the Mascot: which mascot to put on an empty, error or success screen, generating new poses and emotions, mascot animations, the AI mascot in chat. Also for the team workflow: where drafts live (JUZ40 Workspace personal files), moving an approved feature into the clean role project / section file, page naming and order, file covers, who sets Ready for development, pushing new rules to the skill repo."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.33.12 · 17.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.34.1 · 18.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -127,6 +127,7 @@ description: "v4.33.12 · 17.11.2026 — Сборка макетов, экран
     - Инструкция — повелительное наклонение, одно действие в предложении, до 20 слов.
       Описание — до 25 слов. Это верхний предел, а не цель.
     - Активный залог, простые общеупотребимые слова, без канцелярита и цепочек из существительных.
+    - **Без точки в конце строки** (решение владельца 18.11): после последнего предложения точку не ставят, между предложениями точка остаётся: «Файл больше 10 МБ. Выберите файл меньше». Вопросительный знак остаётся. Перед сдачей ищут по всем текстам строки, которые кончаются точкой.
     - **К пользователю — только на «вы»** (решение владельца 03.11): «Пройдите», «ваш», «вы здесь», а не «Пройди», «твой», «ты здесь». По-казахски так же — на «сіз»: «картаңызды», а не «картаңды». Текст с прода на «ты» при переносе в макет переписывают. Перед сдачей ищут по всем текстам файла: ты, тебя, тебе, твой, глаголы на -ешь и -ишь, повелительное без -те.
     - Не удаляют: числа и лимиты, условие, причину ошибки, следующий шаг, предлоги и союзы, без
       которых фраза становится телеграммой.
@@ -875,6 +876,7 @@ TEXT · `Show Leading`, `Show Description`, `Show Trailing`, `Show Divider`. Л�
 (алиас `surface/brand-transparent-static`). Выбрана одна строка в списке. Это исключение из
 правила 13: `Selected` показывает, где пользователь находится, а не момент нажатия. В списке с
 отметками выбора (настройка, фильтр) ставят `Trailing` `Type=Check`, а не `Selected`.
+**Ловушка (18.11):** до публикации SU10 у `State=Selected` не работает `Show Trailing`: галочку скрывают на слое и помечают как временное решение.
 
 Строка с `Trailing` `Type=Toggle` сама не нажимается: переключается только `Toggle` (решение владельца 06.11).
 
@@ -1277,6 +1279,7 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
 
 ### Свойства компонентов — ловушки
 
+- **У `RadioItem` подпись варианта — это слой, а не свойство** (18.11): её пишут прямо в текст слоя.
 - **`swapComponent` у слоя, привязанного к INSTANCE_SWAP-свойству, меняет значение по умолчанию
   у всего свойства** — и все варианты набора, где слой привязан к тому же свойству, получают новую
   иконку. 29.10: в новом `Suffix` `Type=Action` поставили самолётик — и у `Type=Icon` во всех полях
@@ -1822,6 +1825,7 @@ table (frame, layoutMode NONE)
 экраном. Как её собирать — от вариантов на выбор до чистки перед Ready for development —
 в **`references/handoff.md`**. Главное, что держать в голове без него:
 
+- запрос на хэндофф начинают с критиков и `audit.md`, на доску берут только апрувнутые экраны, а что улучшить, чего не хватает (пустые состояния, ошибки и другие) и какие вопросы задать, собирают в отдельной секции ревью (`handoff.md`, §0);
 - варианты различаются устройством, итерация — новой дорожкой рядом, старое не удалять без просьбы;
 - тёмная слева, светлая справа = клон + мода `Theme`, а не пересборка;
 - экраны из `redesign` и концептов — только клоном, оригиналы не трогать (правило 8);
@@ -2027,11 +2031,17 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 - **JUZ40: уведомления и профиль — в шапке «Главной»** (решение владельца 16.11): колокольчик и аватар. Таб-бар остаётся из четырёх табов, пятый таб не добавляют.
 - **JUZ40: прохождение теста** (с 16.11, секция 15 в `Redesign (Student)`). Телефон: в шапке крестик (`HeaderButton` с иконкой `Close`) и таймер `Badge`; таб-бара нет (`MobileBottomBar v2` `Show TabBar=false`), в панели «Назад» и «Далее». Десктоп: слева таймер и список вопросов из `ListItem` (текущий `State=Selected`, с ответом `Trailing` `Type=Check`), справа вопрос; `ChatButton` на экране теста нет. Подтверждения старта и завершения: `Dialog` на десктопе, `MobileBottomSheet` на телефоне, оба поверх `Overlay`. Разбор: `RadioItem` `State=Success` и `State=Error`, бейдж «Верно · 1 балл» или «Неверно · 0 баллов» в `Heading`, ниже «Объяснение».
 - **JUZ40: квиз-игра** (секция 16): оболочка как у теста. Ответ: `RadioItem` `State=Success` / `State=Error` и `Alert` «Правильно» или «Неверно. Вопрос вернётся в следующем раунде.» Экран попытки: балл в `Heading`, раунды и результат списками `ListItem`, фильтр результата из `Tag`. На десктопе раунды и результат видны сразу, на телефоне это вкладки `TabsRow`.
-- **JUZ40: мини-тест лекции**: вкладки `TabsRow` «Комментарии» и «Мини-тест» под материалами; материалы до мини-теста заменяет `Alert`.
+- **JUZ40: мини-тест лекции**: вкладки `TabsRow` «Комментарии» и «Мини-тест» под материалами; материалы до мини-теста заменяет `Alert`. Кнопка «Завершить тест» появляется, только когда отмечены все вопросы (решение владельца 18.11: иначе ученик закроет тест случайно). До этого на её месте `Alert` «Ответьте на все вопросы, чтобы завершить тест. Без ответа: N», панель действий на телефоне скрыта. После нажатия диалог подтверждения.
+- **JUZ40: на телефоне нет кнопок «Следующий урок» и «Предыдущий урок»** (решение владельца 18.11). Если в панели действий больше ничего нет, её скрывают: `MobileBottomBar v2` `Show Action Panel=false`. Оставшаяся кнопка становится основной.
 - **JUZ40: парная работа, Live, доступ** (секция 17): партнёр — `ListItem` с `Leading` `Type=Avatar` и кнопка «Написать в WhatsApp»; ссылка на запись — `Text field` с описанием; Live — строки `ListItem` и кнопка «Перейти», неактивная раньше чем за 30 минут; обязательный курс и оплата — `Alert` с действием.
+- **JUZ40: шаги парной работы до теста** (решение владельца 18.11): «Созвонитесь в Google Meet» и «Пройдите тест вместе и добавьте запись: за неё дают до 5 баллов».
+- **JUZ40: два бейджа у Live-урока** (решение владельца 18.11): первый про встречу, второй про работу ученика.
 - **JUZ40: вопросы с пропусками, перетаскиванием и сопоставлением** (с 17.11): поля внутри текста в SU10 нет. Пропуски в тексте нумеруют «(1)», «(2)», под текстом стоят поля с подписями «Пропуск 1», «Пропуск 2»: `SingleSelect` для выбора из списка, `Text field` для ввода. Перетаскивание: набор слов из `Tag` (занятое слово `State=Disabled`) и `SingleSelect` на каждый пропуск. Сопоставление: `SingleSelect` с подписью-пунктом «1. Казахстан». На десктопе поля шириной 320 в ряд с переносом, на телефоне на всю ширину. Предложение к SU10: поле внутри текста.
-- **JUZ40: прокторинг** (секция 18): настройка разная, поэтому стоят два набора экранов: «Фронт: шаг N из 3» на десктопе и «Мобилка: шаг N из 5» на телефоне. Шаг — оболочка теста без таймера: заголовок, текст, содержимое шага, «Назад» и основная кнопка. Превью камеры — `VideoPlayer` `State=Playing` как заглушка. QR-кода в SU10 нет: стоит фрейм-заглушка. Состояния во время теста — `Dialog` на десктопе и `MobileBottomSheet` на телефоне.
+- **JUZ40: прокторинг** (секция 18): настройка разная, поэтому стоят два набора экранов: «Фронт: шаг N из 3» на десктопе и «Мобилка: шаг N из 5» на телефоне. Шаг — оболочка теста без таймера: заголовок, текст, содержимое шага, «Назад» и основная кнопка. Превью камеры — `VideoPlayer` `State=Playing` как заглушка. QR-кода в SU10 нет: стоит фрейм-заглушка. Состояния во время теста — `Dialog` на десктопе и `MobileBottomSheet` на телефоне. Первый шаг (решение владельца 18.11): цель записи, подписи у пунктов, согласие по умолчанию не отмечено.
 - **JUZ40: негативный исход в блоке результата** (с 16.11): `Mascot` `Emotion=Sad`, заголовок «Не расстраивайтесь», `ProgressBar` `Signal=Error`. Статус теста и экзамена остаётся «Сделано»: порога нет. «Провалено» (`Badge` Error) есть только у сдачи урока: там есть проходной балл. Тексты с прода: > 70 % «Поздравляем», > 50 % «Вы на верном пути», иначе «Не расстраивайтесь».
+- **JUZ40: плохой результат теста** (решение владельца 18.11): заголовок «Есть что разобрать», основная кнопка «Посмотреть разбор». Только у теста: у квиза и экзамена остаётся заголовок прода «Не расстраивайтесь».
+- **JUZ40: балл в блоке результата один раз** (решение владельца 18.11): строки «Баллы» и бейджа «Время» нет, в тесте и интерактивном видео.
+- **JUZ40: штраф квиза пишут двумя строками** (решение владельца 18.11).
 - **JUZ40: редизайн страницы урока только для кабинета студента** (решение владельца 16.11). Кабинет родителя не трогают, хотя он использует те же экраны.
 - **JUZ40: файлы решения — лимит и форматы веба** (решение владельца 16.11): «PDF, DOC, XLS, JPG, PNG или HEIC. До 20 МБ» на десктопе и телефоне.
 - **JUZ40: порог видео в лекции разный** (решение владельца 16.11): фронт 80 %, мобилка 85 %. Десктопный экран пишет «Досмотрите видео до 80%» и «Нужно 80%», экран телефона — 85 %. Интерактивное видео — 85 % везде. Метка `ProgressBar` (`Show Marker`) стоит на 85 %: на десктопе лекции её выключают. Нужно в SU10: положение метки свойством.
@@ -2075,7 +2085,7 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.33.12 · 17.11.2026 · обновил Nurla**.
+Текущая версия — **v4.34.1 · 18.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
