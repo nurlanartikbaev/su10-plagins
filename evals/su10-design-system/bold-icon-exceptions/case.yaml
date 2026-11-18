@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: bold-icon-exceptions
+expected_outcome: |
+  Кнопка «⋯», замок и отправка в поле используют Bold-иконки с ключами из железного правила 5.
+  Outline-варианты и значок WhatsApp на их месте не стоят.

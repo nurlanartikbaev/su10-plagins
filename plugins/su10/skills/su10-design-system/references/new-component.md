@@ -70,17 +70,32 @@
    │  ├─ DocHeading         Title = имя компонента, описание — что это и когда брать
    │  └─ Showcase           главный пример: полосы «Светлая» / «Тёмная тема», дефолтный вариант
    ├─ Section × N           VERTICAL, шаг 0: DocSubheading (свойство или тема) + Showcase
-   └─ Section «Поведение»   правила, которые чаще всего нарушают, + пример в реальном окружении
+   ├─ Section «Поведение»   правила, которые чаще всего нарушают, + пример в реальном окружении
+   └─ Section «Доступность» обязательный раздел: DocSubheading с Title = «Доступность»
    ```
+   - **Раздел «Доступность» обязателен.** Что в нём написать — `references/accessibility.md`, §10: роль, доступное имя, клавиатура, фокус, объявление, движение, увеличение текста, зона касания, контраст. Пункт не относится к компоненту — пишут «Не применимо» и причину. Ответа нет — пишут «Нужно решение владельца», а не придумывают правило.
    - **Статус разработки обязателен.** `Status`: Не начато / В работе / Нужны правки / Готово. Новый компонент — «Не начато» на обеих платформах; дальше статус меняет владелец. Это компонент в документации, он ставится через API — в отличие от Figma `devStatus` у секций.
    - **Каждый раздел с витриной.** Паспорт из одних `DocSubheading` — неполный: свойство без примера не проверить глазами. Новое свойство (например, `Platform` у `Course map / Node`) — новый раздел с витриной «подпись + варианты».
-   - Перед сдачей — проверка всех паспортов файла:
+   - Перед сдачей — проверка всех паспортов файла, только чтение. `noHeader` — нет `Dev status` или `Showcase` в шапке, `noA11y` — нет раздела «Доступность»:
      ```js
-     for (const p of figma.root.children) { if (p.name === 'sandbox') continue; await p.loadAsync();
-       for (const f of p.findAll(n => n.type === 'FRAME' && /Passport$/.test(n.name))) {
+     const res = { total: 0, noHeader: [], noA11y: [] };
+     const isA11y = s => 'children' in s && s.children.some(c => c.type === 'INSTANCE' && c.name === 'DocSubheading' &&
+       Object.entries(c.componentProperties).some(([k, v]) => k.startsWith('Title#') && String(v.value).trim() === 'Доступность'));
+     for (const p of figma.root.children) {
+       if (p.name === 'sandbox') continue;
+       await p.loadAsync();
+       const top = p.children.flatMap(n => n.type === 'SECTION' ? n.children : [n]);
+       for (const f of top) {
+         if (f.type !== 'FRAME' || !/Passport$/.test(f.name)) continue;
+         res.total++;
          const h = f.children.find(c => c.name === 'Header');
-         if (!h?.children.some(c => c.name === 'Dev status') || !h.children.some(c => c.name === 'Showcase')) console.log(p.name, f.name); } }
+         if (!h || !h.children.some(c => c.name === 'Dev status') || !h.children.some(c => c.name === 'Showcase')) res.noHeader.push(`${p.name} · ${f.name}`);
+         if (!f.children.some(isA11y)) res.noA11y.push(`${p.name} · ${f.name}`);
+       }
+     }
+     return { total: res.total, noHeaderCount: res.noHeader.length, noA11yCount: res.noA11y.length, noHeader: res.noHeader, noA11y: res.noA11y };
      ```
+     Прогон 18.11.2026: паспортов 97, без раздела «Доступность» все 97, без полной шапки 8.
 7. **Витрина паспорта — две полосы: `Светлая` и `Тёмная тема`.** Сама `Showcase` полей не держит
    (`padding 0`, `gap 0`, вертикальный автолейаут), фон у неё `surface/1-layer`. Каждая полоса —
    самостоятельная панель: свой фон `surface/1-layer`, поля **12** со всех сторон, шаг **12**,
@@ -134,6 +149,54 @@
 17. **Версию и синхронизацию берёт на себя хук — руками не надо** (он поднимает только патч; новый компонент — это минорная версия, её поднимают руками в трёх местах до коммита, тогда хуку делать нечего). Скилл раздаётся плагином из репозитория `nurlanartikbaev/su10-plagins`, который правят несколько человек. На хуке `Stop` стоит `tools/su10-autopush.sh`: он подтягивает правки остальных, поднимает patch-версию в `SKILL.md` и `plugin.json`, проставляет в шапке, кто обновил, коммитит и пушит. У всех с `autoUpdate` новая версия подхватывается при следующем запуске. Хук останавливает публикацию, если в правке нет записи в `changelog.md` или не прошла проверка `tools/check_skill.py`. Твоя часть — только запись в `references/changelog.md`: что изменилось и почему, этого хук придумать не может. **Хук работает только на `main`**: на другой ветке он ничего не коммитит, не подтягивает и не пушит. Правку на ветке коммитят сами и перед слиянием поднимают patch-версию руками: в `plugin.json`, описании и шапке `SKILL.md` и в разделе «Версии». Иначе `autoUpdate` её не подхватит
 
 
+## Сверка каталога: `catalog-diff`
+
+Показывает, что в файле дски не описано и чего не знает скилл. Запускают в файле SU10 Design System, fileKey `TLPll8pMMVWpHbJdWm6QVe`. Только чтение.
+
+```js
+const PAGE_OFFSET = 0, PAGE_LIMIT = 80;   // не уложилось в вызов: повтори с PAGE_OFFSET = nextPage
+
+const SKIP_PAGE = /^(sandbox|redesign|Cover|Changelog|---|↳)/;
+const norm = s => s.replace(/\[Deprecated\]/g, '').replace(/[^a-zA-Zа-яА-Я0-9]/g, '').toLowerCase();
+const all = figma.root.children.filter(p => !SKIP_PAGE.test(p.name));
+const pages = all.slice(PAGE_OFFSET, PAGE_OFFSET + PAGE_LIMIT);
+const rows = [];
+
+for (const p of pages) {
+  await p.loadAsync();
+  const top = p.children.flatMap(n => n.type === 'SECTION' ? n.children : [n]);
+  const passports = new Map(top.filter(n => n.type === 'FRAME' && /Passport$/.test(n.name))
+    .map(n => [norm(n.name.replace(/(Component)?Passport$/, '')), n.name]));
+  const nodes = p.findAllWithCriteria({ types: ['COMPONENT', 'COMPONENT_SET'] })
+    .filter(n => !(n.type === 'COMPONENT' && n.parent.type === 'COMPONENT_SET'));
+  for (const n of nodes) {
+    const links = n.documentationLinks || [];
+    let passport = passports.get(norm(n.name)) || null;
+    if (!passport) for (const l of links) {
+      const m = /node-id=([0-9]+)[-:]([0-9]+)/.exec(l.uri || '');
+      const t = m && await figma.getNodeByIdAsync(m[1] + ':' + m[2]);
+      if (t && /Passport$/.test(t.name)) passport = t.name;
+    }
+    const part = / · /.test(n.name) || /^[._]/.test(n.name);
+    rows.push({ name: n.name, key: n.key, page: p.name, type: n.type === 'COMPONENT_SET' ? 'set' : 'one',
+      desc: !!(n.description && n.description.trim()), link: links.length > 0, passport, part });
+  }
+}
+
+const main = rows.filter(r => !r.part);
+const next = PAGE_OFFSET + pages.length;
+return { pagesTotal: all.length, scanned: pages.length, nextPage: next < all.length ? next : null, total: rows.length, parts: rows.length - main.length,
+  gaps: { noDescription: rows.filter(r => !r.desc).map(r => r.name), noLink: main.filter(r => !r.link).map(r => r.name), noPassport: main.filter(r => !r.passport).map(r => r.name) },
+  rows: rows.map(r => [r.name, r.key, r.page, r.type, +r.desc, +r.link, r.passport || '', +r.part].join('|')) };
+```
+
+**Как читать.** Строка `rows`: имя, ключ, страница, `set` или `one`, есть описание, есть ссылка, паспорт, вложенная часть. Вложенным частям (` · ` в имени) свой паспорт и ссылка не нужны: разбор лежит в паспорте родителя.
+
+**Сверка со скиллом.** Скрипт файлы скилла не видит, сверку делает агент:
+1. Каждое имя из `rows` ищет в `references/keys.md` и в `references/components/`. Компоненты JUZ40 (`ChatButton`, `Course map / *`, `Student path / *`) описаны в `references/juz40.md`.
+2. Сверяет по ключу, а не только по имени: `Suffix` в файле пять разных, на страницах `Select`, `Tags`, `Tabs`, `Text Area` и `Text Field`.
+3. Показывает владельцу три списка: нет в `keys.md`, нет описания в справочниках, пробелы из `gaps`. Мастера и паспорта по итогам сверки сам не правит (правило 8).
+
 ## Как компонент становится устаревшим
 
 **Как решают, что компонент устарел** (решение владельца 11.11). Мерило — файл Redesign (Student),
@@ -156,3 +219,25 @@ fileKey `KhMjdqizE1KUp3RsScJKne`: в нём актуальный редизай�
 компонент, переводят на замену: `DocScreenMock` `Platform=Mobile` держал `Header` v1 и 11.11
 переведён на `MobileHeader v2`. Вложенный инстанс меняют `swapComponent`: id слоя и привязка
 `visible` к свойству остаются.
+
+## Локальный компонент
+
+Сборку не останавливают и заглушку не ставят. Недостающий элемент **сразу генерируют
+вариантом и оформляют компонентом в своём файле**, а владелец потом переносит его в дску.
+
+1. **Компонент, а не разовые фреймы** — `figma.createComponent()` или `createComponentFromNode()`.
+   Собирается по правилам системы, как будто он уже в дске: переменные вместо сырых значений,
+   текстовые стили, иконки Outline, внутри — готовые компоненты SU10 (`Heading`, `Badge`,
+   `Text Button` и т. п.), произвольный контент — через SLOT.
+2. **Имя по смыслу**: `StatTile`, `Chart / Line`, `EmptyState`. В `description` — что это и
+   чего не хватило в SU10.
+3. **Компонент живёт в файле, где собирают макет** (личный файл в JUZ40 Workspace); в макете —
+   его инстансы, а не копии.
+4. **Компонент одной задачи — в раздел `Operators components` дски** (решение владельца 16.11). Если компонент нужен только одной фиче и в других местах его не будет (точка и полоса пути ученика, звезда карты курса), его не кладут в `Base Blocks`: для него заводят страницу `<Задача> [<Роль>]` под разделителем `↳ Operators components`, как `Course Map [Student]`. На странице одна секция `<Задача> — компоненты, анимации и документация`: компоненты, служебные наборы анимаций, паспорта. Общий элемент (скелетон, полоса, ползунок) — в `Base Blocks` по алфавиту. **Имена компонентов, свойств, значений вариантов, слоёв и страницы — на английском**, как `Course map / Node` и `Student path / Point` (решение владельца 16.11). По-русски остаются описания, паспорта и тексты внутри макета. Компонент из продуктового файла переименовывают до вставки в дску: инстансы на экранах сохраняют связь и сами получают новое имя.
+5. **Написать Nurla**: появился компонент, ссылка на него. Перенос в SU10 Design System делает
+   владелец; после переноса инстансы переключают на компонент дски.
+
+Нельзя: рисовать недостающее разовыми фреймами без компонента (его не перенести в дску) и
+заводить такой компонент прямо в DS-файле — для DS-файла действует раздел «Если добавляешь
+компонент в систему». Если элемент есть готовым блоком на старом ките, можно взять его
+(железное правило 1).

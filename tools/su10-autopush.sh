@@ -34,7 +34,7 @@ find "$LOCK" -maxdepth 0 -mmin +10 -exec rmdir {} \; 2>/dev/null
 mkdir "$LOCK" 2>/dev/null || exit 0
 trap 'rmdir "$LOCK" 2>/dev/null' EXIT
 
-PATHS=(plugins tools README.md .claude-plugin .gitignore)
+PATHS=(plugins tools evals README.md .claude-plugin .gitignore)
 notify() { python3 -c 'import json,sys; print(json.dumps({"systemMessage": sys.argv[1]}, ensure_ascii=False))' "$1"; }
 
 # ---------- только main ----------

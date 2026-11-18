@@ -1,18 +1,32 @@
 #!/usr/bin/env python3
-"""Проверка скилла SU10 перед публикацией. Код выхода 1 значит, что публиковать нельзя."""
+"""Проверка скилла SU10 перед публикацией. Код выхода 1 значит, что публиковать нельзя.
+
+python3 tools/check_skill.py [корень]            проверить скилл
+python3 tools/check_skill.py [корень] --update   записать текущее число решений владельца
+"""
+import collections
 import json
+import os
 import pathlib
 import re
+import subprocess
 import sys
+import tempfile
 
-ROOT = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else pathlib.Path(__file__).resolve().parent.parent
+args = [a for a in sys.argv[1:] if not a.startswith('--')]
+UPDATE = '--update' in sys.argv
+ROOT = pathlib.Path(args[0]) if args else pathlib.Path(__file__).resolve().parent.parent
 SKILL_DIR = ROOT / 'plugins/su10/skills/su10-design-system'
 PLUGIN = ROOT / 'plugins/su10/.claude-plugin/plugin.json'
+REGISTRY = ROOT / 'tools/owner-decisions.json'
+JSC = '/System/Library/Frameworks/JavaScriptCore.framework/Versions/Current/Helpers/jsc'
 NO_KEY = {'FeedbackIcon'}   # стоит только внутри Alert и Toast, отдельно не импортируют
+STALE = ['Fast path', 'каталога выше', 'таблицей в основном файле', 'таблицу ключей в основном файле']
 errors = []
 
 skill = (SKILL_DIR / 'SKILL.md').read_text(encoding='utf-8')
 docs = [SKILL_DIR / 'SKILL.md', *sorted((SKILL_DIR / 'references').rglob('*.md'))]
+live = [d for d in docs if d.name != 'changelog.md']
 
 # Описание скилла
 match = re.search(r'^description: "(.*)"$', skill, re.M)
@@ -32,7 +46,7 @@ for label, pattern in [
     if not found or found.group(1) != version:
         errors.append(f'SKILL.md: версия в месте «{label}» не равна {version}')
 
-# Ссылки на файлы и следы конфликтов
+# Ссылки, следы конфликтов и устаревшие отсылки
 known = {p.name for p in docs}
 for doc in docs:
     text = doc.read_text(encoding='utf-8')
@@ -44,6 +58,9 @@ for doc in docs:
     for ref in set(re.findall(r'`(?:references/)?(?:components/)?([a-z0-9-]+\.md)`', text)):
         if ref not in known:
             errors.append(f'{name}: ссылка на несуществующий файл {ref}')
+    for phrase in STALE:
+        if phrase in text:
+            errors.append(f'{name}: устаревшая отсылка «{phrase}»')
 
 # У каждого компонента из карты в SKILL.md есть ключ
 keys = (SKILL_DIR / 'references/keys.md').read_text(encoding='utf-8')
@@ -52,6 +69,29 @@ for row in re.findall(r'^\| `[a-z]+\.md` \| (.+) \|$', section, re.M):
     for component in (c.strip() for c in row.split(',')):
         if component not in NO_KEY and not re.search(r'^\| ' + re.escape(component) + r'(?: \([^|]*)? \|[^\n]*`[0-9a-f]{40}`', keys, re.M):
             errors.append(f'keys.md: нет ключа компонента {component}')
+
+# Код скриптов разбирается без ошибок. Блок с пометкой ХРУПКО показывает два варианта и не запускается
+if os.path.exists(JSC):
+    for doc in live:
+        for number, code in enumerate(re.findall(r'```js\n(.*?)```', doc.read_text(encoding='utf-8'), re.S), 1):
+            if 'ХРУПКО' in code:
+                continue
+            source = 'new (Object.getPrototypeOf(async function(){}).constructor)(' + json.dumps(code) + ');'
+            with tempfile.NamedTemporaryFile('w', suffix='.js', encoding='utf-8', delete=False) as handle:
+                handle.write(source)
+            result = subprocess.run([JSC, handle.name], capture_output=True, text=True)
+            os.unlink(handle.name)
+            if result.returncode or 'Exception' in result.stdout + result.stderr:
+                errors.append(f'{doc.relative_to(SKILL_DIR)}: блок кода {number} не разбирается')
+
+# Решения владельца не пропадают: число отметок по каждой дате не уменьшается
+decisions = collections.Counter(re.findall(r'решени[еяю] владельца[^)\n]{0,24}?(\d{2}\.\d{2})', ' '.join(d.read_text(encoding='utf-8') for d in live)))
+if UPDATE:
+    REGISTRY.write_text(json.dumps(dict(sorted(decisions.items())), ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+elif REGISTRY.exists():
+    for date, count in json.loads(REGISTRY.read_text(encoding='utf-8')).items():
+        if decisions[date] < count:
+            errors.append(f'решения владельца от {date}: было {count}, стало {decisions[date]}')
 
 for error in errors:
     print(error)

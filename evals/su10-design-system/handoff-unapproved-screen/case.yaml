@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: handoff-unapproved-screen
+expected_outcome: |
+  Сначала идут критики и audit.md, затем сборка доски. На доске только апрувнутые К1 и К2,
+  экрана К3 на ней нет. Рядом собрана секция ревью.

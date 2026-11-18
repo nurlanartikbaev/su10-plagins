@@ -1,0 +1,5 @@
+schema_version: "1.1"
+name: token-question
+expected_outcome: |
+  Ответ называет токен text/critical-static. Прогон не обращается к Figma через use_figma,
+  контекст скилла меньше 15 000 токенов.

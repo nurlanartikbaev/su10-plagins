@@ -18,10 +18,30 @@ const ROOT_ID = '0:0';                    // ← корневой фрейм э�
 
 const root = await figma.getNodeByIdAsync(ROOT_ID);
 if (!root) return { error: 'root не найден' };
+let pg = root; while (pg.parent && pg.type !== 'PAGE') pg = pg.parent;
+await pg.loadAsync();
 
 const PRIMITIVE = /^(blue|green|red|yellow|purple|teal|grey|black|white)\//;
 const LOOKALIKE = /^(Button|Text Button|Badge|Tag|Avatar|Divider|Island|Accordion|TableCell|TableHeaderCell|CheckBox|Toggle)$/;
 const inInstance = n => n.id.indexOf(';') !== -1;   // узел внутри инстанса — правим не мы
+
+// зона касания: что нажимают на телефоне. Строка — одна цель, контролы внутри неё не считают
+const PHONE = root.width < 768;
+const TARGET = /^(Button|Text Button|HeaderButton|Favorite|ChatButton|Tag|Toggle|CheckBox|RadioButton|Tab|TabBarItem|SegmentedControl|PageButton|MenuItem|NavLink|QuickLink|SocialLink|Text field|Text area|NumberInput|SingleSelect|ComboBox|MultiSelect|SliderThumb)$/;
+const ROW = /^(ListItem|ListItem v2|ProfileItem|CheckBoxItem|RadioItem|ToggleItem|ActionCard)$/;
+const LIST_ROW = /^ListItem( v2)?$/;
+
+// текст по правилу 15; сокращения те же, что в §2д
+const ABBR = /(^|[\s(])(сек|мин|ч|г|др|руб|тг|стр|д|п)\.$/i;
+const YOU = /(^|[^а-яёәіңғүұқөһ])(ты|тебя|тебе|тобой|твой|твоя|твоё|твое|твои|твою|твоего|твоей|твоему|твоим|твоих|твоими|сені|саған|сенің|сенімен)(?![а-яёәіңғүұқөһ])/i;
+const YOU_VERB = /[а-яё]{2,}(ешь|ёшь|ишь)(?![а-яё])/i;
+function lint(s) {
+  const t = s.trim(), why = [];
+  if (t.endsWith('.') && !t.endsWith('..') && !/^\d+\.$/.test(t) && !ABBR.test(t)) why.push('точка');
+  if (t.includes('—') && !/ — сценарии для разработки$/.test(t)) why.push('тире');
+  if (YOU.test(t) || YOU_VERB.test(t)) why.push('на ты');
+  return why;
+}
 
 const cache = new Map();
 async function varName(id) {
@@ -30,24 +50,62 @@ async function varName(id) {
   try { const v = await figma.variables.getVariableByIdAsync(id); nm = v && v.name; } catch (e) {}
   cache.set(id, nm); return nm;
 }
+const masters = new Map();
+async function masterName(n) {
+  if (masters.has(n.id)) return masters.get(n.id);
+  const mc = await n.getMainComponentAsync();
+  const nm = mc ? (mc.parent && mc.parent.type === 'COMPONENT_SET' ? mc.parent.name : mc.name) : '';
+  masters.set(n.id, nm); return nm;
+}
 
-const hit = { rawFill: [], primitiveFill: [], rawRadius: [], textNoStyle: [],
+const hit = { rawFill: [], primitiveFill: [], rawRadius: [], rawSpacing: [], rawStroke: [], textNoStyle: [],
               foreignFont: [], collapsedText: [], detachLookalike: [], twoLayerIcon: [],
-              rowOverflow: [] };
+              rowOverflow: [], smallTarget: [], textLint: [], lastDivider: [], placeholderLeft: [] };
 // ряды, у которых переполнение — это прокрутка по задумке, а не ошибка
 const SCROLLABLE = /^(Strip|table|table-wrapper|header|tablerow)$/;
-const add = (k, n) => { if (hit[k].length < 12) hit[k].push(`${n.name} · ${n.id}`); hit[k].total = (hit[k].total || 0) + 1; };
+const add = (k, n, note) => { if (hit[k].length < 12) hit[k].push(`${n.name} · ${n.id}${note ? ' · ' + note : ''}`); hit[k].total = (hit[k].total || 0) + 1; };
 
 let hidden = 0, visited = 0, primaryButtons = 0;
+const smallTargetBy = {};
 
-async function walk(n) {
+async function walk(n, inTarget) {
   if (n.visible === false) { hidden++; return; }   // скрытые детей не отдают — см. §3
   visited++;
 
   if (n.type === 'INSTANCE') {
-    const w = n.componentProperties && n.componentProperties.Weight;
-    const isBtn = n.name === 'Button' || (n.mainComponent && /^Button/.test(n.mainComponent.name));
-    if (isBtn && w && w.value === 'Primary') primaryButtons++;
+    const master = await masterName(n);
+    const props = n.componentProperties || {};
+    if (master === 'Button' && props.Weight && props.Weight.value === 'Primary') primaryButtons++;
+
+    // последняя строка списка с линией: правило 10, ключ свойства плывёт, берём по префиксу
+    if (LIST_ROW.test(master)) {
+      const key = Object.keys(props).find(k => k.startsWith('Show Divider#'));
+      if (key && props[key].value === true) {
+        const sib = n.parent.children, i = sib.findIndex(c => c.id === n.id);
+        const next = sib.slice(i + 1).find(c => c.visible !== false);
+        const nextIsRow = next && next.type === 'INSTANCE' && LIST_ROW.test(await masterName(next));
+        if (!nextIsRow) add('lastDivider', n);
+      }
+    }
+
+    // зона касания меньше 44 на телефоне; иконочный Text Button и Favorite получают 44 × 44 в коде
+    const isTarget = TARGET.test(master) || ROW.test(master);
+    if (PHONE && isTarget && !inTarget && !(props.State && props.State.value === 'Disabled')) {
+      const label = Object.keys(props).find(k => k.startsWith('Show Label#'));
+      const inCode = master === 'Favorite' || (master === 'Text Button' && label && props[label].value === false);
+      if (!inCode && (n.width < 44 || n.height < 44)) {
+        add('smallTarget', n, `${master} ${Math.round(n.width)}×${Math.round(n.height)}`);
+        smallTargetBy[master] = (smallTargetBy[master] || 0) + 1;
+      }
+    }
+    inTarget = inTarget || isTarget;
+  }
+
+  // текст проверяем и внутри инстансов: подписи живут там
+  if (n.type === 'TEXT' && typeof n.characters === 'string') {
+    const why = lint(n.characters);
+    if (why.length) add('textLint', n, `${why.join(', ')} · ${n.characters.trim().slice(0, 40)}`);
+    if (/swap content/i.test(n.characters)) add('placeholderLeft', n);
   }
 
   // иконка с двумя слоями цвета: и заливка, и обводка непустые
@@ -83,6 +141,22 @@ async function walk(n) {
       const b = n.boundVariables || {};
       if (!b.topLeftRadius && !b.topRightRadius && !b.bottomLeftRadius && !b.bottomRightRadius) add('rawRadius', n);
     }
+    if (n.layoutMode === 'HORIZONTAL' || n.layoutMode === 'VERTICAL') {
+      const b = n.boundVariables || {}, raw = [];
+      for (const k of ['paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom']) if (n[k] > 0 && !b[k]) raw.push(k);
+      const flow = n.children.filter(c => c.visible !== false && c.layoutPositioning !== 'ABSOLUTE').length;
+      if (flow > 1 && n.primaryAxisAlignItems !== 'SPACE_BETWEEN' && n.itemSpacing !== 0 && !b.itemSpacing) raw.push('itemSpacing');
+      if (raw.length) add('rawSpacing', n, raw.join(', '));
+    }
+    if ('strokes' in n && Array.isArray(n.strokes) && n.strokeWeight !== 0) {
+      const vis = n.strokes.filter(s => s.visible !== false);
+      if (vis.length) {
+        const b = n.boundVariables || {}, raw = [];
+        if (!n.strokeStyleId && vis.some(s => s.type === 'SOLID' && !(s.boundVariables && s.boundVariables.color))) raw.push('цвет');
+        if (!['strokeWeight', 'strokeTopWeight', 'strokeRightWeight', 'strokeBottomWeight', 'strokeLeftWeight'].some(k => b[k])) raw.push('толщина');
+        if (raw.length) add('rawStroke', n, raw.join(', '));
+      }
+    }
     if (n.type === 'TEXT') {
       if (n.textStyleId === '') add('textNoStyle', n);
       if (n.fontName && n.fontName.family && n.fontName.family !== 'Inter') add('foreignFont', n);
@@ -91,13 +165,13 @@ async function walk(n) {
     if (n.type === 'FRAME' && LOOKALIKE.test(n.name)) add('detachLookalike', n);
   }
 
-  for (const c of (n.children || [])) await walk(c);
+  for (const c of (n.children || [])) await walk(c, inTarget);
 }
-await walk(root);
+await walk(root, false);
 
 const counts = {};
 for (const k of Object.keys(hit)) counts[k] = hit[k].total || 0;
-return { screen: root.name, visited, hiddenSkipped: hidden, primaryButtons, counts, samples: hit };
+return { screen: root.name, phone: PHONE, visited, hiddenSkipped: hidden, primaryButtons, counts, smallTargetBy, samples: hit };
 ```
 
 ## 2. Как читать отчёт
@@ -107,16 +181,22 @@ return { screen: root.name, visited, hiddenSkipped: hidden, primaryButtons, coun
 | `rawFill` | заливка вписана цветом, а не привязана к переменной | «Железные правила», п. 3 |
 | `primitiveFill` | взят примитив (`blue/solid/500`) вместо семантики (`surface/*`, `text/*`) | «Цвет — полный разбор» |
 | `rawRadius` | скругление числом вместо `radius/border-radius-*` | «Радиусы» |
+| `rawSpacing` | поле или шаг автолейаута числом, без `Space-*`, на фрейме, который собрали мы. Ноль не считается, шаг при `SPACE_BETWEEN` и у одного ребёнка тоже | «Железные правила», п. 3 |
+| `rawStroke` | обводка без переменной на нашем слое: в примечании `цвет`, `толщина` или оба | «Железные правила», п. 3 |
 | `textNoStyle` | текст без текстового стиля | «Типографика» |
 | `foreignFont` | шрифт не Inter | «Типографика» |
 | `collapsedText` | текст схлопнут в ноль: поставили `FILL` без собственной ширины | «Порядок операций в автолейауте» |
 | `detachLookalike` | фрейм назван как компонент, но инстансом не является — похоже на детач или ручную сборку | «Железные правила», п. 2 |
 | `twoLayerIcon` | у вектора одновременно заливка и обводка — типично после перекраски иконки через `.strokes` | «Иконки — подбор и подмена» |
 | `rowOverflow` | ряд шире своего контейнера: дети остались на `HUG` там, где нужен `FILL` (классика — `SegmentedControlRow` в узком сайдбаре) | «Не помещается — переводи на FILL» |
+| `smallTarget` | на телефоне (корень уже 768) нажимаемый инстанс меньше 44 по стороне. Строка считается одной целью, контролы внутри неё не считают. `Disabled` пропускают. Иконочный `Text Button` (`Show Label` выключен) и `Favorite` не считают: их область 44 × 44 задана в коде. `smallTargetBy` даёт разбивку по компонентам | `accessibility.md`, §8 |
+| `textLint` | текст с нарушением правила 15: `точка` в конце строки, длинное `тире`, обращение `на ты`. Текст проверяют и внутри инстансов | «Железные правила», п. 15; §2д |
+| `lastDivider` | последняя строка `ListItem` или `ListItem v2` в контейнере с включённым `Show Divider`. Ключ свойства ищут по префиксу `Show Divider#`: он плывёт при публикации | «Железные правила», п. 10 |
+| `placeholderLeft` | в макете остался текст-заглушка `swap content`: слот не заполнили | «Слоты» |
 | `primaryButtons > 1` | на экране больше одной Primary-кнопки | «Действия» |
 
 `counts` — сколько всего, `samples` — до 12 примеров с id на категорию, чтобы сразу прыгнуть
-к слою. Ноль по всем категориям означает только, что машинных нарушений нет: одинаковые
+к слою. Скрипт только читает файл: `lastDivider` находит строки, а выключает линию проверка из правила 10. Ноль по всем категориям означает только, что машинных нарушений нет: одинаковые
 размеры контролов в строке, осмысленность иконок и проверку в обеих темах скрипт не видит,
 их смотрят глазами по чек-листу основного файла.
 
@@ -134,6 +214,12 @@ for (const c of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRigh
 в самодельных карточках и заглушках) и правильно посчитал единственную Primary-кнопку.
 Ложных срабатываний после исключения инстансов не осталось — до него круглый FAB и
 внутренняя геометрия иконки попадали в отчёт зря.
+
+**Новые счётчики проверены 18.11.2026** на секции `5:7771` файла Redesign (Student), 20 экранов без светлых копий: `rawSpacing` 0, `rawStroke` 3 (толщина обводки числом у карточек `Course`), `smallTarget` 70 (`TabBarItem` 52, `Button` 16, `Text Button` с подписью 2), `textLint` 10, `lastDivider` 0, `placeholderLeft` 0. Срабатывание `lastDivider` подтверждено на странице `ListItem` дски (12 строк), текст заглушки найден в мастерах страницы `Overlay`.
+
+**`smallTarget` пока не повод менять размер.** Минимум 44 для всех нажимаемых компонентов ждёт подтверждения владельца, а `Button` M на телефоне по таблице размеров 42. Находку записывают в отчёт, размеры мастеров и инстансов не правят (`accessibility.md`, §8).
+
+**`textLint` не знает смысла строки.** Точку оставляют в учебном содержимом (§2д). Повелительное наклонение без «-те» скрипт не ищет: его проверяют глазами.
 
 ## 2a. Проверка витрин паспорта
 
@@ -198,7 +284,7 @@ n.layoutSizingHorizontal = 'FIXED'; n.resize(w - 8, h); n.layoutSizingHorizontal
 
 **Устаревший размер у всех `FILL`.** Проверка `absoluteRenderBounds` из §2в не видит дефект, если родитель обрезает содержимое: отрисовка обрезана вместе с ним. Признак на снимке: у поля нет правой границы, разделитель короче карточки. После обновления библиотеки пересчитывают все экземпляры с `layoutSizingHorizontal === 'FILL'` на своём уровне (не внутри чужого экземпляра), а не только найденные. Ширина не меняется.
 
-**Слот шторки и диалога.** Слот `content` у `MobileBottomSheet` и `Dialog` стоит в `HUG`. Пока в нём только `FILL`-дети, он держит ширину. Добавили ребёнка с `HUG` (кнопку): слот сжимается до его ширины, строки становятся узкими. После вставки в слот: `slot.layoutSizingHorizontal = 'FILL'`, шторку вернуть к низу экрана: `host.y = frame.height - host.height`.
+**Слот шторки и диалога.** Слот `content` у `MobileBottomSheet` и `Dialog` стоит в `HUG`. Пока в нём только `FILL`-дети, он держит ширину. Добавили ребёнка с `HUG` (кнопку): слот сжимается до его ширины, строки становятся узкими. После вставки в слот: `slot.layoutSizingHorizontal = 'FILL'`. Шторку к низу экрана прибивают автолейаутом, а не координатой (решение владельца 09.11): рецепт «Шторку прибивают к низу экрана автолейаутом» в `references/recipes.md`.
 
 **Кнопки телефона против десктопа.** На телефоне главное действие стоит в панели действий, на десктопе его кладут в карточку урока, и его легко забыть. Перед сдачей собирают подписи кнопок телефона и десктопа одного сценария и сравнивают. Кнопка есть на телефоне и нет на десктопе: это дефект, если на десктопе нет другого пути (список слева).
 
@@ -252,3 +338,30 @@ const strip = s => {
 Кроме скрытых слоёв скрипт принципиально не видит: одинаковость размеров контролов в строке,
 осмысленность подобранной иконки, правильность текста, вёрстку в тёмной теме и на второй
 платформе. Это остаётся за чек-листом основного файла и скриншотом.
+
+## Точечная правка не должна ломать соседей
+
+Почти все ошибки в этих сборках возникли не при первой сборке, а при **исправлении**:
+правило применили шире, чем нужно, и заодно снесли то, что работало.
+
+| Правка | Что сломалось рядом |
+|---|---|
+| обнулил поля слота, чтобы `TabsRow` встал встык | таблица лишилась своих 16 и промежутка после табов |
+| подогнал ширины колонок под контейнер | обрезались телефоны, бейджи и подписи шапки |
+| поменял подпись сегмента текстовым узлом | у узла осталась фиксированная ширина, текст сжался в «3 апи» |
+| перекрасил иконку через `strokes` | поверх штатной заливки лёг второй слой цвета |
+
+Отсюда порядок работы с любой правкой:
+
+1. **Чинить точечно.** Свойство меняем у того узла, который виноват, а не у общего родителя:
+   мешают поля **одному** блоку — перенеси поля на остальные блоки, а не обнуляй их всем.
+2. **Снять «до» и «после».** Перед правкой запомнить измеримое состояние соседей (поля,
+   ширины, высоты, `itemSpacing`), после — сверить те же числа. Скриншот одного узла не
+   показывает, что уехало у соседнего блока — смотри карточку целиком.
+3. **Прогнать короткую регрессию** по уже принятым решениям, а не только по текущему
+   симптому: поля и промежутки на месте; суммы ширин сходятся; у векторов нет одновременно
+   `fills` и `strokes`; сырых заливок и текста без стиля — ноль; компоненты не подменены
+   самодельными фреймами.
+4. **Если правка требует компромисса** (контенту не хватает ширины, компонент не тянется) —
+   это сигнал остановиться и назвать ограничение вслух, а не дожимать макет за счёт
+   читаемости данных.
