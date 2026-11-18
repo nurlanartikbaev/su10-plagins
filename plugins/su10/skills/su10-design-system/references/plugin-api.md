@@ -35,34 +35,75 @@
 
 ### Пролог скрипта
 
-Копируется целиком в начало любой сборки:
+Копируется целиком в начало любой сборки. Проверен запуском 18.11.2026. Ключи свойств с суффиксом `#…` в скриптах не пишут: их находит `propKey`.
 
 ```js
-function addText(parent, chars, style, colorVar, grow) {
-  const t = figma.createText();
-  t.characters = chars;
-  t.textStyleId = style.id;                      // именно .id, не сам объект стиля
-  t.fills = [figma.variables.setBoundVariableForPaint(
-    { type: 'SOLID', color: { r: 0, g: 0, b: 0 } }, 'color', colorVar)];
-  parent.appendChild(t);                         // сначала в родителя…
-  if (grow) t.layoutSizingHorizontal = 'FILL';   // …и только потом FILL
-  return t;
+// V и S: скопируй из keys.md только нужные ключи, каждый импорт идёт по сети
+const V = { textPrimary: '0b7fae5dbbd4528aa5622852a637e4e941d2768c', space0: 'a40746a9eb4f57955a7ea3e146a5e1ec37a6aef2', space8: '712277324d381197e6aae9a4d1feadac674f3d17', space16: '93137cac0248bd6ba123f0791aaf889946026fee' };
+const S = { b2med: 'eac01f462c2a009d6d3f3684dfd1b4c369be33f3', b2semi: '18ec3f4b8327de8e223e4482107746a98cbee3f0' };
+
+async function loadAll(keys, load) {
+  const pairs = await Promise.all(Object.entries(keys).map(async ([k, key]) => [k, await load(key)]));
+  return Object.fromEntries(pairs);
+}
+const T = await loadAll(V, k => figma.variables.importVariableByKeyAsync(k));
+const ST = await loadAll(S, k => figma.importStyleByKeyAsync(k));
+
+function sp(f, prop, v) {                         // отступ только токеном, нет токена — ошибка
+  const vr = T['space' + v];
+  if (!vr) throw new Error('Нет токена Space-' + v + ': добавь ключ из keys.md в V');
+  f.setBoundVariable(prop, vr);
 }
 
-function mkFrame(name, dir, opts = {}) {
-  const f = figma.createAutoLayout(dir, { name });
-  f.fills = [];                                  // ОБЯЗАТЕЛЬНО: по умолчанию фрейм белый
-  f.itemSpacing = opts.gap ?? 0;
-  if (opts.pad) { f.paddingTop = f.paddingBottom = f.paddingLeft = f.paddingRight = opts.pad; }
-  return f;
+function propKey(inst, base) {                    // суффикс #… меняется при публикации библиотеки
+  const key = Object.keys(inst.componentProperties).find(k => k.split('#')[0].trim() === base);
+  if (!key) throw new Error('Нет свойства ' + base + ' у ' + inst.name);
+  return key;
+}
+function setProps(inst, values) {
+  inst.setProperties(Object.fromEntries(Object.entries(values).map(([k, v]) => [propKey(inst, k), v])));
+}
+function pick(set, props) {                       // вариант набора по значениям свойств
+  const v = set.children.find(c => Object.entries(props).every(([k, x]) => c.variantProperties[k] === x));
+  if (!v) throw new Error('Нет варианта ' + JSON.stringify(props) + ' у ' + set.name);
+  return v;
 }
 
-async function fillSlot(instance, build) {        // см. «Слоты» ниже
-  const slot = instance.findAll(n => n.type === 'SLOT')[0]
-            || instance.findOne(n => n.name === 'content');
-  slot.children.slice().forEach(c => { try { c.remove(); } catch (e) {} });
+function slotOf(inst, name = 'content') {         // ближайший слот с этим именем, спуск по children
+  const queue = [...inst.children];
+  let frame = null;
+  while (queue.length) {
+    const n = queue.shift();
+    if (n.name === name) { if (n.type === 'SLOT') return n; frame = frame || n; }
+    if ('children' in n) queue.push(...n.children);
+  }
+  if (!frame) throw new Error('Нет слота ' + name + ' у ' + inst.name);
+  return frame;                                   // после clone() слот может стать фреймом
+}
+async function fillSlot(inst, build, name = 'content') {
+  const slot = slotOf(inst, name);
+  slot.children.slice().forEach(c => { try { c.remove(); } catch (e) {} });   // плейсхолдер
   slot.layoutSizingHorizontal = 'FILL';
   return build(slot);
+}
+
+async function addText(parent, chars, style, colorVar, grow) {
+  await figma.loadFontAsync(style.fontName);      // шрифт загружают до записи текста
+  const t = figma.createText();
+  await t.setTextStyleIdAsync(style.id);
+  t.characters = chars;
+  t.fills = [figma.variables.setBoundVariableForPaint(
+    { type: 'SOLID', color: { r: 0, g: 0, b: 0 } }, 'color', colorVar)];
+  parent.appendChild(t);                          // сначала в родителя…
+  if (grow) { t.textAutoResize = 'HEIGHT'; t.layoutSizingHorizontal = 'FILL'; }   // …потом FILL
+  return t;
+}
+function mkFrame(name, dir, { gap = 0, pad = 0 } = {}) {
+  const f = figma.createAutoLayout(dir, { name });
+  f.fills = [];                                   // по умолчанию фрейм белый
+  sp(f, 'itemSpacing', gap);
+  for (const p of ['paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight']) sp(f, p, pad);
+  return f;
 }
 ```
 
@@ -171,14 +212,7 @@ slot.children[slot.children.length - 1].layoutSizingHorizontal = 'FILL';
 - `FILL` ставится **после** `appendChild`, иначе `Error: FILL can only be set on children of auto-layout frames`.
 - `figma.createAutoLayout` создаёт фрейм с **белой заливкой**. Внутри тёмной темы это выглядит как белый прямоугольник, а светлый текст на нём становится невидимым. Каждому служебному фрейму сразу `fills = []`.
 - **Нет ключа токена отступа — поле молча становится 0** (13.11, пустые состояния «Тематического теста» на телефоне остались без нижнего отступа). `setBoundVariable('paddingBottom', undefined)` не падает: он отвязывает поле, и отступ пропадает. Помощник отступов при отсутствии токена должен падать, а не тихо продолжать:
-  ```js
-  function sp(f, prop, v) {
-    if (!v) { f[prop] = 0; return; }
-    const vr = V['space' + v];
-    if (!vr) throw new Error('Нет токена Space-' + v + ': добавь ключ из keys.md');
-    f.setBoundVariable(prop, vr);
-  }
-  ```
+  Помощник `sp` из пролога падает, если токена нет в `V`.
   Ключи всех ступеней `Space-*` — в `references/keys.md`. Перед сдачей замерь воздух под последним элементом каждой карточки: низ последнего текста или кнопки плюс нижнее поле не ниже края блока (`absoluteBoundingBox`). Текст, упёртый в низ `Island`, — ошибка (решение владельца 13.11).
 - `counterAxisAlignItems` принимает `MIN | MAX | CENTER | BASELINE`. `END` — ошибка валидации.
 - **Текст на `FILL` схлопывается в ноль, если у него не было собственной ширины.** `createText()` → `textAutoResize = 'HEIGHT'` → `layoutSizingHorizontal = 'FILL'` даёт `width: 0`, и подпись рендерится как «…». Лечится явным `resize(любая_ширина, h)` **перед** `FILL`. Симптом легко принять за обрезку по `textTruncation`.
@@ -297,7 +331,7 @@ grid.gridRowCount = 1;
 - **`DesktopDrawer`: нативный слот есть только у `Size=M`.** У `Size=S` и `Size=L` на месте `content` лежит обычный FRAME, поэтому `appendChild` в них падает с `Cannot move node. New parent is an instance…` — положить контент физически невозможно. Пока не починят мастер, любой ящик собирается на `Size=M` (Desktop 420, Mobile 320). Проверить самому:
   ```js
   const d = variant.createInstance();
-  const hasSlot = d.findAll(n => n.type === 'SLOT').length > 0;
+  const hasSlot = slotOf(d).type === 'SLOT';
   ```
 - **`TableHeaderCell`: иконку сортировки не подменять.** Состояние колонки задаётся вариантом `Sort`, а слой `Sort Icon` меняется вместе с ним: `Available` — `Linear / Essentional, UI / Sort random`, `Ascending` — `Sort up`, `Descending` — `Sort down`. Семейство `Sort` остаётся `Linear` по решению владельца (штатное исключение из правила «только Outline»). Ставить вместо него шеврон **нельзя** — меняется смысл: шеврон читается как «раскрыть», а не «сортировать». Запись v3.2.0 «состояний asc/desc/неактивно у компонента нет» **устарела**: с 18.09 они есть.
 - **`Badge`: вектор внутри не наследует цвет подписи.** При смене `Signal` текст перекрашивается, а вектор — нет. Если он виден, цвет копируется с лейбла: `vec.fills = badgeLabel.fills`.

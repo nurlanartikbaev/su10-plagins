@@ -31,11 +31,8 @@ table (frame, layoutMode NONE)
 синхронизации высот строк** — иначе строки разъезжаются по горизонтали. Скрипт — §3
 в `table-scripts.md`.
 
-**Два пути сборки:**
-- **есть шаблон** — SU10-таблица, которую можно клонировать: оркестратор `buildTableFromSpec`
-  (§0), наследует шрифты и отступы бесплатно;
-- **шаблона нет** — в файле только легаси-таблицы на старом ките: собирать с нуля по §0.
-  Легаси-таблицу не «апгрейдим» и руками фреймы не катаем.
+**Сборка одна:** оркестратор `buildTableFromSpec` (§0 в `table-scripts.md`) строит таблицу с нуля
+из компонентов библиотеки. Легаси-таблицу не «апгрейдим» и руками фреймы не катаем.
 
 Полный список ловушек — в `data-tables.md`; там же соглашение по сигналам `Badge` и ключи
 свойств, специфичные для таблиц.
@@ -79,10 +76,7 @@ table (frame)
 Штатный способ. От человека нужны только **какие колонки** и **что в них лежит** — не то,
 как это собрать.
 
-1. **Найти шаблон.** В файле почти всегда есть таблица, собранная на этих компонентах:
-   `figma.currentPage.findAll(n => n.name === 'TableCell')[0]`, затем подняться до предка
-   `table`. Шаблон приносит правильные варианты, шрифты и отступы бесплатно — шапку и
-   обвес ячеек руками не собирают. Шаблона нет — собирать с нуля по §0 в `table-scripts.md`.
+1. **Вставить пролог** из `plugin-api.md` и функции из `table-scripts.md`: §0, §3, §4, §5, §7.
 
 2. **Написать спецификацию колонок** слева направо:
    ```js
@@ -115,7 +109,7 @@ table (frame)
    ];
    ```
 
-4. **Позвать оркестратор** `buildTableFromSpec` (§0 в `table-scripts.md`), передав шаблон,
+4. **Позвать оркестратор** `buildTableFromSpec` (§0 в `table-scripts.md`), передав `parent`,
    `columns`, `rows` и текст подвала. Он сам разложит шапку, посчитает ячейки по колонкам,
    заполнит содержимое, применит поправки из раздела «Ловушки» и синхронизирует высоты — в
    правильном порядке.
@@ -189,11 +183,7 @@ const cellOff = cellSet.children.find(c => c.name === 'Devider=off');
 const footerSet = await figma.importComponentSetByKeyAsync('5ce4da26a0d46756b2df2a1a9cc76f70122173ec');
 const footerMain = footerSet.children.find(v => v.name === 'Type=Counted');
 const footer = footerMain.createInstance();
-footer.setProperties({
-  'Text Info#1153:75': '1-20 учеников из 143',
-  'Show Info#1153:76': true,
-  'Show Pagination#1153:77': true,
-});
+setProps(footer, { 'Text Info': '1-20 учеников из 143', 'Show Info': true, 'Show Pagination': true });
 ```
 
 Внутри `TableFooter` уже лежит своя `Pagination` — вторую рядом не ставят. Настроить
@@ -320,7 +310,7 @@ vec.fills = label.fills;
 - Искать по **имени** непосредственно перед работой с разделом, которого не трогал в этом
   скрипте. Id старше текущего вызова не доверять.
 - Для всего из дски брать **ключи компонентов** (стабильны), а не id. Таблица ключей — в
-  основном файле скилла.
+  `keys.md`.
 - Если структура выглядит незнакомо (лишние обёртки, не те дети) — не бороться, а
   перечитать раздел через `get_metadata`.
 
@@ -331,10 +321,10 @@ vec.fills = label.fills;
 | `TableHeaderCell` | вариант `Sort`: `Off` · `Available` · `Ascending` · `Descending` |
 | `TableCell` | вариант `Devider`: `on` · `off`; слот `content` |
 | `TableRow` | варианты `State`: `Rest` · `Hover` · `Selected`; `Devider`: `on` · `off` |
-| `TableFooter` | вариант `Type`: `Counted` · `Uncounted`; `Text Info#1153:75`, `Show Info#1153:76`, `Show Pagination#1153:77` |
+| `TableFooter` | вариант `Type`: `Counted` · `Uncounted`; `Text Info`, `Show Info`, `Show Pagination` (суффикс находит `propKey`) |
 | `Pagination` | `Total pages`: `3` · `8+` · `Unknown`; `Position`: `First` · `Middle` · `Last` |
 | `Badge` | `Size`: `L` · `M` · `S`; `Signal`: `Neutral` · `Info` · `Success` · `Warning` · `Error` · `Accent`; `Label#1078:0`, `Show Left Icon#1078:19`, `Left Icon#1078:57`, `Show Right Icon#1078:38`, `Right Icon#1078:76` |
 | `CheckBox` | `IsSelected`: `Unselected` · `Selected` · `InGroup`; `State`: `Rest` · `Hover` · `Disabled`. `InGroup` — шапка «выбрать все», когда отмечена часть строк |
 
 Ключ не подошёл — библиотеку перепубликовали: перезапросить через `search_design_system`
-по имени компонента и поправить таблицу ключей в основном файле скилла.
+по имени компонента и поправить таблицу ключей в `keys.md`.

@@ -16,22 +16,23 @@
 Только чтение. Подставь id экрана или секции.
 
 ```js
-const ROOT_ID = '0:0';   // ← экран или секция
-const LIMIT = 10;        // сколько экранов секции разобрать за запуск
+const ROOT_ID = '0:0';        // ← экран или секция
+const OFFSET = 0, LIMIT = 10;  // большая секция: повтори с OFFSET = nextOffset
 
 const root = await figma.getNodeByIdAsync(ROOT_ID);
 if (!root) return { error: 'узел не найден' };
 let pg = root; while (pg.parent && pg.type !== 'PAGE') pg = pg.parent;
 await figma.setCurrentPageAsync(pg);
 
-const SKIP = /^((Outline|Bold|Linear|Color|Broken|Line Duotone|Bold Duotone) \/|Battery|WiFi Signal|Network Signal|Status Bar|Home Indicator)/;
+const SU10 = new Set('Alert,Accordion,StatContent,ActionCard,Avatar,Badge,Button,Breadcrumbs,ChatButton,Coachmark,ContextMenuItem,ContextMenuSection,ContextMenu,RadioButton,CheckBox,Toggle,RadioItem,CheckBoxItem,Label,ToggleItem,CalendarCell,DatePickerCalendar,DatePickerCalendarForward,DateStripCell,DatePickerStrip,Divider,Favorite,FeedbackIcon,FileDropzone,FileItem,Files,HeaderButton,Heading,Subheading,ListItem,ListItem · Leading,ListItem · Trailing,ListItem · Trailing v2,ListItem v2,Loading,Logo,Mascot,NavLink,NumberInput,Pagination,PageButton,ProgressBar,PromoSlide,QuickLink,RatingOption,RatingScale,Scrollbar,SegmentedControl,SegmentedControlRow,SingleSelect,ComboBox,MultiSelect,Suffix,SingleSelectItem,Dropdown,Skeleton,SliderThumb,Slider,RangeSlider,SocialLink,Spotlight,Step,Stepper,Stories,Tag,Tags group,Tab,TabsRow,Counter,Text area,Text Button,Text field,Prefix,Toast,Tooltip,Popover,VideoPlayer,Action Panel,ButtonsGroup,DesktopHeader v2,MenuItem,Island,MobileHeader v2,heading,StreakPill,TabBarItem,MobileTabbar v2,MobileActionPanel v2,MobileBottomBar v2,MobileBottomSheet,Dialog,Overlay,DesktopDrawer,ProfileItem,TableCell,TableFooter,TableHeaderCell,TableHeaderCellSlot,TableRow,TaskPassport'.split(','));
+const SKIP = /^((Outline|Bold|Linear|Color|Broken|Line Duotone|Bold Duotone) \/|Battery|WiFi Signal|Network Signal|Status Bar|Home Indicator|Course map \/|Student path \/|Trophy)/;
 const LOOKALIKE = /^(Button|Text Button|Badge|Tag|Avatar|Divider|Island|Accordion|TableCell|TableHeaderCell|CheckBox|Toggle|ListItem|Alert|Toast)$/;
-const RISKY = /^(fills|strokes|fontName|textStyleId|paddingLeft|paddingRight|paddingTop|paddingBottom|itemSpacing|textAlignHorizontal|effects|cornerRadius)$/;
+const RISKY = /^(fills|strokes|fontName|textStyleId|paddingLeft|paddingRight|paddingTop|paddingBottom|itemSpacing|textAlignHorizontal|effects|cornerRadius|visible)$/;
+const MOMENT = /^(Hover|Pressed|Focused)$/;   // мгновение взаимодействия, правило 13
 const SHAPE = new Set(['VECTOR', 'BOOLEAN_OPERATION', 'ELLIPSE', 'RECTANGLE', 'LINE', 'STAR', 'POLYGON']);
 
-const screens = root.type === 'SECTION'
-  ? root.children.filter(n => n.type === 'FRAME' && !/светлая|қазақша/.test(n.name)).slice(0, LIMIT)
-  : [root];
+const all = root.type === 'SECTION' ? root.children.filter(n => n.type === 'FRAME' && !/светлая|қазақша/.test(n.name)) : [root];
+const screens = all.slice(OFFSET, OFFSET + LIMIT);
 const comps = {}, detached = [];
 let visited = 0, risky = 0, iconColor = 0;
 
@@ -52,7 +53,7 @@ for (const s of screens) {
       if (v.State && v.State !== 'Rest') c.states.add(v.State);
       for (const o of n.overrides || []) {
         const f = o.overriddenFields.filter(x => RISKY.test(x));
-        if (!f.length) continue;
+        if (!f.length || o.id === n.id) continue;
         const t = await figma.getNodeByIdAsync(o.id);
         if (!t || t.type === 'SLOT') continue;          // содержимое слота свободно
         if (SHAPE.has(t.type)) { c.iconColor++; iconColor++; continue; }
@@ -64,22 +65,26 @@ for (const s of screens) {
   }
 }
 
-const rows = Object.entries(comps).map(([name, c]) => ({
-  name, count: c.count, sample: c.sample,
-  cls: !c.remote ? 'new' : /\[Deprecated\]/.test(name) ? 'deprecated' : Object.keys(c.risky).length ? 'adapt' : 'ready',
-  states: [...c.states], risky: c.risky, iconColor: c.iconColor,
-}));
-const order = { new: 0, deprecated: 1, adapt: 2, ready: 3 };
+const rows = Object.entries(comps).map(([name, c]) => {
+  const states = [...c.states];
+  const cls = !c.remote ? 'new' : /\[Deprecated\]/.test(name) ? 'deprecated' : !SU10.has(name) ? 'other-library'
+    : (Object.keys(c.risky).length || states.some(s => MOMENT.test(s))) ? 'adapt' : 'ready';
+  return { name, count: c.count, sample: c.sample, cls, states, risky: c.risky, iconColor: c.iconColor };
+});
+const order = { new: 0, 'other-library': 1, deprecated: 2, adapt: 3, ready: 4 };
 rows.sort((a, b) => order[a.cls] - order[b.cls] || b.count - a.count);
 const totals = rows.reduce((a, r) => (a[r.cls] = (a[r.cls] || 0) + 1, a), {});
-return { root: root.name, screens: screens.length, visited, totals, risky, iconColor,
-  detached: detached.slice(0, 20), rows: rows.filter(r => r.cls !== 'ready'), ready: rows.filter(r => r.cls === 'ready').map(r => r.name) };
+const next = OFFSET + screens.length;
+return { root: root.name, screensTotal: all.length, scanned: screens.length, nextOffset: next < all.length ? next : null,
+  visited, totals, risky, iconColor, detached: detached.slice(0, 20), rows: rows.filter(r => r.cls !== 'ready'),
+  ready: rows.filter(r => r.cls === 'ready').map(r => r.states.length ? r.name + ' [' + r.states.join(', ') + ']' : r.name) };
 ```
 
 | Класс | Что значит | Что сделать |
 |---|---|---|
 | `ready` | компонент библиотеки без рискованных правок | сверь наличие в коде на уровне B или C |
-| `adapt` | внутри компонента изменены цвет, шрифт или отступы | убери правку или внеси предложение к компоненту (правило 17) |
+| `adapt` | внутри компонента изменены цвет, шрифт, отступы или видимость слоя, либо стоит `Hover`, `Pressed`, `Focused` | убери правку или внеси предложение к компоненту (правило 17) |
+| `other-library` | компонент из другой библиотеки, например старого кита | проверь, есть ли замена в SU10 |
 | `deprecated` | компонент устарел | замени по таблице в `SKILL.md` |
 | `new` | локальный компонент, в библиотеке его нет | согласуй с фронтом как новую работу |
 | `detached` | фрейм назван как компонент | замени инстансом |

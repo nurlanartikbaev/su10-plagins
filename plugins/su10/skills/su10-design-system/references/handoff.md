@@ -203,23 +203,28 @@ c.children.find(k => k.name === 'Home Indicator').y = 852 - 34;
 источник или принятое решение. Туда же пишут расхождения, которые на макеты не влияют.
 
 ```js
-// подписи доски — компонентами системы
-const DOC = await figma.getNodeByIdAsync('1745:95');                 // DocHeading
-const HEAD = await figma.getNodeByIdAsync('1386:23');                // Heading
-const ALERT = await figma.getNodeByIdAsync('550:15590');             // Alert
-const hL = HEAD.children.find(v => v.name === 'Size=L'), hM = HEAD.children.find(v => v.name === 'Size=M');
-const note = ALERT.children.find(v => v.name === 'Weight=Primary, Signal=Info');
-for (const c of [DOC, hL, hM, note]) for (const t of c.findAll(n => n.type === 'TEXT')) await figma.loadFontAsync(t.fontName);
+// подписи доски: компоненты берут из библиотеки по ключам, нужен пролог из plugin-api.md
+const [DOC, HEAD, ALERT] = await Promise.all([
+  figma.importComponentByKeyAsync('38a45654a75a8dd689cd5aa896dcba1b94cba735').catch(() => null),  // DocHeading
+  figma.importComponentSetByKeyAsync('b749746cc11c139c5f14d9a57d9c45c52cd1445d'),                  // Heading
+  figma.importComponentSetByKeyAsync('9056c9e7c89f6aa49a385a9fc9d45f3f8350cdf5'),                  // Alert
+]);
+const hL = pick(HEAD, { Size: 'L', Align: 'Left' }), hM = pick(HEAD, { Size: 'M', Align: 'Left' });
+const note = pick(ALERT, { Weight: 'Primary', Signal: 'Info' });
+for (const c of [DOC, hL, hM, note].filter(Boolean)) for (const t of c.findAll(n => n.type === 'TEXT')) await figma.loadFontAsync(t.fontName);
 function put(comp, x, y, w, props) { const i = comp.createInstance(); sec.appendChild(i);
-  if (props) i.setProperties(props); i.resize(w, i.height); i.x = x; i.y = y; return i; }
-put(hL, 100, screenY - 190, 1400, { 'Title#1386:0': 'А · Прохождение курса', 'Show Subtitle#1386:8': false });
-const lbl = put(hM, screenX, 0, 480, { 'Title#1386:0': 'А2 · В процессе', 'Subtitle#1386:4': 'Когда: открыл курс' });
+  if (props) setProps(i, props); i.resize(w, i.height); i.x = x; i.y = y; return i; }
+put(DOC || hL, 100, 40, 1400, DOC ? { Title: 'Курсы — сценарии для разработки' } : { Title: 'Курсы — сценарии для разработки', 'Show Subtitle': false });
+put(hL, 100, screenY - 190, 1400, { Title: 'А · Прохождение курса', 'Show Subtitle': false });
+const lbl = put(hM, screenX, 0, 480, { Title: 'А2 · В процессе', Subtitle: 'Когда: открыл курс' });
 lbl.y = screenY - 18 - lbl.height;
-const n = put(note, screenX, screenY + screenH + 32, 320,
-  { 'Closable#3361:0': false, 'Show Title#3361:2': false, 'Show Buttons #3363:8': false });
+const n = put(note, screenX, screenY + screenH + 32, 320, { Closable: false, 'Show Title': false, 'Show Buttons': false });
 const sub = n.findOne(t => t.type === 'TEXT' && t.name === 'Subtitle');
-sub.characters = 'Экран открывается прокрученным к текущей неделе.'; sub.textTruncation = 'DISABLED'; sub.maxLines = null;
+await figma.loadFontAsync(sub.fontName);
+sub.characters = 'Экран открывается прокрученным к текущей неделе'; sub.textTruncation = 'DISABLED'; sub.maxLines = null;
 ```
+
+**`DocHeading` не импортируется в новый файл** (проверено 18.11.2026): компонент не опубликован в библиотеке. Скрипт тогда ставит шапку секции на `Heading` `Size=L` и об этом пишут в отчёте.
 
 ## 3. Имена и тексты
 
@@ -326,7 +331,7 @@ a.strokes = JSON.parse(JSON.stringify(a.strokes)).map(p => figma.variables.setBo
 
 ## 7. Десктоп из шаблона с верхней навигацией
 
-Шаблон — десктоп-экраны владельца в `redesign`: тёмный `3258:100612` (К6), светлый `3258:100350` (К7) — с 20.10 это актуальные экраны «Курсов», до этого были `2254:15859` / `2250:15099`
+Шаблон лежит в файле `Redesign (Student)`, id работают только там. В другой файл экраны копируют вручную и подставляют id копий. Шаблон — десктоп-экраны владельца в `redesign`: тёмный `3258:100612` (К6), светлый `3258:100350` (К7) — с 20.10 это актуальные экраны «Курсов», до этого были `2254:15859` / `2250:15099`
 (1440 × 1024). Внутри: `Header` (верхняя навигация, абсолютно сверху) и `Content`
 (1440 × 972, поля 20 / 24). Мода `Platform = Desktop` уже стоит на корне.
 

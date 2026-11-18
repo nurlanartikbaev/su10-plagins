@@ -42,7 +42,7 @@ return out;                                                 // console.log не 
 
 ### Library keys компонентов
 
-Node ID из каталога выше годятся для ссылок и для чтения, но `importComponentSetByKeyAsync` / `importComponentByKeyAsync` требуют **library key**. Вот они:
+Node ID из каталога годятся для ссылок и для чтения, но `importComponentSetByKeyAsync` / `importComponentByKeyAsync` требуют **library key**. Вот они:
 
 | Компонент | Тип импорта | Key |
 |---|---|---|
@@ -136,6 +136,40 @@ Node ID из каталога выше годятся для ссылок и д�
 | Slider | Set (`Size`, `State`, `Value` 0–100 шаг 10); `Show Label#4410:22`, `Label#4410:89`, `Show Value#4410:156`, `Value Text#4410:223`, `Show Scale#4410:290`, `Min#4410:357`, `Max#4410:424`, `Show Ticks#4410:491`, `Show Description#4410:558`, `Description#4410:625` | `51beef06a6968cf76df93c5d6240a454238bc641` |
 | RangeSlider | Set (`Size`, `State`, `Value` пресеты от–до); `Show Label#4412:0`, `Label#4412:91`, `Show Value#4412:182`, `Value Text#4412:273`, `Show Scale#4412:364`, `Min#4412:455`, `Max#4412:546`, `Show Ticks#4412:637`, `Show Description#4412:728`, `Description#4412:819` | `d70ec3b0848e693cbf0a1ef9ec74be3cc485159e` |
 | SliderThumb | Set (`Size`, `State`); `Show Tooltip#4410:0`, `Tooltip#4410:11` | `f0bba06b287290c9a12ea12796ebda8d2bdbde65` |
+| Alert | Set | `9056c9e7c89f6aa49a385a9fc9d45f3f8350cdf5` |
+| Toast | Set | `d488493abc39336041595c9b0f72b47a7689689c` |
+| Tooltip | Set | `69292c25f11fd653697e991c1295287e0f13f880` |
+| Loading | Set | `745e2bfb705ca9745048909051048d71d190c127` |
+| Scrollbar | Set | `5634ce008cd85eb151f9af6daed369d4cd2f0df4` |
+| SegmentedControl | Set | `d2b21226b9e9d447b425ba6eeee05ac0cc8c3107` |
+| Stepper | Set | `88bd8be68a63b6e0b0d46aef02d499254901f61e` |
+| Step | Set | `4b3c7d9914b9755c3642874faf87ac1b94297a40` |
+| Label | Set | `d2778201385329c1006ef364be80c42a3f565e0f` |
+| Counter | Component | `644626197543a3f3a2fe7678dc40b8fc2936875d` |
+| ButtonsGroup | Set | `0e418dc087599706a26c92a2dd3d2798fec11ca1` |
+| Favorite | Set | `035566520f0c016cd30e42c5d617156ef7108407` |
+| Spotlight | Set | `8c4cc6440fdbc3a218d3d98e58081e185b6a0476` |
+| ListItem v2 | Set | `e657f860bbc32d10fe9ec7519ea0e89832931a9e` |
+| ListItem · Trailing v2 | Set | `6957237d1a0c824143a4e3f7e26787198f0cff73` |
+| Files | Component | `ddab5e9a3f28ce04bbd9d39f4cd5ae68877822f2` |
+| FileItem | Set | `427b2c24fef8f5e950127de1a97270a789084148` |
+| TaskPassport | Component | `eb492739a0612250c4f1e13ca773268a259a0808` |
+| DatePickerCalendarForward | Set | `21d9428619f54590061df218d46d34e629182837` |
+| MobileHeader v2 | Component | `1dc07544ce612a55d9f20f9a4819a166f8e93287` |
+| MobileTabbar v2 | Component | `f25073531cf478263901433d448837d46afc88bd` |
+| MobileBottomSheet | Component | `1885c25530ce41b69839af3cc0ad97d55e51a7bb` |
+| RatingOption | Set | `339fb8865e33cf429090bfd9c82882f2c8d24632` |
+| RatingScale | Set | `0e807903225b4d5f1f618dd2e68979ca962de0be` |
+| Suffix (Text field) | Set | `bea93519029e8404f7770f3c0079fa22f04941f8` |
+| Suffix (селекты) | Set | `152124331189e0e6d7e9408ac5beb3518a34fbfb` |
+| Suffix (Tab) | Set | `ddc4b483164c6555cec9641a698fe86066bc79f2` |
+| Suffix (Tag) | Component | `b9c1f69d9ff4e51ce219d9c3eafb42dde41122bf` |
+| Suffix (Text area) | Component | `d46e373731276f17515a87a24ac2649a116aef9f` |
+| Course map / Node | Set | `6192811d5503ee0a6f693388167af5a992bc083a` |
+| Course map / Dock | Set | `e85500eb28d5d69c063168d257b47f17800af3f4` |
+| Course map / Month | Set | `6de332ae608a1e401adeb36c5cdcaff6126510ed` |
+| Course map / Week row | Set | `a36bef2368af8f887305639616fd3f3543dbd00c` |
+| Course map / To current | Set | `3605ee1f924e41c7850b2b87093a522e3120b9f2` |
 
 Иконки из **SU10 Icon Pack** (все стиля Outline):
 
@@ -206,6 +240,13 @@ const V = {                                   // figma.variables.importVariableB
   textCritical:  "14c7be2bd8b9cdbfd15af9a53d78f648f5cde4cd",
   textWhite:     "2206925c7b1b2478b2b7729b8e9fdb4a5f7d8a61",
   textBlack:     "308f2148e300a0e410bc2a0accb3b268ee3d1dbc",
+  textBrand:     "cbd05f646edda00e9ccedf44832ff8248df58d1c", // ссылка, выбранное, подпись Secondary-кнопки
+  iconBrand:     "8606b279cf637a1a16ef461cc5ce9e2792c03e2c", // логотип
+  iconBrandOutline: "9f9a38f183c0a53f134758caf6eba79560a9f4ab",
+  borderBrand:   "74f86259ef663c84d1d413ed0f57f671728d3341",
+  surfaceBrand:  "a85a529c370cecc5c2c11a69f3b25438ebd1dcd2", // surface/brand-static
+  surfaceBrandTransparent: "f5f63ec384011f5b76464344e757b3873d82be13",
+  surfaceInverse:"9fb9047bb81ed9a2efabd9abc53d14bd7c6fc53a",
   iconPrimary:   "87451cf160b8c0a5a6147ced1198e7b56b9495bb",
   borderPrimary:   "61168a9a944aed201425e4f799b00746bb4201f3",
   borderSecondary: "d6c6f66f5589742a6050182f3bfb0e651bae933f",
@@ -224,13 +265,19 @@ const V = {                                   // figma.variables.importVariableB
   space48:"9c956e6c870b5ed1df276126060e7c9352ed0e91",
   space64:"d68ad73b7f4c1dc6781d57172c13f09df6c29f79",
   space80:"08b503ced9a7c2d8b615f8d3103bc119bb639dc2",
+  space96:"ca40adc3f9093a629e5e51dddc8e3ab7ff5f3374",
+  space128:"991f82dd26ec0f16c67c4f2ba75e779c668b0e9e",
   storiesRingXl:"5b56e333e7ac021cc96cff9b92a367e2a153002f", // 72 Mobile / 80 Desktop
   storiesRingL: "66eeb96158ba957d29b386c5931271ba2ceaa8b6", // 60 / 62
   storiesRingM: "441e463679e37b5f0ad83a4f112bcbd6b79730af", // 50 / 52
   storiesRingS: "c4b53653991f501ee717f8e8bd25101fb27f2d06", // 40
   storiesRingXs:"4b056d2da22b7ec8bd6f5afad4ce9ee7adf74436", // 32
+  radius100:"09c47134713a7d4cb839a9bb1b8525f16199a418",  // 4
+  radius150:"f015a84e8a6e850c173ed1a02d129680dcfbbeeb",  // 6
   radius200:"5bea7a7e199c0cfacd7669ba383faa64f735b9f6",  // 8
   radius300:"b62402f2b002ea0c612ebd0f804e1900b147c590",  // 12
+  radius400:"b3c2c3fa93fa81a32f28d4d9f9c187b662272856",  // 16
+  radius500:"670a5ffff5c882c84aca12fda1a0cbed02efcad3",  // 20
   radius600:"be2500829c2889116d181cea1a5070ee235c6019",  // 24
   radiusRounded:"0576cfa57576318e03cc9c0e584111ab4db22283",
   listItemHover:  "9228c33a2abfef9c20d2a35740d4ae4a64a63b41", // color/component/list-item/surface-hover
@@ -282,7 +329,13 @@ const S = {                                   // figma.importStyleByKeyAsync
 | BlueGradient | `13a9036c0b3dffbda6f11fd90bc2d21a9bfe9442` |
 | GreenGradient | `03354a2df021c4d1699adf870c44001365cd3e8f` |
 | RedGradient | `2f25bf17609a5e32994f2cc8516a08c855518cac` |
-| YellowGradient | `cc0fd3227f33bcac0d476ebb2500e89849900803` |
+| OrangeGradient | `cc0fd3227f33bcac0d476ebb2500e89849900803` |
+| YellowGradient | `d6fa672df0dfdfa8107ecdfae71ca1c7c8999bb3` |
+| PurpleGradient | `a2ea6d710ab7209ee5ff157c2e5030cc4ebf3288` |
+| LightBlueGradient | `1c1335f8e5cbfadca9bcb5630535a4f67b8b4a30` |
+| BrandGradient | `3e2e42f73ed357c040eb345ead56d43252df4a44` |
+| BackgroundTop: статус-бар | `465e657a273b007d0b1a3bd250030fa81cfbbdd7` |
+| BackgroundBot | `0ce8215732abde49b98103032926084c7dc7070f` |
 | StoriesGradient | `b899c82f441aa10e91ce76e79e6f67263a7db946` |
 | IconGradient — сам меняется по теме | `010164bc24b7f613bf9044aa1521379f8c868413` |
 
