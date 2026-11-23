@@ -227,7 +227,7 @@ footer.layoutSizingHorizontal = 'FILL';
 |---|---|---|
 | `layoutMode` / `itemSpacing` / padding | `VERTICAL` / `0` / `0` | — |
 | `fills` | заливка вложенного уровня | `surface/3-layer` `31bb994f…` |
-| `strokes` | 1px, **`strokeAlign = 'OUTSIDE'`** | `border/secondary` `d6c6f66f…` |
+| `strokes` | 1px, **`strokeAlign = 'INSIDE'`** (решение владельца 23.11, было `OUTSIDE`) | `border/secondary` `d6c6f66f…` |
 | `strokeWeight` | 1 | `stroke/border-stroke-regular` `1c53c438…` |
 | все четыре радиуса | 16 | `radius/border-radius-400` `b3c2c3fa…` |
 | `clipsContent` | `true` | — |
@@ -235,7 +235,7 @@ footer.layoutSizingHorizontal = 'FILL';
 ```js
 block.fills   = [figma.variables.setBoundVariableForPaint({type:'SOLID',color:{r:0,g:0,b:0}},'color', surface3)];
 block.strokes = [figma.variables.setBoundVariableForPaint({type:'SOLID',color:{r:0,g:0,b:0}},'color', borderSecondary)];
-block.strokeAlign = 'OUTSIDE';
+block.strokeAlign = 'INSIDE';   // обводка внутрь: размер блока не растёт на 2 px
 block.setBoundVariable('strokeWeight', strokeRegular);
 for (const c of ['topLeftRadius','topRightRadius','bottomLeftRadius','bottomRightRadius']) {
   block.setBoundVariable(c, radius400);         // радиус — тоже токен, не сырое 16
