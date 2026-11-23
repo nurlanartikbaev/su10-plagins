@@ -255,6 +255,67 @@ block.clipsContent = true;                      // без этого шапка 
 `clipsContent = true`, без этого шапка и подвал торчат острыми углами. В `Accordion` таблица стоит в
 отступе `content` (раздел ниже), поэтому блок со своим скруглением там остаётся.
 
+## Таблица на всю высоту экрана: строки прокручиваются внутри
+
+Решение владельца 23.11. Если таблица — главный блок десктопного экрана (каталог, список),
+страница не растёт под строки. Экран остаётся 1024, таблица тянется до низа, и прокручиваются
+только строки. Шапка таблицы и `TableFooter` стоят на месте. Эталон — экран
+«ТБ1 · Специальности, таблица с прокруткой» в `Redesign (Student)`, секция
+«Career · v2 · десктоп — варианты на выбор» (`2228:28081`).
+
+```
+Content            ← FIXED по высоте (1024 − шапка), снизу padding Space-128
+└── page           ← FILL по высоте
+    └── Island     ← FILL по высоте, и слот, и его content тоже FILL
+        └── table-block → table   ← оба FILL по высоте, gap 0
+            ├── header            ← на месте
+            ├── rows · scroll     ← FILL/FILL, clipsContent, overflowDirection VERTICAL
+            │   ├── TableRow × 20 ← вся страница данных, не только видимые
+            │   └── Scrollbar     ← Vertical, ABSOLUTE, справа 4, сверху и снизу 4
+            └── TableFooter       ← на месте, «1–20 из 124»
+```
+
+1. **Снизу `Space-128`, чтобы кнопка чата не легла на пагинацию.** `ChatButton` стоит
+   поверх контента: 96 × 96, в 24 от низа и правого края. При отступе 128 подвал кончается
+   на 8 px выше кнопки. Отступ 20 пробовали 23.11: кнопка закрыла «7» и «›» в пагинации.
+   Высоту экрана не меняют: 1024.
+2. **Цепочка FILL до самой таблицы.** Если хоть одно звено (`page`, `Island`, слот,
+   `content`, `table-block`, `table`) осталось HUG, таблица растёт под строки и подвал уезжает
+   за экран.
+3. **Строки — в отдельном фрейме `rows · scroll`** между шапкой и подвалом: авто-лейаут
+   `VERTICAL`, gap 0, без заливки, `clipsContent = true`, `overflowDirection = 'VERTICAL'`.
+   В нём лежит вся страница данных, 20 строк, и все разные: дубли строк в макете читаются
+   как ошибка. Подвал считает по той же странице: «1–20 из 124», последняя страница 7.
+4. **`Scrollbar` `Orientation=Vertical`** поверх строк, `layoutPositioning = 'ABSOLUTE'`,
+   `constraints` `MAX` / `STRETCH`. Ручке ставят `FIXED` по высоте, иначе она растягивается на
+   всю полосу и не показывает, что строк больше.
+5. **Скриншот снимай отдельным вызовом после правки отступов.** Снимок в том же ходе, что и
+   правка `padding`, может прийти до пересчёта авто-лейаута: 23.11 он показал таблицу без
+   подвала, хотя в макете всё было на месте.
+
+```js
+C.layoutSizingVertical = 'FIXED'; C.resize(1440, 1024 - C.y);
+C.setBoundVariable('paddingBottom', space128);
+scr.resize(1440, 1024);
+for (const n of [page, island, island.children[0], slotContent, tableBlock, table])
+  n.layoutSizingVertical = 'FILL';
+const sc = figma.createFrame(); table.insertChild(1, sc);
+sc.name = 'rows · scroll'; sc.layoutMode = 'VERTICAL'; sc.itemSpacing = 0; sc.fills = [];
+sc.layoutSizingHorizontal = 'FILL'; sc.layoutSizingVertical = 'FILL';
+sc.clipsContent = true; sc.overflowDirection = 'VERTICAL';
+for (const r of table.children.filter(n => n.name === 'TableRow')) {
+  sc.appendChild(r); r.layoutSizingHorizontal = 'FILL';
+}
+const sb = scrollbarVertical.createInstance(); sc.appendChild(sb);
+sb.layoutPositioning = 'ABSOLUTE'; sb.resize(8, sc.height - 8);
+sb.x = sc.width - 12; sb.y = 4; sb.constraints = { horizontal: 'MAX', vertical: 'STRETCH' };
+sb.children[0].layoutSizingVertical = 'FIXED'; sb.children[0].resize(4, 120);
+```
+
+Таблица в `Island`: строки и `Scrollbar` вставлять можно, это не `Island`. Вложенный `Island`
+в слот `Island` не вставляют: внешний ломается (ловушка в `plugin-api-traps.md`). После сборки проверь,
+что ни один инстанс не схлопнулся (`absoluteRenderBounds.height < 3`).
+
 ## Карточка «табы + таблица» и ширины колонок
 
 **Эталонная раскладка карточки «табы + таблица»** (проверена владельцем на макете
