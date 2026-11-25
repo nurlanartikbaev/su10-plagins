@@ -102,6 +102,11 @@ Node ID из каталога годятся для ссылок и для чт�
 | Island | Single | `0353e3904c9e72531687060d18d616228260e1ef` |
 | ActionCard | Set (`Size` M/S, `State` Rest/Hover/Pressed/Focused/Selected/Disabled), слот `content#4259:24` | `af35568ac5b2e8219e413cd94d9bec1a4feef661` |
 | StatContent | Set (`State` Default/Disabled), `Label#4259:0`, `Value#4259:3`, `Hint#4259:6`, `Show Hint#4259:9` | `edfcb56fe31d7d2c59ae8bc385f077f4aeb2c6a2` |
+| Chart / Bipolar scale | Set (`Pole` Left/Right, `Value` 50–100 шаг 5), `Left#4593:0`, `Right#4593:23` | `a0c09af447163ffb2228b6a9c9aa3f06d8248140` |
+| Chart / Column | Set (`Accent` Yes/No, `Value` 10–100 шаг 10), `Score#4593:55`, `Label#4593:76`, `Icon#4593:97` (INSTANCE_SWAP, Outline) | `6d32bfa82c2333b78c1ccd8b41da3be9175ff165` |
+| Chart / Hexagon | Single, без свойств: форму многоугольника считает разработка | `321478a62b856e819fb14d779ce18aa6aa674667` |
+| Chart / Legend item | Set (`Accent` Yes/No), `Letter#4593:46`, `Name#4593:49`, `Value#4593:52` | `2d78e7e2580da4fd1bc88772eea10bca26907e48` |
+| OrgLogo | Set (`Size` S/M/L, `Type` Logo/Icon); картинку заливают в слой `logo`, режим Fit | `fdf385244446f4dc8606654f16e7c68a1523f1ca` |
 | HeaderButton | Set | `f0bb9240a2cfd9712196c9166bd626d1e4dfee7f` |
 | Accordion | Set | `610c45714a8c02db13e706df1989d3672a3e7e70` |
 | TabBar [Deprecated] (замена `MobileTabbar v2`) | Single | `d5966621e6ab36fe14767aafd92919fa01948345` |

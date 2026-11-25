@@ -21,6 +21,12 @@
 
 ---
 
+## v4.39.0 · 25.11.2026 · обновил Nurla
+
+- **Новые компоненты в дске** (по просьбе владельца): `Chart / Bipolar scale`, `Chart / Column`, `Chart / Hexagon`, `Chart / Legend item` на странице Chart и `OrgLogo` на своей странице. Перенесены из локальных компонентов Career в `Redesign (Student)`. Токены `color/component/chart/*` (13) и `color/component/org-logo/*` (4), паспорта с разделом «Доступность», запись v7 на странице `Changelog`. Ключи в `keys.md`.
+- **Плитка метрики не нужна:** это `Island` с полями `Space-16` в слоте и `StatContent` внутри. Локальный `StatTile` в Career заменён и удалён.
+- **Порядок групп токенов компонентов** нарушен с прошлых версий (mascot, action-card, skeleton, video-player, file-dropzone, chart, org-logo стоят в конце). Пересоздание групп ждёт точки в истории версий от владельца.
+
 ## v4.38.2 · 23.11.2026 · обновил Nurla
 
 - **Обводка таблицы внутрь** (решение владельца): у обёртки таблицы `strokeAlign = 'INSIDE'`, было `OUTSIDE`. `data-tables.md`, раздел «Таблица — один блок».
