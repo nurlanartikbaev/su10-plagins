@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.40.1 · 26.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking a mockup against code; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot, the team guide and workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам, с чего начать, что дальше."
+description: "v4.41.1 · 26.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking a mockup against code; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot, the team guide and workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам, с чего начать, что дальше."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.40.1 · 26.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.41.1 · 26.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -31,7 +31,7 @@ description: "v4.40.1 · 26.11.2026 — Макеты, экраны и табли
 Скиллом пользуются дизайнеры и разработчики. Каждый ответ ведёт человека по пути макета.
 
 1. **Только факты:** что сделано, что найдено, что решить. Без вступления, пересказа запроса и оценок.
-2. **Текст ответа по правилу 15** (`rule-15.md`): минимум слов, на «вы», глагол вместо существительного, без канцелярита, без длинного тире, без точки в конце строки.
+2. **Текст ответа через скилл `ux-write`** из этого плагина. Те же правила для экранов: правило 15 (`rule-15.md`). Коротко: минимум слов, на «вы», глагол вместо существительного, без канцелярита, без длинного тире, без точки в конце строки.
 3. **В конце блок «Дальше»:** номер шага, одно действие и фраза, которую человек скопирует. Решение за другим человеком: назови кого спросить. Отдельный вопрос вне пути (токен, иконка): блок не нужен.
 
 ```
@@ -63,7 +63,7 @@ description: "v4.40.1 · 26.11.2026 — Макеты, экраны и табли
 | График или дашборд | `recipes/dashboard.md`, `local-component.md` |
 | Отступы, сетка, стили текста | `foundations.md` |
 | Таблица | `recipes/tables.md`, `table-scripts.md`, `prologue.md`. Нестандартная таблица: `data-tables.md` |
-| Тексты интерфейса | `rules/rule-15.md` |
+| Тексты интерфейса | скилл `ux-write`, `rules/rule-15.md` |
 | Иконка | `icons.md` |
 | Маскот | `mascot.md` |
 | Вопрос о Plugin API | `plugin-api.md`, нужный раздел |
@@ -174,7 +174,7 @@ description: "v4.40.1 · 26.11.2026 — Макеты, экраны и табли
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.40.1 · 26.11.2026 · обновил Nurla**.
+Текущая версия — **v4.41.1 · 26.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как
