@@ -1,11 +1,11 @@
 ---
 name: su10-design-system
-description: "v4.39.1 · 25.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking how well a mockup matches code or whether developers can build it; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot and the team workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам."
+description: "v4.40.1 · 26.11.2026 — Макеты, экраны и таблицы в Figma на дизайн-системе SU10 (бывшая JUZ40): от спеки до передачи в разработку. Use when building any screen, flow, form, modal, drawer, table or mobile layout in the SU10 Design System file or a product file that consumes it; when turning a spec, Confluence page or Jira task into a mockup; when checking a mockup for missing states (empty, error, loading, disabled); when checking a mockup against code; when preparing developer handoff boards (every handoff starts with a critic review, uses approved screens only and adds a review section); when choosing a component, token or icon; when reviewing a mockup for consistency; when adding a component to the system. Also for the Mascot, the team guide and workflow: drafts, moving approved features, Ready for development. Триггеры: макет по спеке, проверь состояния, пустое состояние, бос күй, қате, жүктелу, сверь с кодом, можно ли сверстать, хэндофф, передать разработчикам, с чего начать, что дальше."
 ---
 
 # Дизайн-система SU10 — как собирать макеты
 
-> **Версия 4.39.1 · 25.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
+> **Версия 4.40.1 · 26.11.2026 · обновил Nurla.** Что менялось — в разделе «Версии» в конце.
 
 Файл-источник: **SU10 Design System** (до переименования — `JUZ40 Design System`), fileKey `TLPll8pMMVWpHbJdWm6QVe`.
 Иконки: **SU10 Icon Pack** (до переименования — `Test Icon Pack`), fileKey `SY8WplV9pQCSFLWfD1pTcQ`.
@@ -26,6 +26,34 @@ description: "v4.39.1 · 25.11.2026 — Макеты, экраны и табли
 
 Начинай с шага, о котором просят. Если экраны идут на доску для разработки, открой `handoff-board.md` до сборки: сетку и имена закладывают сразу.
 
+## Как отвечать
+
+Скиллом пользуются дизайнеры и разработчики. Каждый ответ ведёт человека по пути макета.
+
+1. **Только факты:** что сделано, что найдено, что решить. Без вступления, пересказа запроса и оценок.
+2. **Текст ответа по правилу 15** (`rule-15.md`): минимум слов, на «вы», глагол вместо существительного, без канцелярита, без длинного тире, без точки в конце строки.
+3. **В конце блок «Дальше»:** номер шага, одно действие и фраза, которую человек скопирует. Решение за другим человеком: назови кого спросить. Отдельный вопрос вне пути (токен, иконка): блок не нужен.
+
+```
+Шаг 3 из 8 · Выбор
+Дальше: выберите вариант по коду. Остальные не удаляйте
+Напишите: Берём А2. Сделай от него ещё 3 варианта
+```
+
+| Шаг | Действие человека | Фраза |
+|---|---|---|
+| 1. Контекст | Дать спеку, роль, платформу. Ответить на вопросы | Вот спека: <ссылка>. Роль: <роль>. Платформы: <платформы>. Разбери требования, задай вопросы и покажи карту экранов |
+| 2. Варианты | Попросить 3–4 решения с разным устройством экрана | Собери 3 разных варианта экрана. Подпиши каждый кодом и напиши, в чём его идея |
+| 3. Выбор | Выбрать по коду. Похожи: вернуться к шагу 2 | Берём <код>. Сделай от него ещё 3 варианта |
+| 4. Правки | Назвать экран, проблему и результат | В <код> · <что мешает>. <что нужно>. Покажи правку копией рядом, оригинал не меняй |
+| 5. Состояния | Собрать сценарий целиком | Берём <код>. Собери состояния и сценарии: загрузка, ошибка, пусто, длинный текст. Добавь десктоп |
+| 6. Проверка | Прогнать аудит, затем посмотреть экраны самому. Есть находки: вернуться к шагу 4 | Прогони аудит, проверь состояния и доступность. Покажи снимки в тёмной и светлой теме |
+| 7. Хэндофф | Получить явный апрув продакта фичи. Прочитать ревью | Подготовь к хэндоффу |
+| 8. Чистовой файл | Перенести секции руками, поставить Ready for development | Делаете сами: 7 пунктов в `guide.md` |
+| После передачи | Сверить стенд с макетом | Сверь стенд с макетом: <адрес стенда>. Покажи расхождения по кодам экранов |
+
+Установка, подсказки, частые ошибки и чек-лист перед передачей: `guide.md`.
+
 ## Что читать под задачу
 
 | Задача | Что открыть |
@@ -44,6 +72,7 @@ description: "v4.39.1 · 25.11.2026 — Макеты, экраны и табли
 | Сдача макета | `checklist.md`, `audit-script.md`. Разбор ответа: `audit.md`, §2 |
 | Проверка состояний или доступности | `states-audit.md`, `accessibility.md` |
 | Передача в разработку | `handoff.md`, `handoff-board.md`, `team-workflow.md` |
+| С чего начать, как установить, что дальше | `guide.md` |
 | Новый компонент, токен, паспорт | `new-component.md` |
 
 `keys.md` не читай целиком: ищи строку компонента по имени. Правило ссылается на раздел по имени: найди файл в `INDEX.md`.
@@ -145,7 +174,7 @@ description: "v4.39.1 · 25.11.2026 — Макеты, экраны и табли
 ## Версии
 
 Формат **главная.минорная.патч**; номер и дата стоят в описании скилла и в шапке этого файла.
-Текущая версия — **v4.39.1 · 25.11.2026 · обновил Nurla**.
+Текущая версия — **v4.40.1 · 26.11.2026 · обновил Nurla**.
 
 **Полная история изменений — в `references/changelog.md`.** В основной файл она не
 возвращается: нужна редко, а в контекст тянулась каждый запуск. Там же — правило, как

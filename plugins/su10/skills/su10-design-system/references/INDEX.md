@@ -39,6 +39,7 @@
 | `audit-script.md`, `audit.md`, `checklist.md`, `states-audit.md`, `accessibility.md` | проверка макета |
 | `spec-to-layout.md`, `code-parity.md` | спека и сверка с кодом |
 | `handoff.md`, `handoff-board.md`, `handoff-traps.md`, `team-workflow.md` | передача в разработку |
+| `guide.md` | гайд для команды: установка, 8 шагов, подсказки, частые ошибки, чек-лист |
 | `component-proposals.md`, `adoption.md` | очередь предложений и замер внедрения |
 | `mascot.md`, `icon-repair.md`, `juz40.md` | маскот, починка иконок, решения продукта |
 | `changelog.md` | история версий |
